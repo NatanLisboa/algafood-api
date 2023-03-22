@@ -1,11 +1,9 @@
 package com.lisboaworks.algafood.algafoodapi.service;
 
 import com.lisboaworks.algafood.algafoodapi.model.Customer;
-import com.lisboaworks.algafood.algafoodapi.notification.EmailNotifier;
 import com.lisboaworks.algafood.algafoodapi.notification.Notifier;
 import org.springframework.stereotype.Component;
 
-@Component
 public class CustomerActivationService {
 
     private final Notifier notifier;
