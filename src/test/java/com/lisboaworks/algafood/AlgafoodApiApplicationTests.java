@@ -1,4 +1,4 @@
-package com.lisboaworks.algafood.algafoodapi;
+package com.lisboaworks.algafood;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

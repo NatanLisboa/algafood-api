@@ -1,4 +1,4 @@
-package com.lisboaworks.algafood.algafoodapi;
+package com.lisboaworks.algafood;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
