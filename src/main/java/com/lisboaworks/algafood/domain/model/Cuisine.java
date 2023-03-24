@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-public class Kitchen {
+public class Cuisine {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,8 +32,8 @@ public class Kitchen {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Kitchen kitchen = (Kitchen) o;
-        return id.equals(kitchen.id);
+        Cuisine cuisine = (Cuisine) o;
+        return id.equals(cuisine.id);
     }
 
     @Override
