@@ -9,10 +9,7 @@ public class NotificationConfig {
 
     @Bean
     public EmailNotifier emailNotifier() {
-        EmailNotifier notifier = new EmailNotifier("smtp.algamail.com.br");
-        notifier.setUpperCase(true);
-
-        return notifier;
+        return new EmailNotifier();
     }
 
 }
