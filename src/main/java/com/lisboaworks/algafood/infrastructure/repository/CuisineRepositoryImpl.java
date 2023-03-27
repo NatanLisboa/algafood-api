@@ -35,7 +35,7 @@ public class CuisineRepositoryImpl implements CuisineRepository {
 
     @Override
     @Transactional
-    public void remove(Cuisine cuisine) {
+    public void delete(Cuisine cuisine) {
         cuisine = find(cuisine.getId());
         manager.remove(cuisine);
     }

@@ -51,7 +51,7 @@ public class TestRestaurantRepository {
         restaurantRepository.save(restaurant3);
 
         // DELETE
-        restaurantRepository.remove(restaurant3);
+        restaurantRepository.delete(restaurant3);
 
     }
 
