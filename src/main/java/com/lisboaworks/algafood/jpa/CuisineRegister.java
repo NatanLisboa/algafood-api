@@ -15,14 +15,24 @@ public class CuisineRegister {
     @PersistenceContext
     private EntityManager manager;
 
-    public List<Cuisine> getAll() {
+    public List<Cuisine> findAll() {
         TypedQuery<Cuisine> query = manager.createQuery("from Cuisine", Cuisine.class);
         return query.getResultList();
     }
 
+    public Cuisine find(Long id) {
+        return manager.find(Cuisine.class, id);
+    }
+
     @Transactional
-    public Cuisine register(Cuisine cuisine) {
+    public Cuisine save(Cuisine cuisine) {
         return manager.merge(cuisine);
+    }
+
+    @Transactional
+    public void remove(Cuisine cuisine) {
+        cuisine = find(cuisine.getId());
+        manager.remove(cuisine);
     }
 
 }

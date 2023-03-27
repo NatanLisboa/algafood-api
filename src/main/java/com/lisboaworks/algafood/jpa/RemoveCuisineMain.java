@@ -6,9 +6,10 @@ import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public class CuisineRegisterMain {
+public class RemoveCuisineMain {
 
     public static void main(String[] args) {
+
         ConfigurableApplicationContext applicationContext = new SpringApplicationBuilder(AlgafoodApiApplication.class)
                 .web(WebApplicationType.NONE)
                 .run(args);
@@ -16,17 +17,10 @@ public class CuisineRegisterMain {
 
         CuisineRegister cuisineRegister = applicationContext.getBean(CuisineRegister.class);
 
-        Cuisine cuisine1 = new Cuisine();
-        cuisine1.setName("Brazilian");
+        Cuisine cuisine = new Cuisine();
+        cuisine.setId(1L);
 
-        Cuisine cuisine2 = new Cuisine();
-        cuisine2.setName("Japanese");
-
-        cuisine1 = cuisineRegister.save(cuisine1);
-        cuisine2 = cuisineRegister.save(cuisine2);
-
-        System.out.printf("%d - %s\n", cuisine1.getId(), cuisine1.getName());
-        System.out.printf("%d - %s\n", cuisine2.getId(), cuisine2.getName());
+        cuisineRegister.remove(cuisine);
 
     }
 
