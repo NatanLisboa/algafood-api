@@ -2,6 +2,7 @@ package com.lisboaworks.algafood.jpa;
 
 import com.lisboaworks.algafood.AlgafoodApiApplication;
 import com.lisboaworks.algafood.domain.model.Cuisine;
+import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -13,13 +14,13 @@ public class UpdateCuisineMain {
                 .web(WebApplicationType.NONE)
                 .run(args);
 
-        CuisineRegister cuisineRegister = applicationContext.getBean(CuisineRegister.class);
+        CuisineRepository cuisineRepository = applicationContext.getBean(CuisineRepository.class);
 
         Cuisine cuisine = new Cuisine();
         cuisine.setId(1L);
         cuisine.setName("Chinese");
 
-        cuisineRegister.save(cuisine);
+        cuisineRepository.save(cuisine);
 
     }
 }

@@ -2,6 +2,7 @@ package com.lisboaworks.algafood.jpa;
 
 import com.lisboaworks.algafood.AlgafoodApiApplication;
 import com.lisboaworks.algafood.domain.model.Cuisine;
+import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -14,7 +15,7 @@ public class CuisineRegisterMain {
                 .run(args);
 
 
-        CuisineRegister cuisineRegister = applicationContext.getBean(CuisineRegister.class);
+        CuisineRepository cuisineRepository = applicationContext.getBean(CuisineRepository.class);
 
         Cuisine cuisine1 = new Cuisine();
         cuisine1.setName("Brazilian");
@@ -22,8 +23,8 @@ public class CuisineRegisterMain {
         Cuisine cuisine2 = new Cuisine();
         cuisine2.setName("Japanese");
 
-        cuisine1 = cuisineRegister.save(cuisine1);
-        cuisine2 = cuisineRegister.save(cuisine2);
+        cuisine1 = cuisineRepository.save(cuisine1);
+        cuisine2 = cuisineRepository.save(cuisine2);
 
         System.out.printf("%d - %s\n", cuisine1.getId(), cuisine1.getName());
         System.out.printf("%d - %s\n", cuisine2.getId(), cuisine2.getName());

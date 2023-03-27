@@ -2,6 +2,7 @@ package com.lisboaworks.algafood.jpa;
 
 import com.lisboaworks.algafood.AlgafoodApiApplication;
 import com.lisboaworks.algafood.domain.model.Cuisine;
+import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -15,8 +16,8 @@ public class CuisineQueryMain {
                 .web(WebApplicationType.NONE)
                 .run(args);
 
-        CuisineRegister cuisineRegister = applicationContext.getBean(CuisineRegister.class);
-        List<Cuisine> cuisineList = cuisineRegister.findAll();
+        CuisineRepository cuisineRepository = applicationContext.getBean(CuisineRepository.class);
+        List<Cuisine> cuisineList = cuisineRepository.findAll();
 
         for (Cuisine cuisine : cuisineList) {
             System.out.println(cuisine.getName());
