@@ -32,7 +32,7 @@ public class TestRestaurantRepository {
         }
 
         // FIND BY ID
-        Restaurant restaurant1 = restaurantRepository.find(1L);
+        Restaurant restaurant1 = restaurantRepository.findById(1L);
         System.out.println("Id: " + restaurant1.getId());
         System.out.println("Name: " + restaurant1.getName());
         System.out.println("Shipping fee: R$" + formatter.format(restaurant1.getShippingFee()));

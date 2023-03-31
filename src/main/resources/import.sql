@@ -11,3 +11,8 @@ insert into state (name) values ('Delhi');
 insert into city (name, state_id) values ('Phuket Town', 1);
 insert into city (name, state_id) values ('Kamala', 1);
 insert into city (name, state_id) values ('New Delhi', 2);
+
+insert into role (name, description) values ('C-LEVEL', 'Maximum permission possible');
+insert into role (name, description) values ('DEPARTMENT BOSS', 'Medium permission');
+insert into role (name, description) values ('EMPLOYEE', 'Minimal permission');
+

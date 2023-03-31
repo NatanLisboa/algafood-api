@@ -8,7 +8,7 @@ public interface CityRepository {
 
     List<City> findAll();
 
-    City find(Long id);
+    City findById(Long id);
 
     City save(City city);
 

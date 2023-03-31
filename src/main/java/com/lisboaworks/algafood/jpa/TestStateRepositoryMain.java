@@ -27,7 +27,7 @@ public class TestStateRepositoryMain {
         }
 
         // FIND BY ID
-        State state1 = stateRepository.find(1L);
+        State state1 = stateRepository.findById(1L);
         System.out.println("Id: " + state1.getId());
         System.out.println("Name: " + state1.getName());
 

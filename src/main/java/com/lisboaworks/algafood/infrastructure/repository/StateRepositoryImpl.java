@@ -23,7 +23,7 @@ public class StateRepositoryImpl implements StateRepository {
     }
 
     @Override
-    public State find(Long id) {
+    public State findById(Long id) {
         return manager.find(State.class, id);
     }
 
@@ -36,7 +36,7 @@ public class StateRepositoryImpl implements StateRepository {
     @Override
     @Transactional
     public void delete(State state) {
-        state = find(state.getId());
+        state = findById(state.getId());
         manager.remove(state);
     }
 }

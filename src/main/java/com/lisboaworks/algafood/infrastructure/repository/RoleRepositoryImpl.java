@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.infrastructure.repository;
 
-import com.lisboaworks.algafood.domain.model.City;
-import com.lisboaworks.algafood.domain.repository.CityRepository;
+import com.lisboaworks.algafood.domain.model.Role;
+import com.lisboaworks.algafood.domain.repository.RoleRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,32 +11,32 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Component
-public class CityRepositoryImpl implements CityRepository {
+public class RoleRepositoryImpl implements RoleRepository {
 
     @PersistenceContext
     private EntityManager manager;
 
     @Override
-    public List<City> findAll() {
-        TypedQuery<City> query = manager.createQuery("from City", City.class);
+    public List<Role> findAll() {
+        TypedQuery<Role> query = manager.createQuery("from Role", Role.class);
         return query.getResultList();
     }
 
     @Override
-    public City findById(Long id) {
-        return manager.find(City.class, id);
+    public Role findById(Long id) {
+        return manager.find(Role.class, id);
     }
 
     @Override
     @Transactional
-    public City save(City city) {
-        return manager.merge(city);
+    public Role save(Role role) {
+        return manager.merge(role);
     }
 
     @Override
     @Transactional
-    public void delete(City city) {
-        city = findById(city.getId());
-        manager.remove(city);
+    public void delete(Role role) {
+        role = findById(role.getId());
+        manager.remove(role);
     }
 }

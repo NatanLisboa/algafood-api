@@ -29,7 +29,7 @@ public class TestCityRepositoryMain {
         }
 
         // FIND BY ID
-        City city1 = cityRepository.find(1L);
+        City city1 = cityRepository.findById(1L);
         System.out.println("Id: " + city1.getId());
         System.out.println("Name: " + city1.getName());
         
@@ -37,19 +37,21 @@ public class TestCityRepositoryMain {
         State state = new State();
         state.setId(2L);
 
-        City city3 = new City();
-        city3.setName("City 3");
-        city3.setState(state);
+        City city4 = new City();
+        city4.setName("City 4");
+        city4.setState(state);
 
-        cityRepository.save(city3);
+        cityRepository.save(city4);
 
         // UPDATE
-        city3.setId(3L);
-        city3.setName("3 City");
+        city4.setId(4L);
+        city4.setName("4 City");
 
-        cityRepository.save(city3);
+        cityRepository.save(city4);
 
         // DELETE
+        City city3 = new City();
+        city3.setId(3L);
         cityRepository.delete(city3);
 
     }

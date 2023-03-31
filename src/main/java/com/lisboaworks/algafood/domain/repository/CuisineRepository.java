@@ -7,7 +7,7 @@ import java.util.List;
 public interface CuisineRepository {
 
     List<Cuisine> findAll();
-    Cuisine find(Long id);
+    Cuisine findById(Long id);
 
     Cuisine save(Cuisine cuisine);
 

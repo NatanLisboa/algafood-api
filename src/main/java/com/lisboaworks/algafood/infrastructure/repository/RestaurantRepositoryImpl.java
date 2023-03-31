@@ -1,6 +1,5 @@
 package com.lisboaworks.algafood.infrastructure.repository;
 
-import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
 import org.springframework.stereotype.Component;
@@ -24,7 +23,7 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
     }
 
     @Override
-    public Restaurant find(Long id) {
+    public Restaurant findById(Long id) {
         return manager.find(Restaurant.class, id);
     }
 
@@ -37,7 +36,7 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
     @Override
     @Transactional
     public void delete(Restaurant restaurant) {
-        restaurant = find(restaurant.getId());
+        restaurant = findById(restaurant.getId());
         manager.remove(restaurant);
     }
 }

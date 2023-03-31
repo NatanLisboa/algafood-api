@@ -23,7 +23,7 @@ public class CuisineRepositoryImpl implements CuisineRepository {
     }
 
     @Override
-    public Cuisine find(Long id) {
+    public Cuisine findById(Long id) {
         return manager.find(Cuisine.class, id);
     }
 
@@ -36,7 +36,7 @@ public class CuisineRepositoryImpl implements CuisineRepository {
     @Override
     @Transactional
     public void delete(Cuisine cuisine) {
-        cuisine = find(cuisine.getId());
+        cuisine = findById(cuisine.getId());
         manager.remove(cuisine);
     }
 
