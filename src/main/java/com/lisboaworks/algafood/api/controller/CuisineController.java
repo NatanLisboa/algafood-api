@@ -4,11 +4,11 @@ import com.lisboaworks.algafood.api.model.CuisineXMLWrapper;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,8 +30,16 @@ public class CuisineController {
     }
 
     @GetMapping("/{id}")
-    public Cuisine findById(@PathVariable Long id) {
-        return cuisineRepository.findById(id);
+    public ResponseEntity<Cuisine> findById(@PathVariable Long id) {
+        Cuisine cuisine = cuisineRepository.findById(id);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.LOCATION, "http://localhost:8080/cuisines");
+
+        return ResponseEntity
+                .status(HttpStatus.FOUND)
+                .headers(headers)
+                .build();
     }
 
 }
