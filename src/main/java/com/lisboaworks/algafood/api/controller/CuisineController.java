@@ -65,7 +65,7 @@ public class CuisineController {
 
         BeanUtils.copyProperties(newCuisine, cuisine, "id");
 
-        return ResponseEntity.ok(cuisineRepository.save(cuisine));
+        return ResponseEntity.ok(cuisineRegisterService.save(cuisine));
     }
 
     @DeleteMapping("/{id}")
