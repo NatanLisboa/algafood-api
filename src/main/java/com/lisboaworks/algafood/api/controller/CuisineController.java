@@ -4,7 +4,6 @@ import com.lisboaworks.algafood.api.model.CuisineXMLWrapper;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +39,12 @@ public class CuisineController {
 
         return ResponseEntity.ok(cuisine);
 
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Cuisine add(@RequestBody Cuisine cuisine) {
+        return cuisineRepository.save(cuisine);
     }
 
 }
