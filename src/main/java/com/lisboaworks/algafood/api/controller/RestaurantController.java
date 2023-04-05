@@ -1,13 +1,15 @@
 package com.lisboaworks.algafood.api.controller;
 
+import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
+import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.model.Restaurant;
+import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
+import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
@@ -18,6 +20,13 @@ public class RestaurantController {
 
     @Autowired
     private RestaurantRepository restaurantRepository;
+
+    @Autowired
+    private RestaurantRegisterService restaurantRegisterService;
+
+    @Autowired
+    private CuisineRepository cuisineRepository;
+
 
     @GetMapping
     public List<Restaurant> findAll() {
@@ -33,6 +42,16 @@ public class RestaurantController {
         }
 
         return ResponseEntity.ok(restaurant);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> add(@RequestBody Restaurant restaurant) {
+        try {
+            restaurant = restaurantRegisterService.save(restaurant);
+            return ResponseEntity.status(HttpStatus.CREATED).body(restaurant);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
 }
