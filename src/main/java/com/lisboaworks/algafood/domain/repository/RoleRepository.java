@@ -8,8 +8,11 @@ public interface RoleRepository {
 
 
     List<Role> findAll();
+
     Role findById(Long id);
+
     Role save(Role role);
+
     void delete(Role role);
 
 }

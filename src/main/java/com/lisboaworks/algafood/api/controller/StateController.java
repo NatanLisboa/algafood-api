@@ -1,7 +1,6 @@
 package com.lisboaworks.algafood.api.controller;
 
 import com.lisboaworks.algafood.domain.model.State;
-import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import com.lisboaworks.algafood.domain.repository.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

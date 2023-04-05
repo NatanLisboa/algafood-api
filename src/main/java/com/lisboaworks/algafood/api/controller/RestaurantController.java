@@ -1,7 +1,6 @@
 package com.lisboaworks.algafood.api.controller;
 
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
-import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;

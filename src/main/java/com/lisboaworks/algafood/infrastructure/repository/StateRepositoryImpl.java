@@ -12,10 +12,10 @@ import java.util.List;
 
 @Component
 public class StateRepositoryImpl implements StateRepository {
-    
+
     @PersistenceContext
     private EntityManager manager;
-    
+
     @Override
     public List<State> findAll() {
         TypedQuery<State> query = manager.createQuery("from State", State.class);
