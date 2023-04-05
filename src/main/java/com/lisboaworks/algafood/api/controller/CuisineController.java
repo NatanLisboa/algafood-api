@@ -3,6 +3,7 @@ package com.lisboaworks.algafood.api.controller;
 import com.lisboaworks.algafood.api.model.CuisineXMLWrapper;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
+import com.lisboaworks.algafood.domain.service.CuisineRegisterService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -20,6 +21,9 @@ public class CuisineController {
 
     @Autowired
     private CuisineRepository cuisineRepository;
+
+    @Autowired
+    private CuisineRegisterService cuisineRegisterService;
 
     @GetMapping
     public List<Cuisine> findAll() {
@@ -46,7 +50,7 @@ public class CuisineController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Cuisine add(@RequestBody Cuisine cuisine) {
-        return cuisineRepository.save(cuisine);
+        return cuisineRegisterService.save(cuisine);
     }
 
     @PutMapping("/{id}")
