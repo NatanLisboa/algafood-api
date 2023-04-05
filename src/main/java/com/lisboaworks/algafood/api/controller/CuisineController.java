@@ -3,6 +3,7 @@ package com.lisboaworks.algafood.api.controller;
 import com.lisboaworks.algafood.api.model.CuisineXMLWrapper;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -45,6 +46,20 @@ public class CuisineController {
     @ResponseStatus(HttpStatus.CREATED)
     public Cuisine add(@RequestBody Cuisine cuisine) {
         return cuisineRepository.save(cuisine);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Cuisine> update(@PathVariable Long id,
+                                          @RequestBody Cuisine newCuisine) {
+        Cuisine cuisine = cuisineRepository.findById(id);
+
+        if (Objects.isNull(cuisine)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        BeanUtils.copyProperties(newCuisine, cuisine, "id");
+
+        return ResponseEntity.ok(cuisineRepository.save(cuisine));
     }
 
 }
