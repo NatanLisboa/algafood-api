@@ -2,6 +2,7 @@ package com.lisboaworks.algafood.infrastructure.repository;
 
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class CuisineRepositoryImpl implements CuisineRepository {
@@ -33,10 +35,14 @@ public class CuisineRepositoryImpl implements CuisineRepository {
         return manager.merge(cuisine);
     }
 
-    @Override
     @Transactional
-    public void delete(Cuisine cuisine) {
-        cuisine = findById(cuisine.getId());
+    public void delete(Long id) {
+        Cuisine cuisine = findById(id);
+
+        if (Objects.isNull(cuisine)) {
+            throw new EmptyResultDataAccessException(1);
+        }
+
         manager.remove(cuisine);
     }
 

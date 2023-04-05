@@ -1,12 +1,13 @@
 package com.lisboaworks.algafood.api.controller;
 
 import com.lisboaworks.algafood.api.model.CuisineXMLWrapper;
+import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
+import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import com.lisboaworks.algafood.domain.service.CuisineRegisterService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -70,16 +71,12 @@ public class CuisineController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Cuisine> delete(@PathVariable Long id) {
         try {
-            Cuisine cuisine = cuisineRepository.findById(id);
-
-            if (Objects.isNull(cuisine)) {
-                return ResponseEntity.notFound().build();
-            }
-
-            cuisineRepository.delete(cuisine);
+            cuisineRegisterService.delete(id);
             return ResponseEntity.noContent().build();
-        } catch (DataIntegrityViolationException e) {
+        } catch (EntityAlreadyInUseException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.notFound().build();
         }
 
     }
