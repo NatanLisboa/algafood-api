@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/cuisines")
@@ -32,7 +33,13 @@ public class CuisineController {
     @GetMapping("/{id}")
     public ResponseEntity<Cuisine> findById(@PathVariable Long id) {
         Cuisine cuisine = cuisineRepository.findById(id);
+
+        if (Objects.isNull(cuisine)) {
+            return ResponseEntity.notFound().build();
+        }
+
         return ResponseEntity.ok(cuisine);
+
     }
 
 }
