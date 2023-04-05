@@ -1,6 +1,5 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.model.CuisineXMLWrapper;
 import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import com.lisboaworks.algafood.domain.model.Cuisine;
@@ -29,11 +28,6 @@ public class CuisineController {
     @GetMapping
     public List<Cuisine> findAll() {
         return cuisineRepository.findAll();
-    }
-
-    @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
-    public CuisineXMLWrapper findAllXml() {
-        return new CuisineXMLWrapper(cuisineRepository.findAll());
     }
 
     @GetMapping("/{id}")
