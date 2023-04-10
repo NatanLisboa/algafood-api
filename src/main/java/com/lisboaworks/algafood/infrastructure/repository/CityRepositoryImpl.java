@@ -2,6 +2,7 @@ package com.lisboaworks.algafood.infrastructure.repository;
 
 import com.lisboaworks.algafood.domain.model.City;
 import com.lisboaworks.algafood.domain.repository.CityRepository;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class CityRepositoryImpl implements CityRepository {
@@ -35,8 +37,13 @@ public class CityRepositoryImpl implements CityRepository {
 
     @Override
     @Transactional
-    public void delete(City city) {
-        city = findById(city.getId());
+    public void delete(Long id) {
+        City city = findById(id);
+
+        if (Objects.isNull(city)) {
+            throw new EmptyResultDataAccessException(1);
+        }
+
         manager.remove(city);
     }
 }
