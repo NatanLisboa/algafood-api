@@ -2,7 +2,7 @@ package com.lisboaworks.algafood.infrastructure.repository;
 
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -10,7 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-@Component
+@Repository
 public class RestaurantRepositoryImpl implements RestaurantRepository {
 
     @PersistenceContext

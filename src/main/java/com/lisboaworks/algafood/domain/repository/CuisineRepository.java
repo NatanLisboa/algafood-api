@@ -10,6 +10,8 @@ public interface CuisineRepository {
 
     Cuisine findById(Long id);
 
+    List<Cuisine> findByName(String name);
+
     Cuisine save(Cuisine cuisine);
 
     void delete(Long id);

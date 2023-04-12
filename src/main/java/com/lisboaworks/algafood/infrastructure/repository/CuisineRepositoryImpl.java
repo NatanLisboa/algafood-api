@@ -3,7 +3,7 @@ package com.lisboaworks.algafood.infrastructure.repository;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -12,7 +12,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Objects;
 
-@Component
+@Repository
 public class CuisineRepositoryImpl implements CuisineRepository {
 
     @PersistenceContext
@@ -27,6 +27,13 @@ public class CuisineRepositoryImpl implements CuisineRepository {
     @Override
     public Cuisine findById(Long id) {
         return manager.find(Cuisine.class, id);
+    }
+
+    @Override
+    public List<Cuisine> findByName(String name) {
+        return manager.createQuery("from Cozinha where name = :name", Cuisine.class)
+                .setParameter("name", name)
+                .getResultList();
     }
 
     @Override

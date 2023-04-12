@@ -3,7 +3,7 @@ package com.lisboaworks.algafood.infrastructure.repository;
 import com.lisboaworks.algafood.domain.model.State;
 import com.lisboaworks.algafood.domain.repository.StateRepository;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -12,7 +12,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Objects;
 
-@Component
+@Repository
 public class StateRepositoryImpl implements StateRepository {
 
     @PersistenceContext
