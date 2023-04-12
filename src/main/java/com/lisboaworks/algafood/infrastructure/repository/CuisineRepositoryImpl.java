@@ -31,7 +31,7 @@ public class CuisineRepositoryImpl implements CuisineRepository {
 
     @Override
     public List<Cuisine> findByName(String name) {
-        return manager.createQuery("from Cozinha where name = :name", Cuisine.class)
+        return manager.createQuery("from Cuisine where name = :name", Cuisine.class)
                 .setParameter("name", name)
                 .getResultList();
     }
