@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class RestaurantRegisterService {
@@ -21,11 +22,8 @@ public class RestaurantRegisterService {
     public Restaurant save(Restaurant restaurant) {
 
         Long cuisineId = restaurant.getCuisine().getId();
-        Cuisine cuisine = cuisineRepository.findById(cuisineId);
-
-        if (Objects.isNull(cuisine)) {
-            throw new EntityNotFoundException(String.format("There is no cuisine register with id %d", cuisineId));
-        }
+        Cuisine cuisine = cuisineRepository.findById(cuisineId)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("There is no cuisine register with id %d", cuisineId)));
 
         restaurant.setCuisine(cuisine);
 

@@ -1,20 +1,15 @@
 package com.lisboaworks.algafood.domain.repository;
 
 import com.lisboaworks.algafood.domain.model.Cuisine;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface CuisineRepository {
+@Repository
+public interface CuisineRepository extends JpaRepository<Cuisine, Long> {
 
-    List<Cuisine> findAll();
-
-    Cuisine findById(Long id);
-
-    List<Cuisine> findByName(String name);
-
-    Cuisine save(Cuisine cuisine);
-
-    void delete(Long id);
+//    List<Cuisine> findByName(String name);
 
 
 }

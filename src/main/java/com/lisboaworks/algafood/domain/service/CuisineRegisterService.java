@@ -21,7 +21,7 @@ public class CuisineRegisterService {
 
     public void delete(Long id) {
         try {
-            cuisineRepository.delete(id);
+            cuisineRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new EntityNotFoundException(String.format("Cuisine entity with id %d could not be found in database", id));
         } catch (DataIntegrityViolationException e) {

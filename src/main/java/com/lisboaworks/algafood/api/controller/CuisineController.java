@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/cuisines")
@@ -31,13 +31,10 @@ public class CuisineController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Cuisine> findById(@PathVariable Long id) {
-        Cuisine cuisine = cuisineRepository.findById(id);
+        Optional<Cuisine> cuisine = cuisineRepository.findById(id);
 
-        if (Objects.isNull(cuisine)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(cuisine);
+        return cuisine.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
 
     }
 
@@ -50,24 +47,24 @@ public class CuisineController {
     @PutMapping("/{id}")
     public ResponseEntity<Cuisine> update(@PathVariable Long id,
                                           @RequestBody Cuisine newCuisine) {
-        Cuisine cuisine = cuisineRepository.findById(id);
+        Optional<Cuisine> cuisine = cuisineRepository.findById(id);
 
-        if (Objects.isNull(cuisine)) {
+        if (cuisine.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
-        BeanUtils.copyProperties(newCuisine, cuisine, "id");
+        BeanUtils.copyProperties(newCuisine, cuisine.get(), "id");
 
-        return ResponseEntity.ok(cuisineRegisterService.save(cuisine));
+        return ResponseEntity.ok(cuisineRegisterService.save(cuisine.get()));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Cuisine> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         try {
             cuisineRegisterService.delete(id);
             return ResponseEntity.noContent().build();
         } catch (EntityAlreadyInUseException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
