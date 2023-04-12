@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/states")
@@ -31,13 +32,9 @@ public class StateController {
 
     @GetMapping("/{id}")
     public ResponseEntity<State> findById(@PathVariable Long id) {
-        State state = stateRepository.findById(id);
+        Optional<State> state = stateRepository.findById(id);
 
-        if (Objects.isNull(state)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(state);
+        return state.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -55,11 +52,13 @@ public class StateController {
     public ResponseEntity<?> update(@PathVariable Long id,
                                     @RequestBody State newState) {
         try {
-            State state = stateRepository.findById(id);
+            Optional<State> optionalState = stateRepository.findById(id);
 
-            if (Objects.isNull(state)) {
+            if (optionalState.isEmpty()) {
                 return ResponseEntity.notFound().build();
             }
+
+            State state = optionalState.get();
 
             BeanUtils.copyProperties(newState, state, "id");
 

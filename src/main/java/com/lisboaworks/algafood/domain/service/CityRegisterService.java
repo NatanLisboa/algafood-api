@@ -12,6 +12,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Service
 public class CityRegisterService {
@@ -24,13 +25,13 @@ public class CityRegisterService {
 
     public City save(City city) {
         Long stateId = city.getState().getId();
-        State state = stateRepository.findById(stateId);
+        Optional<State> optionalState = stateRepository.findById(stateId);
 
-        if (Objects.isNull(state)) {
+        if (optionalState.isEmpty()) {
             throw new EntityNotFoundException(String.format("There is no state with id %d in database", stateId));
         }
 
-        city.setState(state);
+        city.setState(optionalState.get());
 
         return cityRepository.save(city);
     }
