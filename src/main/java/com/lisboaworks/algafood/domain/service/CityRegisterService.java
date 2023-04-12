@@ -11,7 +11,6 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
-import java.util.EmptyStackException;
 import java.util.Objects;
 
 @Service
@@ -31,13 +30,15 @@ public class CityRegisterService {
             throw new EntityNotFoundException(String.format("There is no state with id %d in database", stateId));
         }
 
+        city.setState(state);
+
         return cityRepository.save(city);
     }
 
     public void delete(Long id) {
 
         try {
-            cityRepository.delete(id);
+            cityRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new EntityNotFoundException(String.format("There is no city with id %d in database", id));
         } catch (DataIntegrityViolationException e) {
