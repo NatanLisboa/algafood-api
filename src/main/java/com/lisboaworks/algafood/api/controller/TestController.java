@@ -39,5 +39,10 @@ public class TestController {
         return restaurantRepository.findByShippingFeeBetween(startFee, endFee);
     }
 
+    @GetMapping("/restaurants-by-name-and-cuisine-id")
+    public List<Restaurant> getRestaurantsByNameAndCuisineId(String restaurantName, Long cuisineId) {
+        return restaurantRepository.findByNameContainingAndCuisineId(restaurantName, cuisineId);
+    }
+
 
 }
