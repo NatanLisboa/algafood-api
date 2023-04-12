@@ -17,6 +17,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/restaurants")
@@ -39,13 +40,9 @@ public class RestaurantController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Restaurant> findById(@PathVariable Long id) {
-        Restaurant restaurant = restaurantRepository.findById(id);
+        Optional<Restaurant> restaurant = restaurantRepository.findById(id);
 
-        if (Objects.isNull(restaurant)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        return ResponseEntity.ok(restaurant);
+        return restaurant.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
@@ -62,11 +59,13 @@ public class RestaurantController {
     public ResponseEntity<?> update(@PathVariable Long id,
                                     @RequestBody Restaurant newRestaurant) {
         try {
-            Restaurant restaurant = restaurantRepository.findById(id);
+            Optional<Restaurant> optionalRestaurant = restaurantRepository.findById(id);
 
-            if (Objects.isNull(restaurant)) {
+            if (optionalRestaurant.isEmpty()) {
                 return ResponseEntity.notFound().build();
             }
+
+            Restaurant restaurant = optionalRestaurant.get();
 
             BeanUtils.copyProperties(newRestaurant, restaurant, "id");
 
@@ -81,11 +80,13 @@ public class RestaurantController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> partiallyUpdate(@PathVariable Long id, @RequestBody Map<String, Object> fieldsToUpdate) {
-        Restaurant restaurant = restaurantRepository.findById(id);
+        Optional<Restaurant> optionalRestaurant = restaurantRepository.findById(id);
 
-        if (Objects.isNull(restaurant)) {
+        if (optionalRestaurant.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
+
+        Restaurant restaurant = optionalRestaurant.get();
 
         merge(fieldsToUpdate, restaurant);
 
