@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface CuisineRepository extends JpaRepository<Cuisine, Long> {
 
-    List<Cuisine> findCuisinesByName(String name);
+    List<Cuisine> findCuisinesByNameContaining(String name); // CONTAINING: Query com "like"
 
     Optional<Cuisine> findByName(String name);
 
