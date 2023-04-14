@@ -45,14 +45,19 @@ public class TestController {
         return cuisineRepository.findByName(name);
     }
 
-    @GetMapping("/restaurants-by-shipping-fee")
-    public List<Restaurant> getRestaurantsByShippingFee(BigDecimal startFee, BigDecimal endFee) {
-        return restaurantRepository.queryByShippingFeeBetween(startFee, endFee);
-    }
+//    @GetMapping("/restaurants-by-shipping-fee")
+//    public List<Restaurant> getRestaurantsByShippingFee(BigDecimal startFee, BigDecimal endFee) {
+//        return restaurantRepository.queryByShippingFeeBetween(startFee, endFee);
+//    }
 
     @GetMapping("/restaurants/by-name-and-cuisine-id")
     public List<Restaurant> getRestaurantsByNameAndCuisineId(String restaurantName, Long cuisineId) {
         return restaurantRepository.retrieveByNameAndCuisineId(restaurantName, cuisineId);
+    }
+
+    @GetMapping("/restaurants/by-name-and-shipping-fee")
+    public List<Restaurant> getRestaurantsByNameAndShippingFee(String restaurantName, BigDecimal startFee, BigDecimal endFee) {
+        return restaurantRepository.findAllMatching(restaurantName, startFee, endFee);
     }
 
     @GetMapping("/restaurants/first-by-name")
