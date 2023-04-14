@@ -13,7 +13,6 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
     List<Restaurant> queryByShippingFeeBetween(BigDecimal startFee, BigDecimal endFee);
 
-    @Query("from Restaurant where name like %:name% and cuisine.id = :id")
     List<Restaurant> retrieveByNameAndCuisineId(String name, @Param("id") Long cuisineId);
     //List<Restaurant> findByNameContainingAndCuisineId(String restaurantName, Long cuisineId); // Find by cuisine id and restaurant name with like (in that order)
 
