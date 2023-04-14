@@ -8,6 +8,8 @@ import org.springframework.util.StringUtils;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
@@ -21,30 +23,17 @@ public class RestaurantRepositoryImpl implements CustomizedRestaurantRepository 
 
     @Override
     public List<Restaurant> findAllMatching(String name, BigDecimal startShippingFee, BigDecimal endShippingFee) {
-         var jpql = new StringBuilder();
-         var parameters = new HashMap<String, Object>();
-         jpql.append("from Restaurant where 0 = 0 ");
 
-         if (StringUtils.hasLength(name)) {
-             jpql.append("and name like :name ");
-             parameters.put("name", "%" + name + "%");
-         }
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
 
-         if (Objects.nonNull(startShippingFee)) {
-             jpql.append("and shippingFee >= :startFee ");
-             parameters.put("startFee", startShippingFee);
-         }
+        CriteriaQuery<Restaurant> criteria = builder.createQuery(Restaurant.class);
 
-         if (Objects.nonNull(endShippingFee)) {
-             jpql.append("and shippingFee <= :endFee ");
-             parameters.put("endFee", endShippingFee);
-         }
+        criteria.from(Restaurant.class); // from Restaurant
 
-         TypedQuery<Restaurant> query = manager.createQuery(jpql.toString(), Restaurant.class);
+        TypedQuery<Restaurant> query = manager.createQuery(criteria);
 
-         parameters.forEach(query::setParameter);
+        return query.getResultList();
 
-         return query.getResultList();
     }
 
 
