@@ -2,6 +2,8 @@ package com.lisboaworks.algafood.domain.repository;
 
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -11,7 +13,9 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
     List<Restaurant> queryByShippingFeeBetween(BigDecimal startFee, BigDecimal endFee);
 
-    List<Restaurant> findByNameContainingAndCuisineId(String restaurantName, Long cuisineId); // Find by cuisine id and restaurant name with like (in that order)
+    @Query("from Restaurant where name like %:name% and cuisine.id = :id")
+    List<Restaurant> retrieveByNameAndCuisineId(String name, @Param("id") Long cuisineId);
+    //List<Restaurant> findByNameContainingAndCuisineId(String restaurantName, Long cuisineId); // Find by cuisine id and restaurant name with like (in that order)
 
     Optional<Restaurant> findFirstRestaurantByNameContaining(String name); // Only the first one
 
