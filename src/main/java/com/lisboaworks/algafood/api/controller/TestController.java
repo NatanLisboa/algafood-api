@@ -4,10 +4,7 @@ import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
-import com.lisboaworks.algafood.infrastructure.repository.spec.RestaurantWithoutShippingFeeSpec;
-import com.lisboaworks.algafood.infrastructure.repository.spec.RestaurantWithSimilarName;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+
+import static com.lisboaworks.algafood.infrastructure.repository.spec.RestaurantSpecs.withoutShippingFee;
+import static com.lisboaworks.algafood.infrastructure.repository.spec.RestaurantSpecs.withSimilarName;
+
 
 @RestController
 @RequestMapping("/test")
@@ -75,8 +76,6 @@ public class TestController {
 
     @GetMapping("/restaurants/without-shipping-fee")
     public List<Restaurant> getRestaurantsWithoutShippingFee(String restaurantName) {
-        Specification<Restaurant> withoutShippingFee = new RestaurantWithoutShippingFeeSpec();
-        Specification<Restaurant> withSimilarName = new RestaurantWithSimilarName(restaurantName);
-        return restaurantRepository.findAll(withoutShippingFee.and(withSimilarName));
+        return restaurantRepository.findAll(withoutShippingFee().and(withSimilarName(restaurantName)));
     }
 }
