@@ -10,4 +10,6 @@ public interface CustomizedRestaurantRepository {
 
     List<Restaurant> findAllMatching(String name, BigDecimal startShippingFee, BigDecimal endShippingFee);
 
+    List<Restaurant> findWithoutShippingFee(String restaurantName);
+
 }

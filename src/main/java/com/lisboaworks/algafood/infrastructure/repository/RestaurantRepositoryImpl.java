@@ -2,6 +2,9 @@ package com.lisboaworks.algafood.infrastructure.repository;
 
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.CustomizedRestaurantRepository;
+import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -18,11 +21,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import static com.lisboaworks.algafood.infrastructure.repository.spec.RestaurantSpecs.withSimilarName;
+import static com.lisboaworks.algafood.infrastructure.repository.spec.RestaurantSpecs.withoutShippingFee;
+
 @Repository
 public class RestaurantRepositoryImpl implements CustomizedRestaurantRepository {
 
     @PersistenceContext
     private EntityManager manager;
+
+    @Autowired
+    @Lazy
+    private RestaurantRepository restaurantRepository;
 
     @Override
     public List<Restaurant> findAllMatching(String name, BigDecimal startShippingFee, BigDecimal endShippingFee) {
@@ -55,6 +65,11 @@ public class RestaurantRepositoryImpl implements CustomizedRestaurantRepository 
 
         return query.getResultList();
 
+    }
+
+    @Override
+    public List<Restaurant> findWithoutShippingFee(String restaurantName) {
+        return restaurantRepository.findAll(withoutShippingFee().and(withSimilarName(restaurantName)));
     }
 
 

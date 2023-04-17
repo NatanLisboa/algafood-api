@@ -76,6 +76,6 @@ public class TestController {
 
     @GetMapping("/restaurants/without-shipping-fee")
     public List<Restaurant> getRestaurantsWithoutShippingFee(String restaurantName) {
-        return restaurantRepository.findAll(withoutShippingFee().and(withSimilarName(restaurantName)));
+        return restaurantRepository.findWithoutShippingFee(restaurantName);
     }
 }
