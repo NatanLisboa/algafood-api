@@ -4,7 +4,10 @@ import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
+import com.lisboaworks.algafood.infrastructure.repository.spec.RestaurantWithoutShippingFeeSpec;
+import com.lisboaworks.algafood.infrastructure.repository.spec.RestaurantWithSimilarName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,5 +71,12 @@ public class TestController {
     @GetMapping("/restaurants/top2-by-name")
     public List<Restaurant> getTop2RestaurantsByName(String restaurantName) {
         return restaurantRepository.findTop2ByNameContaining(restaurantName);
+    }
+
+    @GetMapping("/restaurants/without-shipping-fee")
+    public List<Restaurant> getRestaurantsWithoutShippingFee(String restaurantName) {
+        Specification<Restaurant> withoutShippingFee = new RestaurantWithoutShippingFeeSpec();
+        Specification<Restaurant> withSimilarName = new RestaurantWithSimilarName(restaurantName);
+        return restaurantRepository.findAll(withoutShippingFee.and(withSimilarName));
     }
 }
