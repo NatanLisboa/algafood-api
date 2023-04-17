@@ -13,6 +13,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -30,11 +31,25 @@ public class RestaurantRepositoryImpl implements CustomizedRestaurantRepository 
 
         CriteriaQuery<Restaurant> criteria = builder.createQuery(Restaurant.class);
         Root<Restaurant> root = criteria.from(Restaurant.class); // from Restaurant
-        Predicate namePredicate = builder.like(root.get("name"), "%" + name + "%");
-        Predicate startFeePredicate = builder.greaterThanOrEqualTo(root.get("shippingFee"), startShippingFee);
-        Predicate endFeePredicate = builder.lessThanOrEqualTo(root.get("shippingFee"), endShippingFee);
 
-        criteria.where(namePredicate, startFeePredicate, endFeePredicate);
+        List<Predicate> predicates = new ArrayList<>();
+
+        if (StringUtils.hasText(name)) {
+            Predicate namePredicate = builder.like(root.get("name"), "%" + name + "%");
+            predicates.add(namePredicate);
+        }
+
+        if (Objects.nonNull(startShippingFee)) {
+            Predicate startFeePredicate = builder.greaterThanOrEqualTo(root.get("shippingFee"), startShippingFee);
+            predicates.add(startFeePredicate);
+        }
+
+        if (Objects.nonNull(endShippingFee)) {
+            Predicate endFeePredicate = builder.lessThanOrEqualTo(root.get("shippingFee"), endShippingFee);
+            predicates.add(endFeePredicate);
+        }
+
+        criteria.where(predicates.toArray(new Predicate[0]));
 
         TypedQuery<Restaurant> query = manager.createQuery(criteria);
 
