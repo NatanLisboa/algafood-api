@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, CustomizedRestaurantRepository, JpaSpecificationExecutor<Restaurant> {
+public interface RestaurantRepository extends CustomJpaRepository<Restaurant, Long>, CustomizedRestaurantRepository, JpaSpecificationExecutor<Restaurant> {
 
     List<Restaurant> queryByShippingFeeBetween(BigDecimal startFee, BigDecimal endFee);
 

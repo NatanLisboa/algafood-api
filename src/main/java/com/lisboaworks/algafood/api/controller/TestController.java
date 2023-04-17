@@ -33,6 +33,11 @@ public class TestController {
         return cuisineRepository.findCuisinesByNameContaining(name);
     }
 
+    @GetMapping("/cuisines/first")
+    public Optional<Cuisine> getFirstCuisine() {
+        return cuisineRepository.customFindFirst();
+    }
+
     @GetMapping("/cuisine/exists-by-name")
     public boolean cuisineExistsByName(@RequestParam String name) {
         return cuisineRepository.existsByName(name);
@@ -77,5 +82,10 @@ public class TestController {
     @GetMapping("/restaurants/without-shipping-fee")
     public List<Restaurant> getRestaurantsWithoutShippingFee(String restaurantName) {
         return restaurantRepository.findWithoutShippingFee(restaurantName);
+    }
+
+    @GetMapping("/restaurants/first")
+    public Optional<Restaurant> getFirstRestaurant() {
+        return restaurantRepository.customFindFirst();
     }
 }
