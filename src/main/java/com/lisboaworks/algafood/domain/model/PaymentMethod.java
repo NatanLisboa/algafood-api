@@ -18,8 +18,4 @@ public class PaymentMethod {
     @Column(nullable = false)
     private String description;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private Restaurant restaurant;
-
 }

@@ -66,7 +66,7 @@ public class RestaurantController {
 
             Restaurant restaurant = optionalRestaurant.get();
 
-            BeanUtils.copyProperties(newRestaurant, restaurant, "id");
+            BeanUtils.copyProperties(newRestaurant, restaurant, "id", "paymentMethods");
 
             restaurant = restaurantRegisterService.save(restaurant);
 

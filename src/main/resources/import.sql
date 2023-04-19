@@ -16,9 +16,8 @@ insert into role (name, description) values ('C-LEVEL', 'Maximum permission poss
 insert into role (name, description) values ('DEPARTMENT BOSS', 'Medium permission');
 insert into role (name, description) values ('EMPLOYEE', 'Minimal permission');
 
-insert into payment_method (description, restaurant_id) values ('Credit card', 1);
-insert into payment_method (description, restaurant_id) values ('Debit card', 1);
-insert into payment_method (description, restaurant_id) values ('Cash', 1);
-insert into payment_method (description, restaurant_id) values ('Credit card', 2);
-insert into payment_method (description, restaurant_id) values ('Debit card', 2);
-insert into payment_method (description, restaurant_id) values ('Cash', 2);
+insert into payment_method (description) values ('Credit card');
+insert into payment_method (description) values ('Debit card');
+insert into payment_method (description) values ('Cash');
+
+insert into restaurant_payment_method values (1, 1), (1, 2), (1, 3), (3, 1), (3, 2), (3, 3);

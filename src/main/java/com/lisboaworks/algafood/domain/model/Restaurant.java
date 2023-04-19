@@ -1,10 +1,13 @@
 package com.lisboaworks.algafood.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -24,5 +27,12 @@ public class Restaurant {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Cuisine cuisine;
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "restaurant_payment_method",
+            joinColumns = @JoinColumn(name = "restaurant_id"),
+            inverseJoinColumns = @JoinColumn(name = "payment_method_id"))
+    private List<PaymentMethod> paymentMethods = new ArrayList<>();
 
 }
