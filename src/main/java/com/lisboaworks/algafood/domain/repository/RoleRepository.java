@@ -1,8 +1,8 @@
 package com.lisboaworks.algafood.domain.repository;
 
-import com.lisboaworks.algafood.domain.model.Role;
+import com.lisboaworks.algafood.domain.model.Permission;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<Permission, Long> {
 
 }
