@@ -28,6 +28,7 @@ public class Restaurant {
     @JoinColumn(nullable = false)
     private Cuisine cuisine;
 
+    @JsonIgnore
     @Embedded
     private Address address;
 
