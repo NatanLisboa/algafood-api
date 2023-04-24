@@ -8,9 +8,9 @@ insert into city (name, state_id) values ('Phuket Town', 1);
 insert into city (name, state_id) values ('Kamala', 1);
 insert into city (name, state_id) values ('New Delhi', 2);
 
-insert into restaurant (name, shipping_fee, cuisine_id, address_city_id, address_zip_code, address_street_name, address_number, address_district) values ('Thai Gourmet', 10, 1, 1, '38400-999', 'Rua João Pinheiro', '1000', 'Centro');
-insert into restaurant (name, shipping_fee, cuisine_id) values ('Indian Fusion Cuisine', 7.00, 2);
-insert into restaurant (name, shipping_fee, cuisine_id) values ('Best Indian Cuisine', 8.00, 2);
+insert into restaurant (name, shipping_fee, cuisine_id, address_city_id, address_zip_code, address_street_name, address_number, address_district, register_datetime, last_update_datetime) values ('Thai Gourmet', 10, 1, 1, '38400-999', 'Rua João Pinheiro', '1000', 'Centro', utc_timestamp, utc_timestamp);
+insert into restaurant (name, shipping_fee, cuisine_id, register_datetime, last_update_datetime) values ('Indian Fusion Cuisine', 7.00, 2, utc_timestamp, utc_timestamp);
+insert into restaurant (name, shipping_fee, cuisine_id, register_datetime, last_update_datetime) values ('Best Indian Cuisine', 8.00, 2, utc_timestamp, utc_timestamp);
 
 insert into role (name, description) values ('C-LEVEL', 'Maximum permission possible');
 insert into role (name, description) values ('DEPARTMENT BOSS', 'Medium permission');
