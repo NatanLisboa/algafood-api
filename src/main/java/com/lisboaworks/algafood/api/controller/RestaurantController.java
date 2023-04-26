@@ -34,7 +34,12 @@ public class RestaurantController {
 
     @GetMapping
     public List<Restaurant> findAll() {
-        return restaurantRepository.findAll();
+        List<Restaurant> restaurants = restaurantRepository.findAll();
+
+//        System.out.println("O nome da cozinha é:");
+//        System.out.println(restaurants.get(0).getCuisine().getName());
+
+        return restaurants;
     }
 
     @GetMapping("/{id}")
