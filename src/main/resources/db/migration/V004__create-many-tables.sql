@@ -40,7 +40,7 @@ create table product (
 create table restaurant (
 	id bigint not null auto_increment,
 	cuisine_id bigint not null,
-	nome varchar(80) not null,
+	name varchar(80) not null,
 	shipping_fee decimal(10,2) not null,
 	update_datetime datetime not null,
 	register_datetime datetime not null,
