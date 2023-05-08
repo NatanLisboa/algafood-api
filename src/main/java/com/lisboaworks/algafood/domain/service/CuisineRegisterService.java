@@ -14,6 +14,8 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class CuisineRegisterService {
 
+    public static final String CUISINE_NOT_FOUND_MESSAGE = "Cuisine entity with id %d could not be found in database";
+    public static final String CUISINE_ALREADY_IN_USE_MESSAGE = "Cuisine with id %d cannot be deleted because it is already in use in another table";
     @Autowired
     private CuisineRepository cuisineRepository;
 
@@ -25,10 +27,15 @@ public class CuisineRegisterService {
         try {
             cuisineRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
-            throw new EntityNotFoundException(String.format("Cuisine entity with id %d could not be found in database", id));
+            throw new EntityNotFoundException(String.format(CUISINE_NOT_FOUND_MESSAGE, id));
         } catch (DataIntegrityViolationException e) {
-            throw new EntityAlreadyInUseException(String.format("Cuisine with id %d cannot be deleted because it is already in use in another table", id));
+            throw new EntityAlreadyInUseException(String.format(CUISINE_ALREADY_IN_USE_MESSAGE, id));
         }
+    }
+
+    public Cuisine findOrThrowException(Long cuisineId) {
+        return cuisineRepository.findById(cuisineId)
+                .orElseThrow(() -> new EntityNotFoundException(String.format(CUISINE_NOT_FOUND_MESSAGE, cuisineId)));
     }
 
 }
