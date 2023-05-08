@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,7 +28,6 @@ public class Order {
     @Column(nullable = false)
     private BigDecimal totalValue;
 
-    @Column(nullable = false)
     @CreationTimestamp
     private LocalDateTime creationDatetime;
 
@@ -36,4 +36,26 @@ public class Order {
     private LocalDateTime cancellationDatetime;
 
     private LocalDateTime deliveryDatetime;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private PaymentMethod paymentMethod;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Restaurant restaurant;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private User customer;
+
+    @Embedded
+    private Address deliveryAddress;
+
+    private OrderStatus status;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> items;
+
+
 }
