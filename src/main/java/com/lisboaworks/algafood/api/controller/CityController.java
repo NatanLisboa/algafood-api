@@ -31,10 +31,8 @@ public class CityController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<City> findById(@PathVariable Long id) {
-        Optional<City> city = cityRepository.findById(id);
-
-        return city.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public City findById(@PathVariable Long id) {
+        return cityRegisterService.findOrThrowException(id);
     }
 
     @PostMapping
@@ -49,38 +47,17 @@ public class CityController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id,
+    public City update(@PathVariable Long id,
                        @RequestBody City newCity) {
-        try {
-            Optional<City> optionalCity = cityRepository.findById(id);
-
-            if (optionalCity.isEmpty()) {
-                return ResponseEntity.notFound().build();
-            }
-
-            City city = optionalCity.get();
-
-            BeanUtils.copyProperties(newCity, city, "id");
-
-            city = cityRegisterService.save(city);
-
-            return ResponseEntity.ok(city);
-
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        City city = cityRegisterService.findOrThrowException(id);
+        BeanUtils.copyProperties(newCity, city, "id");
+        return cityRegisterService.save(city);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        try {
-            cityRegisterService.delete(id);
-            return ResponseEntity.noContent().build();
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        } catch (EntityAlreadyInUseException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-        }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        cityRegisterService.delete(id);
     }
 
 }
