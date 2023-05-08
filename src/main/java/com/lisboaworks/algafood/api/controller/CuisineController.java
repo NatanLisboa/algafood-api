@@ -58,17 +58,23 @@ public class CuisineController {
         return ResponseEntity.ok(cuisineRegisterService.save(cuisine.get()));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
-        try {
-            cuisineRegisterService.delete(id);
-            return ResponseEntity.noContent().build();
-        } catch (EntityAlreadyInUseException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<?> delete(@PathVariable Long id) {
+//        try {
+//            cuisineRegisterService.delete(id);
+//            return ResponseEntity.noContent().build();
+//        } catch (EntityAlreadyInUseException e) {
+//            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+//        } catch (EntityNotFoundException e) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//    }
 
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        cuisineRegisterService.delete(id);
     }
 
 }
