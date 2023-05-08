@@ -76,11 +76,7 @@ public class CuisineController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
-        try{
-            cuisineRegisterService.delete(id);
-        } catch (EntityNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        }
+        cuisineRegisterService.delete(id);
     }
 
 }
