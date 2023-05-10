@@ -49,40 +49,17 @@ public class RestaurantController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id,
+    public Restaurant update(@PathVariable Long id,
                                     @RequestBody Restaurant newRestaurant) {
-        try {
-            Optional<Restaurant> optionalRestaurant = restaurantRepository.findById(id);
-
-            if (optionalRestaurant.isEmpty()) {
-                return ResponseEntity.notFound().build();
-            }
-
-            Restaurant restaurant = optionalRestaurant.get();
-
-            BeanUtils.copyProperties(newRestaurant, restaurant, "id", "paymentMethods", "address", "registerDatetime");
-
-            restaurant = restaurantRegisterService.save(restaurant);
-
-            return ResponseEntity.ok(restaurant);
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-
+        Restaurant restaurant = restaurantRegisterService.findOrThrowException(id);
+        BeanUtils.copyProperties(newRestaurant, restaurant, "id", "paymentMethods", "address", "registerDatetime");
+        return restaurantRegisterService.save(restaurant);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> partiallyUpdate(@PathVariable Long id, @RequestBody Map<String, Object> fieldsToUpdate) {
-        Optional<Restaurant> optionalRestaurant = restaurantRepository.findById(id);
-
-        if (optionalRestaurant.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        Restaurant restaurant = optionalRestaurant.get();
-
+    public Restaurant partiallyUpdate(@PathVariable Long id, @RequestBody Map<String, Object> fieldsToUpdate) {
+        Restaurant restaurant = restaurantRegisterService.findOrThrowException(id);
         merge(fieldsToUpdate, restaurant);
-
         return update(restaurant.getId(), restaurant);
     }
 
