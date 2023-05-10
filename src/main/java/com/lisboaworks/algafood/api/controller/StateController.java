@@ -43,23 +43,9 @@ public class StateController {
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable Long id,
                                     @RequestBody State newState) {
-        try {
-            Optional<State> optionalState = stateRepository.findById(id);
-
-            if (optionalState.isEmpty()) {
-                return ResponseEntity.notFound().build();
-            }
-
-            State state = optionalState.get();
-
-            BeanUtils.copyProperties(newState, state, "id");
-
-            state = stateRegisterService.save(state);
-
-            return ResponseEntity.ok(state);
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        State state = stateRegisterService.findOrThrowException(id);
+        BeanUtils.copyProperties(newState, state, "id");
+        return ResponseEntity.ok(stateRegisterService.save(state));
     }
 
     @DeleteMapping("/{id}")
