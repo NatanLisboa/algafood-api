@@ -41,11 +41,11 @@ public class StateController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id,
+    public State update(@PathVariable Long id,
                                     @RequestBody State newState) {
         State state = stateRegisterService.findOrThrowException(id);
         BeanUtils.copyProperties(newState, state, "id");
-        return ResponseEntity.ok(stateRegisterService.save(state));
+        return stateRegisterService.save(state);
     }
 
     @DeleteMapping("/{id}")
