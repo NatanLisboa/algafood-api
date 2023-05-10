@@ -10,21 +10,26 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class RestaurantRegisterService {
-
+    public static final String RESTAURANT_NOT_FOUND_MESSAGE = "There is no restaurant register with id %d";
     @Autowired
     private RestaurantRepository restaurantRepository;
     @Autowired
     private CuisineRepository cuisineRepository;
+    @Autowired
+    private CuisineRegisterService cuisineRegisterService;
 
     public Restaurant save(Restaurant restaurant) {
 
         Long cuisineId = restaurant.getCuisine().getId();
-        Cuisine cuisine = cuisineRepository.findById(cuisineId)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("There is no cuisine register with id %d", cuisineId)));
-
+        Cuisine cuisine = cuisineRegisterService.findOrThrowException(cuisineId);
         restaurant.setCuisine(cuisine);
 
         return restaurantRepository.save(restaurant);
+    }
+
+    public Restaurant findOrThrowException(Long restaurantId) {
+        return restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new EntityNotFoundException(String.format(RESTAURANT_NOT_FOUND_MESSAGE, restaurantId)));
     }
 
 }

@@ -38,20 +38,14 @@ public class RestaurantController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Restaurant> findById(@PathVariable Long id) {
-        Optional<Restaurant> restaurant = restaurantRepository.findById(id);
-
-        return restaurant.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Restaurant findById(@PathVariable Long id) {
+        return restaurantRegisterService.findOrThrowException(id);
     }
 
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody Restaurant restaurant) {
-        try {
-            restaurant = restaurantRegisterService.save(restaurant);
-            return ResponseEntity.status(HttpStatus.CREATED).body(restaurant);
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    public Restaurant add(@RequestBody Restaurant restaurant) {
+        return restaurantRegisterService.save(restaurant);
     }
 
     @PutMapping("/{id}")
