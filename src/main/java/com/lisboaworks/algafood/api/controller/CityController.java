@@ -36,13 +36,9 @@ public class CityController {
     }
 
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody City city) {
-        try {
-            city = cityRegisterService.save(city);
-            return ResponseEntity.ok(city);
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    @ResponseStatus(HttpStatus.CREATED)
+    public City add(@RequestBody City city) {
+        return cityRegisterService.save(city);
     }
 
 
