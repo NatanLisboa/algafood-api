@@ -19,7 +19,6 @@ public class CityRegisterService {
 
     public static final String CITY_NOT_FOUND_MESSAGE = "There is no city with id %d in database";
     public static final String CITY_ALREADY_IN_USE_MESSAGE = "City with id %d cannot be deleted because it is already being used by other entities in database";
-    public static final String STATE_NOT_FOUND_MESSAGE = "There is no state with id %d in database";
     @Autowired
     private CityRepository cityRepository;
 
@@ -31,7 +30,7 @@ public class CityRegisterService {
         Optional<State> optionalState = stateRepository.findById(stateId);
 
         if (optionalState.isEmpty()) {
-            throw new EntityNotFoundException(String.format(STATE_NOT_FOUND_MESSAGE, stateId));
+            throw new EntityNotFoundException(String.format(StateRegisterService.STATE_NOT_FOUND_MESSAGE, stateId));
         }
 
         city.setState(optionalState.get());

@@ -30,10 +30,8 @@ public class StateController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<State> findById(@PathVariable Long id) {
-        Optional<State> state = stateRepository.findById(id);
-
-        return state.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public State findById(@PathVariable Long id) {
+        return stateRegisterService.findOrThrowException(id);
     }
 
     @PostMapping

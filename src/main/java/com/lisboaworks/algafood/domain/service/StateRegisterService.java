@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class StateRegisterService {
 
+    public static final String STATE_NOT_FOUND_MESSAGE = "There is no state with id %d in database";
+    public static final String STATE_ALREADY_IN_USE_MESSAGE = "State with id %d cannot be deleted because it is already being used by other entities in database";
     @Autowired
     private StateRepository stateRepository;
 
@@ -24,11 +26,16 @@ public class StateRegisterService {
         try {
             stateRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
-            throw new EntityNotFoundException(String.format("There is no state with id %d in database", id));
+            throw new EntityNotFoundException(String.format(STATE_NOT_FOUND_MESSAGE, id));
         } catch (DataIntegrityViolationException e) {
-            throw new EntityAlreadyInUseException(String.format("State with id %d cannot be deleted because it is already being used by other entities in database", id));
+            throw new EntityAlreadyInUseException(String.format(STATE_ALREADY_IN_USE_MESSAGE, id));
         }
 
+    }
+
+    public State findOrThrowException(Long stateId) {
+        return stateRepository.findById(stateId)
+                .orElseThrow(() -> new EntityNotFoundException(String.format(STATE_NOT_FOUND_MESSAGE, stateId)));
     }
     
 }
