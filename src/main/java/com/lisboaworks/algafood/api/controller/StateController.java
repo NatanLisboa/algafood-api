@@ -35,13 +35,8 @@ public class StateController {
     }
 
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody State state) {
-        try {
-            state = stateRegisterService.save(state);
-            return ResponseEntity.ok(state);
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public State add(@RequestBody State state) {
+        return stateRegisterService.save(state);
     }
 
 
