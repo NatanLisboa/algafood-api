@@ -2,6 +2,7 @@ package com.lisboaworks.algafood.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
+import com.lisboaworks.algafood.domain.exception.CuisineNotFoundException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
@@ -48,7 +49,7 @@ public class RestaurantController {
     public Restaurant add(@RequestBody Restaurant restaurant) {
         try {
             return restaurantRegisterService.save(restaurant);
-        } catch (EntityNotFoundException e) {
+        } catch (CuisineNotFoundException e) {
             throw new BusinessRuleException(e.getMessage());
         }
     }
@@ -60,7 +61,7 @@ public class RestaurantController {
         BeanUtils.copyProperties(newRestaurant, restaurant, "id", "paymentMethods", "address", "registerDatetime");
         try {
             return restaurantRegisterService.save(restaurant);
-        } catch (EntityNotFoundException e) {
+        } catch (CuisineNotFoundException e) {
             throw new BusinessRuleException(e.getMessage());
         }
     }

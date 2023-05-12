@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.domain.service;
 
+import com.lisboaworks.algafood.domain.exception.CityNotFoundException;
 import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import com.lisboaworks.algafood.domain.model.City;
@@ -16,8 +17,6 @@ import java.util.Optional;
 
 @Service
 public class CityRegisterService {
-
-    public static final String CITY_NOT_FOUND_MESSAGE = "There is no city with id %d in database";
     public static final String CITY_ALREADY_IN_USE_MESSAGE = "City with id %d cannot be deleted because it is already being used by other entities in database";
     @Autowired
     private CityRepository cityRepository;
@@ -35,20 +34,20 @@ public class CityRegisterService {
         return cityRepository.save(city);
     }
 
-    public void delete(Long id) {
+    public void delete(Long cityId) {
 
         try {
-            cityRepository.deleteById(id);
+            cityRepository.deleteById(cityId);
         } catch (EmptyResultDataAccessException e) {
-            throw new EntityNotFoundException(String.format(CITY_NOT_FOUND_MESSAGE, id));
+            throw new CityNotFoundException(cityId);
         } catch (DataIntegrityViolationException e) {
-            throw new EntityAlreadyInUseException(String.format(CITY_ALREADY_IN_USE_MESSAGE, id));
+            throw new EntityAlreadyInUseException(String.format(CITY_ALREADY_IN_USE_MESSAGE, cityId));
         }
 
     }
 
     public City findOrThrowException(Long cityId) {
         return cityRepository.findById(cityId)
-                .orElseThrow(() -> new EntityNotFoundException(String.format(CITY_NOT_FOUND_MESSAGE, cityId)));
+                .orElseThrow(() -> new CityNotFoundException(cityId));
     }
 }

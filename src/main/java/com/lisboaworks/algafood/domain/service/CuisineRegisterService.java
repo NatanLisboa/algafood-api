@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.domain.service;
 
+import com.lisboaworks.algafood.domain.exception.CuisineNotFoundException;
 import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import com.lisboaworks.algafood.domain.model.Cuisine;
@@ -14,7 +15,6 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class CuisineRegisterService {
 
-    public static final String CUISINE_NOT_FOUND_MESSAGE = "Cuisine entity with id %d could not be found in database";
     public static final String CUISINE_ALREADY_IN_USE_MESSAGE = "Cuisine with id %d cannot be deleted because it is already in use in another table";
     @Autowired
     private CuisineRepository cuisineRepository;
@@ -23,19 +23,19 @@ public class CuisineRegisterService {
         return cuisineRepository.save(cuisine);
     }
 
-    public void delete(Long id) {
+    public void delete(Long cuisineId) {
         try {
-            cuisineRepository.deleteById(id);
+            cuisineRepository.deleteById(cuisineId);
         } catch (EmptyResultDataAccessException e) {
-            throw new EntityNotFoundException(String.format(CUISINE_NOT_FOUND_MESSAGE, id));
+            throw new CuisineNotFoundException(cuisineId);
         } catch (DataIntegrityViolationException e) {
-            throw new EntityAlreadyInUseException(String.format(CUISINE_ALREADY_IN_USE_MESSAGE, id));
+            throw new EntityAlreadyInUseException(String.format(CUISINE_ALREADY_IN_USE_MESSAGE, cuisineId));
         }
     }
 
     public Cuisine findOrThrowException(Long cuisineId) {
         return cuisineRepository.findById(cuisineId)
-                .orElseThrow(() -> new EntityNotFoundException(String.format(CUISINE_NOT_FOUND_MESSAGE, cuisineId)));
+                .orElseThrow(() -> new CuisineNotFoundException(cuisineId));
     }
 
 }
