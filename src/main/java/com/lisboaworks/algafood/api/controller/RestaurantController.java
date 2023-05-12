@@ -1,6 +1,7 @@
 package com.lisboaworks.algafood.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
@@ -45,7 +46,11 @@ public class RestaurantController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Restaurant add(@RequestBody Restaurant restaurant) {
-        return restaurantRegisterService.save(restaurant);
+        try {
+            return restaurantRegisterService.save(restaurant);
+        } catch (EntityNotFoundException e) {
+            throw new BusinessRuleException(e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
@@ -53,7 +58,11 @@ public class RestaurantController {
                                     @RequestBody Restaurant newRestaurant) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(id);
         BeanUtils.copyProperties(newRestaurant, restaurant, "id", "paymentMethods", "address", "registerDatetime");
-        return restaurantRegisterService.save(restaurant);
+        try {
+            return restaurantRegisterService.save(restaurant);
+        } catch (EntityNotFoundException e) {
+            throw new BusinessRuleException(e.getMessage());
+        }
     }
 
     @PatchMapping("/{id}")
