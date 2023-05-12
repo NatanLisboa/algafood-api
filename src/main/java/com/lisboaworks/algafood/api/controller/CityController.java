@@ -4,6 +4,7 @@ package com.lisboaworks.algafood.api.controller;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
+import com.lisboaworks.algafood.domain.exception.StateNotFoundException;
 import com.lisboaworks.algafood.domain.model.City;
 import com.lisboaworks.algafood.domain.repository.CityRepository;
 import com.lisboaworks.algafood.domain.service.CityRegisterService;
@@ -41,8 +42,8 @@ public class CityController {
     public City add(@RequestBody City city) {
         try {
             return cityRegisterService.save(city);
-        } catch (BusinessRuleException e) {
-            throw new BusinessRuleException(e.getMessage());
+        } catch (StateNotFoundException e) {
+            throw new BusinessRuleException(e.getMessage(), e);
         }
     }
 
@@ -50,12 +51,12 @@ public class CityController {
     @PutMapping("/{id}")
     public City update(@PathVariable Long id,
                        @RequestBody City newCity) {
-        City city = cityRegisterService.findOrThrowException(id);
-        BeanUtils.copyProperties(newCity, city, "id");
         try {
+            City city = cityRegisterService.findOrThrowException(id);
+            BeanUtils.copyProperties(newCity, city, "id");
             return cityRegisterService.save(city);
-        } catch (EntityNotFoundException e) {
-            throw new BusinessRuleException(e.getMessage());
+        } catch (StateNotFoundException e) {
+            throw new BusinessRuleException(e.getMessage(), e);
         }
 
     }
