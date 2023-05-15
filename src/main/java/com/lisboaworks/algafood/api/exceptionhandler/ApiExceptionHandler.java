@@ -25,20 +25,34 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         ApiExceptionType apiExceptionType = ApiExceptionType.ENTITY_NOT_FOUND;
         String detail = e.getMessage();
 
-        ApiException apiException = createApiExceptionBuilder(status, apiExceptionType, detail)
+        ApiException entityNotFoundException = createApiExceptionBuilder(status, apiExceptionType, detail)
                 .build();
 
-        return handleExceptionInternal(e, apiException, new HttpHeaders(), status, request);
+        return handleExceptionInternal(e, entityNotFoundException, new HttpHeaders(), status, request);
     }
 
     @ExceptionHandler(BusinessRuleException.class)
     public ResponseEntity<?> handleBusinessRuleException(BusinessRuleException e, WebRequest request /* Automatically injected by Spring */) {
-        return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        ApiExceptionType apiExceptionType = ApiExceptionType.BUSINESS_RULE_ERROR;
+        String detail = e.getMessage();
+
+        ApiException businessRuleException = createApiExceptionBuilder(status, apiExceptionType, detail)
+                .build();
+
+        return handleExceptionInternal(e, businessRuleException, new HttpHeaders(), status, request);
     }
 
     @ExceptionHandler(EntityAlreadyInUseException.class)
     public ResponseEntity<?> handleEntityAlreadyInUseException(EntityAlreadyInUseException e, WebRequest request /* Automatically injected by Spring */ ) {
-        return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.CONFLICT, request);
+        HttpStatus status = HttpStatus.CONFLICT;
+        ApiExceptionType apiExceptionType = ApiExceptionType.ENTITY_ALREADY_IN_USE;
+        String detail = e.getMessage();
+
+        ApiException entityAlreadyInUseException = createApiExceptionBuilder(status, apiExceptionType, detail)
+                .build();
+
+        return handleExceptionInternal(e, entityAlreadyInUseException, new HttpHeaders(), status, request);
     }
 
     @Override
