@@ -7,6 +7,7 @@ import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -53,6 +54,18 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 .build();
 
         return handleExceptionInternal(e, entityAlreadyInUseException, new HttpHeaders(), status, request);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+
+        ApiExceptionType apiExceptionType = ApiExceptionType.INCOMPREHENSIBLE_MESSAGE;
+        String detail = "The request body is invalid. Verify syntax error.";
+
+        ApiException httpMessageNotReadableException = createApiExceptionBuilder(status, apiExceptionType, detail)
+                .build();
+
+        return super.handleExceptionInternal(ex, httpMessageNotReadableException, new HttpHeaders(), status, request);
     }
 
     @Override
