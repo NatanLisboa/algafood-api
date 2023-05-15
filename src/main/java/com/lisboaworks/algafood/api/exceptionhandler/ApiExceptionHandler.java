@@ -1,6 +1,7 @@
 package com.lisboaworks.algafood.api.exceptionhandler;
 
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
+import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler(BusinessRuleException.class)
-    public ResponseEntity<?> handleBusinessRuleException(EntityNotFoundException e) {
+    public ResponseEntity<?> handleBusinessRuleException(BusinessRuleException e) {
         ApiException apiException = ApiException.builder()
                 .datetime(LocalDateTime.now())
                 .message(e.getMessage())
@@ -43,6 +44,17 @@ public class ApiExceptionHandler {
                 .build();
 
         return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
+                .body(apiException);
+    }
+
+    @ExceptionHandler(EntityAlreadyInUseException.class)
+    public ResponseEntity<?> handleEntityAlreadyInUseException(EntityAlreadyInUseException e) {
+        ApiException apiException = ApiException.builder()
+                .datetime(LocalDateTime.now())
+                .message(e.getMessage())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(apiException);
     }
 
