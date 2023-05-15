@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.api.exceptionhandler;
 
+import static com.lisboaworks.algafood.api.exceptionhandler.ApiException.ApiExceptionBuilder;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
@@ -20,7 +21,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException e, WebRequest request /* Automatically injected by Spring */) {
-        return handleExceptionInternal(e, e.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        ApiExceptionType apiExceptionType = ApiExceptionType.ENTITY_NOT_FOUND;
+        String detail = e.getMessage();
+
+        ApiException apiException = createApiExceptionBuilder(status, apiExceptionType, detail)
+                .build();
+
+        return handleExceptionInternal(e, apiException, new HttpHeaders(), status, request);
     }
 
     @ExceptionHandler(BusinessRuleException.class)
@@ -38,16 +46,25 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         if (Objects.isNull(body)) {
             body = ApiException.builder()
-                    .datetime(LocalDateTime.now())
-                    .message(status.getReasonPhrase())
+                    .title(status.getReasonPhrase())
+                    .status(status.value())
                     .build();
         } else if (body instanceof String) {
             body = ApiException.builder()
-                    .datetime(LocalDateTime.now())
-                    .message((String) body)
+                    .title((String) body)
+                    .status(status.value())
                     .build();
         }
 
         return super.handleExceptionInternal(ex, body, headers, status, request);
+    }
+
+    private ApiExceptionBuilder createApiExceptionBuilder(HttpStatus status,
+            ApiExceptionType apiExceptionType, String detail) {
+        return ApiException.builder()
+                .status(status.value())
+                .type(apiExceptionType.getUri())
+                .title(apiExceptionType.getTitle())
+                .detail(detail);
     }
 }
