@@ -41,9 +41,9 @@ public class RestaurantController {
         return restaurantRepository.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Restaurant findById(@PathVariable Long id) {
-        return restaurantRegisterService.findOrThrowException(id);
+    @GetMapping("/{restaurantId}")
+    public Restaurant findById(@PathVariable Long restaurantId) {
+        return restaurantRegisterService.findOrThrowException(restaurantId);
     }
 
     @PostMapping
