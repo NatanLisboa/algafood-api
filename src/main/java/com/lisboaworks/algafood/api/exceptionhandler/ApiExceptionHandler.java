@@ -26,39 +26,39 @@ import java.util.stream.Collectors;
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException e, WebRequest request /* Automatically injected by Spring */) {
+    public ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException ex, WebRequest request /* Automatically injected by Spring */) {
         HttpStatus status = HttpStatus.NOT_FOUND;
         ApiExceptionType apiExceptionType = ApiExceptionType.ENTITY_NOT_FOUND;
-        String detail = e.getMessage();
+        String detail = ex.getMessage();
 
         ApiException entityNotFoundException = createApiExceptionBuilder(status, apiExceptionType, detail)
                 .build();
 
-        return handleExceptionInternal(e, entityNotFoundException, new HttpHeaders(), status, request);
+        return handleExceptionInternal(ex, entityNotFoundException, new HttpHeaders(), status, request);
     }
 
     @ExceptionHandler(BusinessRuleException.class)
-    public ResponseEntity<?> handleBusinessRuleException(BusinessRuleException e, WebRequest request /* Automatically injected by Spring */) {
+    public ResponseEntity<?> handleBusinessRuleException(BusinessRuleException ex, WebRequest request /* Automatically injected by Spring */) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         ApiExceptionType apiExceptionType = ApiExceptionType.BUSINESS_RULE_ERROR;
-        String detail = e.getMessage();
+        String detail = ex.getMessage();
 
         ApiException businessRuleException = createApiExceptionBuilder(status, apiExceptionType, detail)
                 .build();
 
-        return handleExceptionInternal(e, businessRuleException, new HttpHeaders(), status, request);
+        return handleExceptionInternal(ex, businessRuleException, new HttpHeaders(), status, request);
     }
 
     @ExceptionHandler(EntityAlreadyInUseException.class)
-    public ResponseEntity<?> handleEntityAlreadyInUseException(EntityAlreadyInUseException e, WebRequest request /* Automatically injected by Spring */ ) {
+    public ResponseEntity<?> handleEntityAlreadyInUseException(EntityAlreadyInUseException ex, WebRequest request /* Automatically injected by Spring */ ) {
         HttpStatus status = HttpStatus.CONFLICT;
         ApiExceptionType apiExceptionType = ApiExceptionType.ENTITY_ALREADY_IN_USE;
-        String detail = e.getMessage();
+        String detail = ex.getMessage();
 
         ApiException entityAlreadyInUseException = createApiExceptionBuilder(status, apiExceptionType, detail)
                 .build();
 
-        return handleExceptionInternal(e, entityAlreadyInUseException, new HttpHeaders(), status, request);
+        return handleExceptionInternal(ex, entityAlreadyInUseException, new HttpHeaders(), status, request);
     }
 
     @Override
@@ -80,28 +80,28 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return super.handleExceptionInternal(ex, httpMessageNotReadableException, new HttpHeaders(), status, request);
     }
 
-    private ResponseEntity<Object> handlePropertyBindingException(PropertyBindingException rootCause, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    private ResponseEntity<Object> handlePropertyBindingException(PropertyBindingException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ApiExceptionType apiExceptionType = ApiExceptionType.INCOMPREHENSIBLE_MESSAGE;
-        String propertyName = this.getExceptionRootCausePath(rootCause.getPath());
+        String propertyName = this.getExceptionRootCausePath(ex.getPath());
         String detail = String.format("Unknown property '%s' sent in the request. Please, fix or remove this property and try again", propertyName);
 
         ApiException propertyBindingException = createApiExceptionBuilder(status, apiExceptionType, detail)
                 .build();
 
-        return handleExceptionInternal(rootCause, propertyBindingException, headers, status, request);
+        return handleExceptionInternal(ex, propertyBindingException, headers, status, request);
     }
 
-    private ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException rootCause, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    private ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ApiExceptionType apiExceptionType = ApiExceptionType.INCOMPREHENSIBLE_MESSAGE;
-        String path = this.getExceptionRootCausePath(rootCause.getPath());
+        String path = this.getExceptionRootCausePath(ex.getPath());
 
         String detail = String.format("The property '%s' received value '%s', "
-        + "which is from an invalid type. Fix it to send a value compatible with type %s.", path, rootCause.getValue(), rootCause.getTargetType().getSimpleName());
+        + "which is from an invalid type. Fix it to send a value compatible with type %s.", path, ex.getValue(), ex.getTargetType().getSimpleName());
 
         ApiException invalidFormatException = createApiExceptionBuilder(status, apiExceptionType, detail)
                 .build();
 
-        return handleExceptionInternal(rootCause, invalidFormatException, headers, status ,request);
+        return handleExceptionInternal(ex, invalidFormatException, headers, status ,request);
     }
 
     @Override
