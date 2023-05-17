@@ -1,6 +1,5 @@
 package com.lisboaworks.algafood.api.exceptionhandler;
 
-import static com.lisboaworks.algafood.api.exceptionhandler.ApiException.ApiExceptionBuilder;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
@@ -8,13 +7,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @ControllerAdvice
@@ -86,7 +83,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return super.handleExceptionInternal(ex, body, headers, status, request);
     }
 
-    private ApiExceptionBuilder createApiExceptionBuilder(HttpStatus status,
+    private ApiException.ApiExceptionBuilder createApiExceptionBuilder(HttpStatus status,
             ApiExceptionType apiExceptionType, String detail) {
         return ApiException.builder()
                 .status(status.value())

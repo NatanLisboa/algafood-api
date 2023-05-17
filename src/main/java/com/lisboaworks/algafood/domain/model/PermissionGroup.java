@@ -1,6 +1,5 @@
 package com.lisboaworks.algafood.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

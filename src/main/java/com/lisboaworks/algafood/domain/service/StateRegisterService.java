@@ -1,7 +1,6 @@
 package com.lisboaworks.algafood.domain.service;
 
 import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
-import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import com.lisboaworks.algafood.domain.exception.StateNotFoundException;
 import com.lisboaworks.algafood.domain.model.State;
 import com.lisboaworks.algafood.domain.repository.StateRepository;

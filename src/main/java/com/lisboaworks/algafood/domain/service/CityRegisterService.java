@@ -2,7 +2,6 @@ package com.lisboaworks.algafood.domain.service;
 
 import com.lisboaworks.algafood.domain.exception.CityNotFoundException;
 import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
-import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import com.lisboaworks.algafood.domain.model.City;
 import com.lisboaworks.algafood.domain.model.State;
 import com.lisboaworks.algafood.domain.repository.CityRepository;
@@ -10,10 +9,7 @@ import com.lisboaworks.algafood.domain.repository.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class CityRegisterService {

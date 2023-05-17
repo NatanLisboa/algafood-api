@@ -1,7 +1,6 @@
 package com.lisboaworks.algafood.domain.repository;
 
 import com.lisboaworks.algafood.domain.model.Restaurant;
-import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;

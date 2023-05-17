@@ -1,6 +1,5 @@
 package com.lisboaworks.algafood.domain.service;
 
-import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import com.lisboaworks.algafood.domain.exception.RestaurantNotFoundException;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.model.Restaurant;

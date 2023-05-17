@@ -2,15 +2,12 @@ package com.lisboaworks.algafood.domain.service;
 
 import com.lisboaworks.algafood.domain.exception.CuisineNotFoundException;
 import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
-import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class CuisineRegisterService {

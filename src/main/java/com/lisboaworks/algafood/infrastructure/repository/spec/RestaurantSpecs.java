@@ -4,7 +4,6 @@ import com.lisboaworks.algafood.domain.model.Restaurant;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public class RestaurantSpecs {
 
