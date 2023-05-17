@@ -1,7 +1,10 @@
 package com.lisboaworks.algafood.api.exceptionhandler;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.exc.IgnoredPropertyException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.fasterxml.jackson.databind.exc.PropertyBindingException;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -64,6 +68,8 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         if (rootCause instanceof InvalidFormatException) {
             return handleInvalidFormatException((InvalidFormatException) rootCause, headers, status, request);
+        } else if (rootCause instanceof PropertyBindingException) {
+            return handlePropertyBindingException((PropertyBindingException) rootCause, headers, status, request);
         }
         ApiExceptionType apiExceptionType = ApiExceptionType.INCOMPREHENSIBLE_MESSAGE;
         String detail = "The request body is invalid. Verify syntax error.";
@@ -74,11 +80,20 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return super.handleExceptionInternal(ex, httpMessageNotReadableException, new HttpHeaders(), status, request);
     }
 
+    private ResponseEntity<Object> handlePropertyBindingException(PropertyBindingException rootCause, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        ApiExceptionType apiExceptionType = ApiExceptionType.INCOMPREHENSIBLE_MESSAGE;
+        String propertyName = this.getExceptionRootCausePath(rootCause.getPath());
+        String detail = String.format("Unknown property '%s' sent in the request. Please, fix or remove this property and try again", propertyName);
+
+        ApiException propertyBindingException = createApiExceptionBuilder(status, apiExceptionType, detail)
+                .build();
+
+        return handleExceptionInternal(rootCause, propertyBindingException, headers, status, request);
+    }
+
     private ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException rootCause, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ApiExceptionType apiExceptionType = ApiExceptionType.INCOMPREHENSIBLE_MESSAGE;
-        String path = rootCause.getPath().stream()
-                .map(JsonMappingException.Reference::getFieldName)
-                .collect(Collectors.joining("."));
+        String path = this.getExceptionRootCausePath(rootCause.getPath());
 
         String detail = String.format("The property '%s' received value '%s', "
         + "which is from an invalid type. Fix it to send a value compatible with type %s.", path, rootCause.getValue(), rootCause.getTargetType().getSimpleName());
@@ -114,5 +129,11 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 .type(apiExceptionType.getUri())
                 .title(apiExceptionType.getTitle())
                 .detail(detail);
+    }
+
+    private String getExceptionRootCausePath(List<JsonMappingException.Reference> references) {
+        return references.stream()
+                .map(JsonMappingException.Reference::getFieldName)
+                .collect(Collectors.joining("."));
     }
 }
