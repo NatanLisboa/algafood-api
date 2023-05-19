@@ -1,10 +1,8 @@
 package com.lisboaworks.algafood.api.exceptionhandler;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.exc.IgnoredPropertyException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.PropertyBindingException;
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException ex, WebRequest request /* Automatically injected by Spring */) {
         HttpStatus status = HttpStatus.NOT_FOUND;
-        ApiExceptionType apiExceptionType = ApiExceptionType.ENTITY_NOT_FOUND;
+        ApiExceptionType apiExceptionType = ApiExceptionType.RESOURCE_NOT_FOUND;
         String detail = ex.getMessage();
 
         ApiException entityNotFoundException = createApiExceptionBuilder(status, apiExceptionType, detail)
@@ -90,6 +89,16 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 .build();
 
         return super.handleExceptionInternal(ex, httpMessageNotReadableException, new HttpHeaders(), status, request);
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        ApiExceptionType apiExceptionType = ApiExceptionType.RESOURCE_NOT_FOUND;
+        String detail = String.format("The resource '%s', which you tried to access, does not exist", ex.getRequestURL());
+        ApiException noHandlerFoundException = createApiExceptionBuilder(status, apiExceptionType, detail)
+                .build();
+
+        return this.handleExceptionInternal(ex, noHandlerFoundException, headers, status, request);
     }
 
     private ResponseEntity<Object> handlePropertyBindingException(PropertyBindingException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
