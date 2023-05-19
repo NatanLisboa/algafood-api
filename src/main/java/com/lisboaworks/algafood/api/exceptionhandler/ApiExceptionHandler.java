@@ -26,6 +26,21 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> handleUncaughtException(Exception ex, WebRequest request) {
+        ex.printStackTrace();
+
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        ApiExceptionType apiExceptionType = ApiExceptionType.SYSTEM_ERROR;
+        String detail = "An unexpected internal system error has occurred. " +
+                "Try again and if the problem persists, contact the system administrator.";
+
+        ApiException applicationException = createApiExceptionBuilder(status, apiExceptionType, detail)
+                .build();
+
+        return this.handleExceptionInternal(ex, applicationException, new HttpHeaders(), status, request);
+    }
+
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException ex, WebRequest request /* Automatically injected by Spring */) {
         HttpStatus status = HttpStatus.NOT_FOUND;
