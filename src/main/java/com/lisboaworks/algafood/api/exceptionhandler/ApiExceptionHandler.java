@@ -50,7 +50,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         ApiException entityNotFoundException = createApiExceptionBuilder(status, apiExceptionType, detail)
                 .build();
 
-        return handleExceptionInternal(ex, entityNotFoundException, new HttpHeaders(), status, request);
+        return this.handleExceptionInternal(ex, entityNotFoundException, new HttpHeaders(), status, request);
     }
 
     @ExceptionHandler(BusinessRuleException.class)
@@ -62,7 +62,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         ApiException businessRuleException = createApiExceptionBuilder(status, apiExceptionType, detail)
                 .build();
 
-        return handleExceptionInternal(ex, businessRuleException, new HttpHeaders(), status, request);
+        return this.handleExceptionInternal(ex, businessRuleException, new HttpHeaders(), status, request);
     }
 
     @ExceptionHandler(EntityAlreadyInUseException.class)
@@ -74,7 +74,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         ApiException entityAlreadyInUseException = createApiExceptionBuilder(status, apiExceptionType, detail)
                 .build();
 
-        return handleExceptionInternal(ex, entityAlreadyInUseException, new HttpHeaders(), status, request);
+        return this.handleExceptionInternal(ex, entityAlreadyInUseException, new HttpHeaders(), status, request);
     }
 
     @Override
@@ -124,7 +124,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         ApiException propertyBindingException = createApiExceptionBuilder(status, apiExceptionType, detail)
                 .build();
 
-        return handleExceptionInternal(ex, propertyBindingException, headers, status, request);
+        return this.handleExceptionInternal(ex, propertyBindingException, headers, status, request);
     }
 
     private ResponseEntity<Object> handleInvalidFormatException(InvalidFormatException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -137,7 +137,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         ApiException invalidFormatException = createApiExceptionBuilder(status, apiExceptionType, detail)
                 .build();
 
-        return handleExceptionInternal(ex, invalidFormatException, headers, status ,request);
+        return this.handleExceptionInternal(ex, invalidFormatException, headers, status ,request);
     }
 
     private ResponseEntity<Object> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -146,7 +146,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                         + "which is of an invalid type. Correct and enter a value compatible with type %s.", ex.getName(), ex.getValue(), Objects.requireNonNull(ex.getRequiredType()).getSimpleName());
         ApiException typeMismatchException = createApiExceptionBuilder(status, apiExceptionType, detail)
                 .build();
-        return handleExceptionInternal(ex, typeMismatchException, headers, status, request);
+        return this.handleExceptionInternal(ex, typeMismatchException, headers, status, request);
     }
 
     @Override
