@@ -1,6 +1,7 @@
 package com.lisboaworks.algafood.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lisboaworks.algafood.ValidationGroups;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,17 +27,17 @@ public class Restaurant {
 
 //    @NotNull
 //    @NotEmpty
-    @NotBlank //@NotNull + @NotEmpty + not blank spaces
     @Column(nullable = false)
+    @NotBlank(groups = ValidationGroups.RestaurantRegister.class) //@NotNull + @NotEmpty + not blank spaces
     private String name;
     @Column(nullable = false)
 //    @DecimalMin("0")
-    @PositiveOrZero
+    @PositiveOrZero(groups = ValidationGroups.RestaurantRegister.class)
     private BigDecimal shippingFee;
 
     //@JsonIgnoreProperties("hibernateLazyInitializer")
     @Valid // cascading validation
-    @NotNull
+    @NotNull(groups = ValidationGroups.RestaurantRegister.class)
     @ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Cuisine cuisine;
