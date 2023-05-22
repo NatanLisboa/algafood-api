@@ -7,7 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,10 +23,14 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+//    @NotNull
+//    @NotEmpty
+    @NotBlank //@NotNull + @NotEmpty + not blank spaces
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
+//    @DecimalMin("0")
+    @PositiveOrZero
     private BigDecimal shippingFee;
 
     //@JsonIgnoreProperties("hibernateLazyInitializer")
