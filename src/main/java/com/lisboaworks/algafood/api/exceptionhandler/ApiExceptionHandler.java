@@ -19,6 +19,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -37,6 +38,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         ApiExceptionType apiExceptionType = ApiExceptionType.SYSTEM_ERROR;
 
         ApiException applicationException = createApiExceptionBuilder(status, apiExceptionType, FINAL_USER_GENERIC_ERROR_MESSAGE)
+                .userMessage(FINAL_USER_GENERIC_ERROR_MESSAGE)
                 .build();
 
         return this.handleExceptionInternal(ex, applicationException, new HttpHeaders(), status, request);
@@ -49,6 +51,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         String detail = ex.getMessage();
 
         ApiException entityNotFoundException = createApiExceptionBuilder(status, apiExceptionType, detail)
+                .userMessage(detail)
                 .build();
 
         return this.handleExceptionInternal(ex, entityNotFoundException, new HttpHeaders(), status, request);
@@ -61,6 +64,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         String detail = ex.getMessage();
 
         ApiException businessRuleException = createApiExceptionBuilder(status, apiExceptionType, detail)
+                .userMessage(detail)
                 .build();
 
         return this.handleExceptionInternal(ex, businessRuleException, new HttpHeaders(), status, request);
@@ -103,6 +107,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         String detail = "The request body is invalid. Verify syntax error.";
 
         ApiException httpMessageNotReadableException = createApiExceptionBuilder(status, apiExceptionType, detail)
+                .userMessage(FINAL_USER_GENERIC_ERROR_MESSAGE)
                 .build();
 
         return super.handleExceptionInternal(ex, httpMessageNotReadableException, new HttpHeaders(), status, request);
@@ -113,6 +118,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         ApiExceptionType apiExceptionType = ApiExceptionType.RESOURCE_NOT_FOUND;
         String detail = String.format("The resource '%s', which you tried to access, does not exist", ex.getRequestURL());
         ApiException noHandlerFoundException = createApiExceptionBuilder(status, apiExceptionType, detail)
+                .userMessage(FINAL_USER_GENERIC_ERROR_MESSAGE)
                 .build();
 
         return this.handleExceptionInternal(ex, noHandlerFoundException, headers, status, request);
@@ -149,6 +155,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         String detail = String.format("The URL parameter '%s' was given the value '%s', "
                         + "which is of an invalid type. Correct and enter a value compatible with type %s.", ex.getName(), ex.getValue(), Objects.requireNonNull(ex.getRequiredType()).getSimpleName());
         ApiException typeMismatchException = createApiExceptionBuilder(status, apiExceptionType, detail)
+                .userMessage(FINAL_USER_GENERIC_ERROR_MESSAGE)
                 .build();
         return this.handleExceptionInternal(ex, typeMismatchException, headers, status, request);
     }
@@ -158,13 +165,17 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         if (Objects.isNull(body)) {
             body = ApiException.builder()
+                    .timestamp(LocalDateTime.now())
                     .title(status.getReasonPhrase())
                     .status(status.value())
+                    .userMessage(FINAL_USER_GENERIC_ERROR_MESSAGE)
                     .build();
         } else if (body instanceof String) {
             body = ApiException.builder()
+                    .timestamp(LocalDateTime.now())
                     .title((String) body)
                     .status(status.value())
+                    .userMessage(FINAL_USER_GENERIC_ERROR_MESSAGE)
                     .build();
         }
 
@@ -174,6 +185,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     private ApiException.ApiExceptionBuilder createApiExceptionBuilder(HttpStatus status,
             ApiExceptionType apiExceptionType, String detail) {
         return ApiException.builder()
+                .timestamp(LocalDateTime.now())
                 .status(status.value())
                 .type(apiExceptionType.getUri())
                 .title(apiExceptionType.getTitle())
