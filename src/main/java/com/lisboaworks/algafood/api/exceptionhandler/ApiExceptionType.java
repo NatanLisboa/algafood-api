@@ -10,7 +10,8 @@ public enum ApiExceptionType {
     BUSINESS_RULE_ERROR("Business rule error", "/business-rule-error"),
     INCOMPREHENSIBLE_MESSAGE("Incomprehensible message", "/incomprehensible-message"),
     INVALID_PARAMETER("Invalid parameter", "/invalid-parameter"),
-    SYSTEM_ERROR("System error", "/system-error");
+    SYSTEM_ERROR("System error", "/system-error"),
+    INVALID_DATA("Invalid data", "/invalid-data");
 
     private String title;
     private String uri;
