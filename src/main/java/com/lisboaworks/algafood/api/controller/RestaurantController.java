@@ -20,6 +20,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class RestaurantController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Restaurant add(@RequestBody @Validated(ValidationGroups.RestaurantRegister.class) Restaurant restaurant) {
+    public Restaurant add(@RequestBody @Valid Restaurant restaurant) {
         try {
             return restaurantRegisterService.save(restaurant);
         } catch (CuisineNotFoundException e) {

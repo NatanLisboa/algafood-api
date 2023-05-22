@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
+import javax.validation.groups.ConvertGroup;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -28,16 +29,17 @@ public class Restaurant {
 //    @NotNull
 //    @NotEmpty
     @Column(nullable = false)
-    @NotBlank(groups = ValidationGroups.RestaurantRegister.class) //@NotNull + @NotEmpty + not blank spaces
+    @NotBlank //@NotNull + @NotEmpty + not blank spaces
     private String name;
     @Column(nullable = false)
 //    @DecimalMin("0")
-    @PositiveOrZero(groups = ValidationGroups.RestaurantRegister.class)
+    @PositiveOrZero
     private BigDecimal shippingFee;
 
     //@JsonIgnoreProperties("hibernateLazyInitializer")
     @Valid // cascading validation
-    @NotNull(groups = ValidationGroups.RestaurantRegister.class)
+    @ConvertGroup(to = ValidationGroups.CuisineId.class)
+    @NotNull
     @ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false)
     private Cuisine cuisine;
