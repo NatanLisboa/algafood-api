@@ -26,16 +26,17 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
+    public static final String FINAL_USER_GENERIC_ERROR_MESSAGE = "An unexpected internal system error has occurred. " +
+            "Try again and if the problem persists, contact the system administrator.";
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleUncaughtException(Exception ex, WebRequest request) {
         ex.printStackTrace();
 
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
         ApiExceptionType apiExceptionType = ApiExceptionType.SYSTEM_ERROR;
-        String detail = "An unexpected internal system error has occurred. " +
-                "Try again and if the problem persists, contact the system administrator.";
 
-        ApiException applicationException = createApiExceptionBuilder(status, apiExceptionType, detail)
+        ApiException applicationException = createApiExceptionBuilder(status, apiExceptionType, FINAL_USER_GENERIC_ERROR_MESSAGE)
                 .build();
 
         return this.handleExceptionInternal(ex, applicationException, new HttpHeaders(), status, request);
@@ -72,6 +73,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         String detail = ex.getMessage();
 
         ApiException entityAlreadyInUseException = createApiExceptionBuilder(status, apiExceptionType, detail)
+                .userMessage(detail)
                 .build();
 
         return this.handleExceptionInternal(ex, entityAlreadyInUseException, new HttpHeaders(), status, request);
@@ -122,6 +124,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         String detail = String.format("Unknown property '%s' sent in the request. Please, fix or remove this property and try again", propertyName);
 
         ApiException propertyBindingException = createApiExceptionBuilder(status, apiExceptionType, detail)
+                .userMessage(FINAL_USER_GENERIC_ERROR_MESSAGE)
                 .build();
 
         return this.handleExceptionInternal(ex, propertyBindingException, headers, status, request);
@@ -135,6 +138,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         + "which is from an invalid type. Fix it to send a value compatible with type %s.", path, ex.getValue(), ex.getTargetType().getSimpleName());
 
         ApiException invalidFormatException = createApiExceptionBuilder(status, apiExceptionType, detail)
+                .userMessage(FINAL_USER_GENERIC_ERROR_MESSAGE)
                 .build();
 
         return this.handleExceptionInternal(ex, invalidFormatException, headers, status ,request);

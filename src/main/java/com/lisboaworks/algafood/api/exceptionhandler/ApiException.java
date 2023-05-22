@@ -14,4 +14,6 @@ public class ApiException {
     private String title;
     private String detail;
 
+    private String userMessage;
+
 }
