@@ -34,6 +34,7 @@ public class Restaurant {
     @Column(nullable = false)
 //    @DecimalMin("0")
     @PositiveOrZero
+    @NotNull
     private BigDecimal shippingFee;
 
     //@JsonIgnoreProperties("hibernateLazyInitializer")
