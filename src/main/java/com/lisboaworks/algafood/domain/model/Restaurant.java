@@ -33,7 +33,7 @@ public class Restaurant {
     private String name;
     @Column(nullable = false)
 //    @DecimalMin("0")
-    @PositiveOrZero
+    @PositiveOrZero(message = "{shippingFee.invalid}")
     @NotNull
     private BigDecimal shippingFee;
 
