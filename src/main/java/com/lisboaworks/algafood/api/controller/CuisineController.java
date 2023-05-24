@@ -39,7 +39,7 @@ public class CuisineController {
 
     @PutMapping("/{id}")
     public Cuisine update(@PathVariable Long id,
-                                          @RequestBody Cuisine newCuisine) {
+                                          @RequestBody @Valid Cuisine newCuisine) {
         Cuisine cuisine = cuisineRegisterService.findOrThrowException(id);
         BeanUtils.copyProperties(newCuisine, cuisine, "id");
         return cuisineRegisterService.save(cuisine);
