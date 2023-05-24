@@ -8,6 +8,9 @@ import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.TypeMismatchException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +34,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     public static final String FINAL_USER_GENERIC_ERROR_MESSAGE = "An unexpected internal system error has occurred. " +
             "Try again and if the problem persists, contact the system administrator.";
+
+    @Autowired
+    private MessageSource messageSource;
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleUncaughtException(Exception ex, WebRequest request) {
@@ -134,10 +140,14 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         BindingResult bindingResult = ex.getBindingResult();
 
         List<ApiException.Field> apiExceptionFields = bindingResult.getFieldErrors().stream()
-                .map(fieldError -> ApiException.Field.builder()
+                .map(fieldError -> {
+                    String message = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
+
+                    return ApiException.Field.builder()
                         .name(fieldError.getField())
-                        .userMessage(fieldError.getDefaultMessage())
-                        .build())
+                        .userMessage(message)
+                        .build();
+                })
                 .toList();
 
         ApiException methodArgumentNotValidException = createApiExceptionBuilder(status, apiExceptionType, detail)
