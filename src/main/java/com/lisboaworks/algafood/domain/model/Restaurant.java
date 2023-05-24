@@ -29,7 +29,7 @@ public class Restaurant {
 //    @NotNull
 //    @NotEmpty
     @Column(nullable = false)
-    @NotBlank //@NotNull + @NotEmpty + not blank spaces
+    @NotBlank(message = "Name is mandatory") //@NotNull + @NotEmpty + not blank spaces
     private String name;
     @Column(nullable = false)
 //    @DecimalMin("0")
