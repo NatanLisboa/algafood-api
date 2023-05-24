@@ -1,4 +1,4 @@
-package com.lisboaworks.algafood;
+package com.lisboaworks.algafood.core.validation;
 
 public interface ValidationGroups {
 

@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.lisboaworks.algafood.ValidationGroups;
+import com.lisboaworks.algafood.core.validation.ValidationGroups;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
@@ -33,7 +33,7 @@ public class Restaurant {
     private String name;
     @Column(nullable = false)
 //    @DecimalMin("0")
-    @PositiveOrZero(message = "{shippingFee.invalid}")
+    @PositiveOrZero
     @NotNull
     private BigDecimal shippingFee;
 

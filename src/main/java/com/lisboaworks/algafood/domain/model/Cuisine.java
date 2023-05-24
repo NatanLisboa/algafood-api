@@ -2,7 +2,7 @@ package com.lisboaworks.algafood.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.lisboaworks.algafood.ValidationGroups;
+import com.lisboaworks.algafood.core.validation.ValidationGroups;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
