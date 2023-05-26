@@ -1,6 +1,7 @@
 package com.lisboaworks.algafood.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lisboaworks.algafood.core.validation.FreeShippingFeeDescriptiveName;
 import com.lisboaworks.algafood.core.validation.Multiple;
 import com.lisboaworks.algafood.core.validation.ShippingFee;
 import com.lisboaworks.algafood.core.validation.ValidationGroups;
@@ -18,6 +19,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@FreeShippingFeeDescriptiveName(
+        valueField = "shippingFee",
+        descriptionField = "name",
+        mandatoryDescription = "Free shipping"
+)
 @Entity
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -28,24 +34,19 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @NotNull
-//    @NotEmpty
+    @NotBlank
     @Column(nullable = false)
-    @NotBlank //@NotNull + @NotEmpty + not blank spaces
     private String name;
-    @Column(nullable = false)
-//    @DecimalMin("0")
-    //@PositiveOrZero
-    @Multiple(number = 5)
-    @ShippingFee
+
     @NotNull
+    @PositiveOrZero
+    @Column(nullable = false)
     private BigDecimal shippingFee;
 
-    //@JsonIgnoreProperties("hibernateLazyInitializer")
-    @Valid // cascading validation
+    @Valid
     @ConvertGroup(to = ValidationGroups.CuisineId.class)
     @NotNull
-    @ManyToOne//(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(nullable = false)
     private Cuisine cuisine;
 
