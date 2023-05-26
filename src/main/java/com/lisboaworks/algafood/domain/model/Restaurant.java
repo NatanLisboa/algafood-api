@@ -1,6 +1,7 @@
 package com.lisboaworks.algafood.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lisboaworks.algafood.core.validation.ShippingFee;
 import com.lisboaworks.algafood.core.validation.ValidationGroups;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -33,7 +34,8 @@ public class Restaurant {
     private String name;
     @Column(nullable = false)
 //    @DecimalMin("0")
-    @PositiveOrZero
+    //@PositiveOrZero
+    @ShippingFee
     @NotNull
     private BigDecimal shippingFee;
 
