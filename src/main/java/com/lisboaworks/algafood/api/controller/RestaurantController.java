@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.CuisineNotFoundException;
-import com.lisboaworks.algafood.domain.exception.ValidationException;
+import com.lisboaworks.algafood.core.validation.ConstraintValidationException;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
@@ -76,19 +76,19 @@ public class RestaurantController {
 
     @PatchMapping("/{id}")
     public Restaurant partiallyUpdate(@PathVariable Long id, @RequestBody Map<String, Object> fieldsToUpdate,
-                                      HttpServletRequest request) {
+                                      HttpServletRequest request) throws ConstraintValidationException {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(id);
         merge(fieldsToUpdate, restaurant, request);
         validate(restaurant, "restaurant");
         return update(restaurant.getId(), restaurant);
     }
 
-    private void validate(Restaurant restaurant, String objectName) {
+    private void validate(Restaurant restaurant, String objectName) throws ConstraintValidationException {
         BeanPropertyBindingResult bindingResult = new BeanPropertyBindingResult(restaurant, objectName);
         validator.validate(restaurant, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            throw new ValidationException(bindingResult);
+            throw new ConstraintValidationException(bindingResult);
         }
     }
 

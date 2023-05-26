@@ -3,10 +3,6 @@ package com.lisboaworks.algafood.core.validation;
 import org.springframework.beans.BeanUtils;
 
 import javax.validation.*;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 import java.math.BigDecimal;
 import java.util.Objects;
 

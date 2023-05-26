@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.exc.PropertyBindingException;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
+import com.lisboaworks.algafood.core.validation.ConstraintValidationException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -122,6 +123,11 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return super.handleExceptionInternal(ex, httpMessageNotReadableException, new HttpHeaders(), status, request);
     }
 
+    @ExceptionHandler(ConstraintValidationException.class)
+    public ResponseEntity<Object> handleValidationException(ConstraintValidationException ex, WebRequest request) {
+        return this.handleValidationInternal(ex, ex.getBindingResult(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
     @Override
     protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ApiExceptionType apiExceptionType = ApiExceptionType.RESOURCE_NOT_FOUND;
@@ -135,10 +141,12 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        return this.handleValidationInternal(ex, ex.getBindingResult(), headers, status, request);
+    }
+
+    private ResponseEntity<Object> handleValidationInternal(Exception ex, BindingResult bindingResult, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ApiExceptionType apiExceptionType = ApiExceptionType.INVALID_DATA;
         String detail = "One or more fields are invalid. Fill in correctly and try again.";
-
-        BindingResult bindingResult = ex.getBindingResult();
 
         List<ApiException.Object> apiExceptionObjects = bindingResult.getAllErrors().stream()
                 .map(objectError -> {
