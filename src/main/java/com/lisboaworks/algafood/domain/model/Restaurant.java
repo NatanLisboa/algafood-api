@@ -2,8 +2,6 @@ package com.lisboaworks.algafood.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lisboaworks.algafood.core.validation.FreeShippingFeeDescriptiveName;
-import com.lisboaworks.algafood.core.validation.Multiple;
-import com.lisboaworks.algafood.core.validation.ShippingFee;
 import com.lisboaworks.algafood.core.validation.ValidationGroups;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
