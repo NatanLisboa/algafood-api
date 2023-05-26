@@ -1,6 +1,7 @@
 package com.lisboaworks.algafood.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lisboaworks.algafood.core.validation.Multiple;
 import com.lisboaworks.algafood.core.validation.ShippingFee;
 import com.lisboaworks.algafood.core.validation.ValidationGroups;
 import lombok.Data;
@@ -35,6 +36,7 @@ public class Restaurant {
     @Column(nullable = false)
 //    @DecimalMin("0")
     //@PositiveOrZero
+    @Multiple(number = 5)
     @ShippingFee
     @NotNull
     private BigDecimal shippingFee;
