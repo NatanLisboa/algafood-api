@@ -1,5 +1,7 @@
 package com.lisboaworks.algafood;
 
+import com.lisboaworks.algafood.domain.exception.CuisineNotFoundException;
+import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.service.CuisineRegisterService;
 import org.junit.jupiter.api.Assertions;
@@ -45,5 +47,33 @@ public class CuisineRegisterIntegrationTests {
         assertThat(expectedException).isNotNull();
 
     }
+    
+    @Test
+    public void shouldFail_WhenRemoveCuisineAlreadyInUse() {
+    	//scenario
+    	Long cuisineId = 1L;
+    	
+    	//action
+    	EntityAlreadyInUseException expectedException = Assertions.assertThrows(EntityAlreadyInUseException.class, 
+    			() -> cuisineRegisterService.delete(cuisineId));
+    	
+    	//validation
+    	assertThat(expectedException).isNotNull();
+    }
+    
+    @Test
+    public void shouldFail_WhenRemoveNonexistentCuisine() {
+    	//scenario
+    	Long cuisineId = 0L;
+    	
+    	//action
+    	CuisineNotFoundException expectedException = Assertions.assertThrows(CuisineNotFoundException.class, 
+    			() -> cuisineRegisterService.delete(cuisineId));
+    	
+    	//validation
+    	assertThat(expectedException).isNotNull();
+    }
+    
+    
 
 }
