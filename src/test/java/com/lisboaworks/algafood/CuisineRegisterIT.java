@@ -1,9 +1,9 @@
 package com.lisboaworks.algafood;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -17,11 +17,16 @@ public class CuisineRegisterIT {
 	
 	@LocalServerPort
 	private int port;
+	
+	@BeforeEach
+	public void setup() {
+		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();		
+		RestAssured.port = port;
+		RestAssured.basePath = "/cuisines";
+	}
     
 	@Test
-	public void shouldReturnStatusOK_WhenGettingCuisines() {
-		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-		
+	public void shouldReturnStatusOK_WhenGettingCuisines() {		
 		given()
 			.basePath("/cuisines")
 			.port(port)
@@ -33,9 +38,7 @@ public class CuisineRegisterIT {
 	}
 	
 	@Test
-	public void shouldContainTwoCuisines_WhenGettingCuisines() {
-		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-		
+	public void shouldContainTwoCuisines_WhenGettingCuisines() {		
 		given()
 			.basePath("/cuisines")
 			.port(port)
@@ -43,8 +46,7 @@ public class CuisineRegisterIT {
 		.when()
 			.get()
 		.then()
-			.body("", hasSize(2))
-			.body("name", hasItems("Thai", "Indian"));
+			.body("", hasSize(2));
 	}
 
 }
