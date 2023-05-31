@@ -14,7 +14,7 @@ import javax.validation.ConstraintViolationException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
-public class CuisineRegisterIntegrationTests {
+public class CuisineRegisterIT {
 
     @Autowired
     private CuisineRegisterService cuisineRegisterService;
