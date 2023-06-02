@@ -24,7 +24,7 @@ import io.restassured.http.ContentType;
 @TestPropertySource("/application-test.properties")
 public class CuisineRegisterIT {
 	
-	private static final String CUISINE_REGISTER_JSON_PATH = "/json/cuisine-register-body.json";
+	private static final String CUISINE_REGISTER_JSON_PATH = "/json/chinese-cuisine.json";
 
 	private static final long NONEXISTENT_CUISINE_ID = -1L;
 	
@@ -54,7 +54,7 @@ public class CuisineRegisterIT {
 	}
     
 	@Test
-	public void shouldReturnStatusOK_WhenGettingCuisines() {		
+	public void shouldReturnHttpStatusOK_WhenGettingAllCuisines() {		
 		given()
 			.accept(ContentType.JSON)
 		.when()
@@ -74,7 +74,7 @@ public class CuisineRegisterIT {
 	}
 	
 	@Test
-	public void shouldReturnStatusCreated_WhenRegisteringCuisine() {
+	public void shouldReturnHttpStatusCreated_WhenRegisteringCuisine() {
 		given()
 			.body(cuisineRegisterBody)
 			.contentType(ContentType.JSON)
@@ -98,7 +98,7 @@ public class CuisineRegisterIT {
 	}
 	
 	@Test
-	public void shouldReturnStatusNotFound_WhenGettingNonexistentCuisine() {
+	public void shouldReturnHttpStatusNotFound_WhenGettingNonexistentCuisine() {
 		given()
 			.pathParam("cuisineId", NONEXISTENT_CUISINE_ID)
 			.accept(ContentType.JSON)
