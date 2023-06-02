@@ -1,0 +1,7 @@
+{
+	"name": "New Indian Restaurant",
+	"shippingFee": 10,
+	"cuisine": {
+		"id": 2
+	}
+}
