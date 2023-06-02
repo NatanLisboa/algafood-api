@@ -59,7 +59,7 @@ public class DatabaseCleaner {
 		ResultSet rs = metaData.getTables(connection.getCatalog(), null, null, new String[] { "TABLE" });
 
 		while (rs.next()) {
-			tableNames.add(String.format("`%s`", rs.getString("TABLE_NAME")));
+			tableNames.add(rs.getString("TABLE_NAME"));
 		}
 
 		tableNames.remove("flyway_schema_history");
@@ -87,7 +87,7 @@ public class DatabaseCleaner {
 	private void addTruncateSatements(List<String> tableNames, Statement statement) {
 		tableNames.forEach(tableName -> {
 			try {
-				statement.addBatch(sql("TRUNCATE TABLE " + tableName));
+				statement.addBatch(sql("TRUNCATE TABLE " + "`" + tableName + "`"));
 			} catch (SQLException e) {
 				throw new RuntimeException(e);
 			}
