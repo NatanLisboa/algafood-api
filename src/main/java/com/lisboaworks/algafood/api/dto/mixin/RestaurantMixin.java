@@ -1,6 +1,5 @@
 package com.lisboaworks.algafood.api.dto.mixin;
 
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;

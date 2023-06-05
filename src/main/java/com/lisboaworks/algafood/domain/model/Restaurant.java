@@ -1,7 +1,6 @@
 package com.lisboaworks.algafood.domain.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
