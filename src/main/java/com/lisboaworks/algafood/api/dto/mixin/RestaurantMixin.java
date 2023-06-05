@@ -1,6 +1,7 @@
 package com.lisboaworks.algafood.api.dto.mixin;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +20,11 @@ public abstract class RestaurantMixin {
     @JsonIgnore
     private Address address;
 
-    @JsonIgnore
-    private LocalDateTime registerDatetime;
+    //@JsonIgnore
+    private OffsetDateTime registerDatetime;
 
-    @JsonIgnore
-    private LocalDateTime lastUpdateDatetime;
+    //@JsonIgnore
+    private OffsetDateTime lastUpdateDatetime;
 
     @JsonIgnore
     private List<Product> products = new ArrayList<>();

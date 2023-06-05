@@ -2,6 +2,7 @@ package com.lisboaworks.algafood.domain.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,11 +68,11 @@ public class Restaurant {
 
     @CreationTimestamp
     @Column(nullable = false, columnDefinition = "datetime")
-    private LocalDateTime registerDatetime;
+    private OffsetDateTime registerDatetime;
 
     @UpdateTimestamp
     @Column(nullable = false, columnDefinition = "datetime")
-    private LocalDateTime lastUpdateDatetime;
+    private OffsetDateTime lastUpdateDatetime;
 
     @OneToMany(mappedBy = "restaurant")
     private List<Product> products = new ArrayList<>();
