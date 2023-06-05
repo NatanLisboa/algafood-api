@@ -8,17 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class StateRegisterService {
-    public static final String STATE_ALREADY_IN_USE_MESSAGE = "State with id %d cannot be deleted because it is already being used by other entities in database";
+    
+	public static final String STATE_ALREADY_IN_USE_MESSAGE = "State with id %d cannot be deleted because it is already being used by other entities in database";
+    
     @Autowired
     private StateRepository stateRepository;
 
+    @Transactional
     public State save(State state) {
         return stateRepository.save(state);
     }
 
+    @Transactional
     public void delete(Long stateId) {
 
         try {

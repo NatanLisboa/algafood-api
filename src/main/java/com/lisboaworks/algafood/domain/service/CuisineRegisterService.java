@@ -8,18 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CuisineRegisterService {
 
     public static final String CUISINE_ALREADY_IN_USE_MESSAGE = "Cuisine with id %d cannot be deleted because it is already in use in another table";
+
     @Autowired
     private CuisineRepository cuisineRepository;
 
+    @Transactional
     public Cuisine save(Cuisine cuisine) {
         return cuisineRepository.save(cuisine);
     }
 
+    @Transactional
     public void delete(Long cuisineId) {
         try {
             cuisineRepository.deleteById(cuisineId);

@@ -5,24 +5,24 @@ import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.model.City;
 import com.lisboaworks.algafood.domain.model.State;
 import com.lisboaworks.algafood.domain.repository.CityRepository;
-import com.lisboaworks.algafood.domain.repository.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CityRegisterService {
-    public static final String CITY_ALREADY_IN_USE_MESSAGE = "City with id %d cannot be deleted because it is already being used by other entities in database";
-    @Autowired
+    
+	public static final String CITY_ALREADY_IN_USE_MESSAGE = "City with id %d cannot be deleted because it is already being used by other entities in database";
+    
+	@Autowired
     private CityRepository cityRepository;
-
-    @Autowired
-    private StateRepository stateRepository;
 
     @Autowired
     private StateRegisterService stateRegisterService;
 
+    @Transactional
     public City save(City city) {
         Long stateId = city.getState().getId();
         State state = stateRegisterService.findOrThrowException(stateId);
@@ -30,6 +30,7 @@ public class CityRegisterService {
         return cityRepository.save(city);
     }
 
+    @Transactional
     public void delete(Long cityId) {
 
         try {
