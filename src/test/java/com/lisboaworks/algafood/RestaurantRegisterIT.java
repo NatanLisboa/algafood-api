@@ -31,9 +31,19 @@ public class RestaurantRegisterIT {
 
 	private static final BigDecimal INDIAN_FUSION_SHIPPING_FEE = new BigDecimal(7);
 
-	private static final String RESTAURANT_REGISTER_JSON_PATH = "/json/new-indian-restaurant-ok.json";
+	private static final String RESTAURANT_OK_JSON_PATH = "/json/new-indian-restaurant-ok.json";
+	
+	private static final String RESTAURANT_WITHOUT_SHIPPING_FEE_JSON_PATH = "/json/restaurant-without-shipping-fee.json";
 
 	private static final long NONEXISTENT_RESTAURANT_ID = -1L;
+
+	private static final String RESTAURANT_WITHOUT_CUISINE_JSON_PATH = "/json/restaurant-without-cuisine.json";
+
+	private static final String RESTAURANT_WITH_NONEXISTENT_CUISINE_JSON_PATH = "/json/restaurant-with-nonexistent-cuisine.json";
+
+	private static final String RESTAURANT_WITHOUT_NAME_JSON_PATH = "/json/restaurant-without-name.json";
+
+	private static final String RESTAURANT_WITH_NEGATIVE_SHIPPING_FEE_JSON_PATH = "/json/restaurant-with-negative-shipping-fee.json";
 	
 	@LocalServerPort
 	private int port;
@@ -49,7 +59,13 @@ public class RestaurantRegisterIT {
 	
 	private Restaurant thaiGourmet;
 	private int qtyRegisteredRestaurants;
-	private String restaurantRegisterBodyOk;
+	private String restaurantOkJson;
+	private String restaurantWithoutShippingFeeJson;
+	private String restaurantWithoutCuisineJson;
+	private String restaurantWithNonExistentCuisineJson;
+	private String restaurantWithoutNameJson;
+	private String restaurantWithNegativeShippingFeeJson;
+	
 	
 	@BeforeEach
 	public void setup() {
@@ -57,8 +73,13 @@ public class RestaurantRegisterIT {
 		RestAssured.port = port;
 		RestAssured.basePath = "/restaurants";
 		
-		restaurantRegisterBodyOk = ResourceUtils.getContentFromResource(RESTAURANT_REGISTER_JSON_PATH);
-		
+		restaurantOkJson = ResourceUtils.getContentFromResource(RESTAURANT_OK_JSON_PATH);
+		restaurantWithoutShippingFeeJson = ResourceUtils.getContentFromResource(RESTAURANT_WITHOUT_SHIPPING_FEE_JSON_PATH);
+		restaurantWithoutCuisineJson = ResourceUtils.getContentFromResource(RESTAURANT_WITHOUT_CUISINE_JSON_PATH);
+		restaurantWithNonExistentCuisineJson = ResourceUtils.getContentFromResource(RESTAURANT_WITH_NONEXISTENT_CUISINE_JSON_PATH);
+		restaurantWithoutNameJson = ResourceUtils.getContentFromResource(RESTAURANT_WITHOUT_NAME_JSON_PATH);
+		restaurantWithNegativeShippingFeeJson = ResourceUtils.getContentFromResource(RESTAURANT_WITH_NEGATIVE_SHIPPING_FEE_JSON_PATH);
+				
 		databaseCleaner.clearTables();
 		prepareData();
 	}
@@ -84,9 +105,9 @@ public class RestaurantRegisterIT {
 	}
 	
 	@Test
-	public void shouldReturnHttpStatusCreated_WhenRegisteringRestaurantWithoutRequestBodyErrors() {
+	public void shouldReturnHttpStatusCreated_WhenRegisteringValidRestaurant() {
 		given()
-			.body(restaurantRegisterBodyOk)
+			.body(restaurantOkJson)
 			.contentType(ContentType.JSON)
 			.accept(ContentType.JSON)
 		.when()
@@ -116,6 +137,67 @@ public class RestaurantRegisterIT {
 			.get("/{restaurantId}")
 		.then()
 			.statusCode(HttpStatus.NOT_FOUND.value());
+	}
+	
+	@Test
+	public void shouldReturnHttpStatusBadRequest_WhenRegisteringRestaurantWithoutName() {
+		given()
+			.body(restaurantWithoutNameJson)
+			.contentType(ContentType.JSON)
+			.accept(ContentType.JSON)
+		.when()
+			.post()
+		.then()
+			.statusCode(HttpStatus.BAD_REQUEST.value());
+	}
+	
+	
+	@Test
+	public void shouldReturnHttpStatusBadRequest_WhenRegisteringRestaurantWithoutShippingFee() {
+		given()
+			.body(restaurantWithoutShippingFeeJson)
+			.contentType(ContentType.JSON)
+			.accept(ContentType.JSON)
+		.when()
+			.post()
+		.then()
+			.statusCode(HttpStatus.BAD_REQUEST.value());
+	}
+	
+	@Test
+	public void shouldReturnHttpStatusBadRequest_WhenRegisteringRestaurantWithNegativeShippingFee() {
+		given()
+			.body(restaurantWithNegativeShippingFeeJson)
+			.contentType(ContentType.JSON)
+			.accept(ContentType.JSON)
+		.when()
+			.post()
+		.then()
+			.statusCode(HttpStatus.BAD_REQUEST.value());
+	}
+	
+	@Test
+	public void shouldReturnHttpStatusBadRequest_WhenRegisteringRestaurantWithoutCuisine() {
+		given()
+			.body(restaurantWithoutCuisineJson)
+			.contentType(ContentType.JSON)
+			.accept(ContentType.JSON)
+		.when()
+			.post()
+		.then()
+			.statusCode(HttpStatus.BAD_REQUEST.value());
+	}
+	
+	@Test
+	public void shouldReturnHttpStatusBadRequest_WhenRegisteringRestaurantWithNonexistentCuisine() {
+		given()
+			.body(restaurantWithNonExistentCuisineJson)
+			.contentType(ContentType.JSON)
+			.accept(ContentType.JSON)
+		.when()
+			.post()
+		.then()
+			.statusCode(HttpStatus.BAD_REQUEST.value());
 	}
 
 	private void prepareData() {

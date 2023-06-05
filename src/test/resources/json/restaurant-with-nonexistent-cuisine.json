@@ -1,0 +1,7 @@
+{
+	"name": "Restaurant with nonexistent cuisine",
+	"shippingFee": 10,
+	"cuisine": {
+		"id": 0
+	}
+}
