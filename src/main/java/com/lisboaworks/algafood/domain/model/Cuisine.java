@@ -1,7 +1,5 @@
 package com.lisboaworks.algafood.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonRootName;
 import com.lisboaworks.algafood.core.validation.ValidationGroups;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,7 +10,6 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@JsonRootName("cuisine")
 @Entity
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -28,7 +25,6 @@ public class Cuisine {
     @Column(nullable = false)
     private String name;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "cuisine")
     private List<Restaurant> restaurants = new ArrayList<>();
 
