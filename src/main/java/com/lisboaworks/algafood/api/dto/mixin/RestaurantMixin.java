@@ -19,10 +19,10 @@ public abstract class RestaurantMixin {
     @JsonIgnore
     private Address address;
 
-    //@JsonIgnore
+    @JsonIgnore
     private OffsetDateTime registerDatetime;
 
-    //@JsonIgnore
+    @JsonIgnore
     private OffsetDateTime lastUpdateDatetime;
 
     @JsonIgnore
