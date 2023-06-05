@@ -1,6 +1,7 @@
 package com.lisboaworks.algafood.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.lisboaworks.algafood.core.validation.FreeShippingFeeDescriptiveName;
 import com.lisboaworks.algafood.core.validation.ValidationGroups;
 import lombok.Data;
@@ -41,6 +42,7 @@ public class Restaurant {
     @Column(nullable = false)
     private BigDecimal shippingFee;
 
+    @JsonIgnoreProperties(value = "name", allowGetters = true)
     @Valid
     @ConvertGroup(to = ValidationGroups.CuisineId.class)
     @NotNull
