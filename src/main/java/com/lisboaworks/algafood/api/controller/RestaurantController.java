@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.CuisineNotFoundException;
+import com.lisboaworks.algafood.api.dto.RestaurantDTO;
 import com.lisboaworks.algafood.core.validation.ConstraintValidationException;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
@@ -48,8 +49,10 @@ public class RestaurantController {
     }
 
     @GetMapping("/{restaurantId}")
-    public Restaurant findById(@PathVariable Long restaurantId) {
-        return restaurantRegisterService.findOrThrowException(restaurantId);
+    public RestaurantDTO findById(@PathVariable Long restaurantId) {
+    	Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
+    	RestaurantDTO restaurantDTO = null; // Implement mapping from Restaurant entity to RestaurantDTO
+    	return restaurantDTO;
     }
 
     @PostMapping
