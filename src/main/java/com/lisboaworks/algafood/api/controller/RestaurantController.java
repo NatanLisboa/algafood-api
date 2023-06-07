@@ -3,8 +3,10 @@ package com.lisboaworks.algafood.api.controller;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.CuisineNotFoundException;
 import com.lisboaworks.algafood.api.dto.RestaurantDTO;
+import com.lisboaworks.algafood.api.dto.input.RestaurantInput;
 import com.lisboaworks.algafood.api.dto.CuisineDTO;
 import com.lisboaworks.algafood.domain.model.Restaurant;
+import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import org.springframework.beans.BeanUtils;
@@ -38,8 +40,9 @@ public class RestaurantController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public RestaurantDTO add(@RequestBody @Valid Restaurant restaurant) {
+    public RestaurantDTO add(@RequestBody @Valid RestaurantInput restaurantInput) {
         try {
+        	Restaurant restaurant = toDomainObject(restaurantInput);
             return toDTO(restaurantRegisterService.save(restaurant));
         } catch (CuisineNotFoundException e) {
             throw new BusinessRuleException(e.getMessage());
@@ -48,8 +51,9 @@ public class RestaurantController {
 
     @PutMapping("/{id}")
     public RestaurantDTO update(@PathVariable Long id,
-                                    @RequestBody @Valid Restaurant newRestaurant) {
+                                    @RequestBody @Valid RestaurantInput newRestaurantInput) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(id);
+        Restaurant newRestaurant = toDomainObject(newRestaurantInput);
         BeanUtils.copyProperties(newRestaurant, restaurant, "id", "paymentMethods", "address", "registerDatetime");
         try {
             return toDTO(restaurantRegisterService.save(restaurant));
@@ -75,6 +79,19 @@ public class RestaurantController {
 		return restaurants.stream()
 				.map(restaurant -> toDTO(restaurant))
 				.toList();		
+	}
+	
+	private Restaurant toDomainObject(RestaurantInput restaurantInput) {
+		Restaurant restaurant = new Restaurant();
+		restaurant.setName(restaurantInput.getName());
+		restaurant.setShippingFee(restaurantInput.getShippingFee());
+		
+		Cuisine cuisine = new Cuisine();
+		cuisine.setId(restaurantInput.getCuisine().getId());
+		
+		restaurant.setCuisine(cuisine);
+		
+		return restaurant;
 	}
 
 

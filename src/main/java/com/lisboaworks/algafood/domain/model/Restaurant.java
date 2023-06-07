@@ -16,17 +16,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PositiveOrZero;
-import javax.validation.groups.ConvertGroup;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.lisboaworks.algafood.core.validation.FreeShippingFeeDescriptiveName;
-import com.lisboaworks.algafood.core.validation.ValidationGroups;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -46,18 +40,12 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     @Column(nullable = false)
     private String name;
 
-    @NotNull
-    @PositiveOrZero
     @Column(nullable = false)
     private BigDecimal shippingFee;
 
-    @Valid
-    @ConvertGroup(to = ValidationGroups.CuisineId.class)
-    @NotNull
     @ManyToOne
     @JoinColumn(nullable = false)
     private Cuisine cuisine;
