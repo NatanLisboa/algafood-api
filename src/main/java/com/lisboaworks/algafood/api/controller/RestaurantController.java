@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lisboaworks.algafood.api.assembler.RestaurantDTOAssembler;
+import com.lisboaworks.algafood.api.assembler.RestaurantInputDisassembler;
 import com.lisboaworks.algafood.api.dto.RestaurantDTO;
 import com.lisboaworks.algafood.api.dto.input.RestaurantInput;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.CuisineNotFoundException;
-import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
@@ -38,6 +38,9 @@ public class RestaurantController {
     
     @Autowired
     private RestaurantDTOAssembler restaurantDTOAssembler;
+    
+    @Autowired
+    private RestaurantInputDisassembler restaurantInputDisassembler;
 
     @GetMapping
     public List<RestaurantDTO> findAll() {
@@ -54,7 +57,7 @@ public class RestaurantController {
     @ResponseStatus(HttpStatus.CREATED)
     public RestaurantDTO add(@RequestBody @Valid RestaurantInput restaurantInput) {
         try {
-        	Restaurant restaurant = toDomainObject(restaurantInput);
+        	Restaurant restaurant = restaurantInputDisassembler.toDomainObject(restaurantInput);
             return restaurantDTOAssembler.toDTO(restaurantRegisterService.save(restaurant));
         } catch (CuisineNotFoundException e) {
             throw new BusinessRuleException(e.getMessage());
@@ -65,7 +68,7 @@ public class RestaurantController {
     public RestaurantDTO update(@PathVariable Long id,
                                     @RequestBody @Valid RestaurantInput newRestaurantInput) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(id);
-        Restaurant newRestaurant = toDomainObject(newRestaurantInput);
+        Restaurant newRestaurant = restaurantInputDisassembler.toDomainObject(newRestaurantInput);
         BeanUtils.copyProperties(newRestaurant, restaurant, "id", "paymentMethods", "address", "registerDatetime");
         try {
             return restaurantDTOAssembler.toDTO(restaurantRegisterService.save(restaurant));
@@ -73,19 +76,6 @@ public class RestaurantController {
             throw new BusinessRuleException(e.getMessage());
         }
     }
-	
-	private Restaurant toDomainObject(RestaurantInput restaurantInput) {
-		Restaurant restaurant = new Restaurant();
-		restaurant.setName(restaurantInput.getName());
-		restaurant.setShippingFee(restaurantInput.getShippingFee());
-		
-		Cuisine cuisine = new Cuisine();
-		cuisine.setId(restaurantInput.getCuisine().getId());
-		
-		restaurant.setCuisine(cuisine);
-		
-		return restaurant;
-	}
 
 
 }
