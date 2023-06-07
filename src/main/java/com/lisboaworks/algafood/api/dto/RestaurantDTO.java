@@ -11,7 +11,14 @@ public class RestaurantDTO {
 	
 	private Long id;
 	private String name;
-	private BigDecimal shippingFee;
+	private BigDecimal fee;
 	private CuisineDTO cuisine;
+	
+	/*
+	 * Source: cuisine,name
+	 * Target: name,cuisine
+	 */
+	private String nameCuisine;
+	private Long idCuisine;
 	
 }

@@ -8,6 +8,11 @@ import lombok.Setter;
 public class CuisineDTO {
 	
 	private Long id;
-	private String name;
+	
+	/*
+	 * Source: cuisine,name
+	 * Target: cuisine,cuisine,name
+	 */
+	private String cuisineName;
 
 }
