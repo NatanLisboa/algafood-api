@@ -2,26 +2,21 @@ package com.lisboaworks.algafood.api.assembler;
 
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.lisboaworks.algafood.api.dto.CuisineDTO;
 import com.lisboaworks.algafood.api.dto.RestaurantDTO;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 
 @Component
 public class RestaurantDTOAssembler {
 	
+	@Autowired
+	private ModelMapper modelMapper;
+	
 	public RestaurantDTO toDTO(Restaurant restaurant) {
-		CuisineDTO cuisine = new CuisineDTO();
-    	cuisine.setId(restaurant.getCuisine().getId());
-    	cuisine.setName(restaurant.getCuisine().getName());
-    	
-    	RestaurantDTO restaurantDTO = new RestaurantDTO();
-    	restaurantDTO.setId(restaurant.getId());
-    	restaurantDTO.setName(restaurant.getName());
-    	restaurantDTO.setShippingFee(restaurant.getShippingFee());
-    	restaurantDTO.setCuisine(cuisine);
-		return restaurantDTO;
+		return modelMapper.map(restaurant, RestaurantDTO.class);
 	}
 	
 	public List<RestaurantDTO> toDTOList(List<Restaurant> restaurants) {
