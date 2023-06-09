@@ -1,0 +1,36 @@
+Funcionamento padrão da biblioteca para mapeamento de propriedades de objetos Java ModelMapper
+
+O ModelMapper pega o nome de cada propriedade e separa em tokens 
+Exemplo: (Cuisine) cuisine.name -> (CuisineDTO) cuisine.nameCuisine
+
+Tokens de origem (cuisine.name): cuisine, name
+Tokens de destino (cuisine.nameCuisine): cuisine, name, cuisine
+
+Regras do ModelMapper para concretizar o match dos campos no mapeamento padrão:
+-------------------------------------------------------------------------------
+1 - Todos os tokens na propriedade destino devem corresponder com os tokens da propriedade de origem
+    No exemplo acima:
+        Tokens de origem (Cuisine): cuisine, name
+        Tokens de destino (CuisineDTO): cuisine, name, cuisine
+
+    Há as propriedades "cuisine" e "name" tanto nos tokens de destino quanto nos tokens de origem.
+    Logo, a primeira regra está satisfeita.
+
+2 - Os tokens da origem e do destino podem ter correspondência em qualquer ordem
+    No exemplo acima:
+        Tokens de origem (Cuisine): cuisine, name
+        Tokens de destino (CuisineDTO): cuisine, name, cuisine
+
+    As propriedades existem tanto no destino quanto na origem e a ordem de correspondência não importa.
+    Logo, a segunda regra está satisfeita.
+
+3 - O nome da propriedade de origem deve ter ao menos um token de correspondência no destino
+    No exemplo acima:
+        Nome da propriedade de origem (Cuisine): name
+        Tokens de destino (CuisineDTO): name, cuisine
+
+    Há um token de destino chamado "name" que corresponde ao nome da propriedade de origem (name).
+    Logo, a terceira regra está satisfeita.
+-------------------------------------------------------------------------------
+
+Como todas as regras foram satisfeitas, o ModelMapper mapeia o valor de cuisine.name (do tipo Cuisine) para a propriedade cuisine.nameCuisine (do tipo CuisineDTO) automaticamente. 
