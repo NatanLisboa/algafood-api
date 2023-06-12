@@ -28,6 +28,18 @@ public class RestaurantRegisterService {
         return restaurantRepository.save(restaurant);
     }
 
+    @Transactional
+    public void activate(Long restaurantId) {
+        Restaurant restaurant = this.findOrThrowException(restaurantId);
+        restaurant.activate();
+    }
+
+    @Transactional
+    public void inactivate(Long restaurantId) {
+        Restaurant restaurant = this.findOrThrowException(restaurantId);
+        restaurant.inactivate();
+    }
+
     public Restaurant findOrThrowException(Long restaurantId) {
         return restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));

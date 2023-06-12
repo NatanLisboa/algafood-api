@@ -6,14 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.lisboaworks.algafood.api.assembler.RestaurantDTOAssembler;
 import com.lisboaworks.algafood.api.assembler.RestaurantInputDisassembler;
@@ -75,5 +68,16 @@ public class RestaurantController {
         }
     }
 
+    @PutMapping("/{restaurantId}/active")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void activate(@PathVariable Long restaurantId) {
+        restaurantRegisterService.activate(restaurantId);
+    }
+
+    @DeleteMapping("/{restaurantId}/active")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void inactivate(@PathVariable Long restaurantId) {
+        restaurantRegisterService.inactivate(restaurantId);
+    }
 
 }

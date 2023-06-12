@@ -53,6 +53,8 @@ public class Restaurant {
     @Embedded
     private Address address;
 
+    private Boolean active = Boolean.FALSE;
+
     @CreationTimestamp
     @Column(nullable = false, columnDefinition = "datetime")
     private OffsetDateTime registerDatetime;
@@ -70,4 +72,11 @@ public class Restaurant {
             inverseJoinColumns = @JoinColumn(name = "payment_method_id"))
     private List<PaymentMethod> paymentMethods = new ArrayList<>();
 
+    public void activate() {
+        this.setActive(true);
+    }
+
+    public void inactivate() {
+        this.setActive(false);
+    }
 }
