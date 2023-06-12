@@ -35,6 +35,7 @@ public class CityRegisterService {
 
         try {
             cityRepository.deleteById(cityId);
+            cityRepository.flush(); // execute the transactions made so far to the database
         } catch (EmptyResultDataAccessException e) {
             throw new CityNotFoundException(cityId);
         } catch (DataIntegrityViolationException e) {

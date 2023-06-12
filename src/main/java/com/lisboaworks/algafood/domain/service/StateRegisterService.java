@@ -28,6 +28,7 @@ public class StateRegisterService {
 
         try {
             stateRepository.deleteById(stateId);
+            stateRepository.flush(); // execute the transactions made so far to the database
         } catch (EmptyResultDataAccessException e) {
             throw new StateNotFoundException(stateId);
         } catch (DataIntegrityViolationException e) {
