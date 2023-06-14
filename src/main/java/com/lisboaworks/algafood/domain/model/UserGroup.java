@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class PermissionGroup {
+public class UserGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +22,8 @@ public class PermissionGroup {
 
     @ManyToMany
     @JoinTable(
-            name = "permission_group_permission",
-            joinColumns = @JoinColumn(name = "group_id"),
+            name = "user_group_permission",
+            joinColumns = @JoinColumn(name = "user_group_id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id")
     )
     private List<Permission> permissions = new ArrayList<>();

@@ -6,14 +6,14 @@ delete from city;
 delete from cuisine;
 delete from state;
 delete from payment_method;
-delete from permission_group;
-delete from permission_group_permission;
+delete from user_group;
+delete from user_group_permission;
 delete from permission;
 delete from product;
 delete from restaurant;
 delete from restaurant_payment_method;
 delete from user;
-delete from user_permission_group;
+delete from user_user_group;
 
 -- Enable foreign key checks again
 set foreign_key_checks = 1;
@@ -23,7 +23,7 @@ alter table city auto_increment = 1;
 alter table cuisine auto_increment = 1;
 alter table state auto_increment = 1;
 alter table payment_method auto_increment = 1;
-alter table permission_group auto_increment = 1;
+alter table user_group auto_increment = 1;
 alter table permission auto_increment = 1;
 alter table product auto_increment = 1;
 alter table restaurant auto_increment = 1;
@@ -52,6 +52,11 @@ insert into product (name, description, price, active, restaurant_id) values ('T
 insert into permission (name, description) values ('C-LEVEL', 'Maximum permission possible');
 insert into permission (name, description) values ('DEPARTMENT BOSS', 'Medium permission');
 insert into permission (name, description) values ('EMPLOYEE', 'Minimal permission');
+
+insert into user_group (name) values ('Manager');
+insert into user_group (name) values ('Seller');
+insert into user_group (name) values ('Secretary');
+insert into user_group (name) values ('Register officer');
 
 insert into payment_method (description) values ('Credit card');
 insert into payment_method (description) values ('Debit card');

@@ -518,7 +518,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Indian Real Cuisine\",\r\n    \"shippingFee\": 1.00,\r\n    \"cuisine\": {\r\n        \"id\": 2\r\n    }\r\n}",
+							"raw": "{\r\n    \"name\": \"Indian Real Cuisine 2\",\r\n    \"shippingFee\": 1.00,\r\n    \"cuisine\": {\r\n        \"id\": 2\r\n    },\r\n    \"address\": {\r\n        \"zipCode\": \"38400-999\",\r\n        \"streetName\": \"Rua João Pinheiro\",\r\n        \"number\": \"1000\",\r\n        \"complement\": null,\r\n        \"district\": \"Centro\",\r\n        \"city\": {\r\n            \"id\": 2\r\n        }\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -547,7 +547,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Restaurante Brasileiro\",\r\n    \"shippingFee\": 1.00,\r\n    \"cuisine\": {\r\n        \"id\": 2\r\n    }\r\n}",
+							"raw": "{\r\n    \"name\": \"Restaurante Brasileiro\",\r\n    \"shippingFee\": 1.00,\r\n    \"cuisine\": {\r\n        \"id\": 2\r\n    },\r\n    \"address\": {\r\n        \"zipCode\": \"38400-999\",\r\n        \"streetName\": \"Rua João Pinheiro\",\r\n        \"number\": \"1000\",\r\n        \"complement\": null,\r\n        \"district\": \"Centro\",\r\n        \"city\": {\r\n            \"id\": 1\r\n        }\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -555,7 +555,7 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/restaurants/1",
+							"raw": "api.algafood.local:8080/restaurants/3",
 							"host": [
 								"api",
 								"algafood",
@@ -564,7 +564,7 @@
 							"port": "8080",
 							"path": [
 								"restaurants",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -751,6 +751,147 @@
 							"path": [
 								"cities",
 								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User groups",
+			"item": [
+				{
+					"name": "Get all user groups",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "api.algafood.local:8080/user-groups",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"user-groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user group by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.algafood.local:8080/user-groups/1",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"user-groups",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add user group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"General assistant\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "api.algafood.local:8080/user-groups",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"user-groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user group",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Updated permission group\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "api.algafood.local:8080/user-groups/1",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"user-groups",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user group",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "api.algafood.local:8080/user-groups/3",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"user-groups",
+								"3"
 							]
 						}
 					},

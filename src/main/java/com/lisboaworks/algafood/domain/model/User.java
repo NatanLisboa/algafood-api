@@ -38,7 +38,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "group_id")
     )
-    private List<PermissionGroup> permissionGroups = new ArrayList<>();
+    private List<UserGroup> userGroups = new ArrayList<>();
 
 
 }
