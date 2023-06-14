@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.lisboaworks.algafood.domain.exception.CityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -51,7 +52,7 @@ public class RestaurantController {
         try {
         	Restaurant restaurant = restaurantInputDisassembler.toDomainObject(restaurantInput);
             return restaurantDTOAssembler.toDTO(restaurantRegisterService.save(restaurant));
-        } catch (CuisineNotFoundException e) {
+        } catch (CuisineNotFoundException | CityNotFoundException e) {
             throw new BusinessRuleException(e.getMessage());
         }
     }
@@ -63,7 +64,7 @@ public class RestaurantController {
         restaurantInputDisassembler.copyToDomainObject(newRestaurantInput, restaurant);
         try {
             return restaurantDTOAssembler.toDTO(restaurantRegisterService.save(restaurant));
-        } catch (CuisineNotFoundException e) {
+        } catch (CuisineNotFoundException | CityNotFoundException e) {
             throw new BusinessRuleException(e.getMessage());
         }
     }

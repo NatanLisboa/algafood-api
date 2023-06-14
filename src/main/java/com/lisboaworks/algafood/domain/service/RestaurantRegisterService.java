@@ -1,6 +1,7 @@
 package com.lisboaworks.algafood.domain.service;
 
 import com.lisboaworks.algafood.domain.exception.RestaurantNotFoundException;
+import com.lisboaworks.algafood.domain.model.City;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
@@ -19,11 +20,19 @@ public class RestaurantRegisterService {
     @Autowired
     private CuisineRegisterService cuisineRegisterService;
 
+    @Autowired
+    private CityRegisterService cityRegisterService;
+
     @Transactional
     public Restaurant save(Restaurant restaurant) {
         Long cuisineId = restaurant.getCuisine().getId();
+        Long cityId = restaurant.getAddress().getCity().getId();
+
         Cuisine cuisine = cuisineRegisterService.findOrThrowException(cuisineId);
+        City city = cityRegisterService.findOrThrowException(cityId);
+
         restaurant.setCuisine(cuisine);
+        restaurant.getAddress().setCity(city);
 
         return restaurantRepository.save(restaurant);
     }

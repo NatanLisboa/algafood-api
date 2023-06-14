@@ -53,7 +53,7 @@ public class Restaurant {
     @Embedded
     private Address address;
 
-    private Boolean active = Boolean.FALSE;
+    private Boolean active = Boolean.TRUE;
 
     @CreationTimestamp
     @Column(nullable = false, columnDefinition = "datetime")
