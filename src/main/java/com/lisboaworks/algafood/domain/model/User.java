@@ -40,5 +40,8 @@ public class User {
     )
     private List<UserGroup> userGroups = new ArrayList<>();
 
+    public boolean passwordMatchesWith(String password) {
+        return this.password.equals(password);
+    }
 
 }

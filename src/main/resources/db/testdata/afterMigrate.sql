@@ -64,7 +64,11 @@ insert into payment_method (description) values ('Cash');
 
 insert into restaurant_payment_method (restaurant_id, payment_method_id) values (1, 1), (1, 2), (1, 3), (3, 1), (3, 2), (3, 3);
 
-
+insert into user (name, email, password, register_datetime) values
+('João da Silva', 'joao.man@algafood.com', '123', utc_timestamp),
+('Maria Joaquina', 'maria.sel@algafood.com', '123', utc_timestamp),
+('José Souza', 'jose.aux@algafood.com', '123', utc_timestamp),
+('Sebastião Martins', 'sebastiao.reg@algafood.com', '123', utc_timestamp);
 
 
 
