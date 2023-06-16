@@ -7,7 +7,7 @@ import com.lisboaworks.algafood.api.dto.input.UserGroupInput;
 import com.lisboaworks.algafood.domain.model.UserGroup;
 import com.lisboaworks.algafood.domain.repository.UserGroupRepository;
 import com.lisboaworks.algafood.domain.service.UserGroupRegisterService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,19 +16,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user-groups")
+@AllArgsConstructor
 public class UserGroupController {
 
-    @Autowired
-    private UserGroupRegisterService userGroupRegisterService;
-
-    @Autowired
-    private UserGroupDTOAssembler userGroupDTOAssembler;
-
-    @Autowired
-    private UserGroupRepository userGroupRepository;
-
-    @Autowired
-    private UserGroupInputDisassembler userGroupInputDisassembler;
+    private final UserGroupRegisterService userGroupRegisterService;
+    private final UserGroupDTOAssembler userGroupDTOAssembler;
+    private final UserGroupRepository userGroupRepository;
+    private final UserGroupInputDisassembler userGroupInputDisassembler;
 
     @GetMapping
     public List<UserGroupDTO> findAll() {

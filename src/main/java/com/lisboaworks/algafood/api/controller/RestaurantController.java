@@ -1,39 +1,31 @@
 package com.lisboaworks.algafood.api.controller;
 
-import java.util.List;
-
-import javax.validation.Valid;
-
-import com.lisboaworks.algafood.domain.exception.CityNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
 import com.lisboaworks.algafood.api.assembler.RestaurantDTOAssembler;
 import com.lisboaworks.algafood.api.assembler.RestaurantInputDisassembler;
 import com.lisboaworks.algafood.api.dto.RestaurantDTO;
 import com.lisboaworks.algafood.api.dto.input.RestaurantInput;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
+import com.lisboaworks.algafood.domain.exception.CityNotFoundException;
 import com.lisboaworks.algafood.domain.exception.CuisineNotFoundException;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/restaurants")
+@AllArgsConstructor
 public class RestaurantController {
 
-    @Autowired
-    private RestaurantRepository restaurantRepository;
-
-    @Autowired
-    private RestaurantRegisterService restaurantRegisterService;
-    
-    @Autowired
-    private RestaurantDTOAssembler restaurantDTOAssembler;
-    
-    @Autowired
-    private RestaurantInputDisassembler restaurantInputDisassembler;
+    private final RestaurantRepository restaurantRepository;
+    private final RestaurantRegisterService restaurantRegisterService;
+    private final RestaurantDTOAssembler restaurantDTOAssembler;
+    private final RestaurantInputDisassembler restaurantInputDisassembler;
 
     @GetMapping
     public List<RestaurantDTO> findAll() {
@@ -57,10 +49,10 @@ public class RestaurantController {
         }
     }
 
-    @PutMapping("/{id}")
-    public RestaurantDTO update(@PathVariable Long id,
+    @PutMapping("/{restaurantId}")
+    public RestaurantDTO update(@PathVariable Long restaurantId,
                                     @RequestBody @Valid RestaurantInput newRestaurantInput) {
-        Restaurant restaurant = restaurantRegisterService.findOrThrowException(id);
+        Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
         restaurantInputDisassembler.copyToDomainObject(newRestaurantInput, restaurant);
         try {
             return restaurantDTOAssembler.toDTO(restaurantRegisterService.save(restaurant));

@@ -1,7 +1,5 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.CuisineDTOAssembler;
-import com.lisboaworks.algafood.api.assembler.CuisineInputDisassembler;
 import com.lisboaworks.algafood.api.assembler.PaymentMethodDTOAssembler;
 import com.lisboaworks.algafood.api.assembler.PaymentMethodInputDisassembler;
 import com.lisboaworks.algafood.api.dto.PaymentMethodDTO;
@@ -9,7 +7,7 @@ import com.lisboaworks.algafood.api.dto.input.PaymentMethodInput;
 import com.lisboaworks.algafood.domain.model.PaymentMethod;
 import com.lisboaworks.algafood.domain.repository.PaymentMethodRepository;
 import com.lisboaworks.algafood.domain.service.PaymentMethodRegisterService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,19 +16,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/payment-methods")
+@AllArgsConstructor
 public class PaymentMethodController {
 
-    @Autowired
-    private PaymentMethodRegisterService paymentMethodRegisterService;
-
-    @Autowired
-    private PaymentMethodDTOAssembler paymentMethodDTOAssembler;
-
-    @Autowired
-    private PaymentMethodRepository paymentMethodRepository;
-
-    @Autowired
-    private PaymentMethodInputDisassembler paymentMethodInputDisassembler;
+    private final PaymentMethodRegisterService paymentMethodRegisterService;
+    private final PaymentMethodDTOAssembler paymentMethodDTOAssembler;
+    private final PaymentMethodRepository paymentMethodRepository;
+    private final PaymentMethodInputDisassembler paymentMethodInputDisassembler;
 
     @GetMapping
     public List<PaymentMethodDTO> findAll() {

@@ -1,6 +1,5 @@
 package com.lisboaworks.algafood.api.dto.input;
 
-import com.lisboaworks.algafood.api.dto.CitySummaryDTO;
 import lombok.Getter;
 import lombok.Setter;
 

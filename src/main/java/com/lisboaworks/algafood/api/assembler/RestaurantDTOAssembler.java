@@ -1,19 +1,18 @@
 package com.lisboaworks.algafood.api.assembler;
 
-import java.util.List;
-
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.lisboaworks.algafood.api.dto.RestaurantDTO;
 import com.lisboaworks.algafood.domain.model.Restaurant;
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
+@AllArgsConstructor
 public class RestaurantDTOAssembler {
 	
-	@Autowired
-	private ModelMapper modelMapper;
+	private final ModelMapper modelMapper;
 	
 	public RestaurantDTO toDTO(Restaurant restaurant) {
 		return modelMapper.map(restaurant, RestaurantDTO.class);

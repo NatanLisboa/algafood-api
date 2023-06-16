@@ -2,7 +2,9 @@ package com.lisboaworks.algafood.core.validation;
 
 import org.springframework.beans.BeanUtils;
 
-import javax.validation.*;
+import javax.validation.ConstraintValidator;
+import javax.validation.ConstraintValidatorContext;
+import javax.validation.ValidationException;
 import java.math.BigDecimal;
 import java.util.Objects;
 

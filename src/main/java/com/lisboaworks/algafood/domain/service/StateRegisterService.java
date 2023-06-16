@@ -4,19 +4,18 @@ import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.exception.StateNotFoundException;
 import com.lisboaworks.algafood.domain.model.State;
 import com.lisboaworks.algafood.domain.repository.StateRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@AllArgsConstructor
 public class StateRegisterService {
     
 	public static final String STATE_ALREADY_IN_USE_MESSAGE = "State with id %d cannot be deleted because it is already being used by other entities in database";
-    
-    @Autowired
-    private StateRepository stateRepository;
+    private final StateRepository stateRepository;
 
     @Transactional
     public State save(State state) {

@@ -5,23 +5,17 @@ import com.lisboaworks.algafood.domain.model.City;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@AllArgsConstructor
 public class RestaurantRegisterService {
-    
-	public static final String RESTAURANT_NOT_FOUND_MESSAGE = "There is no restaurant register with id %d";
- 
-    @Autowired
-    private RestaurantRepository restaurantRepository;
-    
-    @Autowired
-    private CuisineRegisterService cuisineRegisterService;
 
-    @Autowired
-    private CityRegisterService cityRegisterService;
+    private final RestaurantRepository restaurantRepository;
+    private final CuisineRegisterService cuisineRegisterService;
+    private final CityRegisterService cityRegisterService;
 
     @Transactional
     public Restaurant save(Restaurant restaurant) {

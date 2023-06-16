@@ -10,7 +10,7 @@ import com.lisboaworks.algafood.domain.exception.StateNotFoundException;
 import com.lisboaworks.algafood.domain.model.City;
 import com.lisboaworks.algafood.domain.repository.CityRepository;
 import com.lisboaworks.algafood.domain.service.CityRegisterService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,28 +19,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cities")
+@AllArgsConstructor
 public class CityController {
 
-    @Autowired
-    private CityRepository cityRepository;
-
-    @Autowired
-    private CityRegisterService cityRegisterService;
-
-    @Autowired
-    private CityDTOAssembler cityDTOAssembler;
-    
-    @Autowired
-    private CityInputDisassembler cityInputDisassembler;
+    private final CityRepository cityRepository;
+    private final CityRegisterService cityRegisterService;
+    private final CityDTOAssembler cityDTOAssembler;
+    private final CityInputDisassembler cityInputDisassembler;
     
     @GetMapping
     public List<CityDTO> findAll() {
         return cityDTOAssembler.toDTOList(cityRepository.findAll());
     }
 
-    @GetMapping("/{id}")
-    public CityDTO findById(@PathVariable Long id) {
-        City city = cityRegisterService.findOrThrowException(id);
+    @GetMapping("/{cityId}")
+    public CityDTO findById(@PathVariable Long cityId) {
+        City city = cityRegisterService.findOrThrowException(cityId);
         return cityDTOAssembler.toDTO(city);
     }
 
@@ -56,11 +50,11 @@ public class CityController {
     }
 
 
-    @PutMapping("/{id}")
-    public CityDTO update(@PathVariable Long id,
+    @PutMapping("/{cityId}")
+    public CityDTO update(@PathVariable Long cityId,
                        @RequestBody @Valid CityInput newCityInput) {
         try {
-            City city = cityRegisterService.findOrThrowException(id);
+            City city = cityRegisterService.findOrThrowException(cityId);
             cityInputDisassembler.copyToDomainObject(newCityInput, city);
             return cityDTOAssembler.toDTO(cityRegisterService.save(city));
         } catch (StateNotFoundException e) {
@@ -69,10 +63,10 @@ public class CityController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{cityId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        cityRegisterService.delete(id);
+    public void delete(@PathVariable Long cityId) {
+        cityRegisterService.delete(cityId);
     }
 
 }

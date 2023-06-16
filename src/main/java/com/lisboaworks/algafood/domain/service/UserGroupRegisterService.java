@@ -4,21 +4,19 @@ import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.exception.UserGroupNotFoundException;
 import com.lisboaworks.algafood.domain.model.UserGroup;
 import com.lisboaworks.algafood.domain.repository.UserGroupRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@AllArgsConstructor
 public class UserGroupRegisterService {
 
     private static final String USER_GROUP_ALREADY_IN_USE_MESSAGE = "User group with id %d cannot be deleted because it is already being used by other entities in database";
-    @Autowired
-    private UserGroupRepository userGroupRepository;
-
-    @Autowired
-    private RestaurantRegisterService userGroupRegisterService;
+    private final UserGroupRepository userGroupRepository;
+    private final RestaurantRegisterService userGroupRegisterService;
 
     @Transactional
     public UserGroup save(UserGroup userGroup) {

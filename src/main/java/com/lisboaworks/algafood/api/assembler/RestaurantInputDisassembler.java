@@ -1,21 +1,20 @@
 package com.lisboaworks.algafood.api.assembler;
 
-import com.lisboaworks.algafood.domain.model.City;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.lisboaworks.algafood.api.dto.input.RestaurantInput;
+import com.lisboaworks.algafood.domain.model.City;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.model.Restaurant;
+import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
 @Component
+@AllArgsConstructor
 public class RestaurantInputDisassembler {
 
-	@Autowired
-	private ModelMapper modelMapper;
+	private final ModelMapper modelMapper;
 	
 	public Restaurant toDomainObject(RestaurantInput restaurantInput) {
 		return modelMapper.map(restaurantInput, Restaurant.class);

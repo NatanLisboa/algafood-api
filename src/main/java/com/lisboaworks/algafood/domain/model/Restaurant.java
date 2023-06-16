@@ -1,29 +1,16 @@
 package com.lisboaworks.algafood.domain.model;
 
+import com.lisboaworks.algafood.core.validation.FreeShippingFeeDescriptiveName;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import com.lisboaworks.algafood.core.validation.FreeShippingFeeDescriptiveName;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @FreeShippingFeeDescriptiveName(
         valueField = "shippingFee",

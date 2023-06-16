@@ -1,10 +1,13 @@
 package com.lisboaworks.algafood;
 
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
-
-import java.math.BigDecimal;
+import com.lisboaworks.algafood.domain.model.Cuisine;
+import com.lisboaworks.algafood.domain.model.Restaurant;
+import com.lisboaworks.algafood.domain.repository.CuisineRepository;
+import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
+import com.lisboaworks.algafood.util.DatabaseCleaner;
+import com.lisboaworks.algafood.util.ResourceUtils;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +16,11 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.TestPropertySource;
 
-import com.lisboaworks.algafood.domain.model.Cuisine;
-import com.lisboaworks.algafood.domain.model.Restaurant;
-import com.lisboaworks.algafood.domain.repository.CuisineRepository;
-import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
-import com.lisboaworks.algafood.util.DatabaseCleaner;
-import com.lisboaworks.algafood.util.ResourceUtils;
+import java.math.BigDecimal;
 
-import io.restassured.RestAssured;
-import io.restassured.http.ContentType;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasSize;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("/application-test.properties")

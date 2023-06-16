@@ -4,19 +4,18 @@ import com.lisboaworks.algafood.domain.exception.CuisineNotFoundException;
 import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@AllArgsConstructor
 public class CuisineRegisterService {
 
     public static final String CUISINE_ALREADY_IN_USE_MESSAGE = "Cuisine with id %d cannot be deleted because it is already in use in another table";
-
-    @Autowired
-    private CuisineRepository cuisineRepository;
+    private final CuisineRepository cuisineRepository;
 
     @Transactional
     public Cuisine save(Cuisine cuisine) {

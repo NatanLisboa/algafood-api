@@ -4,22 +4,19 @@ import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.exception.PaymentMethodNotFoundException;
 import com.lisboaworks.algafood.domain.model.PaymentMethod;
 import com.lisboaworks.algafood.domain.repository.PaymentMethodRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@AllArgsConstructor
 public class PaymentMethodRegisterService {
 
     public static final String PAYMENT_METHOD_ALREADY_IN_USE_MESSAGE = "Payment method with id %d cannot be deleted because it is already being used by other entities in database";
-
-    @Autowired
-    private PaymentMethodRepository paymentMethodRepository;
-
-    @Autowired
-    private RestaurantRegisterService paymentMethodRegisterService;
+    private final PaymentMethodRepository paymentMethodRepository;
+    private final RestaurantRegisterService paymentMethodRegisterService;
 
     @Transactional
     public PaymentMethod save(PaymentMethod paymentMethod) {
