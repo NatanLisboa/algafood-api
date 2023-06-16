@@ -7,6 +7,7 @@ import com.lisboaworks.algafood.core.validation.ConstraintValidationException;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
+import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +33,13 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
+@AllArgsConstructor
 public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
     public static final String FINAL_USER_GENERIC_ERROR_MESSAGE = "An unexpected internal system error has occurred. " +
             "Try again and if the problem persists, contact the system administrator.";
 
-    @Autowired
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleUncaughtException(Exception ex, WebRequest request) {
