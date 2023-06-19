@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class UserRegisterService {
@@ -16,6 +18,15 @@ public class UserRegisterService {
 
     @Transactional
     public User save(User user) {
+        userRepository.detach(user); // Remove the entity from JPA persistence context
+
+        Optional<User> userSearchedByEmail = userRepository.findByEmail(user.getEmail());
+
+        if (userSearchedByEmail.isPresent() && !userSearchedByEmail.get().equals(user)) {
+            throw new BusinessRuleException(String.format("There is a user already registered with the email '%s'. " +
+                    "Please, change the email address and try again.", user.getEmail()));
+        }
+
         return userRepository.save(user);
     }
 
