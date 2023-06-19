@@ -1,10 +1,7 @@
 package com.lisboaworks.algafood.domain.service;
 
 import com.lisboaworks.algafood.domain.exception.RestaurantNotFoundException;
-import com.lisboaworks.algafood.domain.model.City;
-import com.lisboaworks.algafood.domain.model.Cuisine;
-import com.lisboaworks.algafood.domain.model.PaymentMethod;
-import com.lisboaworks.algafood.domain.model.Restaurant;
+import com.lisboaworks.algafood.domain.model.*;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
