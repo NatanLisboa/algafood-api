@@ -16,7 +16,6 @@ public class PaymentMethodRegisterService {
 
     public static final String PAYMENT_METHOD_ALREADY_IN_USE_MESSAGE = "Payment method with id %d cannot be deleted because it is already being used by other entities in database";
     private final PaymentMethodRepository paymentMethodRepository;
-    private final RestaurantRegisterService paymentMethodRegisterService;
 
     @Transactional
     public PaymentMethod save(PaymentMethod paymentMethod) {

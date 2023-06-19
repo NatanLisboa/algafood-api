@@ -613,6 +613,74 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get all payment methods from restaurant",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.algafood.local:8080/restaurants/1/payment-methods",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"1",
+								"payment-methods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Associate payment method to restaurant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "api.algafood.local:8080/restaurants/1/payment-methods/2",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"1",
+								"payment-methods",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disassociate payment method from restaurant",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "api.algafood.local:8080/restaurants/1/payment-methods/2",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"1",
+								"payment-methods",
+								"2"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

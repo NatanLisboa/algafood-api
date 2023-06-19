@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -18,9 +19,9 @@ public class PaymentMethodDTOAssembler {
         return modelMapper.map(paymentMethod, PaymentMethodDTO.class);
     }
 
-    public List<PaymentMethodDTO> toDTOList(List<PaymentMethod> paymentMethods) {
+    public List<PaymentMethodDTO> toDTOList(Collection<PaymentMethod> paymentMethods) {
         return paymentMethods.stream()
-                .map(paymentMethod -> toDTO(paymentMethod))
+                .map(this::toDTO)
                 .toList();
     }
 
