@@ -43,5 +43,11 @@ public class RestaurantProductController {
         product.setRestaurant(restaurant);
         return productDTOAssembler.toDTO(productRegisterService.save(product));
     }
+    @PutMapping("/{productId}")
+    public ProductDTO update(@PathVariable Long restaurantId, @PathVariable Long productId, @RequestBody @Valid ProductInput updateProductInput) {
+        Product product = productRegisterService.findOrThrowException(restaurantId, productId);
+        productInputDisassembler.copyToDomainObject(updateProductInput, product);
+        return productDTOAssembler.toDTO(productRegisterService.save(product));
+    }
 
 }
