@@ -16,6 +16,11 @@ public class RestaurantRegisterService {
     private final CityRegisterService cityRegisterService;
     private final PaymentMethodRegisterService paymentMethodRegisterService;
 
+    public Restaurant findOrThrowException(Long restaurantId) {
+        return restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
+    }
+
     @Transactional
     public Restaurant save(Restaurant restaurant) {
         Long cuisineId = restaurant.getCuisine().getId();
@@ -58,9 +63,15 @@ public class RestaurantRegisterService {
         restaurant.removePaymentMethod(paymentMethod);
     }
 
-    public Restaurant findOrThrowException(Long restaurantId) {
-        return restaurantRepository.findById(restaurantId)
-                .orElseThrow(() -> new RestaurantNotFoundException(restaurantId));
+    @Transactional
+    public void open(Long restaurantId) {
+        Restaurant restaurant = this.findOrThrowException(restaurantId);
+        restaurant.open();
     }
 
+    @Transactional
+    public void close(Long restaurantId) {
+        Restaurant restaurant = this.findOrThrowException(restaurantId);
+        restaurant.close();
+    }
 }

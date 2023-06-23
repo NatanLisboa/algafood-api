@@ -40,9 +40,9 @@ insert into city (name, state_id) values ('Phuket Town', 1);
 insert into city (name, state_id) values ('Kamala', 1);
 insert into city (name, state_id) values ('New Delhi', 2);
 
-insert into restaurant (name, shipping_fee, cuisine_id, address_city_id, address_zip_code, address_street_name, address_number, address_district, register_datetime, last_update_datetime, active) values ('Thai Gourmet', 10, 1, 1, '38400-999', 'Rua João Pinheiro', '1000', 'Centro', utc_timestamp, utc_timestamp, true);
-insert into restaurant (name, shipping_fee, cuisine_id, register_datetime, last_update_datetime, active) values ('Indian Fusion Cuisine', 7.00, 2, utc_timestamp, utc_timestamp, true);
-insert into restaurant (name, shipping_fee, cuisine_id, register_datetime, last_update_datetime, active) values ('Best Indian Cuisine', 8.00, 2, utc_timestamp, utc_timestamp, true);
+insert into restaurant (name, shipping_fee, cuisine_id, address_city_id, address_zip_code, address_street_name, address_number, address_district, register_datetime, last_update_datetime, active, open) values ('Thai Gourmet', 10, 1, 1, '38400-999', 'Rua João Pinheiro', '1000', 'Centro', utc_timestamp, utc_timestamp, true, false);
+insert into restaurant (name, shipping_fee, cuisine_id, register_datetime, last_update_datetime, active, open) values ('Indian Fusion Cuisine', 7.00, 2, utc_timestamp, utc_timestamp, true, false);
+insert into restaurant (name, shipping_fee, cuisine_id, register_datetime, last_update_datetime, active, open) values ('Best Indian Cuisine', 8.00, 2, utc_timestamp, utc_timestamp, true, false);
 
 insert into product (name, description, price, active, restaurant_id) values ('Tom Yum Goong', 'Spicy shrimp soup', 19.90, true, 1);
 insert into product (name, description, price, active, restaurant_id) values ('Tom Kha Gai', 'Chicken in coconut soup', 23.90, true, 1);

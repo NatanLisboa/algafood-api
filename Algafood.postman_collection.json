@@ -681,6 +681,50 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Open restaurant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "api.algafood.local:8080/restaurants/1/opening",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"1",
+								"opening"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Close restaurant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "api.algafood.local:8080/restaurants/1/closure",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"1",
+								"closure"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1118,7 +1162,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/restaurants/2/products",
+							"raw": "api.algafood.local:8080/restaurants/1/products",
 							"host": [
 								"api",
 								"algafood",
@@ -1127,7 +1171,7 @@
 							"port": "8080",
 							"path": [
 								"restaurants",
-								"2",
+								"1",
 								"products"
 							]
 						}
@@ -1183,6 +1227,38 @@
 								"restaurants",
 								"2",
 								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update restaurant product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Samosa\",\r\n    \"description\": \"Fried triangular dough stuffed with seasoned potato\",\r\n    \"price\": 9.90,\r\n    \"active\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "api.algafood.local:8080/restaurants/2/products/3",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"2",
+								"products",
+								"3"
 							]
 						}
 					},
