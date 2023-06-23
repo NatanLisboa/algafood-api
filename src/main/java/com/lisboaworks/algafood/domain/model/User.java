@@ -7,7 +7,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -34,14 +36,22 @@ public class User {
 
     @ManyToMany
     @JoinTable(
-            name = "user_group",
+            name = "user_user_group",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "group_id")
+            inverseJoinColumns = @JoinColumn(name = "user_group_id")
     )
-    private List<UserGroup> userGroups = new ArrayList<>();
+    private Set<UserGroup> userGroups = new HashSet<>();
 
     public boolean passwordMatchesWith(String password) {
         return this.password.equals(password);
+    }
+
+    public void addUserGroup(UserGroup userGroup) {
+        userGroups.add(userGroup);
+    }
+
+    public void removeUserGroup(UserGroup userGroup) {
+        userGroups.remove(userGroup);
     }
 
 }

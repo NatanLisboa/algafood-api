@@ -2,6 +2,8 @@ package com.lisboaworks.algafood.domain.service;
 
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.UserNotFoundException;
+import com.lisboaworks.algafood.domain.model.UserGroup;
+import com.lisboaworks.algafood.domain.model.User;
 import com.lisboaworks.algafood.domain.model.User;
 import com.lisboaworks.algafood.domain.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -15,6 +17,7 @@ import java.util.Optional;
 public class UserRegisterService {
 
     private final UserRepository userRepository;
+    private final UserGroupRegisterService userGroupRegisterService;
 
     @Transactional
     public User save(User user) {
@@ -45,4 +48,21 @@ public class UserRegisterService {
 
         user.setPassword(newPassword);
     }
+
+    @Transactional
+    public void associateUserGroup(Long userId, Long userGroupId) {
+        User user = this.findOrThrowException(userId);
+        UserGroup userGroup = userGroupRegisterService.findOrThrowException(userGroupId);
+
+        user.addUserGroup(userGroup);
+    }
+
+    @Transactional
+    public void disassociateUserGroup(Long userId, Long userGroupId) {
+        User user = this.findOrThrowException(userId);
+        UserGroup userGroup = userGroupRegisterService.findOrThrowException(userGroupId);
+
+        user.removeUserGroup(userGroup);
+    }
+    
 }
