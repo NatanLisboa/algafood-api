@@ -28,4 +28,12 @@ public class UserGroup {
     )
     private List<Permission> permissions = new ArrayList<>();
 
+    public void addPermission(Permission permission) {
+        permissions.add(permission);
+    }
+
+    public void removePermission(Permission permission) {
+        permissions.remove(permission);
+    }
+
 }

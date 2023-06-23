@@ -49,14 +49,18 @@ insert into product (name, description, price, active, restaurant_id) values ('T
 insert into product (name, description, price, active, restaurant_id) values ('Spicy curry cod', 'Fresh cod with curry and Ghost Jolokia pepper', 20.00, true, 2);
 insert into product (name, description, price, active, restaurant_id) values ('Tikka masala chicken', 'Chicken with a rich seasoned sauce', 25.00, true, 3);
 
-insert into permission (name, description) values ('C-LEVEL', 'Maximum permission possible');
-insert into permission (name, description) values ('DEPARTMENT BOSS', 'Medium permission');
-insert into permission (name, description) values ('EMPLOYEE', 'Minimal permission');
+insert into permission (name, description) values ('GET_CUISINES', 'Allow get cuisines');
+insert into permission (name, description) values ('EDIT_CUISINES', 'Allow edit cuisines');
 
 insert into user_group (name) values ('Manager');
 insert into user_group (name) values ('Seller');
 insert into user_group (name) values ('Secretary');
 insert into user_group (name) values ('Register officer');
+
+insert into user_group_permission(user_group_id, permission_id) values (1, 1);
+insert into user_group_permission(user_group_id, permission_id) values (1, 2);
+insert into user_group_permission(user_group_id, permission_id) values (2, 1);
+insert into user_group_permission(user_group_id, permission_id) values (3, 2);
 
 insert into payment_method (description) values ('Credit card');
 insert into payment_method (description) values ('Debit card');

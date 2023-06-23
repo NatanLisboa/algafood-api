@@ -1150,6 +1150,92 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get all permissions from user group",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.algafood.local:8080/user-groups/4/permissions",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"user-groups",
+								"4",
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Associate permission to user group",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Updated permission group\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "api.algafood.local:8080/user-groups/4/permissions/1",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"user-groups",
+								"4",
+								"permissions",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disassociate permission from user group",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Updated permission group\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "api.algafood.local:8080/user-groups/4/permissions/1",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"user-groups",
+								"4",
+								"permissions",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

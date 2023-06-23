@@ -2,6 +2,7 @@ package com.lisboaworks.algafood.domain.service;
 
 import com.lisboaworks.algafood.domain.exception.EntityAlreadyInUseException;
 import com.lisboaworks.algafood.domain.exception.UserGroupNotFoundException;
+import com.lisboaworks.algafood.domain.model.Permission;
 import com.lisboaworks.algafood.domain.model.UserGroup;
 import com.lisboaworks.algafood.domain.repository.UserGroupRepository;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,13 @@ public class UserGroupRegisterService {
     private static final String USER_GROUP_ALREADY_IN_USE_MESSAGE = "User group with id %d cannot be deleted because it is already being used by other entities in database";
     private final UserGroupRepository userGroupRepository;
     private final RestaurantRegisterService userGroupRegisterService;
+
+    private final PermissionRegisterService permissionRegisterService;
+
+    public UserGroup findOrThrowException(Long userGroupId) {
+        return userGroupRepository.findById(userGroupId)
+                .orElseThrow(() -> new UserGroupNotFoundException(userGroupId));
+    }
 
     @Transactional
     public UserGroup save(UserGroup userGroup) {
@@ -37,9 +45,19 @@ public class UserGroupRegisterService {
 
     }
 
-    public UserGroup findOrThrowException(Long userGroupId) {
-        return userGroupRepository.findById(userGroupId)
-                .orElseThrow(() -> new UserGroupNotFoundException(userGroupId));
+    @Transactional
+    public void associatePermission(Long userGroupId, Long permissionId) {
+        UserGroup userGroup = this.findOrThrowException(userGroupId);
+        Permission permission = permissionRegisterService.findOrThrowException(permissionId);
+
+        userGroup.addPermission(permission);
     }
-    
+
+    @Transactional
+    public void disassociatePermission(Long userGroupId, Long permissionId) {
+        UserGroup userGroup = this.findOrThrowException(userGroupId);
+        Permission permission = permissionRegisterService.findOrThrowException(permissionId);
+
+        userGroup.removePermission(permission);
+    }
 }
