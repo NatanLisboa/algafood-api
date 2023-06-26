@@ -2,7 +2,9 @@ package com.lisboaworks.algafood.api.controller;
 
 import com.lisboaworks.algafood.api.assembler.RestaurantDTOAssembler;
 import com.lisboaworks.algafood.api.assembler.RestaurantInputDisassembler;
+import com.lisboaworks.algafood.api.assembler.UserDTOAssembler;
 import com.lisboaworks.algafood.api.dto.RestaurantDTO;
+import com.lisboaworks.algafood.api.dto.UserDTO;
 import com.lisboaworks.algafood.api.dto.input.RestaurantInput;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.CityNotFoundException;
@@ -26,6 +28,7 @@ public class RestaurantController {
     private final RestaurantRegisterService restaurantRegisterService;
     private final RestaurantDTOAssembler restaurantDTOAssembler;
     private final RestaurantInputDisassembler restaurantInputDisassembler;
+    private final UserDTOAssembler userDTOAssembler;
 
     @GetMapping
     public List<RestaurantDTO> findAll() {
@@ -83,6 +86,23 @@ public class RestaurantController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void close(@PathVariable Long restaurantId) {
         restaurantRegisterService.close(restaurantId);
+    }
+
+    @GetMapping("/{restaurantId}/responsible-users")
+    public List<UserDTO> getAllResponsibleUsers(@PathVariable Long restaurantId) {
+        return userDTOAssembler.toDTOList(restaurantRegisterService.getAllResponsibleUsers(restaurantId));
+    }
+
+    @PutMapping("/{restaurantId}/responsible-users/{userId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void associateResponsibleUser(@PathVariable Long restaurantId, @PathVariable Long userId) {
+        restaurantRegisterService.associateResponsibleUser(restaurantId, userId);
+    }
+
+    @DeleteMapping("/{restaurantId}/responsible-users/{userId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void disassociateResponsibleUser(@PathVariable Long restaurantId, @PathVariable Long userId) {
+        restaurantRegisterService.disassociateResponsibleUser(restaurantId, userId);
     }
 
 }

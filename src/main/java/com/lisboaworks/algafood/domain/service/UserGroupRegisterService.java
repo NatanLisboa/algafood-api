@@ -17,8 +17,6 @@ public class UserGroupRegisterService {
 
     private static final String USER_GROUP_ALREADY_IN_USE_MESSAGE = "User group with id %d cannot be deleted because it is already being used by other entities in database";
     private final UserGroupRepository userGroupRepository;
-    private final RestaurantRegisterService userGroupRegisterService;
-
     private final PermissionRegisterService permissionRegisterService;
 
     public UserGroup findOrThrowException(Long userGroupId) {

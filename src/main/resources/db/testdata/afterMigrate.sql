@@ -14,6 +14,7 @@ delete from restaurant;
 delete from restaurant_payment_method;
 delete from user;
 delete from user_user_group;
+delete from restaurant_responsible_user;
 
 -- Enable foreign key checks again
 set foreign_key_checks = 1;
@@ -76,6 +77,6 @@ insert into user (name, email, password, register_datetime) values
 
 insert into user_user_group(user_id, user_group_id) values (1, 1), (1, 2), (2, 2), (3, 3), (3, 2), (4, 4);
 
-
+insert into restaurant_responsible_user(restaurant_id, user_id) values (1, 1), (2, 2), (3, 3), (3, 2)
 
 

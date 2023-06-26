@@ -63,6 +63,12 @@ public class Restaurant {
             inverseJoinColumns = @JoinColumn(name = "payment_method_id"))
     private Set<PaymentMethod> paymentMethods = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(name = "restaurant_responsible_user",
+            joinColumns = @JoinColumn(name = "restaurant_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private Set<User> responsibleUsers = new HashSet<>();
+
     public void activate() {
         this.setActive(true);
     }
@@ -87,4 +93,11 @@ public class Restaurant {
         this.setOpen(false);
     }
 
+    public void addResponsibleUser(User user) {
+        this.responsibleUsers.add(user);
+    }
+
+    public void removeResponsibleUser(User user) {
+        this.responsibleUsers.remove(user);
+    }
 }

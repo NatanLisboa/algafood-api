@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Set;
+
 @Service
 @AllArgsConstructor
 public class RestaurantRegisterService {
@@ -15,6 +17,7 @@ public class RestaurantRegisterService {
     private final CuisineRegisterService cuisineRegisterService;
     private final CityRegisterService cityRegisterService;
     private final PaymentMethodRegisterService paymentMethodRegisterService;
+    private UserRegisterService userRegisterService;
 
     public Restaurant findOrThrowException(Long restaurantId) {
         return restaurantRepository.findById(restaurantId)
@@ -73,5 +76,27 @@ public class RestaurantRegisterService {
     public void close(Long restaurantId) {
         Restaurant restaurant = this.findOrThrowException(restaurantId);
         restaurant.close();
+    }
+
+    @Transactional
+    public Set<User> getAllResponsibleUsers(Long restaurantId) {
+        Restaurant restaurant = this.findOrThrowException(restaurantId);
+        return restaurant.getResponsibleUsers();
+    }
+
+    @Transactional
+    public void associateResponsibleUser(Long restaurantId, Long userId) {
+        Restaurant restaurant = this.findOrThrowException(restaurantId);
+        User responsibleUser = userRegisterService.findOrThrowException(userId);
+
+        restaurant.addResponsibleUser(responsibleUser);
+    }
+
+    @Transactional
+    public void disassociateResponsibleUser(Long restaurantId, Long userId) {
+        Restaurant restaurant = this.findOrThrowException(restaurantId);
+        User responsibleUser = userRegisterService.findOrThrowException(userId);
+
+        restaurant.removeResponsibleUser(responsibleUser);
     }
 }
