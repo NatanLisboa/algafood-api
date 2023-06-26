@@ -7,6 +7,7 @@ import com.lisboaworks.algafood.api.dto.input.RestaurantInput;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.CityNotFoundException;
 import com.lisboaworks.algafood.domain.exception.CuisineNotFoundException;
+import com.lisboaworks.algafood.domain.exception.RestaurantNotFoundException;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
@@ -84,4 +85,25 @@ public class RestaurantController {
     public void close(@PathVariable Long restaurantId) {
         restaurantRegisterService.close(restaurantId);
     }
+
+    @PutMapping("/activations")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void activateMultiples(@RequestBody List<Long> restaurantIds) {
+        try {
+            restaurantRegisterService.activate(restaurantIds);
+        } catch (RestaurantNotFoundException e) {
+            throw new BusinessRuleException(e.getMessage(), e);
+        }
+    }
+
+    @DeleteMapping("/activations")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void inactivateMultiples(@RequestBody List<Long> restaurantIds) {
+        try {
+            restaurantRegisterService.inactivate(restaurantIds);
+        } catch (RestaurantNotFoundException e) {
+            throw new BusinessRuleException(e.getMessage(), e);
+        }
+    }
+
 }

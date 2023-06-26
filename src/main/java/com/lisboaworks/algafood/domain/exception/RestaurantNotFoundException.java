@@ -7,7 +7,7 @@ public class RestaurantNotFoundException extends EntityNotFoundException {
     }
 
     public RestaurantNotFoundException(Long restaurantId) {
-        super(String.format("There is no restaurant register with id %d", restaurantId));
+        super(String.format("There is no restaurant register with code %d", restaurantId));
     }
 
 }

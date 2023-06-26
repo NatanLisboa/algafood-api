@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -42,6 +43,16 @@ public class RestaurantRegisterService {
     public void activate(Long restaurantId) {
         Restaurant restaurant = this.findOrThrowException(restaurantId);
         restaurant.activate();
+    }
+
+    @Transactional
+    public void activate(List<Long> restaurantIds) {
+        restaurantIds.forEach(this::activate);
+    }
+
+    @Transactional
+    public void inactivate(List<Long> restaurantIds) {
+        restaurantIds.forEach(this::inactivate);
     }
 
     @Transactional

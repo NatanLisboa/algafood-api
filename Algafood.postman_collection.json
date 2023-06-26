@@ -615,6 +615,66 @@
 					"response": []
 				},
 				{
+					"name": "Activate multiple restaurants",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[1, 3]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "api.algafood.local:8080/restaurants/activations",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"activations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inactivate multiple restaurants",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[1, 3]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "api.algafood.local:8080/restaurants/activations",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"activations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get all payment methods from restaurant",
 					"request": {
 						"method": "GET",
