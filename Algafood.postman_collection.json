@@ -1621,6 +1621,35 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Add order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"restaurant\": {\r\n        \"id\": 1\r\n    },\r\n    \"paymentMethod\": {\r\n        \"id\": 1\r\n    },\r\n    \"deliveryAddress\": {\r\n        \"zipCode\": \"38400-000\",\r\n        \"streetName\": \"Rua Floriano Peixoto\",\r\n        \"number\": \"600\",\r\n        \"complement\": \"Apto 704\",\r\n        \"district\": \"Brasil\",\r\n        \"city\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    \"items\": [\r\n        {\r\n            \"productId\": 1,\r\n            \"quantity\": 3,\r\n            \"note\": \"Without pepper\"\r\n        },\r\n        {\r\n            \"productId\": 2,\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "api.algafood.local:8080/orders",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
