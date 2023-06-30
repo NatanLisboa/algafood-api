@@ -12,6 +12,7 @@ import java.util.List;
 @Entity
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Table(name = "`order`")
 public class Order {
 
     @Id
@@ -52,6 +53,7 @@ public class Order {
     @Embedded
     private Address deliveryAddress;
 
+    @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
     @OneToMany(mappedBy = "order")

@@ -15,6 +15,8 @@ delete from restaurant_payment_method;
 delete from user;
 delete from user_user_group;
 delete from restaurant_responsible_user;
+delete from `order`;
+delete from order_item;
 
 -- Enable foreign key checks again
 set foreign_key_checks = 1;
@@ -77,6 +79,25 @@ insert into user (name, email, password, register_datetime) values
 
 insert into user_user_group(user_id, user_group_id) values (1, 1), (1, 2), (2, 2), (3, 3), (3, 2), (4, 4);
 
-insert into restaurant_responsible_user(restaurant_id, user_id) values (1, 1), (2, 2), (3, 3), (3, 2)
+insert into restaurant_responsible_user(restaurant_id, user_id) values (1, 1), (2, 2), (3, 3), (3, 2);
 
+insert into `order` (id, restaurant_id, customer_id, payment_method_id, address_city_id, address_zip_code,
+                    address_street_name, address_number, address_complement, address_district,
+	                status, creation_datetime, subtotal, shipping_fee, total_value)
+values (1, 1, 1, 1, 1, '38400-000', 'Rua Floriano Peixoto', '500', 'Apto 801', 'Brazil',
+        'CREATED', utc_timestamp, 63.70, 10.00, 73.70);
 
+insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
+values (1, 1, 1, 2, 19.90, 39.80, 'Less spicy, please');
+
+insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
+values (2, 1, 2, 1, 23.90, 23.90, null);
+
+insert into `order` (id, restaurant_id, customer_id, payment_method_id, address_city_id, address_zip_code,
+                    address_street_name, address_number, address_complement, address_district,
+	                status, creation_datetime, subtotal, shipping_fee, total_value)
+values (2, 3, 1, 2, 1, '38400-111', 'St Acre', '300', 'House number 2', 'Centre',
+        'CREATED', utc_timestamp, 75.00, 0.00, 75.00);
+
+insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
+values (3, 2, 4, 3, 25.00, 75.00, 'More concentrated sauce');
