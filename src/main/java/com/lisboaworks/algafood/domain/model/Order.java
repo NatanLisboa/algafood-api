@@ -54,10 +54,21 @@ public class Order {
     private Address deliveryAddress;
 
     @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+    private OrderStatus status = OrderStatus.CREATED;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> items;
 
 
+    public BigDecimal calculateTotalValue() {
+        return this.calculateSubtotal().add(this.shippingFee);
+    }
+
+    public BigDecimal calculateSubtotal() {
+        BigDecimal subtotal = BigDecimal.ZERO;
+        for (OrderItem item : items) {
+            subtotal = subtotal.add(item.getTotalPrice());
+        }
+        return subtotal;
+    }
 }

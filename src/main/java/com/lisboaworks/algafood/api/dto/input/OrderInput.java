@@ -18,7 +18,7 @@ public class OrderInput {
 
     @Valid
     @NotNull
-    private AddressInput address;
+    private AddressInput deliveryAddress;
 
     @Valid
     @NotNull

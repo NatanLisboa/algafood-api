@@ -1623,7 +1623,7 @@
 					"response": []
 				},
 				{
-					"name": "Add order",
+					"name": "Issue order",
 					"request": {
 						"method": "POST",
 						"header": [],

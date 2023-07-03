@@ -31,6 +31,8 @@ alter table permission auto_increment = 1;
 alter table product auto_increment = 1;
 alter table restaurant auto_increment = 1;
 alter table user auto_increment = 1;
+alter table `order` auto_increment = 1;
+alter table order_item auto_increment = 1;
 
 -- Insert testing data
 insert into cuisine (id, name) values (1, 'Thai');

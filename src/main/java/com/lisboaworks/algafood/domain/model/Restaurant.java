@@ -100,4 +100,12 @@ public class Restaurant {
     public void removeResponsibleUser(User user) {
         this.responsibleUsers.remove(user);
     }
+
+    public boolean hasPaymentMethod(PaymentMethod paymentMethod) {
+        return this.paymentMethods.contains(paymentMethod);
+    }
+
+    public boolean hasProduct(Product product) {
+        return this.products.contains(product);
+    }
 }
