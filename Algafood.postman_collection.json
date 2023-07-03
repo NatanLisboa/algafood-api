@@ -1650,6 +1650,28 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Confirm order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "api.algafood.local:8080/orders/1/confirmation",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"orders",
+								"1",
+								"confirmation"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
