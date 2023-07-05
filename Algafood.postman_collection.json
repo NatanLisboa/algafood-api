@@ -1616,6 +1616,32 @@
 					"response": []
 				},
 				{
+					"name": "Get all orders (exclusive fields)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.algafood.local:8080/orders?fields=code,totalValue,restaurant",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "code,totalValue,restaurant"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get order by code",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
