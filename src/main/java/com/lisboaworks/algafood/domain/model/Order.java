@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.domain.model;
 
+import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
@@ -71,4 +72,33 @@ public class Order {
         }
         return subtotal;
     }
+
+    public void confirm() {
+        this.setStatus(OrderStatus.CONFIRMED);
+        this.setConfirmationDatetime(OffsetDateTime.now());
+    }
+
+    public void cancel() {
+        this.setStatus(OrderStatus.CANCELLED);
+        this.setCancellationDatetime(OffsetDateTime.now());
+    }
+
+    public void deliver() {
+        this.setStatus(OrderStatus.DELIVERED);
+        this.setDeliveryDatetime(OffsetDateTime.now());
+    }
+
+    private void setStatus(OrderStatus newStatus) {
+        if (!status.canBeChangedTo(newStatus)) {
+            throw new BusinessRuleException(String.format("Status from order number %d cannot be changed from '%s' to '%s'. " +
+                            "Only from '%s' to '%s' is accepted.",
+                    id,
+                    status.getDescription(),
+                    newStatus.getDescription(),
+                    newStatus.getFormattedPreviousStatuses(),
+                    newStatus.getDescription()));
+        }
+        this.status = newStatus;
+    }
+
 }
