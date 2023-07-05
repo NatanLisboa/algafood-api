@@ -43,23 +43,6 @@ public class RestaurantController {
         return this.findAll();
     }
 
-//    @GetMapping
-//    public MappingJacksonValue findAll(@RequestParam(required = false) String projection) {
-//        List<Restaurant> restaurants = restaurantRepository.findAll();
-//        List<RestaurantDTO> restaurantsDTO = restaurantDTOAssembler.toDTOList(restaurants);
-//
-//        MappingJacksonValue restaurantsWrapper = new MappingJacksonValue(restaurantsDTO);
-//
-//        restaurantsWrapper.setSerializationView(RestaurantView.Summary.class);
-//        if ("only-name".equals(projection)) {
-//            restaurantsWrapper.setSerializationView(RestaurantView.OnlyName.class);
-//        } else if ("full".equals(projection)) {
-//            restaurantsWrapper.setSerializationView(null);
-//        }
-//
-//        return restaurantsWrapper;
-//    }
-
     @GetMapping("/{restaurantId}")
     public RestaurantDTO findById(@PathVariable Long restaurantId) {
     	Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
