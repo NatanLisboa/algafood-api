@@ -18,4 +18,16 @@ public class OrderFlowController {
         orderFlowService.confirm(orderId);
     }
 
+    @PutMapping("/cancellation")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void cancel(@PathVariable Long orderId) {
+        orderFlowService.cancel(orderId);
+    }
+
+    @PutMapping("/delivery")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deliver(@PathVariable Long orderId) {
+        orderFlowService.deliver(orderId);
+    }
+
 }
