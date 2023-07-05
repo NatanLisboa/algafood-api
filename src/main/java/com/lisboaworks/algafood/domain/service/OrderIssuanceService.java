@@ -71,8 +71,8 @@ public class OrderIssuanceService {
         order.setCustomer(customer);
     }
 
-    public Order findOrThrowException(Long orderId) {
-        return orderRepository.findById(orderId)
-                .orElseThrow(() -> new OrderNotFoundException(orderId));
+    public Order findOrThrowException(String orderCode) {
+        return orderRepository.findByCode(orderCode)
+                .orElseThrow(() -> new OrderNotFoundException(orderCode));
     }
 }

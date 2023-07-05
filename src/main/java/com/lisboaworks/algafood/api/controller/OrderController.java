@@ -33,9 +33,9 @@ public class OrderController {
         return orderSummaryDTOAssembler.toDTOList(orderRepository.findAll());
     }
 
-    @GetMapping("/{orderId}")
-    public OrderDTO findById(@PathVariable Long orderId) {
-        Order order = orderIssuanceService.findOrThrowException(orderId);
+    @GetMapping("/{orderCode}")
+    public OrderDTO findById(@PathVariable String orderCode) {
+        Order order = orderIssuanceService.findOrThrowException(orderCode);
         return orderDTOAssembler.toDTO(order);
     }
 

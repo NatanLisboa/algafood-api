@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -20,6 +21,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
+
+    private String code;
 
     @Column(nullable = false)
     private BigDecimal subtotal;
@@ -90,15 +93,20 @@ public class Order {
 
     private void setStatus(OrderStatus newStatus) {
         if (!status.canBeChangedTo(newStatus)) {
-            throw new BusinessRuleException(String.format("Status from order number %d cannot be changed from '%s' to '%s'. " +
+            throw new BusinessRuleException(String.format("Status from order with code '%s' cannot be changed from '%s' to '%s'. " +
                             "Only from '%s' to '%s' is accepted.",
-                    id,
+                    code,
                     status.getDescription(),
                     newStatus.getDescription(),
                     newStatus.getFormattedPreviousStatuses(),
                     newStatus.getDescription()));
         }
         this.status = newStatus;
+    }
+
+    @PrePersist //JPA callback method called before persist some register
+    private void generateCode() {
+        this.setCode(UUID.randomUUID().toString());
     }
 
 }
