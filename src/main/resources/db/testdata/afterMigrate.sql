@@ -49,7 +49,7 @@ insert into restaurant (name, shipping_fee, cuisine_id, address_city_id, address
 insert into restaurant (name, shipping_fee, cuisine_id, register_datetime, last_update_datetime, active, open) values ('Indian Fusion Cuisine', 7.00, 2, utc_timestamp, utc_timestamp, true, false);
 insert into restaurant (name, shipping_fee, cuisine_id, register_datetime, last_update_datetime, active, open) values ('Best Indian Cuisine', 8.00, 2, utc_timestamp, utc_timestamp, true, false);
 
-insert into product (name, description, price, active, restaurant_id) values ('Tom Yum Goong', 'Spicy shrimp soup', 19.90, true, 1);
+insert into product (name, description, price, active, restaurant_id) values ('Tom Yum Goong', 'Spicy shrimp soup', 19.90, false, 1);
 insert into product (name, description, price, active, restaurant_id) values ('Tom Kha Gai', 'Chicken in coconut soup', 23.90, true, 1);
 insert into product (name, description, price, active, restaurant_id) values ('Spicy curry cod', 'Fresh cod with curry and Ghost Jolokia pepper', 20.00, true, 2);
 insert into product (name, description, price, active, restaurant_id) values ('Tikka masala chicken', 'Chicken with a rich seasoned sauce', 25.00, true, 3);

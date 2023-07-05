@@ -1483,7 +1483,7 @@
 			"name": "Restaurant products",
 			"item": [
 				{
-					"name": "Get all restaurant products",
+					"name": "Get all active restaurant products",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -1499,6 +1499,34 @@
 								"restaurants",
 								"1",
 								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all restaurant products (including inactive products)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.algafood.local:8080/restaurants/1/products?includeInactiveProducts=true",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"1",
+								"products"
+							],
+							"query": [
+								{
+									"key": "includeInactiveProducts",
+									"value": "true"
+								}
 							]
 						}
 					},

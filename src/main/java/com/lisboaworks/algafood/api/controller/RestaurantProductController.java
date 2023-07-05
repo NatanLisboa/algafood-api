@@ -6,6 +6,7 @@ import com.lisboaworks.algafood.api.dto.ProductDTO;
 import com.lisboaworks.algafood.api.dto.input.ProductInput;
 import com.lisboaworks.algafood.domain.model.Product;
 import com.lisboaworks.algafood.domain.model.Restaurant;
+import com.lisboaworks.algafood.domain.repository.ProductRepository;
 import com.lisboaworks.algafood.domain.service.ProductRegisterService;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import lombok.AllArgsConstructor;
@@ -23,11 +24,19 @@ public class RestaurantProductController {
     private final RestaurantRegisterService restaurantRegisterService;
     private final ProductDTOAssembler productDTOAssembler;
     private final ProductInputDisassembler productInputDisassembler;
+    private final ProductRepository productRepository;
 
     @GetMapping
-    public List<ProductDTO> findAll(@PathVariable Long restaurantId) {
+    public List<ProductDTO> findAll(@PathVariable Long restaurantId,
+                                    @RequestParam(required = false) boolean includeInactiveProducts) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
-        return productDTOAssembler.toDTOList(restaurant.getProducts());
+        List<Product> allActiveProducts;
+        if (includeInactiveProducts) {
+            allActiveProducts = restaurant.getProducts();
+        } else {
+            allActiveProducts = productRepository.findActiveProductsByRestaurant(restaurant);
+        }
+        return productDTOAssembler.toDTOList(allActiveProducts);
     }
 
     @GetMapping("/{productId}")
