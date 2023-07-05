@@ -1,9 +1,11 @@
 package com.lisboaworks.algafood.api.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.lisboaworks.algafood.api.assembler.RestaurantDTOAssembler;
 import com.lisboaworks.algafood.api.assembler.RestaurantInputDisassembler;
 import com.lisboaworks.algafood.api.dto.RestaurantDTO;
 import com.lisboaworks.algafood.api.dto.input.RestaurantInput;
+import com.lisboaworks.algafood.api.dto.view.RestaurantView;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.CityNotFoundException;
 import com.lisboaworks.algafood.domain.exception.CuisineNotFoundException;
@@ -13,6 +15,7 @@ import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -29,9 +32,33 @@ public class RestaurantController {
     private final RestaurantInputDisassembler restaurantInputDisassembler;
 
     @GetMapping
+    @JsonView(RestaurantView.Summary.class)
     public List<RestaurantDTO> findAll() {
         return restaurantDTOAssembler.toDTOList(restaurantRepository.findAll());
     }
+
+    @GetMapping(params = "projection=only-name")
+    @JsonView(RestaurantView.OnlyName.class)
+    public List<RestaurantDTO> findAllOnlyWithName() {
+        return this.findAll();
+    }
+
+//    @GetMapping
+//    public MappingJacksonValue findAll(@RequestParam(required = false) String projection) {
+//        List<Restaurant> restaurants = restaurantRepository.findAll();
+//        List<RestaurantDTO> restaurantsDTO = restaurantDTOAssembler.toDTOList(restaurants);
+//
+//        MappingJacksonValue restaurantsWrapper = new MappingJacksonValue(restaurantsDTO);
+//
+//        restaurantsWrapper.setSerializationView(RestaurantView.Summary.class);
+//        if ("only-name".equals(projection)) {
+//            restaurantsWrapper.setSerializationView(RestaurantView.OnlyName.class);
+//        } else if ("full".equals(projection)) {
+//            restaurantsWrapper.setSerializationView(null);
+//        }
+//
+//        return restaurantsWrapper;
+//    }
 
     @GetMapping("/{restaurantId}")
     public RestaurantDTO findById(@PathVariable Long restaurantId) {

@@ -471,7 +471,7 @@
 			"name": "Restaurants",
 			"item": [
 				{
-					"name": "Get all restaurants",
+					"name": "Get all restaurants (summarized)",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -485,6 +485,32 @@
 							"port": "8080",
 							"path": [
 								"restaurants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all restaurants (only with name)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.algafood.local:8080/restaurants?projection=only-name",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants"
+							],
+							"query": [
+								{
+									"key": "projection",
+									"value": "only-name"
+								}
 							]
 						}
 					},
