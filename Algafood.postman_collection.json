@@ -1649,7 +1649,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/orders?startCreationDatetime=2023-07-07T10:00:00Z",
+							"raw": "api.algafood.local:8080/orders?startCreationDatetime=2023-07-07T10:00:00Z&endCreationDatetime=2023-07-07T17:00:00Z",
 							"host": [
 								"api",
 								"algafood",
@@ -1673,6 +1673,10 @@
 								{
 									"key": "startCreationDatetime",
 									"value": "2023-07-07T10:00:00Z"
+								},
+								{
+									"key": "endCreationDatetime",
+									"value": "2023-07-07T17:00:00Z"
 								}
 							]
 						}

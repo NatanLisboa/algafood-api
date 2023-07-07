@@ -15,6 +15,8 @@ public class OrderFilter {
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private OffsetDateTime startCreationDatetime;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private OffsetDateTime endCreationDatetime;
 
 }
