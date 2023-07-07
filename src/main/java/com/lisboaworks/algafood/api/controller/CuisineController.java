@@ -8,6 +8,10 @@ import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import com.lisboaworks.algafood.domain.service.CuisineRegisterService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,8 +29,11 @@ public class CuisineController {
     private final CuisineInputDisassembler cuisineInputDisassembler;
 
     @GetMapping
-    public List<CuisineDTO> findAll() {
-        return cuisineDTOAssembler.toDTOList(cuisineRepository.findAll());
+    public Page<CuisineDTO> findAll(@PageableDefault(size = 5) Pageable pageable) {
+        Page<Cuisine> cuisinesPage = cuisineRepository.findAll(pageable);
+        List<CuisineDTO> cuisinesDTO = cuisineDTOAssembler.toDTOList(cuisinesPage.getContent());
+        Page<CuisineDTO> cuisinesDTOPage = new PageImpl<>(cuisinesDTO, pageable, cuisinesPage.getTotalElements());
+        return cuisinesDTOPage;
     }
 
     @GetMapping("/{cuisineId}")

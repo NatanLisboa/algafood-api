@@ -47,6 +47,62 @@
 					"response": []
 				},
 				{
+					"name": "Get paginated cuisines",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "default",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "api.algafood.local:8080/cuisines?size=2&page=0&sort=name,desc&sort=id",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"cuisines"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "sort",
+									"value": "name,desc"
+								},
+								{
+									"key": "sort",
+									"value": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Get cuisine by id",
 					"request": {
 						"method": "GET",
