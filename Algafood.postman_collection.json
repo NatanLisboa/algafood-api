@@ -1649,7 +1649,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/orders?startCreationDatetime=2023-07-07T10:00:00Z&endCreationDatetime=2023-07-07T17:00:00Z",
+							"raw": "api.algafood.local:8080/orders?customerId=1&restaurantId=3&startCreationDatetime=2023-07-07T10:00:00Z&endCreationDatetime=2023-07-07T20:00:00Z",
 							"host": [
 								"api",
 								"algafood",
@@ -1662,13 +1662,11 @@
 							"query": [
 								{
 									"key": "customerId",
-									"value": "1",
-									"disabled": true
+									"value": "1"
 								},
 								{
 									"key": "restaurantId",
-									"value": "3",
-									"disabled": true
+									"value": "3"
 								},
 								{
 									"key": "startCreationDatetime",
@@ -1676,7 +1674,7 @@
 								},
 								{
 									"key": "endCreationDatetime",
-									"value": "2023-07-07T17:00:00Z"
+									"value": "2023-07-07T20:00:00Z"
 								}
 							]
 						}
