@@ -14,6 +14,10 @@ import com.lisboaworks.algafood.domain.repository.filter.OrderFilter;
 import com.lisboaworks.algafood.domain.service.OrderIssuanceService;
 import com.lisboaworks.algafood.infrastructure.repository.spec.OrderSpecs;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,9 +35,11 @@ public class OrderController {
     private final OrderInputDisassembler orderInputDisassembler;
 
     @GetMapping
-    public List<OrderSummaryDTO> findAll(OrderFilter filter) {
-        List<Order> orders = orderRepository.findAll(OrderSpecs.usingFilter(filter));
-        return orderSummaryDTOAssembler.toDTOList(orders);
+    public Page<OrderSummaryDTO> findAll(OrderFilter filter, @PageableDefault(size = 5) Pageable pageable) {
+        Page<Order> ordersPage = orderRepository.findAll(OrderSpecs.usingFilter(filter), pageable);
+        List<OrderSummaryDTO> ordersDTO = orderSummaryDTOAssembler.toDTOList(ordersPage.getContent());
+        Page<OrderSummaryDTO> ordersDTOPage = new PageImpl<>(ordersDTO, pageable, ordersPage.getTotalElements());
+        return ordersDTOPage;
     }
 
     @GetMapping("/{orderCode}")

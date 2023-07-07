@@ -9,44 +9,6 @@
 			"name": "Cuisines",
 			"item": [
 				{
-					"name": "Get all cuisines",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/xml",
-								"type": "default",
-								"disabled": true
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "default"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/xml",
-								"type": "default",
-								"disabled": true
-							}
-						],
-						"url": {
-							"raw": "api.algafood.local:8080/cuisines",
-							"host": [
-								"api",
-								"algafood",
-								"local"
-							],
-							"port": "8080",
-							"path": [
-								"cuisines"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Get paginated cuisines",
 					"request": {
 						"method": "GET",
@@ -70,7 +32,7 @@
 							}
 						],
 						"url": {
-							"raw": "api.algafood.local:8080/cuisines?size=2&page=0&sort=name,desc&sort=id",
+							"raw": "api.algafood.local:8080/cuisines?page=0&sort=name,desc&sort=id",
 							"host": [
 								"api",
 								"algafood",
@@ -83,7 +45,8 @@
 							"query": [
 								{
 									"key": "size",
-									"value": "2"
+									"value": "2",
+									"disabled": true
 								},
 								{
 									"key": "page",
@@ -1680,32 +1643,12 @@
 			"name": "Orders",
 			"item": [
 				{
-					"name": "Get all orders",
+					"name": "Get paginated orders",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/orders",
-							"host": [
-								"api",
-								"algafood",
-								"local"
-							],
-							"port": "8080",
-							"path": [
-								"orders"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get all orders (with filters)",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "api.algafood.local:8080/orders?customerId=1&restaurantId=3&startCreationDatetime=2023-07-07T10:00:00Z&endCreationDatetime=2023-07-07T20:00:00Z",
+							"raw": "api.algafood.local:8080/orders?page=0&sort=totalValue,desc",
 							"host": [
 								"api",
 								"algafood",
@@ -1717,20 +1660,12 @@
 							],
 							"query": [
 								{
-									"key": "customerId",
-									"value": "1"
+									"key": "page",
+									"value": "0"
 								},
 								{
-									"key": "restaurantId",
-									"value": "3"
-								},
-								{
-									"key": "startCreationDatetime",
-									"value": "2023-07-07T10:00:00Z"
-								},
-								{
-									"key": "endCreationDatetime",
-									"value": "2023-07-07T20:00:00Z"
+									"key": "sort",
+									"value": "totalValue,desc"
 								}
 							]
 						}
