@@ -32,7 +32,7 @@
 							}
 						],
 						"url": {
-							"raw": "api.algafood.local:8080/cuisines?page=0&sort=name,desc&sort=id",
+							"raw": "api.algafood.local:8080/cuisines?size=1&page=0",
 							"host": [
 								"api",
 								"algafood",
@@ -45,8 +45,7 @@
 							"query": [
 								{
 									"key": "size",
-									"value": "2",
-									"disabled": true
+									"value": "1"
 								},
 								{
 									"key": "page",
@@ -54,11 +53,13 @@
 								},
 								{
 									"key": "sort",
-									"value": "name,desc"
+									"value": "name,desc",
+									"disabled": true
 								},
 								{
 									"key": "sort",
-									"value": "id"
+									"value": "id",
+									"disabled": true
 								}
 							]
 						}
@@ -1648,7 +1649,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/orders?page=0&sort=totalValue,desc",
+							"raw": "api.algafood.local:8080/orders?page=0&size=1",
 							"host": [
 								"api",
 								"algafood",
@@ -1665,7 +1666,12 @@
 								},
 								{
 									"key": "sort",
-									"value": "totalValue,desc"
+									"value": "totalValue,desc",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "1"
 								}
 							]
 						}
