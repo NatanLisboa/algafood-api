@@ -1644,12 +1644,12 @@
 					"response": []
 				},
 				{
-					"name": "Get all orders (exclusive fields)",
+					"name": "Get all orders (with filters)",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/orders?fields=code,totalValue,customer[id,name]",
+							"raw": "api.algafood.local:8080/orders?startCreationDatetime=2023-07-07T10:00:00Z",
 							"host": [
 								"api",
 								"algafood",
@@ -1661,8 +1661,18 @@
 							],
 							"query": [
 								{
-									"key": "fields",
-									"value": "code,totalValue,customer[id,name]"
+									"key": "customerId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "restaurantId",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "startCreationDatetime",
+									"value": "2023-07-07T10:00:00Z"
 								}
 							]
 						}
