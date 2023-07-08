@@ -1,6 +1,6 @@
 package com.lisboaworks.algafood.api.dto;
 
-import com.lisboaworks.algafood.domain.model.*;
+import com.lisboaworks.algafood.domain.model.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
 

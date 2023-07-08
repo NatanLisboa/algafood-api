@@ -2,7 +2,6 @@ package com.lisboaworks.algafood.domain.service;
 
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.OrderNotFoundException;
-import com.lisboaworks.algafood.domain.exception.ProductNotFoundException;
 import com.lisboaworks.algafood.domain.model.*;
 import com.lisboaworks.algafood.domain.repository.OrderRepository;
 import lombok.AllArgsConstructor;

@@ -2,9 +2,8 @@ package com.lisboaworks.algafood.domain.service;
 
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.UserNotFoundException;
+import com.lisboaworks.algafood.domain.model.User;
 import com.lisboaworks.algafood.domain.model.UserGroup;
-import com.lisboaworks.algafood.domain.model.User;
-import com.lisboaworks.algafood.domain.model.User;
 import com.lisboaworks.algafood.domain.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

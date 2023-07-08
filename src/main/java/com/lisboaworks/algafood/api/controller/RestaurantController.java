@@ -15,7 +15,6 @@ import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
