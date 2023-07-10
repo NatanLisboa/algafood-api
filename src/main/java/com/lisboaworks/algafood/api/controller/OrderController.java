@@ -6,6 +6,7 @@ import com.lisboaworks.algafood.api.assembler.OrderSummaryDTOAssembler;
 import com.lisboaworks.algafood.api.dto.OrderDTO;
 import com.lisboaworks.algafood.api.dto.OrderSummaryDTO;
 import com.lisboaworks.algafood.api.dto.input.OrderInput;
+import com.lisboaworks.algafood.core.data.PageableTranslator;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import com.lisboaworks.algafood.domain.model.Order;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/orders")
@@ -36,6 +38,7 @@ public class OrderController {
 
     @GetMapping
     public Page<OrderSummaryDTO> findAll(OrderFilter filter, @PageableDefault(size = 5) Pageable pageable) {
+        pageable = this.mapSortPropertiesNamesToMatchWithDomainModel(pageable);
         Page<Order> ordersPage = orderRepository.findAll(OrderSpecs.usingFilter(filter), pageable);
         List<OrderSummaryDTO> ordersDTO = orderSummaryDTOAssembler.toDTOList(ordersPage.getContent());
         Page<OrderSummaryDTO> ordersDTOPage = new PageImpl<>(ordersDTO, pageable, ordersPage.getTotalElements());
@@ -56,6 +59,16 @@ public class OrderController {
         } catch (EntityNotFoundException e) {
             throw new BusinessRuleException(e.getMessage(), e);
         }
+    }
+
+    private Pageable mapSortPropertiesNamesToMatchWithDomainModel(Pageable pageable) {
+        var mappingFromRequestToDomainModel = Map.of(
+                "code", "code",
+                "restaurant.name", "restaurant.name",
+                "customerName", "customer.name",
+                "totalValue", "totalValue"
+        );
+        return PageableTranslator.translate(pageable, mappingFromRequestToDomainModel);
     }
 
 }

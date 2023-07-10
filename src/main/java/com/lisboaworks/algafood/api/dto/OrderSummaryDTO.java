@@ -17,7 +17,7 @@ public class OrderSummaryDTO {
     private BigDecimal totalValue;
     private OffsetDateTime creationDatetime;
     private RestaurantSummaryDTO restaurant;
-    private UserDTO customer;
+    private String customerName;
     private OrderStatus status;
 
 }

@@ -1649,7 +1649,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/orders?page=0&size=1",
+							"raw": "api.algafood.local:8080/orders?sort=customerName,desc",
 							"host": [
 								"api",
 								"algafood",
@@ -1662,16 +1662,17 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "0"
-								},
-								{
-									"key": "sort",
-									"value": "totalValue,desc",
+									"value": "0",
 									"disabled": true
 								},
 								{
 									"key": "size",
-									"value": "1"
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "customerName,desc"
 								}
 							]
 						}

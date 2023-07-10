@@ -98,7 +98,7 @@ values (2, 1, 2, 1, 23.90, 23.90, null);
 insert into `order` (id, code, restaurant_id, customer_id, payment_method_id, address_city_id, address_zip_code,
                     address_street_name, address_number, address_complement, address_district,
 	                status, creation_datetime, subtotal, shipping_fee, total_value)
-values (2, 'ce814877-e9b3-4dab-bc65-76e3ff9ed672', 3, 1, 2, 1, '38400-111', 'St Acre', '300', 'House number 2', 'Centre',
+values (2, 'ce814877-e9b3-4dab-bc65-76e3ff9ed672', 3, 2, 2, 1, '38400-111', 'St Acre', '300', 'House number 2', 'Centre',
         'CREATED', utc_timestamp, 75.00, 0.00, 75.00);
 
 insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
