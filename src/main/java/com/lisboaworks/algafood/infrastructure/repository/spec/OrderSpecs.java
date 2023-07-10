@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.infrastructure.repository.spec;
 
 import com.lisboaworks.algafood.domain.model.Order;
-import com.lisboaworks.algafood.domain.repository.filter.OrderFilter;
+import com.lisboaworks.algafood.domain.filter.OrderFilter;
 import org.springframework.data.jpa.domain.Specification;
 
 import javax.persistence.criteria.Predicate;

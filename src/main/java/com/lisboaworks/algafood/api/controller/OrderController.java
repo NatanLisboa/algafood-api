@@ -11,7 +11,7 @@ import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import com.lisboaworks.algafood.domain.model.Order;
 import com.lisboaworks.algafood.domain.repository.OrderRepository;
-import com.lisboaworks.algafood.domain.repository.filter.OrderFilter;
+import com.lisboaworks.algafood.domain.filter.OrderFilter;
 import com.lisboaworks.algafood.domain.service.OrderIssuanceService;
 import com.lisboaworks.algafood.infrastructure.repository.spec.OrderSpecs;
 import lombok.AllArgsConstructor;

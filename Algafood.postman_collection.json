@@ -1808,6 +1808,32 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Statistics",
+			"item": [
+				{
+					"name": "Daily sales",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.algafood.local:8080/statistics/daily-sales",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"statistics",
+								"daily-sales"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
