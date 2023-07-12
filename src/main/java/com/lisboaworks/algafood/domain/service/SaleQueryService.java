@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface SaleQueryService {
 
-    List<DailySale> getDailySales(DailySaleFilter filter);
+    List<DailySale> getDailySales(DailySaleFilter filter, String timeOffset);
 
 }

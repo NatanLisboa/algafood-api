@@ -6,6 +6,7 @@ import com.lisboaworks.algafood.domain.service.SaleQueryService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,11 +16,12 @@ import java.util.List;
 @AllArgsConstructor
 public class StatisticsController {
 
+    private static final String UTC_OFFSET = "+00:00";
     private final SaleQueryService saleQueryService;
 
     @GetMapping("/daily-sales")
-    public List<DailySale> getDailySales(DailySaleFilter filter) {
-        return saleQueryService.getDailySales(filter);
+    public List<DailySale> getDailySales(DailySaleFilter filter, @RequestParam(required = false, defaultValue = UTC_OFFSET) String timeOffset) {
+        return saleQueryService.getDailySales(filter, timeOffset);
     }
 
 }
