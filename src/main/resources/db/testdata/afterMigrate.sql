@@ -129,7 +129,7 @@ insert into `order` (id, code, restaurant_id, customer_id, payment_method_id, ad
                     address_street_name, address_number, address_complement, address_district,
 	                status, creation_datetime, delivery_datetime, subtotal, shipping_fee, total_value)
 values (5, '4bfe22ed-a7fa-431a-8b86-918bc7c5faab', 1, 1, 1, 1, '38400-111', 'St Acre', '300', 'House number 2', 'Centre',
-        'DELIVERED', str_to_date('2023-07-09 01:00:00', '%Y-%c-%e %T'), str_to_date('2023-07-10 11:30:00', '%Y-%c-%e %T'), 63.70, 10.00, 73.70);
+        'DELIVERED', str_to_date('2023-07-09 12:00:00', '%Y-%c-%e %T'), str_to_date('2023-07-10 11:30:00', '%Y-%c-%e %T'), 63.70, 10.00, 73.70);
 
 insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
 values (6, 5, 1, 2, 19.90, 39.80, 'More spicy, please');
