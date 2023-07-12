@@ -1813,7 +1813,7 @@
 			"name": "Statistics",
 			"item": [
 				{
-					"name": "Daily sales",
+					"name": "Get daily sales",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -1828,6 +1828,23 @@
 							"path": [
 								"statistics",
 								"daily-sales"
+							],
+							"query": [
+								{
+									"key": "startCreationDatetime",
+									"value": "2023-07-08T00:00:00Z",
+									"disabled": true
+								},
+								{
+									"key": "endCreationDatetime",
+									"value": "2023-07-10T00:00:00Z",
+									"disabled": true
+								},
+								{
+									"key": "restaurantId",
+									"value": "1",
+									"disabled": true
+								}
 							]
 						}
 					},

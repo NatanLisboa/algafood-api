@@ -24,23 +24,34 @@ public class SaleQueryServiceImpl implements SaleQueryService {
         CriteriaQuery<DailySale> query = builder.createQuery(DailySale.class);
         Root<Order> root = query.from(Order.class);
         List<Predicate> predicates = new ArrayList<>();
-        List<OrderStatus> ordersStatusesToBeReturned = Arrays.asList(
-                OrderStatus.CONFIRMED,
-                OrderStatus.DELIVERED
-        );
-
-        //TODO: Build predicate to get only confirmed and delivered orders. Build predicates for each filter attribute.
-        
         Expression<Date> creationDate = builder.function("date", Date.class, root.get("creationDatetime"));
-
         CompoundSelection<DailySale> selection = builder.construct(
                 DailySale.class,
                 creationDate,
                 builder.count(root.get("id")),
                 builder.sum(root.get("totalValue"))
         );
+        List<OrderStatus> ordersStatusesToBeReturned = Arrays.asList(
+                OrderStatus.CONFIRMED,
+                OrderStatus.DELIVERED
+        );
+
+        predicates.add(root.get("status").in(ordersStatusesToBeReturned));
+        if (Objects.nonNull(filter.getRestaurantId())) {
+            Predicate restaurantIdPredicate = builder.equal(root.get("restaurant"), filter.getRestaurantId());
+            predicates.add(restaurantIdPredicate);
+        }
+        if (Objects.nonNull(filter.getStartCreationDatetime())) {
+            Predicate startCreationDatetimePredicate = builder.greaterThanOrEqualTo(root.get("creationDatetime"), filter.getStartCreationDatetime());
+            predicates.add(startCreationDatetimePredicate);
+        }
+        if (Objects.nonNull(filter.getEndCreationDatetime())) {
+            Predicate endCreationDatetimePredicate = builder.lessThanOrEqualTo(root.get("creationDatetime"), filter.getEndCreationDatetime());
+            predicates.add(endCreationDatetimePredicate);
+        }
 
         query.select(selection);
+        query.where(predicates.toArray(new Predicate[0]));
         query.groupBy(creationDate);
 
         return manager.createQuery(query).getResultList();

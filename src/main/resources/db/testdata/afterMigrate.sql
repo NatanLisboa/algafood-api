@@ -71,7 +71,7 @@ insert into payment_method (description) values ('Credit card');
 insert into payment_method (description) values ('Debit card');
 insert into payment_method (description) values ('Cash');
 
-insert into restaurant_payment_method (restaurant_id, payment_method_id) values (1, 1), (1, 2), (1, 3), (3, 1), (3, 2), (3, 3);
+insert into restaurant_payment_method (restaurant_id, payment_method_id) values (1, 1), (1, 2), (1, 3), (2, 2), (2, 3), (3, 1), (3, 2), (3, 3);
 
 insert into user (name, email, password, register_datetime) values
 ('João da Silva', 'joao.man@algafood.com', '123', utc_timestamp),
@@ -83,11 +83,12 @@ insert into user_user_group(user_id, user_group_id) values (1, 1), (1, 2), (2, 2
 
 insert into restaurant_responsible_user(restaurant_id, user_id) values (1, 1), (2, 2), (3, 3), (3, 2);
 
+
 insert into `order` (id, code, restaurant_id, customer_id, payment_method_id, address_city_id, address_zip_code,
                     address_street_name, address_number, address_complement, address_district,
-	                status, creation_datetime, subtotal, shipping_fee, total_value)
+	                status, creation_datetime, delivery_datetime, subtotal, shipping_fee, total_value)
 values (1, '522be832-c93b-4164-a390-e62114e6177d', 1, 1, 1, 1, '38400-000', 'Rua Floriano Peixoto', '500', 'Apto 801', 'Brazil',
-        'CREATED', utc_timestamp, 63.70, 10.00, 73.70);
+        'DELIVERED', str_to_date('2023-07-08 13:00:00', '%Y-%c-%e %T'), str_to_date('2023-07-10 15:00:00', '%Y-%c-%e %T'), 63.70, 10.00, 73.70);
 
 insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
 values (1, 1, 1, 2, 19.90, 39.80, 'Less spicy, please');
@@ -97,9 +98,41 @@ values (2, 1, 2, 1, 23.90, 23.90, null);
 
 insert into `order` (id, code, restaurant_id, customer_id, payment_method_id, address_city_id, address_zip_code,
                     address_street_name, address_number, address_complement, address_district,
-	                status, creation_datetime, subtotal, shipping_fee, total_value)
+	                status, creation_datetime, delivery_datetime, subtotal, shipping_fee, total_value)
 values (2, 'ce814877-e9b3-4dab-bc65-76e3ff9ed672', 3, 2, 2, 1, '38400-111', 'St Acre', '300', 'House number 2', 'Centre',
-        'CREATED', utc_timestamp, 75.00, 0.00, 75.00);
+        'DELIVERED', str_to_date('2023-07-08 09:00:00', '%Y-%c-%e %T'), str_to_date('2023-07-10 09:00:00', '%Y-%c-%e %T'), 75.00, 0.00, 75.00);
 
 insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
 values (3, 2, 4, 3, 25.00, 75.00, 'More concentrated sauce');
+
+
+insert into `order` (id, code, restaurant_id, customer_id, payment_method_id, address_city_id, address_zip_code,
+                    address_street_name, address_number, address_complement, address_district,
+	                status, creation_datetime, confirmation_datetime, subtotal, shipping_fee, total_value)
+values (3, '3b6abc4e-14c3-4508-bdc1-bcf0250e6657', 2, 2, 2, 2, '38400-111', 'St Acre', '300', 'House number 2', 'Centre',
+        'CONFIRMED', str_to_date('2023-07-06 09:00:00', '%Y-%c-%e %T'), str_to_date('2023-07-06 09:30:00', '%Y-%c-%e %T'), 100.00, 7.00, 107.00);
+
+insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
+values (4, 3, 3, 5, 20.00, 100.00, 'More spicy, please');
+
+
+insert into `order` (id, code, restaurant_id, customer_id, payment_method_id, address_city_id, address_zip_code,
+                    address_street_name, address_number, address_complement, address_district,
+	                status, creation_datetime, subtotal, shipping_fee, total_value)
+values (4, '0ee1fe06-d7ba-419f-980b-0e0030ea4f84', 3, 4, 3, 2, '38400-111', 'St Acre', '300', 'House number 2', 'Centre',
+        'CREATED', str_to_date('2023-07-08 11:00:00', '%Y-%c-%e %T'), 25.00, 8.00, 33.00);
+
+insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
+values (5, 4, 4, 1, 25.00, 25.00, 'More sauce');
+
+insert into `order` (id, code, restaurant_id, customer_id, payment_method_id, address_city_id, address_zip_code,
+                    address_street_name, address_number, address_complement, address_district,
+	                status, creation_datetime, delivery_datetime, subtotal, shipping_fee, total_value)
+values (5, '4bfe22ed-a7fa-431a-8b86-918bc7c5faab', 1, 1, 1, 1, '38400-111', 'St Acre', '300', 'House number 2', 'Centre',
+        'DELIVERED', str_to_date('2023-07-09 12:00:00', '%Y-%c-%e %T'), str_to_date('2023-07-10 11:30:00', '%Y-%c-%e %T'), 63.70, 10.00, 73.70);
+
+insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
+values (6, 5, 1, 2, 19.90, 39.80, 'More spicy, please');
+
+insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
+values (7, 5, 2, 1, 23.90, 23.90, null);
