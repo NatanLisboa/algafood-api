@@ -1,4 +1,4 @@
-package com.lisboaworks.algafood.infrastructure.service;
+package com.lisboaworks.algafood.infrastructure.service.query;
 
 import com.lisboaworks.algafood.domain.filter.DailySaleFilter;
 import com.lisboaworks.algafood.domain.model.Order;
@@ -60,6 +60,7 @@ public class SaleQueryServiceImpl implements SaleQueryService {
         query.select(selection);
         query.where(predicates.toArray(new Predicate[0]));
         query.groupBy(creationDate);
+        query.orderBy(builder.asc(creationDate));
 
         return manager.createQuery(query).getResultList();
     }

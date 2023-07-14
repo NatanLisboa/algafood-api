@@ -1816,7 +1816,19 @@
 					"name": "Get daily sales",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/pdf,application/json",
+								"type": "default"
+							}
+						],
 						"url": {
 							"raw": "api.algafood.local:8080/statistics/daily-sales",
 							"host": [
