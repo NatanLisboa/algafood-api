@@ -33,7 +33,7 @@ public class PdfSaleReportService implements SaleReportService {
 
             return JasperExportManager.exportReportToPdf(jasperPrint);
         } catch (Exception e) {
-            throw new RuntimeException("Unable to issue daily sales report", e);
+            throw new ReportException("Unable to issue daily sales report", e);
         }
     }
 
