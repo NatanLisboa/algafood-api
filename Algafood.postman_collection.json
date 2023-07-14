@@ -1844,6 +1844,11 @@
 									"key": "restaurantId",
 									"value": "1",
 									"disabled": true
+								},
+								{
+									"key": "timeOffset",
+									"value": "-03:00",
+									"disabled": true
 								}
 							]
 						}

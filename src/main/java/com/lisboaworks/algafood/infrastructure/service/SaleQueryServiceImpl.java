@@ -15,16 +15,23 @@ import java.util.*;
 @Repository
 public class SaleQueryServiceImpl implements SaleQueryService {
 
+    private static final String UTC_OFFSET = "+00:00";
     @PersistenceContext
     private EntityManager manager;
 
     @Override
-    public List<DailySale> getDailySales(DailySaleFilter filter) {
+    public List<DailySale> getDailySales(DailySaleFilter filter, String timeOffset) {
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<DailySale> query = builder.createQuery(DailySale.class);
         Root<Order> root = query.from(Order.class);
         List<Predicate> predicates = new ArrayList<>();
-        Expression<Date> creationDate = builder.function("date", Date.class, root.get("creationDatetime"));
+        Expression<Date> functionConvertTzCreationDate = builder.function(
+                "convert_tz",
+                Date.class,
+                root.get("creationDatetime"),
+                builder.literal(UTC_OFFSET),
+                builder.literal(timeOffset));
+        Expression<Date> creationDate = builder.function("date", Date.class, functionConvertTzCreationDate);
         CompoundSelection<DailySale> selection = builder.construct(
                 DailySale.class,
                 creationDate,
