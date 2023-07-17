@@ -1868,6 +1868,50 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Product photos",
+			"item": [
+				{
+					"name": "Update product photo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/natan/OneDrive/Área de Trabalho/tom-yum-goong.webp"
+								},
+								{
+									"key": "description",
+									"value": "Spicy shrimp soup",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "api.algafood.local:8080/restaurants/1/products/1/photo",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"restaurants",
+								"1",
+								"products",
+								"1",
+								"photo"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
