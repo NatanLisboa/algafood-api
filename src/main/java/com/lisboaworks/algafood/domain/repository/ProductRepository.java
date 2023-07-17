@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long>, ProductRepositoryQuery {
 
     @Query("from Product where restaurant.id = :restaurantId and id = :productId")
     Optional<Product> findById(Long restaurantId, Long productId);

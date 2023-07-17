@@ -1,36 +1,45 @@
 package com.lisboaworks.algafood.api.controller;
 
+import com.lisboaworks.algafood.api.assembler.ProductPhotoDTOAssembler;
+import com.lisboaworks.algafood.api.dto.ProductPhotoDTO;
 import com.lisboaworks.algafood.api.dto.input.ProductPhotoInput;
+import com.lisboaworks.algafood.domain.model.Product;
+import com.lisboaworks.algafood.domain.model.ProductPhoto;
+import com.lisboaworks.algafood.domain.service.ProductPhotoCatalogService;
+import com.lisboaworks.algafood.domain.service.ProductRegisterService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/restaurants/{restaurantId}/products/{productId}/photo")
+@AllArgsConstructor
 public class RestaurantProductPhotoController {
 
+    private final ProductRegisterService productRegisterService;
+    private final ProductPhotoCatalogService productPhotoCatalogService;
+    private final ProductPhotoDTOAssembler productPhotoDTOAssembler;
+
     @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void updatePhoto(@PathVariable Long restaurantId,
-                            @PathVariable Long productId, @Valid ProductPhotoInput productPhotoInput) {
-        String filename = UUID.randomUUID().toString()
-                + "_" + productPhotoInput.getFile().getOriginalFilename();
+    public ProductPhotoDTO updatePhoto(@PathVariable Long restaurantId,
+                                       @PathVariable Long productId, @Valid ProductPhotoInput productPhotoInput) {
+        Product product = productRegisterService.findOrThrowException(restaurantId, productId);
 
-        Path photoFilePath = Path.of(".\\src\\test\\resources\\image", filename);
+        MultipartFile file = productPhotoInput.getFile();
 
-        System.out.println(productPhotoInput.getDescription());
-        System.out.println(photoFilePath);
-        System.out.println(productPhotoInput.getFile().getContentType());
+        ProductPhoto productPhoto = new ProductPhoto();
+        productPhoto.setProduct(product);
+        productPhoto.setDescription(productPhotoInput.getDescription());
+        productPhoto.setContentType(file.getContentType());
+        productPhoto.setSize(file.getSize());
+        productPhoto.setFilename(file.getOriginalFilename());
 
-        try {
-            productPhotoInput.getFile().transferTo(photoFilePath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ProductPhoto savedPhoto = productPhotoCatalogService.save(productPhoto);
+
+        return productPhotoDTOAssembler.toDTO(savedPhoto);
     }
 
 }
