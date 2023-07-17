@@ -17,6 +17,7 @@ delete from user_user_group;
 delete from restaurant_responsible_user;
 delete from `order`;
 delete from order_item;
+delete from product_photo;
 
 -- Enable foreign key checks again
 set foreign_key_checks = 1;
