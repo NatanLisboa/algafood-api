@@ -5,6 +5,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.UUID;
@@ -15,11 +16,11 @@ public class RestaurantProductPhotoController {
 
     @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void updatePhoto(@PathVariable Long restaurantId,
-                            @PathVariable Long productId, ProductPhotoInput productPhotoInput) {
+                            @PathVariable Long productId, @Valid ProductPhotoInput productPhotoInput) {
         String filename = UUID.randomUUID().toString()
                 + "_" + productPhotoInput.getFile().getOriginalFilename();
 
-        Path photoFilePath = Path.of(".\\src\\test\\resources", filename);
+        Path photoFilePath = Path.of(".\\src\\test\\resources\\image", filename);
 
         System.out.println(productPhotoInput.getDescription());
         System.out.println(photoFilePath);
