@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @AllArgsConstructor
 public class ProductPhotoCatalogService {
@@ -14,6 +16,14 @@ public class ProductPhotoCatalogService {
 
     @Transactional
     public ProductPhoto save(ProductPhoto productPhoto) {
+        Long restaurantId = productPhoto.getRestaurantId();
+        Long productId = productPhoto.getProduct().getId();
+
+        Optional<ProductPhoto> photoOptional = productRepository
+                .findPhotoById(restaurantId, productId);
+
+        photoOptional.ifPresent(productRepository::delete);
+
         return productRepository.save(productPhoto);
     }
 

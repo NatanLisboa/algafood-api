@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Data
@@ -27,4 +28,11 @@ public class ProductPhoto {
     @MapsId //Determine that this entity has the same id of its owner (i.e., ProductPhoto also has product_id as its id, as Product)
     private Product product;
 
+
+    public Long getRestaurantId() {
+        if (Objects.nonNull(this.product)) {
+            return this.product.getRestaurant().getId();
+        }
+        return null;
+    }
 }

@@ -6,4 +6,6 @@ public interface ProductRepositoryQuery {
 
     ProductPhoto save(ProductPhoto productPhoto);
 
+    void delete(ProductPhoto productPhoto);
+
 }
