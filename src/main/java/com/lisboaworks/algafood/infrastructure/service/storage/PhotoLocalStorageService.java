@@ -6,14 +6,30 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.FileStore;
 import java.nio.file.Files;
+import java.nio.file.OpenOption;
 import java.nio.file.Path;
+import java.util.stream.Stream;
 
 @Service
 public class PhotoLocalStorageService implements PhotoStorageService {
 
     @Value("${algafood.storage.local.photo-directory}")
     private Path photosDirectory;
+
+    @Override
+    public InputStream get(String filename) {
+        try {
+            Path filePath = this.getFilePath(filename);
+            return Files.newInputStream(filePath);
+        } catch (Exception e) {
+            throw new StorageException("Unable to get file", e);
+        }
+    }
 
     @Override
     public void store(NewPhoto newPhoto) {
