@@ -13,12 +13,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 @RestController
 @RequestMapping("/restaurants/{restaurantId}/products/{productId}/photo")
@@ -36,13 +38,17 @@ public class RestaurantProductPhotoController {
         return productPhotoDTOAssembler.toDTO(productPhoto);
     }
 
-    @GetMapping(produces = MediaType.IMAGE_JPEG_VALUE)
-    public ResponseEntity<InputStreamResource> servePhoto(@PathVariable Long restaurantId, @PathVariable Long productId) {
+    @GetMapping
+    public ResponseEntity<InputStreamResource> servePhoto(@PathVariable Long restaurantId,
+                                                          @PathVariable Long productId, @RequestHeader(name = "accept") String acceptHeader) throws HttpMediaTypeNotAcceptableException {
         try {
             ProductPhoto productPhoto = productPhotoCatalogService.findOrThrowException(restaurantId, productId);
+            MediaType photoMediaType = MediaType.parseMediaType(productPhoto.getContentType());
+            List<MediaType> acceptedMediaTypes = MediaType.parseMediaTypes(acceptHeader);
+            this.verifyMediaTypeCompatibility(photoMediaType, acceptedMediaTypes);
             InputStream inputStream = photoStorageService.get(productPhoto.getFilename());
             return ResponseEntity.ok()
-                    .contentType(MediaType.IMAGE_JPEG)
+                    .contentType(photoMediaType)
                     .body(new InputStreamResource(inputStream));
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
@@ -66,6 +72,15 @@ public class RestaurantProductPhotoController {
         ProductPhoto savedPhoto = productPhotoCatalogService.save(productPhoto, file.getInputStream());
 
         return productPhotoDTOAssembler.toDTO(savedPhoto);
+    }
+
+    private void verifyMediaTypeCompatibility(MediaType photoMediaType, List<MediaType> acceptedMediaTypes) throws HttpMediaTypeNotAcceptableException {
+        boolean isCompatible = acceptedMediaTypes.stream()
+                .anyMatch(acceptedMediaType -> acceptedMediaType.isCompatibleWith(photoMediaType));
+
+        if (!isCompatible) {
+            throw new HttpMediaTypeNotAcceptableException(acceptedMediaTypes);
+        }
     }
 
 }

@@ -1888,7 +1888,7 @@
 							},
 							{
 								"key": "Accept",
-								"value": "image/jpeg",
+								"value": "image/png,image/jpeg",
 								"type": "default"
 							}
 						],
