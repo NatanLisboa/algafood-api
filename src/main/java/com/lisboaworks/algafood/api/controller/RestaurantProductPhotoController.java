@@ -11,6 +11,7 @@ import com.lisboaworks.algafood.domain.service.ProductPhotoCatalogService;
 import com.lisboaworks.algafood.domain.service.ProductRegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
@@ -72,6 +73,12 @@ public class RestaurantProductPhotoController {
         ProductPhoto savedPhoto = productPhotoCatalogService.save(productPhoto, file.getInputStream());
 
         return productPhotoDTOAssembler.toDTO(savedPhoto);
+    }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePhoto(@PathVariable Long restaurantId, @PathVariable Long productId) {
+        productPhotoCatalogService.delete(restaurantId, productId);
     }
 
     private void verifyMediaTypeCompatibility(MediaType photoMediaType, List<MediaType> acceptedMediaTypes) throws HttpMediaTypeNotAcceptableException {

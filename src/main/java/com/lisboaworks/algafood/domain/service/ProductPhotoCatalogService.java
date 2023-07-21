@@ -2,7 +2,6 @@ package com.lisboaworks.algafood.domain.service;
 
 import static com.lisboaworks.algafood.domain.service.PhotoStorageService.NewPhoto;
 
-import com.lisboaworks.algafood.api.dto.ProductPhotoDTO;
 import com.lisboaworks.algafood.domain.exception.ProductPhotoNotFoundException;
 import com.lisboaworks.algafood.domain.model.ProductPhoto;
 import com.lisboaworks.algafood.domain.repository.ProductRepository;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.Optional;
 
 @Service
@@ -47,6 +47,14 @@ public class ProductPhotoCatalogService {
         photoStorageService.replace(existentFilename, newPhoto);
 
         return productPhoto;
+    }
+
+    @Transactional
+    public void delete(Long restaurantId, Long productId) {
+        ProductPhoto productPhoto = this.findOrThrowException(restaurantId, productId);
+        productRepository.delete(productPhoto);
+        productRepository.flush();
+        photoStorageService.remove(productPhoto.getFilename());
     }
 
     public ProductPhoto findOrThrowException(Long restaurantId, Long productId) {
