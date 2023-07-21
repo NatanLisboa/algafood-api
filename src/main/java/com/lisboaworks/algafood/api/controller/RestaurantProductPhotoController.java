@@ -24,6 +24,12 @@ public class RestaurantProductPhotoController {
     private final ProductPhotoCatalogService productPhotoCatalogService;
     private final ProductPhotoDTOAssembler productPhotoDTOAssembler;
 
+    @GetMapping
+    public ProductPhotoDTO getPhoto(@PathVariable Long restaurantId, @PathVariable Long productId) {
+        ProductPhoto productPhoto = productPhotoCatalogService.findOrThrowException(restaurantId, productId);
+        return productPhotoDTOAssembler.toDTO(productPhoto);
+    }
+
     @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ProductPhotoDTO updatePhoto(@PathVariable Long restaurantId,
                                        @PathVariable Long productId, @Valid ProductPhotoInput productPhotoInput) throws IOException {

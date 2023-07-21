@@ -1,6 +1,9 @@
 package com.lisboaworks.algafood.domain.service;
 
 import static com.lisboaworks.algafood.domain.service.PhotoStorageService.NewPhoto;
+
+import com.lisboaworks.algafood.api.dto.ProductPhotoDTO;
+import com.lisboaworks.algafood.domain.exception.ProductPhotoNotFoundException;
 import com.lisboaworks.algafood.domain.model.ProductPhoto;
 import com.lisboaworks.algafood.domain.repository.ProductRepository;
 import lombok.AllArgsConstructor;
@@ -46,4 +49,8 @@ public class ProductPhotoCatalogService {
         return productPhoto;
     }
 
+    public ProductPhoto findOrThrowException(Long restaurantId, Long productId) {
+        return productRepository.findPhotoById(restaurantId, productId)
+                .orElseThrow(() -> new ProductPhotoNotFoundException(restaurantId, productId));
+    }
 }
