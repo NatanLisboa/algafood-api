@@ -1882,18 +1882,7 @@
 						"header": [],
 						"body": {
 							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "file",
-									"type": "file",
-									"src": "/C:/Users/natan/IdeaProjects/algafood-api/src/test/resources/image/tom-yum-goong.png"
-								},
-								{
-									"key": "description",
-									"value": "Spicy shrimp soup",
-									"type": "default"
-								}
-							]
+							"formdata": []
 						},
 						"url": {
 							"raw": "api.algafood.local:8080/restaurants/1/products/1/photo",
