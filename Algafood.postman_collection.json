@@ -1879,7 +1879,19 @@
 					},
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "image/jpeg",
+								"type": "default"
+							}
+						],
 						"body": {
 							"mode": "formdata",
 							"formdata": []
@@ -1914,7 +1926,7 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/natan/IdeaProjects/algafood-api/src/test/resources/image/tom-yum-goong.png"
+									"src": "/C:/Users/natan/IdeaProjects/algafood-api/src/test/resources/image/tom-yum-goong.jpg"
 								},
 								{
 									"key": "description",
