@@ -1,7 +1,6 @@
 package com.lisboaworks.algafood.domain.service;
 
 import static com.lisboaworks.algafood.domain.service.PhotoStorageService.NewPhoto;
-
 import com.lisboaworks.algafood.domain.exception.ProductPhotoNotFoundException;
 import com.lisboaworks.algafood.domain.model.ProductPhoto;
 import com.lisboaworks.algafood.domain.repository.ProductRepository;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
-import java.nio.file.Files;
 import java.util.Optional;
 
 @Service
@@ -41,6 +39,7 @@ public class ProductPhotoCatalogService {
 
         NewPhoto newPhoto = NewPhoto.builder()
                 .filename(productPhoto.getFilename())
+                .contentType(productPhoto.getContentType())
                 .inputStream(fileData)
                 .build();
 

@@ -1,7 +1,12 @@
 package com.lisboaworks.algafood.infrastructure.service.storage;
 
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.lisboaworks.algafood.core.storage.StorageProperties;
 import com.lisboaworks.algafood.domain.service.PhotoStorageService;
+import com.lisboaworks.algafood.infrastructure.service.storage.exception.StorageException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +17,7 @@ import java.io.InputStream;
 public class S3PhotoStorageService implements PhotoStorageService {
 
     private final AmazonS3 amazonS3;
+    private final StorageProperties storageProperties;
 
     @Override
     public InputStream get(String filename) {
@@ -20,12 +26,32 @@ public class S3PhotoStorageService implements PhotoStorageService {
 
     @Override
     public void store(NewPhoto newPhoto) {
+        try {
+            String filePath = this.getFilePath(newPhoto.getFilename());
 
+            ObjectMetadata objectMetadata = new ObjectMetadata();
+            objectMetadata.setContentType(newPhoto.getContentType());
+
+            PutObjectRequest putObjectRequest = new PutObjectRequest(
+                    storageProperties.getS3().getBucket(),
+                    filePath,
+                    newPhoto.getInputStream(),
+                    objectMetadata
+            ).withCannedAcl(CannedAccessControlList.PublicRead);
+
+            amazonS3.putObject(putObjectRequest);
+        } catch (Exception e) {
+            throw new StorageException("Unable to store file in Amazon S3", e);
+        }
     }
 
     @Override
     public void remove(String filename) {
 
+    }
+
+    private String getFilePath(String filename) {
+        return String.format("%s/%s", storageProperties.getS3().getPhotosDirectory(), filename);
     }
 
 }
