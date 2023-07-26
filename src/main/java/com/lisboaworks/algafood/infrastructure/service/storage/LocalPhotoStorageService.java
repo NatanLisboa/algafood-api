@@ -1,25 +1,21 @@
 package com.lisboaworks.algafood.infrastructure.service.storage;
 
+import com.lisboaworks.algafood.core.storage.StorageProperties;
 import com.lisboaworks.algafood.domain.service.PhotoStorageService;
 import com.lisboaworks.algafood.infrastructure.service.storage.exception.StorageException;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.FileStore;
 import java.nio.file.Files;
-import java.nio.file.OpenOption;
 import java.nio.file.Path;
-import java.util.stream.Stream;
 
 @Service
-public class PhotoLocalStorageService implements PhotoStorageService {
+@AllArgsConstructor
+public class LocalPhotoStorageService implements PhotoStorageService {
 
-    @Value("${algafood.storage.local.photo-directory}")
-    private Path photosDirectory;
+    private final StorageProperties storageProperties;
 
     @Override
     public InputStream get(String filename) {
@@ -52,7 +48,7 @@ public class PhotoLocalStorageService implements PhotoStorageService {
     }
 
     private Path getFilePath(String filename) {
-        return photosDirectory.resolve(Path.of(filename));
+        return storageProperties.getLocal().getPhotosDirectory().resolve(Path.of(filename));
     }
 
 }
