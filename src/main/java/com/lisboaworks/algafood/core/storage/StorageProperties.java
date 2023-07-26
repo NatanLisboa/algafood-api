@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.core.storage;
 
+import com.amazonaws.regions.Regions;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -31,7 +32,7 @@ public class StorageProperties {
         private String accessKeyId;
         private String secretAccessKey;
         private String bucket;
-        private String region;
+        private Regions region;
         private String photosDirectory;
 
     }
