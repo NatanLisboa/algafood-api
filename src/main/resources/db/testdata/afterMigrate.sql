@@ -78,7 +78,9 @@ insert into user (name, email, password, register_datetime) values
 ('João da Silva', 'joao.man@algafood.com', '123', utc_timestamp),
 ('Maria Joaquina', 'maria.sel@algafood.com', '123', utc_timestamp),
 ('José Souza', 'jose.aux@algafood.com', '123', utc_timestamp),
-('Sebastião Martins', 'sebastiao.reg@algafood.com', '123', utc_timestamp);
+('Sebastião Martins', 'sebastiao.reg@algafood.com', '123', utc_timestamp),
+('Leonardo Narita', 'senhor.war14+leonardo@gmail.com', '123', utc_timestamp),
+('Natan Lisboa', 'senhor.war14+natan@gmail.com', '123', utc_timestamp);
 
 insert into user_user_group(user_id, user_group_id) values (1, 1), (1, 2), (2, 2), (3, 3), (3, 2), (4, 4);
 
@@ -137,3 +139,29 @@ values (6, 5, 1, 2, 19.90, 39.80, 'More spicy, please');
 
 insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
 values (7, 5, 2, 1, 23.90, 23.90, null);
+
+
+insert into `order` (id, code, restaurant_id, customer_id, payment_method_id, address_city_id, address_zip_code,
+                    address_street_name, address_number, address_complement, address_district,
+	                status, creation_datetime, subtotal, shipping_fee, total_value)
+values (6, '0d8f95f5-6d97-41c4-ae24-12a1b00465ce', 1, 5, 1, 1, '38400-111', 'St Acre', '300', 'House number 2', 'Centre',
+        'CREATED', utc_timestamp, 63.70, 10.00, 73.70);
+
+insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
+values (8, 6, 1, 2, 19.90, 39.80, 'More spicy, please');
+
+insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
+values (9, 6, 2, 1, 23.90, 23.90, null);
+
+
+insert into `order` (id, code, restaurant_id, customer_id, payment_method_id, address_city_id, address_zip_code,
+                    address_street_name, address_number, address_complement, address_district,
+	                status, creation_datetime, subtotal, shipping_fee, total_value)
+values (7, '053fe35a-9eb1-4b81-b8d7-092df804fdfa', 1, 6, 1, 1, '38400-111', 'St Acre', '300', 'House number 2', 'Centre',
+        'CREATED', utc_timestamp, 63.70, 10.00, 73.70);
+
+insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
+values (10, 7, 1, 2, 19.90, 39.80, 'More spicy, please');
+
+insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
+values (11, 7, 2, 1, 23.90, 23.90, null);
