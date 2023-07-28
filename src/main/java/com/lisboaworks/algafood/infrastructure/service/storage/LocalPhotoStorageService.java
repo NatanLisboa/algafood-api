@@ -4,18 +4,16 @@ import com.lisboaworks.algafood.core.storage.StorageProperties;
 import com.lisboaworks.algafood.domain.service.PhotoStorageService;
 import com.lisboaworks.algafood.infrastructure.service.storage.exception.StorageException;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
 
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-//@Service
-@AllArgsConstructor
 public class LocalPhotoStorageService implements PhotoStorageService {
 
-    private final StorageProperties storageProperties;
+    @Autowired
+    private StorageProperties storageProperties;
 
     @Override
     public RetrievedPhoto get(String filename) {

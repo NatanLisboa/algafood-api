@@ -9,17 +9,18 @@ import com.lisboaworks.algafood.core.storage.StorageProperties;
 import com.lisboaworks.algafood.domain.service.PhotoStorageService;
 import com.lisboaworks.algafood.infrastructure.service.storage.exception.StorageException;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.InputStream;
 import java.net.URL;
 
-@Service
-@AllArgsConstructor
 public class S3PhotoStorageService implements PhotoStorageService {
 
-    private final AmazonS3 amazonS3;
-    private final StorageProperties storageProperties;
+    @Autowired
+    private AmazonS3 amazonS3;
+
+    @Autowired
+    private StorageProperties storageProperties;
 
     @Override
     public RetrievedPhoto get(String filename) {
