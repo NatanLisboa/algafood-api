@@ -4,6 +4,7 @@ import com.lisboaworks.algafood.core.storage.StorageProperties;
 import com.lisboaworks.algafood.domain.service.PhotoStorageService;
 import com.lisboaworks.algafood.infrastructure.service.storage.exception.StorageException;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.util.FileCopyUtils;
 
 import java.io.InputStream;
@@ -17,10 +18,13 @@ public class LocalPhotoStorageService implements PhotoStorageService {
     private final StorageProperties storageProperties;
 
     @Override
-    public InputStream get(String filename) {
+    public RetrievedPhoto get(String filename) {
         try {
             Path filePath = this.getFilePath(filename);
-            return Files.newInputStream(filePath);
+            RetrievedPhoto retrievedPhoto = RetrievedPhoto.builder()
+                    .inputStream(Files.newInputStream(filePath))
+                    .build();
+            return retrievedPhoto;
         } catch (Exception e) {
             throw new StorageException("Unable to get file", e);
         }

@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.api.controller;
 
+import com.lisboaworks.algafood.domain.service.PhotoStorageService.RetrievedPhoto;
 import com.lisboaworks.algafood.api.assembler.ProductPhotoDTOAssembler;
 import com.lisboaworks.algafood.api.dto.ProductPhotoDTO;
 import com.lisboaworks.algafood.api.dto.input.ProductPhotoInput;
@@ -10,6 +11,7 @@ import com.lisboaworks.algafood.domain.service.PhotoStorageService;
 import com.lisboaworks.algafood.domain.service.ProductPhotoCatalogService;
 import com.lisboaworks.algafood.domain.service.ProductRegisterService;
 import lombok.AllArgsConstructor;
+import org.apache.http.HttpHeaders;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -47,10 +49,17 @@ public class RestaurantProductPhotoController {
             MediaType photoMediaType = MediaType.parseMediaType(productPhoto.getContentType());
             List<MediaType> acceptedMediaTypes = MediaType.parseMediaTypes(acceptHeader);
             this.verifyMediaTypeCompatibility(photoMediaType, acceptedMediaTypes);
-            InputStream inputStream = photoStorageService.get(productPhoto.getFilename());
-            return ResponseEntity.ok()
-                    .contentType(photoMediaType)
-                    .body(new InputStreamResource(inputStream));
+            RetrievedPhoto retrievedPhoto = photoStorageService.get(productPhoto.getFilename());
+            if (retrievedPhoto.hasUrl()) {
+                return ResponseEntity
+                        .status(HttpStatus.FOUND)
+                        .header(HttpHeaders.LOCATION, retrievedPhoto.getUrl())
+                        .build();
+            } else {
+                return ResponseEntity.ok()
+                        .contentType(photoMediaType)
+                        .body(new InputStreamResource(retrievedPhoto.getInputStream()));
+            }
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
