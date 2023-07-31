@@ -20,7 +20,8 @@ public class OrderFlowService {
 
         Message message = Message.builder()
                 .subject(order.getRestaurant().getName() + " - Confirmed order")
-                .body("The order with code <strong>" + order.getCode() + "</strong> was confirmed.")
+                .body("confirmed-order.html")
+                .variable("order", order)
                 .receiver(order.getCustomer().getEmail())
                 .build();
 
