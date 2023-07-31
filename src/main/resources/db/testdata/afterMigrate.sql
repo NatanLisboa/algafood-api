@@ -38,6 +38,7 @@ alter table order_item auto_increment = 1;
 -- Insert testing data
 insert into cuisine (id, name) values (1, 'Thai');
 insert into cuisine (id, name) values (2, 'Indian');
+insert into cuisine (id, name) values (3, 'Brazilian');
 
 insert into state (name) values ('Phuket');
 insert into state (name) values ('Delhi');
@@ -49,11 +50,14 @@ insert into city (name, state_id) values ('New Delhi', 2);
 insert into restaurant (name, shipping_fee, cuisine_id, address_city_id, address_zip_code, address_street_name, address_number, address_district, register_datetime, last_update_datetime, active, open) values ('Thai Gourmet', 10, 1, 1, '38400-999', 'Rua João Pinheiro', '1000', 'Centro', utc_timestamp, utc_timestamp, true, false);
 insert into restaurant (name, shipping_fee, cuisine_id, register_datetime, last_update_datetime, active, open) values ('Indian Fusion Cuisine', 7.00, 2, utc_timestamp, utc_timestamp, true, false);
 insert into restaurant (name, shipping_fee, cuisine_id, register_datetime, last_update_datetime, active, open) values ('Best Indian Cuisine', 8.00, 2, utc_timestamp, utc_timestamp, true, false);
+insert into restaurant (name, shipping_fee, cuisine_id, register_datetime, last_update_datetime, active, open) values ('Restaurante do José Roguedes', 10.00, 3, utc_timestamp, utc_timestamp, true, false);
 
 insert into product (name, description, price, active, restaurant_id) values ('Tom Yum Goong', 'Spicy shrimp soup', 19.90, false, 1);
 insert into product (name, description, price, active, restaurant_id) values ('Tom Kha Gai', 'Chicken in coconut soup', 23.90, true, 1);
 insert into product (name, description, price, active, restaurant_id) values ('Spicy curry cod', 'Fresh cod with curry and Ghost Jolokia pepper', 20.00, true, 2);
 insert into product (name, description, price, active, restaurant_id) values ('Tikka masala chicken', 'Chicken with a rich seasoned sauce', 25.00, true, 3);
+insert into product (name, description, price, active, restaurant_id) values ('Hambúrguer gostosississississississimo', 'Cheeseburger dipped in cheese fondue', 110.00, true, 4);
+insert into product (name, description, price, active, restaurant_id) values ('Coxinha de abóbora', 'Fried cone-shaped dough filled with pumpkin', 15.00, true, 4);
 
 insert into permission (name, description) values ('GET_CUISINES', 'Allow get cuisines');
 insert into permission (name, description) values ('EDIT_CUISINES', 'Allow edit cuisines');
@@ -165,3 +169,22 @@ values (10, 7, 1, 2, 19.90, 39.80, 'More spicy, please');
 
 insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
 values (11, 7, 2, 1, 23.90, 23.90, null);
+
+
+insert into `order` (id, code, restaurant_id, customer_id, payment_method_id, address_city_id, address_zip_code,
+                    address_street_name, address_number, address_complement, address_district,
+	                status, creation_datetime, subtotal, shipping_fee, total_value)
+values (8, '5c9c50b1-f078-43e1-951c-22b6833ce91a', 4, 5, 1, 1, '38400-111', 'St Acre', '300', 'House number 2', 'Centre',
+        'CREATED', utc_timestamp, 330.00, 10.00, 340.00);
+
+insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
+values (12, 8, 5, 3, 110.00, 330.00, null);
+
+insert into `order` (id, code, restaurant_id, customer_id, payment_method_id, address_city_id, address_zip_code,
+                    address_street_name, address_number, address_complement, address_district,
+	                status, creation_datetime, subtotal, shipping_fee, total_value)
+values (9, 'dfd70411-ee92-487a-b41a-88d5de02a002', 4, 5, 1, 1, '38400-111', 'St Acre', '300', 'House number 2', 'Centre',
+        'CREATED', utc_timestamp, 45.00, 10.00, 55.00);
+
+insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
+values (13, 9, 6, 3, 15.00, 45.00, null);

@@ -1747,7 +1747,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/orders/522be832-c93b-4164-a390-e62114e6177d/confirmation",
+							"raw": "api.algafood.local:8080/orders/dfd70411-ee92-487a-b41a-88d5de02a002/confirmation",
 							"host": [
 								"api",
 								"algafood",
@@ -1756,7 +1756,7 @@
 							"port": "8080",
 							"path": [
 								"orders",
-								"522be832-c93b-4164-a390-e62114e6177d",
+								"dfd70411-ee92-487a-b41a-88d5de02a002",
 								"confirmation"
 							]
 						}
