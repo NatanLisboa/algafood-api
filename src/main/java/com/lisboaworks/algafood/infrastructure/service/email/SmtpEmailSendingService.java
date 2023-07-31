@@ -5,7 +5,7 @@ import com.lisboaworks.algafood.domain.service.EmailSendingService;
 import com.lisboaworks.algafood.infrastructure.service.email.exception.EmailException;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -14,12 +14,16 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import javax.mail.internet.MimeMessage;
 
 @Service
-@AllArgsConstructor
 public class SmtpEmailSendingService implements EmailSendingService {
 
-    private final JavaMailSender mailSender;
-    private final EmailProperties emailProperties;
-    private final Configuration freeMarkerConfig;
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Autowired
+    private EmailProperties emailProperties;
+
+    @Autowired
+    private Configuration freeMarkerConfig;
 
     @Override
     public void send(Message message) {
@@ -41,7 +45,7 @@ public class SmtpEmailSendingService implements EmailSendingService {
 
     }
 
-    private String processTemplate(Message message) {
+    public String processTemplate(Message message) {
         try {
             Template template = freeMarkerConfig.getTemplate(message.getBody());
             return FreeMarkerTemplateUtils.processTemplateIntoString(template, message.getVariables());

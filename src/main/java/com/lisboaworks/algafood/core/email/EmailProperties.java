@@ -18,4 +18,11 @@ public class EmailProperties {
     @NotNull
     private String sender;
 
+    @NotNull
+    private EmailSendingServiceImpl impl = EmailSendingServiceImpl.MOCK;
+
+    public enum EmailSendingServiceImpl {
+        MOCK, SMTP;
+    }
+
 }
