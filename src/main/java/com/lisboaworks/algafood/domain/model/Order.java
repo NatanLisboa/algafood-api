@@ -1,9 +1,11 @@
 package com.lisboaworks.algafood.domain.model;
 
+import com.lisboaworks.algafood.domain.event.ConfirmedOrderEvent;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.domain.AbstractAggregateRoot;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -13,9 +15,9 @@ import java.util.UUID;
 
 @Entity
 @Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Table(name = "`order`")
-public class Order {
+public class Order extends AbstractAggregateRoot<Order> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,6 +81,7 @@ public class Order {
     public void confirm() {
         this.setStatus(OrderStatus.CONFIRMED);
         this.setConfirmationDatetime(OffsetDateTime.now());
+        this.registerEvent(new ConfirmedOrderEvent(this));
     }
 
     public void cancel() {

@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.domain.service;
 
+import com.lisboaworks.algafood.domain.repository.OrderRepository;
 import com.lisboaworks.algafood.domain.service.EmailSendingService.Message;
 import com.lisboaworks.algafood.domain.model.Order;
 import lombok.AllArgsConstructor;
@@ -11,21 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderFlowService {
 
     private final OrderIssuanceService orderIssuanceService;
-    private final EmailSendingService emailSendingService;
+    private final OrderRepository orderRepository;
 
     @Transactional
     public void confirm(String orderCode) {
         Order order = orderIssuanceService.findOrThrowException(orderCode);
         order.confirm();
-
-        Message message = Message.builder()
-                .subject(order.getRestaurant().getName() + " - Confirmed order")
-                .body("confirmed-order.html")
-                .variable("order", order)
-                .receiver(order.getCustomer().getEmail())
-                .build();
-
-        emailSendingService.send(message);
+        
+        orderRepository.save(order);
     }
 
     @Transactional
