@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.domain.model;
 
+import com.lisboaworks.algafood.domain.event.CancelledOrderEvent;
 import com.lisboaworks.algafood.domain.event.ConfirmedOrderEvent;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import lombok.Data;
@@ -87,6 +88,7 @@ public class Order extends AbstractAggregateRoot<Order> {
     public void cancel() {
         this.setStatus(OrderStatus.CANCELLED);
         this.setCancellationDatetime(OffsetDateTime.now());
+        this.registerEvent(new CancelledOrderEvent(this));
     }
 
     public void deliver() {

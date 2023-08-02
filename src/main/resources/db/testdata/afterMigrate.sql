@@ -95,7 +95,7 @@ insert into `order` (id, code, restaurant_id, customer_id, payment_method_id, ad
                     address_street_name, address_number, address_complement, address_district,
 	                status, creation_datetime, delivery_datetime, subtotal, shipping_fee, total_value)
 values (1, '522be832-c93b-4164-a390-e62114e6177d', 1, 1, 1, 1, '38400-000', 'Rua Floriano Peixoto', '500', 'Apto 801', 'Brazil',
-        'DELIVERED', str_to_date('2023-07-08 13:00:00', '%Y-%c-%e %T'), str_to_date('2023-07-10 15:00:00', '%Y-%c-%e %T'), 63.70, 10.00, 73.70);
+        'CREATED', str_to_date('2023-07-08 13:00:00', '%Y-%c-%e %T'), str_to_date('2023-07-10 15:00:00', '%Y-%c-%e %T'), 63.70, 10.00, 73.70);
 
 insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
 values (1, 1, 1, 2, 19.90, 39.80, 'Less spicy, please');

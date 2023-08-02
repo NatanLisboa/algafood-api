@@ -18,7 +18,7 @@ public class OrderFlowService {
     public void confirm(String orderCode) {
         Order order = orderIssuanceService.findOrThrowException(orderCode);
         order.confirm();
-        
+
         orderRepository.save(order);
     }
 
@@ -26,6 +26,8 @@ public class OrderFlowService {
     public void cancel(String orderCode) {
         Order order = orderIssuanceService.findOrThrowException(orderCode);
         order.cancel();
+
+        orderRepository.save(order);
     }
 
     @Transactional
