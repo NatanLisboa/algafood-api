@@ -7,6 +7,7 @@ import com.lisboaworks.algafood.domain.service.EmailSendingService.Message;
 import lombok.AllArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 @Component
 @AllArgsConstructor
@@ -14,7 +15,7 @@ public class ConfirmedOrderCustomerNotificationListener {
 
     private final EmailSendingService emailSendingService;
 
-    @EventListener
+    @TransactionalEventListener
     public void whenConfirmingOrder(ConfirmedOrderEvent event) {
         Order order = event.getOrder();
 
