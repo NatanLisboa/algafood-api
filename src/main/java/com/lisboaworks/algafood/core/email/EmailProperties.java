@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.core.email;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -21,8 +22,18 @@ public class EmailProperties {
     @NotNull
     private EmailSendingServiceImpl impl = EmailSendingServiceImpl.MOCK;
 
+    private Sandbox sandbox = new Sandbox();
+
+    @Getter
+    @Setter
+    public class Sandbox {
+
+        private String receiver;
+
+    }
+
     public enum EmailSendingServiceImpl {
-        MOCK, SMTP;
+        MOCK, SANDBOX, SMTP
     }
 
 }
