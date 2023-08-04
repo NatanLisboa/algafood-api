@@ -1,23 +1,29 @@
-function getRestaurants() {
+function getPaymentMethods() {
   $.ajax({
-    url: "http://api.algafood.local:8080/restaurants",
+    url: "http://api.algafood.local:8080/payment-methods",
     type: "get",
 
     success: function(response) {
-      $("#content").text(JSON.stringify(response));
+      fillTable(response);
     }
   });
 }
 
-function closeRestaurant() {
-  $.ajax({
-    url: "http://api.algafood.local:8080/restaurants/1/closure",
-    type: "put",
 
-    success: function(response) {
-      alert("The restaurant was closed!")
-    }
+function fillTable(paymentMethods) {
+  $("#table tbody tr").remove();
+
+  $.each(paymentMethods, function(i, paymentMethod) {
+    var row = $("<tr>");
+
+    row.append(
+      $("<td>").text(paymentMethod.id),
+      $("<td>").text(paymentMethod.description)
+    );
+
+    row.appendTo("#table");
   });
 }
 
-$("#button").click(getRestaurants);
+
+$("#btn-get").click(getPaymentMethods);
