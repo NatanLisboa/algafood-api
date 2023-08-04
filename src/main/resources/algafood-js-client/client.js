@@ -4,7 +4,7 @@ function getRestaurants() {
     type: "get",
 
     success: function(response) {
-      $("#content").text(response);
+      $("#content").text(JSON.stringify(response));
     }
   });
 }

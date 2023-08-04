@@ -14,7 +14,9 @@ import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -32,15 +34,19 @@ public class RestaurantController {
 
     @GetMapping
     @JsonView(RestaurantView.Summary.class)
-    public List<RestaurantDTO> findAll() {
-        return restaurantDTOAssembler.toDTOList(restaurantRepository.findAll());
+    public ResponseEntity<List<RestaurantDTO>> findAll() {
+        List<RestaurantDTO> restaurantDTOList = restaurantDTOAssembler.toDTOList(restaurantRepository.findAll());
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*")
+                .body(restaurantDTOList);
     }
 
-    @GetMapping(params = "projection=only-name")
-    @JsonView(RestaurantView.OnlyName.class)
-    public List<RestaurantDTO> findAllOnlyWithName() {
-        return this.findAll();
-    }
+//    @GetMapping(params = "projection=only-name")
+//    @JsonView(RestaurantView.OnlyName.class)
+//    public List<RestaurantDTO> findAllOnlyWithName() {
+//        return this.findAll();
+//    }
 
     @GetMapping("/{restaurantId}")
     public RestaurantDTO findById(@PathVariable Long restaurantId) {
