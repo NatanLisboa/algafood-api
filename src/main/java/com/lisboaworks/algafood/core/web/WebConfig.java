@@ -10,9 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedMethods("*"); //default: Simple request methods (GET, HEAD, POST)
-                //.allowedOrigins("*") //default: All origins (*)
-                //.maxAge(30);  //Preflight request cache life (default: 1800 seconds)
+                .allowedMethods("*");
     }
 
 }
