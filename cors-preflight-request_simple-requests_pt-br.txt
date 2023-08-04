@@ -1,0 +1,10 @@
+Os navegadores que suportam CORS podem fazer uma requisição com o verbo
+'OPTIONS' no endpoint da API antes de fazer a requisição solicitada justamente
+para verificar se o Cross Origin está disponível do lado do servidor para o recurso que está sendo requisitado.
+Tal requisição é denominada "preflight request".
+Entretanto, os navegadores só fazem tal requisição se a requisição original NÃO for uma "requisição simples".
+
+Para uma requisição ser considerada como uma "requisição simples" pelos navegadores, ela deve satisfazer TODAS
+as condições presentes no link abaixo:
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Simple_requests

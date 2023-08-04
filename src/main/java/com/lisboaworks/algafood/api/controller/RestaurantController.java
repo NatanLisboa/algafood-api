@@ -22,7 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/restaurants")
-@CrossOrigin
+@CrossOrigin(maxAge = 10)
 @AllArgsConstructor
 public class RestaurantController {
 
