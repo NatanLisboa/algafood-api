@@ -3,12 +3,12 @@ package com.lisboaworks.algafood.api.dto.input;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
 public class PaymentMethodInput {
-    @NotNull
+    @NotBlank
     private String description;
 
 }
