@@ -76,7 +76,7 @@ insert into payment_method (description) values ('Credit card');
 insert into payment_method (description) values ('Debit card');
 insert into payment_method (description) values ('Cash');
 
-insert into restaurant_payment_method (restaurant_id, payment_method_id) values (1, 1), (1, 2), (1, 3), (2, 2), (2, 3), (3, 1), (3, 2), (3, 3);
+insert into restaurant_payment_method (restaurant_id, payment_method_id) values (1, 1), (1, 2), (2, 2), (3, 1), (3, 2);
 
 insert into user (name, email, password, register_datetime) values
 ('João da Silva', 'joao.man@algafood.com', '123', utc_timestamp),
@@ -126,7 +126,7 @@ values (4, 3, 3, 5, 20.00, 100.00, 'More spicy, please');
 insert into `order` (id, code, restaurant_id, customer_id, payment_method_id, address_city_id, address_zip_code,
                     address_street_name, address_number, address_complement, address_district,
 	                status, creation_datetime, subtotal, shipping_fee, total_value)
-values (4, '0ee1fe06-d7ba-419f-980b-0e0030ea4f84', 3, 4, 3, 2, '38400-111', 'St Acre', '300', 'House number 2', 'Centre',
+values (4, '0ee1fe06-d7ba-419f-980b-0e0030ea4f84', 3, 4, 2, 2, '38400-111', 'St Acre', '300', 'House number 2', 'Centre',
         'CREATED', str_to_date('2023-07-08 11:00:00', '%Y-%c-%e %T'), 25.00, 8.00, 33.00);
 
 insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
