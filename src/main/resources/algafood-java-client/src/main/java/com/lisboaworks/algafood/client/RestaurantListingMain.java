@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Objects;
 
-public class AlgafoodClientMain {
+public class RestaurantListingMain {
 
     public static void main(String[] args) {
         try {

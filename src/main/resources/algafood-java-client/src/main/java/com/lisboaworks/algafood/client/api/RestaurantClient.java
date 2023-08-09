@@ -2,6 +2,7 @@ package com.lisboaworks.algafood.client.api;
 
 import com.lisboaworks.algafood.client.api.exception.ClientApiException;
 import com.lisboaworks.algafood.client.dto.RestaurantSummaryDTO;
+import com.lisboaworks.algafood.client.input.RestaurantInput;
 import lombok.AllArgsConstructor;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
@@ -24,6 +25,16 @@ public class RestaurantClient {
 
             assert restaurants != null;
             return Arrays.asList(restaurants);
+        } catch (RestClientResponseException e) {
+            throw new ClientApiException(e.getMessage(), e);
+        }
+    }
+
+    public RestaurantDTO addRestaurant(RestaurantInput restaurantInput) {
+        String resourceUri = url + RESOURCE_PATH;
+
+        try {
+            return restTemplate.postForObject(resourceUri, restaurantInput, RestaurantDTO.class);
         } catch (RestClientResponseException e) {
             throw new ClientApiException(e.getMessage(), e);
         }
