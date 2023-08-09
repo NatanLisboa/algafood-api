@@ -40,9 +40,11 @@ public class PaymentMethodController {
     @GetMapping("/{paymentMethodId}")
     public ResponseEntity<PaymentMethodDTO> findById(@PathVariable Long paymentMethodId) {
         PaymentMethod paymentMethod = paymentMethodRegisterService.findOrThrowException(paymentMethodId);
+        PaymentMethodDTO paymentMethodDTO = paymentMethodDTOAssembler.toDTO(paymentMethod);
+
         return ResponseEntity.ok()
                 .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
-                .body(paymentMethodDTOAssembler.toDTO(paymentMethod));
+                .body(paymentMethodDTO);
     }
 
     @PostMapping
