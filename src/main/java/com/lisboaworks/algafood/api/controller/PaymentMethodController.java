@@ -8,11 +8,14 @@ import com.lisboaworks.algafood.domain.model.PaymentMethod;
 import com.lisboaworks.algafood.domain.repository.PaymentMethodRepository;
 import com.lisboaworks.algafood.domain.service.PaymentMethodRegisterService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/payment-methods")
@@ -25,8 +28,13 @@ public class PaymentMethodController {
     private final PaymentMethodInputDisassembler paymentMethodInputDisassembler;
 
     @GetMapping
-    public List<PaymentMethodDTO> findAll() {
-        return paymentMethodDTOAssembler.toDTOList(paymentMethodRepository.findAll());
+    public ResponseEntity<List<PaymentMethodDTO>> findAll() {
+        List<PaymentMethod> paymentMethods = paymentMethodRepository.findAll();
+        List<PaymentMethodDTO> paymentMethodsDTO = paymentMethodDTOAssembler.toDTOList(paymentMethods);
+
+        return ResponseEntity.ok()
+                .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
+                .body(paymentMethodsDTO);
     }
 
     @GetMapping("/{paymentMethodId}")
