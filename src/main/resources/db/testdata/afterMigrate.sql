@@ -74,9 +74,9 @@ insert into user_group_permission(user_group_id, permission_id) values (1, 2);
 insert into user_group_permission(user_group_id, permission_id) values (2, 1);
 insert into user_group_permission(user_group_id, permission_id) values (3, 2);
 
-insert into payment_method (description) values ('Credit card');
-insert into payment_method (description) values ('Debit card');
-insert into payment_method (description) values ('Cash');
+insert into payment_method (description, last_update_datetime) values ('Credit card', utc_timestamp);
+insert into payment_method (description, last_update_datetime) values ('Debit card', utc_timestamp);
+insert into payment_method (description, last_update_datetime) values ('Cash', utc_timestamp);
 
 insert into restaurant_payment_method (restaurant_id, payment_method_id) values (1, 1), (1, 2), (2, 2), (3, 1), (3, 2);
 

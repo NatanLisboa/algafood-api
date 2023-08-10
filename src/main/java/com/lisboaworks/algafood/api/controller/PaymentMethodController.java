@@ -33,11 +33,7 @@ public class PaymentMethodController {
         List<PaymentMethodDTO> paymentMethodsDTO = paymentMethodDTOAssembler.toDTOList(paymentMethods);
 
         return ResponseEntity.ok()
-//                .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS)) // public
                 .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS).cachePublic()) //default - Allow cache in all instances (local and proxies)
-//                .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS).cachePrivate()) // Deny caching in intermediate proxies (only allows in local cache)
-//                .cacheControl(CacheControl.noCache()) // Every request to a cacheable resource always hits the server to make a response validation
-//                .cacheControl(CacheControl.noStore()) // Turns the response non-cacheable
                 .body(paymentMethodsDTO);
     }
 
