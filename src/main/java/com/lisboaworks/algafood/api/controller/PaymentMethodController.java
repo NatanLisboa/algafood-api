@@ -54,12 +54,24 @@ public class PaymentMethodController {
     }
 
     @GetMapping("/{paymentMethodId}")
-    public ResponseEntity<PaymentMethodDTO> findById(@PathVariable Long paymentMethodId) {
+    public ResponseEntity<PaymentMethodDTO> findById(@PathVariable Long paymentMethodId, ServletWebRequest request) {
+        ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
+
+        String eTag = "0";
+        OffsetDateTime lastUpdateDateTime = paymentMethodRepository.getLastUpdateDatetime();
+        if (Objects.nonNull(lastUpdateDateTime)) {
+            eTag = String.valueOf(lastUpdateDateTime.toEpochSecond());
+        }
+        if (request.checkNotModified(eTag)) {
+            return null;
+        }
+
         PaymentMethod paymentMethod = paymentMethodRegisterService.findOrThrowException(paymentMethodId);
         PaymentMethodDTO paymentMethodDTO = paymentMethodDTOAssembler.toDTO(paymentMethod);
 
         return ResponseEntity.ok()
                 .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
+                .eTag(eTag)
                 .body(paymentMethodDTO);
     }
 
