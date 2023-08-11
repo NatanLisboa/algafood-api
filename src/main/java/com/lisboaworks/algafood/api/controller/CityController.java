@@ -12,6 +12,7 @@ import com.lisboaworks.algafood.domain.repository.CityRepository;
 import com.lisboaworks.algafood.domain.service.CityRegisterService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,8 @@ public class CityController {
 
     @GetMapping("/{cityId}")
     @ApiOperation("Get a city by its id")
-    public CityDTO findById(@PathVariable Long cityId) {
+    public CityDTO findById(@ApiParam(value = "Id from a city", example = "1")
+                            @PathVariable Long cityId) {
         City city = cityRegisterService.findOrThrowException(cityId);
         return cityDTOAssembler.toDTO(city);
     }
@@ -46,7 +48,8 @@ public class CityController {
     @PostMapping
     @ApiOperation("Register a new city")
     @ResponseStatus(HttpStatus.CREATED)
-    public CityDTO add(@RequestBody @Valid CityInput cityInput) {
+    public CityDTO add(@ApiParam(name = "body", value = "New city representation")
+                       @RequestBody @Valid CityInput cityInput) {
         try {
         	City city = cityInputDisassembler.toDomainObject(cityInput);
             return cityDTOAssembler.toDTO(cityRegisterService.save(city));
@@ -57,8 +60,11 @@ public class CityController {
 
     @PutMapping("/{cityId}")
     @ApiOperation("Update an existing city")
-    public CityDTO update(@PathVariable Long cityId,
-                       @RequestBody @Valid CityInput newCityInput) {
+    public CityDTO update(@ApiParam(value = "Id from a city", example = "1")
+                          @PathVariable Long cityId,
+
+                          @ApiParam(name = "body", value = "City representation with new data")
+                          @RequestBody @Valid CityInput newCityInput) {
         try {
             City city = cityRegisterService.findOrThrowException(cityId);
             cityInputDisassembler.copyToDomainObject(newCityInput, city);
@@ -72,7 +78,8 @@ public class CityController {
     @DeleteMapping("/{cityId}")
     @ApiOperation("Delete a city by its id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long cityId) {
+    public void delete(@ApiParam(value = "Id from a city", example = "1")
+                       @PathVariable Long cityId) {
         cityRegisterService.delete(cityId);
     }
 
