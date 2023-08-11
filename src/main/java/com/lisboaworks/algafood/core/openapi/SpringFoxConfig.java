@@ -7,6 +7,7 @@ import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
+import springfox.documentation.service.Tag;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
@@ -23,7 +24,8 @@ public class SpringFoxConfig {
                     .paths(PathSelectors.any())
 //                  .paths(PathSelectors.ant("/restaurants/*"))
                 .build()
-                .apiInfo(this.apiInfo());
+                .apiInfo(this.apiInfo())
+                .tags(new Tag("Cities", "Manage the cities"));
     }
 
     public ApiInfo apiInfo() {

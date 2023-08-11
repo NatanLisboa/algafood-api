@@ -10,6 +10,7 @@ import com.lisboaworks.algafood.domain.exception.StateNotFoundException;
 import com.lisboaworks.algafood.domain.model.City;
 import com.lisboaworks.algafood.domain.repository.CityRepository;
 import com.lisboaworks.algafood.domain.service.CityRegisterService;
+import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/cities")
+@Api(tags = "Cities")
 @AllArgsConstructor
 public class CityController {
 
