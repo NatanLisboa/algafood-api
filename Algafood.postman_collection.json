@@ -1983,6 +1983,32 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "OpenAPI",
+			"item": [
+				{
+					"name": "Get API definition",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.algafood.local:8080/v2/api-docs",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"v2",
+								"api-docs"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
