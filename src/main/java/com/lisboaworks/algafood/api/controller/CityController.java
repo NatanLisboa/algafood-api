@@ -11,6 +11,7 @@ import com.lisboaworks.algafood.domain.model.City;
 import com.lisboaworks.algafood.domain.repository.CityRepository;
 import com.lisboaworks.algafood.domain.service.CityRegisterService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,17 +31,20 @@ public class CityController {
     private final CityInputDisassembler cityInputDisassembler;
     
     @GetMapping
+    @ApiOperation("Get all registered cities")
     public List<CityDTO> findAll() {
         return cityDTOAssembler.toDTOList(cityRepository.findAll());
     }
 
     @GetMapping("/{cityId}")
+    @ApiOperation("Get a city by its id")
     public CityDTO findById(@PathVariable Long cityId) {
         City city = cityRegisterService.findOrThrowException(cityId);
         return cityDTOAssembler.toDTO(city);
     }
 
     @PostMapping
+    @ApiOperation("Register a new city")
     @ResponseStatus(HttpStatus.CREATED)
     public CityDTO add(@RequestBody @Valid CityInput cityInput) {
         try {
@@ -51,8 +55,8 @@ public class CityController {
         }
     }
 
-
     @PutMapping("/{cityId}")
+    @ApiOperation("Update an existing city")
     public CityDTO update(@PathVariable Long cityId,
                        @RequestBody @Valid CityInput newCityInput) {
         try {
@@ -66,9 +70,11 @@ public class CityController {
     }
 
     @DeleteMapping("/{cityId}")
+    @ApiOperation("Delete a city by its id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long cityId) {
         cityRegisterService.delete(cityId);
     }
+
 
 }
