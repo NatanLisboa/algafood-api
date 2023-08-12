@@ -32,8 +32,66 @@ public class SpringFoxConfig {
                 .build()
                 .useDefaultResponseMessages(false)
                 .globalResponses(HttpMethod.GET, this.globalGetResponseMessages())
+                .globalResponses(HttpMethod.POST, this.globalPostResponseMessages())
+                .globalResponses(HttpMethod.PUT, this.globalPutResponseMessages())
+                .globalResponses(HttpMethod.DELETE, this.globalDeleteResponseMessages())
                 .apiInfo(this.apiInfo())
                 .tags(new Tag("Cities", "Manage the cities"));
+    }
+
+    private List<Response> globalDeleteResponseMessages() {
+        return Arrays.asList(
+                new ResponseBuilder()
+                        .code(String.valueOf(HttpStatus.BAD_REQUEST))
+                        .description("Bad request (client error)")
+                        .build(),
+                new ResponseBuilder()
+                        .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR))
+                        .description("Internal server error")
+                        .build()
+        );
+    }
+
+    private List<Response> globalPutResponseMessages() {
+        return Arrays.asList(
+                new ResponseBuilder()
+                        .code(String.valueOf(HttpStatus.BAD_REQUEST))
+                        .description("Bad request (client error)")
+                        .build(),
+                new ResponseBuilder()
+                        .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR))
+                        .description("Internal server error")
+                        .build(),
+                new ResponseBuilder()
+                        .code(String.valueOf(HttpStatus.NOT_ACCEPTABLE))
+                        .description("Resource has no representation that can be accepted by the consumer")
+                        .build(),
+                new ResponseBuilder()
+                        .code(String.valueOf(HttpStatus.UNSUPPORTED_MEDIA_TYPE))
+                        .description("Request denied because the body is in an unsupported format")
+                        .build()
+        );
+    }
+
+    private List<Response> globalPostResponseMessages() {
+        return Arrays.asList(
+                new ResponseBuilder()
+                        .code(String.valueOf(HttpStatus.BAD_REQUEST))
+                        .description("Bad request (client error)")
+                        .build(),
+                new ResponseBuilder()
+                        .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR))
+                        .description("Internal server error")
+                        .build(),
+                new ResponseBuilder()
+                        .code(String.valueOf(HttpStatus.NOT_ACCEPTABLE))
+                        .description("Resource has no representation that can be accepted by the consumer")
+                        .build(),
+                new ResponseBuilder()
+                        .code(String.valueOf(HttpStatus.UNSUPPORTED_MEDIA_TYPE))
+                        .description("Request denied because the body is in an unsupported format")
+                        .build()
+        );
     }
 
     private List<Response> globalGetResponseMessages() {
