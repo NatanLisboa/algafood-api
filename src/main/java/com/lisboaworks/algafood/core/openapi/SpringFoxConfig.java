@@ -2,15 +2,22 @@ package com.lisboaworks.algafood.core.openapi;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.ResponseBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
+import springfox.documentation.service.Response;
 import springfox.documentation.service.Tag;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableSwagger2
@@ -22,10 +29,24 @@ public class SpringFoxConfig {
                 .select()
                     .apis(RequestHandlerSelectors.basePackage("com.lisboaworks.algafood.api"))
                     .paths(PathSelectors.any())
-//                  .paths(PathSelectors.ant("/restaurants/*"))
                 .build()
+                .useDefaultResponseMessages(false)
+                .globalResponses(HttpMethod.GET, this.globalGetResponseMessages())
                 .apiInfo(this.apiInfo())
                 .tags(new Tag("Cities", "Manage the cities"));
+    }
+
+    private List<Response> globalGetResponseMessages() {
+        return Arrays.asList(
+                new ResponseBuilder()
+                        .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR))
+                        .description("Internal server error")
+                        .build(),
+                new ResponseBuilder()
+                        .code(String.valueOf(HttpStatus.NOT_ACCEPTABLE))
+                        .description("Resource has no representation that can be accepted by the consumer")
+                        .build()
+        );
     }
 
     public ApiInfo apiInfo() {
