@@ -2,8 +2,10 @@ package com.lisboaworks.algafood.core.openapi;
 
 import com.fasterxml.classmate.TypeResolver;
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
+import com.lisboaworks.algafood.core.openapi.dto.PageableDTOOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -40,6 +42,7 @@ public class SpringFoxConfig {
                 .globalResponses(HttpMethod.PUT, this.globalPostPutResponseMessages())
                 .globalResponses(HttpMethod.DELETE, this.globalDeleteResponseMessages())
                 .additionalModels(typeResolver.resolve(ApiException.class))
+                .directModelSubstitute(Pageable.class, PageableDTOOpenApi.class)
                 .apiInfo(this.apiInfo())
                 .tags(new Tag("Cities", "Manage the cities"))
                 .tags(new Tag("User groups", "Manage the user groups"));
