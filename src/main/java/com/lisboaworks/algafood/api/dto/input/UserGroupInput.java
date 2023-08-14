@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.api.dto.input;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class UserGroupInput {
 
+    @ApiModelProperty(example = "Manager")
     @NotBlank
     private String name;
 
