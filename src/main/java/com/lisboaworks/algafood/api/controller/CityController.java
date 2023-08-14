@@ -13,13 +13,14 @@ import com.lisboaworks.algafood.domain.repository.CityRepository;
 import com.lisboaworks.algafood.domain.service.CityRegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cities")
+@RequestMapping(path = "/cities", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class CityController implements CityControllerOpenApi {
 

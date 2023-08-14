@@ -10,13 +10,14 @@ import com.lisboaworks.algafood.domain.repository.UserGroupRepository;
 import com.lisboaworks.algafood.domain.service.UserGroupRegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user-groups")
+@RequestMapping(path = "/user-groups", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class UserGroupController implements UserGroupControllerOpenApi {
 
