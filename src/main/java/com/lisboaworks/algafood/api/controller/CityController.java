@@ -5,6 +5,7 @@ import com.lisboaworks.algafood.api.assembler.CityDTOAssembler;
 import com.lisboaworks.algafood.api.assembler.CityInputDisassembler;
 import com.lisboaworks.algafood.api.dto.CityDTO;
 import com.lisboaworks.algafood.api.dto.input.CityInput;
+import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.StateNotFoundException;
 import com.lisboaworks.algafood.domain.model.City;
@@ -13,6 +14,10 @@ import com.lisboaworks.algafood.domain.service.CityRegisterService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +43,12 @@ public class CityController {
     }
 
     @GetMapping("/{cityId}")
+    @ApiResponses({
+            @ApiResponse(responseCode = "400", description = "Invalid city id",
+                    content = @Content(schema = @Schema(implementation = ApiException.class))),
+            @ApiResponse(responseCode = "404", description = "City not found",
+                    content = @Content(schema = @Schema(implementation = ApiException.class)))
+    })
     @ApiOperation("Get a city by its id")
     public CityDTO findById(@ApiParam(value = "Id from a city", example = "1")
                             @PathVariable Long cityId) {
@@ -47,6 +58,9 @@ public class CityController {
 
     @PostMapping
     @ApiOperation("Register a new city")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Registered city")
+    })
     @ResponseStatus(HttpStatus.CREATED)
     public CityDTO add(@ApiParam(name = "body", value = "New city representation")
                        @RequestBody @Valid CityInput cityInput) {
@@ -59,6 +73,10 @@ public class CityController {
     }
 
     @PutMapping("/{cityId}")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Updated city"),
+            @ApiResponse(responseCode = "404", description = "City not found", content = @Content(schema = @Schema(implementation = ApiException.class)))
+    })
     @ApiOperation("Update an existing city")
     public CityDTO update(@ApiParam(value = "Id from a city", example = "1")
                           @PathVariable Long cityId,
@@ -76,6 +94,11 @@ public class CityController {
     }
 
     @DeleteMapping("/{cityId}")
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "City deleted successfully"),
+            @ApiResponse(responseCode = "404", description = "City not found",
+                    content = @Content(schema = @Schema(implementation = ApiException.class)))
+    })
     @ApiOperation("Delete a city by its id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@ApiParam(value = "Id from a city", example = "1")
