@@ -1,5 +1,7 @@
 package com.lisboaworks.algafood.core.openapi;
 
+import com.fasterxml.classmate.TypeResolver;
+import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -25,6 +27,9 @@ public class SpringFoxConfig {
 
     @Bean
     public Docket apiDocket() {
+        TypeResolver typeResolver = new TypeResolver();
+
+
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                     .apis(RequestHandlerSelectors.basePackage("com.lisboaworks.algafood.api"))
@@ -35,6 +40,7 @@ public class SpringFoxConfig {
                 .globalResponses(HttpMethod.POST, this.globalPostResponseMessages())
                 .globalResponses(HttpMethod.PUT, this.globalPutResponseMessages())
                 .globalResponses(HttpMethod.DELETE, this.globalDeleteResponseMessages())
+                .additionalModels(typeResolver.resolve(ApiException.class))
                 .apiInfo(this.apiInfo())
                 .tags(new Tag("Cities", "Manage the cities"));
     }
