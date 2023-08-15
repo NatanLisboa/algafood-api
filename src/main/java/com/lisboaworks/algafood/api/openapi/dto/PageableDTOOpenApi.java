@@ -1,4 +1,4 @@
-package com.lisboaworks.algafood.core.openapi.dto;
+package com.lisboaworks.algafood.api.openapi.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

@@ -1,15 +1,19 @@
 package com.lisboaworks.algafood.core.openapi;
 
 import com.fasterxml.classmate.TypeResolver;
+import com.lisboaworks.algafood.api.dto.CuisineDTO;
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
-import com.lisboaworks.algafood.core.openapi.dto.PageableDTOOpenApi;
+import com.lisboaworks.algafood.api.openapi.dto.CuisinesDTOOpenApi;
+import com.lisboaworks.algafood.api.openapi.dto.PageableDTOOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import springfox.documentation.builders.*;
+import springfox.documentation.schema.AlternateTypeRules;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.Response;
@@ -43,6 +47,10 @@ public class SpringFoxConfig {
                 .globalResponses(HttpMethod.DELETE, this.globalDeleteResponseMessages())
                 .additionalModels(typeResolver.resolve(ApiException.class))
                 .directModelSubstitute(Pageable.class, PageableDTOOpenApi.class)
+                .alternateTypeRules(AlternateTypeRules.newRule(
+                        typeResolver.resolve(Page.class, CuisineDTO.class),
+                        CuisinesDTOOpenApi.class)
+                )
                 .apiInfo(this.apiInfo())
                 .tags(new Tag("Cities", "Manage the cities"))
                 .tags(new Tag("User groups", "Manage the user groups"));

@@ -1,4 +1,4 @@
-package com.lisboaworks.algafood.api.controller.openapi;
+package com.lisboaworks.algafood.api.openapi.controller;
 
 import com.lisboaworks.algafood.api.dto.UserGroupDTO;
 import com.lisboaworks.algafood.api.dto.input.UserGroupInput;

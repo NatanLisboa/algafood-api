@@ -2,7 +2,7 @@ package com.lisboaworks.algafood.api.controller;
 
 import com.lisboaworks.algafood.api.assembler.UserGroupDTOAssembler;
 import com.lisboaworks.algafood.api.assembler.UserGroupInputDisassembler;
-import com.lisboaworks.algafood.api.controller.openapi.UserGroupControllerOpenApi;
+import com.lisboaworks.algafood.api.openapi.controller.UserGroupControllerOpenApi;
 import com.lisboaworks.algafood.api.dto.UserGroupDTO;
 import com.lisboaworks.algafood.api.dto.input.UserGroupInput;
 import com.lisboaworks.algafood.domain.model.UserGroup;

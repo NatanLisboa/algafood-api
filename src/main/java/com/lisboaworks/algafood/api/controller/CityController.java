@@ -3,7 +3,7 @@ package com.lisboaworks.algafood.api.controller;
 
 import com.lisboaworks.algafood.api.assembler.CityDTOAssembler;
 import com.lisboaworks.algafood.api.assembler.CityInputDisassembler;
-import com.lisboaworks.algafood.api.controller.openapi.CityControllerOpenApi;
+import com.lisboaworks.algafood.api.openapi.controller.CityControllerOpenApi;
 import com.lisboaworks.algafood.api.dto.CityDTO;
 import com.lisboaworks.algafood.api.dto.input.CityInput;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
