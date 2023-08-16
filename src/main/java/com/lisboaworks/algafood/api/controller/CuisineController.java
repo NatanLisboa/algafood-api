@@ -4,6 +4,7 @@ import com.lisboaworks.algafood.api.assembler.CuisineDTOAssembler;
 import com.lisboaworks.algafood.api.assembler.CuisineInputDisassembler;
 import com.lisboaworks.algafood.api.dto.CuisineDTO;
 import com.lisboaworks.algafood.api.dto.input.CuisineInput;
+import com.lisboaworks.algafood.api.openapi.controller.CuisineControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import com.lisboaworks.algafood.domain.service.CuisineRegisterService;
@@ -13,15 +14,16 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cuisines")
+@RequestMapping(value = "/cuisines", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
-public class CuisineController {
+public class CuisineController implements CuisineControllerOpenApi {
 
     private final CuisineRepository cuisineRepository;
     private final CuisineRegisterService cuisineRegisterService;

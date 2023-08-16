@@ -53,7 +53,8 @@ public class SpringFoxConfig {
                 )
                 .apiInfo(this.apiInfo())
                 .tags(new Tag("Cities", "Manage the cities"))
-                .tags(new Tag("User groups", "Manage the user groups"));
+                .tags(new Tag("User groups", "Manage the user groups"))
+                .tags(new Tag("Cuisines", "Manage the cuisines"));
     }
 
     public ApiInfo apiInfo() {
@@ -112,10 +113,14 @@ public class SpringFoxConfig {
                 new ResponseBuilder()
                         .code(String.valueOf(HttpStatus.BAD_REQUEST))
                         .description("Bad request (client error)")
+                        .representation(MediaType.APPLICATION_JSON)
+                        .apply(this.apiExceptionBuilder())
                         .build(),
                 new ResponseBuilder()
                         .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR))
                         .description("Internal server error")
+                        .representation(MediaType.APPLICATION_JSON)
+                        .apply(this.apiExceptionBuilder())
                         .build()
         );
     }
