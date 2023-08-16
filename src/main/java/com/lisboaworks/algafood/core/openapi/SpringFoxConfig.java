@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.web.context.request.ServletWebRequest;
 import springfox.documentation.builders.*;
 import springfox.documentation.schema.AlternateTypeRules;
 import springfox.documentation.service.ApiInfo;
@@ -46,6 +47,7 @@ public class SpringFoxConfig {
                 .globalResponses(HttpMethod.PUT, this.globalPostPutResponseMessages())
                 .globalResponses(HttpMethod.DELETE, this.globalDeleteResponseMessages())
                 .additionalModels(typeResolver.resolve(ApiException.class))
+                .ignoredParameterTypes(ServletWebRequest.class)
                 .directModelSubstitute(Pageable.class, PageableDTOOpenApi.class)
                 .alternateTypeRules(AlternateTypeRules.newRule(
                         typeResolver.resolve(Page.class, CuisineDTO.class),
