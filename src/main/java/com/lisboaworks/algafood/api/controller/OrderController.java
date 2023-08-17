@@ -14,6 +14,8 @@ import com.lisboaworks.algafood.domain.repository.OrderRepository;
 import com.lisboaworks.algafood.domain.filter.OrderFilter;
 import com.lisboaworks.algafood.domain.service.OrderIssuanceService;
 import com.lisboaworks.algafood.infrastructure.repository.spec.OrderSpecs;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -36,6 +38,10 @@ public class OrderController {
     private final OrderSummaryDTOAssembler orderSummaryDTOAssembler;
     private final OrderInputDisassembler orderInputDisassembler;
 
+    @ApiImplicitParams({
+            @ApiImplicitParam(value = "Names of properties to filter on the response, separated by a comma",
+                    name = "fields", paramType = "query", type = "string")
+    })
     @GetMapping
     public Page<OrderSummaryDTO> findAll(OrderFilter filter, @PageableDefault(size = 5) Pageable pageable) {
         pageable = this.mapSortPropertiesNamesToMatchWithDomainModel(pageable);
@@ -45,6 +51,10 @@ public class OrderController {
         return ordersDTOPage;
     }
 
+    @ApiImplicitParams({
+            @ApiImplicitParam(value = "Names of properties to filter on the response, separated by a comma",
+                    name = "fields", paramType = "query", type = "string")
+    })
     @GetMapping("/{orderCode}")
     public OrderDTO findById(@PathVariable String orderCode) {
         Order order = orderIssuanceService.findOrThrowException(orderCode);
