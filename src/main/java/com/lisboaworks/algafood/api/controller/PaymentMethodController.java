@@ -4,12 +4,14 @@ import com.lisboaworks.algafood.api.assembler.PaymentMethodDTOAssembler;
 import com.lisboaworks.algafood.api.assembler.PaymentMethodInputDisassembler;
 import com.lisboaworks.algafood.api.dto.PaymentMethodDTO;
 import com.lisboaworks.algafood.api.dto.input.PaymentMethodInput;
+import com.lisboaworks.algafood.api.openapi.controller.PaymentMethodControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.PaymentMethod;
 import com.lisboaworks.algafood.domain.repository.PaymentMethodRepository;
 import com.lisboaworks.algafood.domain.service.PaymentMethodRegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -22,9 +24,9 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-@RequestMapping("/payment-methods")
+@RequestMapping(value = "/payment-methods", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
-public class PaymentMethodController {
+public class PaymentMethodController implements PaymentMethodControllerOpenApi {
 
     private final PaymentMethodRegisterService paymentMethodRegisterService;
     private final PaymentMethodDTOAssembler paymentMethodDTOAssembler;
