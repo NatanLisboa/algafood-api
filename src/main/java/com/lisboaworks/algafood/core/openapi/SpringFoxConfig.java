@@ -15,15 +15,14 @@ import org.springframework.http.MediaType;
 import org.springframework.web.context.request.ServletWebRequest;
 import springfox.documentation.builders.*;
 import springfox.documentation.schema.AlternateTypeRules;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.service.Response;
-import springfox.documentation.service.Tag;
+import springfox.documentation.schema.ScalarType;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -46,6 +45,15 @@ public class SpringFoxConfig {
                 .globalResponses(HttpMethod.POST, this.globalPostPutResponseMessages())
                 .globalResponses(HttpMethod.PUT, this.globalPostPutResponseMessages())
                 .globalResponses(HttpMethod.DELETE, this.globalDeleteResponseMessages())
+                .globalRequestParameters(Collections.singletonList(
+                        new RequestParameterBuilder()
+                                .name("fields")
+                                .description("Names of properties to filter on the response, separated by a comma")
+                                .in(ParameterType.QUERY)
+                                .required(false)
+                                .query(q -> q.model(m -> m.scalarModel(ScalarType.STRING)))
+                                .build()
+                ))
                 .additionalModels(typeResolver.resolve(ApiException.class))
                 .ignoredParameterTypes(ServletWebRequest.class)
                 .directModelSubstitute(Pageable.class, PageableDTOOpenApi.class)
