@@ -40,10 +40,10 @@ public class ApiException {
     @Builder
     public static class Object {
 
-        @ApiModelProperty("price")
+        @ApiModelProperty(example = "price")
         private String name;
 
-        @ApiModelProperty("The price is mandatory")
+        @ApiModelProperty(example = "The price is mandatory")
         private String userMessage;
 
     }
