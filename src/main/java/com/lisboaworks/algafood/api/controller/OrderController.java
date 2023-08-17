@@ -6,6 +6,7 @@ import com.lisboaworks.algafood.api.assembler.OrderSummaryDTOAssembler;
 import com.lisboaworks.algafood.api.dto.OrderDTO;
 import com.lisboaworks.algafood.api.dto.OrderSummaryDTO;
 import com.lisboaworks.algafood.api.dto.input.OrderInput;
+import com.lisboaworks.algafood.api.openapi.OrderControllerOpenApi;
 import com.lisboaworks.algafood.core.data.PageableTranslator;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
@@ -30,7 +31,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/orders")
 @AllArgsConstructor
-public class OrderController {
+public class OrderController implements OrderControllerOpenApi {
 
     private final OrderDTOAssembler orderDTOAssembler;
     private final OrderIssuanceService orderIssuanceService;
