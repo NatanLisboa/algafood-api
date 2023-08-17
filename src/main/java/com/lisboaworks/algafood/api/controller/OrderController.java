@@ -6,7 +6,7 @@ import com.lisboaworks.algafood.api.assembler.OrderSummaryDTOAssembler;
 import com.lisboaworks.algafood.api.dto.OrderDTO;
 import com.lisboaworks.algafood.api.dto.OrderSummaryDTO;
 import com.lisboaworks.algafood.api.dto.input.OrderInput;
-import com.lisboaworks.algafood.api.openapi.OrderControllerOpenApi;
+import com.lisboaworks.algafood.api.openapi.controller.OrderControllerOpenApi;
 import com.lisboaworks.algafood.core.data.PageableTranslator;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
@@ -22,6 +22,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -63,6 +64,7 @@ public class OrderController implements OrderControllerOpenApi {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public OrderDTO issue(@RequestBody @Valid OrderInput orderInput) {
         Order order = orderInputDisassembler.toDomainObject(orderInput);
         try {
