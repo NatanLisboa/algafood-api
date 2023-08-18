@@ -22,7 +22,7 @@ public interface OrderControllerOpenApi {
     @ApiOperation("Get registered orders page")
     @ApiImplicitParams({
             @ApiImplicitParam(value = "Names of properties to filter on the response, separated by a comma",
-                    name = "fields", paramType = "query", type = "string")
+                    name = "fields", paramType = "query", type = "string", dataTypeClass = String.class)
     })
     Page<OrderSummaryDTO> findAll(OrderFilter filter, Pageable pageable);
 
@@ -33,7 +33,7 @@ public interface OrderControllerOpenApi {
     })
     @ApiImplicitParams({
             @ApiImplicitParam(value = "Names of properties to filter on the response, separated by a comma",
-                    name = "fields", paramType = "query", type = "string")
+                    name = "fields", paramType = "query", type = "string", dataTypeClass = String.class)
     })
     OrderDTO findById(String orderCode);
 

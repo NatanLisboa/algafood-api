@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.api.dto.input;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class RestaurantIdInput {
 
+    @ApiModelProperty(example = "1")
     @NotNull
     private Long id;
 

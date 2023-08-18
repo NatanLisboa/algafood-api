@@ -15,14 +15,13 @@ import com.lisboaworks.algafood.domain.repository.OrderRepository;
 import com.lisboaworks.algafood.domain.filter.OrderFilter;
 import com.lisboaworks.algafood.domain.service.OrderIssuanceService;
 import com.lisboaworks.algafood.infrastructure.repository.spec.OrderSpecs;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -30,7 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping(value = "/orders", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class OrderController implements OrderControllerOpenApi {
 
@@ -40,10 +39,6 @@ public class OrderController implements OrderControllerOpenApi {
     private final OrderSummaryDTOAssembler orderSummaryDTOAssembler;
     private final OrderInputDisassembler orderInputDisassembler;
 
-    @ApiImplicitParams({
-            @ApiImplicitParam(value = "Names of properties to filter on the response, separated by a comma",
-                    name = "fields", paramType = "query", type = "string")
-    })
     @GetMapping
     public Page<OrderSummaryDTO> findAll(OrderFilter filter, @PageableDefault(size = 5) Pageable pageable) {
         pageable = this.mapSortPropertiesNamesToMatchWithDomainModel(pageable);
@@ -53,10 +48,6 @@ public class OrderController implements OrderControllerOpenApi {
         return ordersDTOPage;
     }
 
-    @ApiImplicitParams({
-            @ApiImplicitParam(value = "Names of properties to filter on the response, separated by a comma",
-                    name = "fields", paramType = "query", type = "string")
-    })
     @GetMapping("/{orderCode}")
     public OrderDTO findById(@PathVariable String orderCode) {
         Order order = orderIssuanceService.findOrThrowException(orderCode);
