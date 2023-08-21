@@ -65,7 +65,8 @@ public class SpringFoxConfig {
                 .tags(new Tag("Cuisines", "Manage the cuisines"))
                 .tags(new Tag("Payment methods", "Manage the payment methods"))
                 .tags(new Tag("Orders", "Manage the orders"))
-                .tags(new Tag("Restaurants", "Manage the restaurants"));
+                .tags(new Tag("Restaurants", "Manage the restaurants"))
+                .tags(new Tag("States", "Manage the states"));
 
     }
 

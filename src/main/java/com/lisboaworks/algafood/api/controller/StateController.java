@@ -4,6 +4,7 @@ import com.lisboaworks.algafood.api.assembler.StateDTOAssembler;
 import com.lisboaworks.algafood.api.assembler.StateInputDisassembler;
 import com.lisboaworks.algafood.api.dto.StateDTO;
 import com.lisboaworks.algafood.api.dto.input.StateInput;
+import com.lisboaworks.algafood.api.openapi.controller.StateControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.State;
 import com.lisboaworks.algafood.domain.repository.StateRepository;
 import com.lisboaworks.algafood.domain.service.StateRegisterService;
@@ -17,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/states")
 @AllArgsConstructor
-public class StateController {
+public class StateController implements StateControllerOpenApi {
 
     private final StateRepository stateRepository;
     private final StateRegisterService stateRegisterService;
