@@ -26,14 +26,14 @@ public interface UserGroupControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Get a user group by its id")
-    UserGroupDTO findById(@ApiParam(value = "Id from a user group", example = "1")
+    UserGroupDTO findById(@ApiParam(value = "Id from a user group", example = "1", required = true)
                             Long userGroupId);
 
     @ApiOperation("Register a new user group")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Registered user group")
     })
-    UserGroupDTO add(@ApiParam(name = "body", value = "New user group representation")
+    UserGroupDTO add(@ApiParam(name = "body", value = "New user group representation", required = true)
                        UserGroupInput userGroupInput);
 
     @ApiResponses({
@@ -41,10 +41,10 @@ public interface UserGroupControllerOpenApi {
             @ApiResponse(responseCode = "404", description = "User group not found", content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Update an existing user group")
-    UserGroupDTO update(@ApiParam(value = "Id from a user group", example = "1")
+    UserGroupDTO update(@ApiParam(value = "Id from a user group", example = "1", required = true)
                           Long userGroupId,
 
-                          @ApiParam(name = "body", value = "User group representation with new data")
+                          @ApiParam(name = "body", value = "User group representation with new data", required = true)
                           UserGroupInput newUserGroupInput);
 
     @ApiResponses({
@@ -53,6 +53,6 @@ public interface UserGroupControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Delete a user group by its id")
-    void delete(@ApiParam(value = "Id from a user group", example = "1")
+    void delete(@ApiParam(value = "Id from a user group", example = "1", required = true)
                        Long userGroupId);
 }

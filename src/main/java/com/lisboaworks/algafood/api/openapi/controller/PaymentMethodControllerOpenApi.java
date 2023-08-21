@@ -28,14 +28,14 @@ public interface PaymentMethodControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Get a payment method by its id")
-    ResponseEntity<PaymentMethodDTO> findById(@ApiParam(value = "Id from a payment method", example = "1")
+    ResponseEntity<PaymentMethodDTO> findById(@ApiParam(value = "Id from a payment method", example = "1", required = true)
                             Long paymentMethodId, ServletWebRequest request);
 
     @ApiOperation("Register a new payment method")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Registered payment method")
     })
-    PaymentMethodDTO add(@ApiParam(name = "body", value = "New payment method representation")
+    PaymentMethodDTO add(@ApiParam(name = "body", value = "New payment method representation", required = true)
                        PaymentMethodInput paymentMethodInput);
 
     @ApiResponses({
@@ -43,7 +43,7 @@ public interface PaymentMethodControllerOpenApi {
             @ApiResponse(responseCode = "404", description = "Payment method not found", content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Update an existing payment method")
-    PaymentMethodDTO update(@ApiParam(value = "Id from a payment method", example = "1")
+    PaymentMethodDTO update(@ApiParam(value = "Id from a payment method", example = "1", required = true)
                           Long paymentMethodId,
 
                           @ApiParam(name = "body", value = "Payment method representation with new data")
@@ -55,6 +55,6 @@ public interface PaymentMethodControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Delete a payment method by its id")
-    void delete(@ApiParam(value = "Id from a payment method", example = "1")
+    void delete(@ApiParam(value = "Id from a payment method", example = "1", required = true)
                        Long paymentMethodId);
 }

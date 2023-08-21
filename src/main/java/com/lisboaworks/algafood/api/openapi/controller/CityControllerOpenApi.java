@@ -26,14 +26,14 @@ public interface CityControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Get a city by its id")
-    CityDTO findById(@ApiParam(value = "Id from a city", example = "1")
+    CityDTO findById(@ApiParam(value = "Id from a city", example = "1", required = true)
                             Long cityId);
 
     @ApiOperation("Register a new city")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Registered city")
     })
-    CityDTO add(@ApiParam(name = "body", value = "New city representation")
+    CityDTO add(@ApiParam(name = "body", value = "New city representation", required = true)
                        CityInput cityInput);
 
     @ApiResponses({
@@ -41,7 +41,7 @@ public interface CityControllerOpenApi {
             @ApiResponse(responseCode = "404", description = "City not found", content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Update an existing city")
-    CityDTO update(@ApiParam(value = "Id from a city", example = "1")
+    CityDTO update(@ApiParam(value = "Id from a city", example = "1", required = true)
                           Long cityId,
 
                           @ApiParam(name = "body", value = "City representation with new data")
@@ -53,6 +53,6 @@ public interface CityControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Delete a city by its id")
-    void delete(@ApiParam(value = "Id from a city", example = "1")
+    void delete(@ApiParam(value = "Id from a city", example = "1", required = true)
                        Long cityId);
 }

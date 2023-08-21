@@ -26,14 +26,14 @@ public interface CuisineControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Get a cuisine by its id")
-    CuisineDTO findById(@ApiParam(value = "Id from a cuisine", example = "1")
+    CuisineDTO findById(@ApiParam(value = "Id from a cuisine", example = "1", required = true)
                             Long cuisineId);
 
     @ApiOperation("Register a new cuisine")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Registered cuisine")
     })
-    CuisineDTO add(@ApiParam(name = "body", value = "New cuisine representation")
+    CuisineDTO add(@ApiParam(name = "body", value = "New cuisine representation", required = true)
                        CuisineInput cuisineInput);
 
     @ApiResponses({
@@ -41,7 +41,7 @@ public interface CuisineControllerOpenApi {
             @ApiResponse(responseCode = "404", description = "Cuisine not found", content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Update an existing cuisine")
-    CuisineDTO update(@ApiParam(value = "Id from a cuisine", example = "1")
+    CuisineDTO update(@ApiParam(value = "Id from a cuisine", example = "1", required = true)
                           Long cuisineId,
 
                           @ApiParam(name = "body", value = "Cuisine representation with new data")
@@ -53,6 +53,6 @@ public interface CuisineControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Delete a cuisine by its id")
-    void delete(@ApiParam(value = "Id from a cuisine", example = "1")
+    void delete(@ApiParam(value = "Id from a cuisine", example = "1", required = true)
                        Long cuisineId);
 }

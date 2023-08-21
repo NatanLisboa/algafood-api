@@ -6,6 +6,7 @@ import com.lisboaworks.algafood.api.assembler.RestaurantInputDisassembler;
 import com.lisboaworks.algafood.api.dto.RestaurantDTO;
 import com.lisboaworks.algafood.api.dto.input.RestaurantInput;
 import com.lisboaworks.algafood.api.dto.view.RestaurantView;
+import com.lisboaworks.algafood.api.openapi.controller.RestaurantControllerOpenApi;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.CityNotFoundException;
 import com.lisboaworks.algafood.domain.exception.CuisineNotFoundException;
@@ -13,20 +14,18 @@ import com.lisboaworks.algafood.domain.exception.RestaurantNotFoundException;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/restaurants")
+@RequestMapping(value = "/restaurants", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
-public class RestaurantController {
+public class RestaurantController implements RestaurantControllerOpenApi {
 
     private final RestaurantRepository restaurantRepository;
     private final RestaurantRegisterService restaurantRegisterService;
@@ -34,22 +33,12 @@ public class RestaurantController {
     private final RestaurantInputDisassembler restaurantInputDisassembler;
 
     @GetMapping
-    @ApiOperation(value = "Get restaurants")
-    @ApiImplicitParams({
-            @ApiImplicitParam(value = "Order projections name",
-                    allowableValues = "only-name",
-                    name = "projection",
-                    paramType = "query",
-                    type = "string",
-                    dataTypeClass = String.class)
-    })
     @JsonView(RestaurantView.Summary.class)
     public List<RestaurantDTO> findAll() {
         return restaurantDTOAssembler.toDTOList(restaurantRepository.findAll());
     }
 
     @GetMapping(params = "projection=only-name")
-    @ApiOperation(value = "Get restaurants", hidden = true)
     @JsonView(RestaurantView.OnlyName.class)
     public List<RestaurantDTO> findAllOnlyWithName() {
         return this.findAll();
