@@ -35,7 +35,7 @@ public interface RestaurantControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation(value = "Get restaurant by id")
-    RestaurantDTO findById(@ApiParam(name = "Restaurant id", example = "1", required = true) Long restaurantId);
+    RestaurantDTO findById(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
 
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Restaurant registered successfully")
@@ -52,7 +52,7 @@ public interface RestaurantControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation(value = "Update restaurant")
-    RestaurantDTO update(@ApiParam(name = "Restaurant id", example = "1", required = true)
+    RestaurantDTO update(@ApiParam(value = "Restaurant id", example = "1", required = true)
                          Long restaurantId,
 
                          @ApiParam(name = "body", value = "Restaurant representation with new data", required = true)
@@ -65,7 +65,7 @@ public interface RestaurantControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation(value = "Activate restaurant")
-    void activate(@ApiParam(name = "Restaurant id", example = "1", required = true) Long restaurantId);
+    void activate(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
 
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Restaurant inactivated successfully"),
@@ -73,7 +73,7 @@ public interface RestaurantControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation(value = "Inactivate restaurant")
-    void inactivate(@ApiParam(name = "Restaurant id", example = "1", required = true) Long restaurantId);
+    void inactivate(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
 
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Restaurant opened successfully"),
@@ -81,7 +81,7 @@ public interface RestaurantControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation(value = "Open restaurant")
-    void open(@ApiParam(name = "Restaurant id", example = "1", required = true) Long restaurantId);
+    void open(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
 
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Restaurant closed successfully"),
@@ -89,18 +89,18 @@ public interface RestaurantControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation(value = "Close restaurant")
-    void close(@ApiParam(name = "Restaurant id", required = true) Long restaurantId);
+    void close(@ApiParam(value = "Restaurant id", required = true) Long restaurantId);
 
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Restaurants activated successfully")
     })
     @ApiOperation(value = "Activate multiple restaurants")
-    void activateMultiples(@ApiParam(name = "Restaurants ids", required = true) List<Long> restaurantIds);
+    void activateMultiples(@ApiParam(value = "Restaurants ids", required = true) List<Long> restaurantIds);
 
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Restaurants inactivated successfully")
     })
     @ApiOperation(value = "Inactivate multiple restaurants")
-    void inactivateMultiples(@ApiParam(name = "Restaurants ids", required = true) List<Long> restaurantIds);
+    void inactivateMultiples(@ApiParam(value = "Restaurants ids", required = true) List<Long> restaurantIds);
 
 }
