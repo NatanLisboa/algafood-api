@@ -2,6 +2,7 @@ package com.lisboaworks.algafood.api.controller;
 
 import com.lisboaworks.algafood.api.assembler.UserDTOAssembler;
 import com.lisboaworks.algafood.api.dto.UserDTO;
+import com.lisboaworks.algafood.api.openapi.controller.RestaurantResponsibleUserControllerOpenApi;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/restaurants/{restaurantId}/responsible-users")
 @AllArgsConstructor
-public class RestaurantResponsibleUserController {
+public class RestaurantResponsibleUserController implements RestaurantResponsibleUserControllerOpenApi {
 
     private final RestaurantRegisterService restaurantRegisterService;
     private final UserDTOAssembler userDTOAssembler;
