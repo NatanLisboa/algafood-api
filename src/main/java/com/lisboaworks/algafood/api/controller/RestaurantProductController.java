@@ -4,21 +4,24 @@ import com.lisboaworks.algafood.api.assembler.ProductDTOAssembler;
 import com.lisboaworks.algafood.api.assembler.ProductInputDisassembler;
 import com.lisboaworks.algafood.api.dto.ProductDTO;
 import com.lisboaworks.algafood.api.dto.input.ProductInput;
+import com.lisboaworks.algafood.api.openapi.controller.RestaurantProductControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.Product;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.ProductRepository;
 import com.lisboaworks.algafood.domain.service.ProductRegisterService;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/restaurants/{restaurantId}/products")
+@RequestMapping(value = "/restaurants/{restaurantId}/products", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
-public class RestaurantProductController {
+public class RestaurantProductController implements RestaurantProductControllerOpenApi {
 
     private final ProductRegisterService productRegisterService;
     private final RestaurantRegisterService restaurantRegisterService;
@@ -46,12 +49,14 @@ public class RestaurantProductController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ProductDTO add(@PathVariable Long restaurantId, @RequestBody @Valid ProductInput productInput) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
         Product product = productInputDisassembler.toDomainObject(productInput);
         product.setRestaurant(restaurant);
         return productDTOAssembler.toDTO(productRegisterService.save(product));
     }
+
     @PutMapping("/{productId}")
     public ProductDTO update(@PathVariable Long restaurantId, @PathVariable Long productId, @RequestBody @Valid ProductInput updateProductInput) {
         Product product = productRegisterService.findOrThrowException(restaurantId, productId);

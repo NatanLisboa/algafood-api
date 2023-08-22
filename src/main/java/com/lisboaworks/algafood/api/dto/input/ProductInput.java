@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.api.dto.input;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,12 +13,15 @@ import java.math.BigDecimal;
 @Setter
 public class ProductInput {
 
+    @ApiModelProperty(example = "Tom Kha Gai")
     @NotBlank
     private String name;
 
+    @ApiModelProperty(example = "Chicken in coconut soup")
     @NotBlank
     private String description;
 
+    @ApiModelProperty(example = "23.90")
     @NotNull
     @PositiveOrZero
     private BigDecimal price;
