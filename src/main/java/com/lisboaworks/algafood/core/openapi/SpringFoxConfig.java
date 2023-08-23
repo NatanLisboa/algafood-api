@@ -9,6 +9,7 @@ import com.lisboaworks.algafood.api.openapi.dto.OrdersDTOOpenApi;
 import com.lisboaworks.algafood.api.openapi.dto.PageableDTOOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpMethod;
@@ -25,6 +26,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
@@ -49,7 +51,7 @@ public class SpringFoxConfig {
                 .globalResponses(HttpMethod.PUT, this.globalPostPutResponseMessages())
                 .globalResponses(HttpMethod.DELETE, this.globalDeleteResponseMessages())
                 .additionalModels(typeResolver.resolve(ApiException.class))
-                .ignoredParameterTypes(ServletWebRequest.class)
+                .ignoredParameterTypes(ServletWebRequest.class, InputStream.class, InputStreamResource.class)
                 .directModelSubstitute(Pageable.class, PageableDTOOpenApi.class)
                 .alternateTypeRules(AlternateTypeRules.newRule(
                         typeResolver.resolve(Page.class, CuisineDTO.class),

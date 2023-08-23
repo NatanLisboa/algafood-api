@@ -1,14 +1,14 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.openapi.controller.RestaurantProductPhotoControllerOpenApi;
-import com.lisboaworks.algafood.domain.service.PhotoStorageService.RetrievedPhoto;
 import com.lisboaworks.algafood.api.assembler.ProductPhotoDTOAssembler;
 import com.lisboaworks.algafood.api.dto.ProductPhotoDTO;
 import com.lisboaworks.algafood.api.dto.input.ProductPhotoInput;
+import com.lisboaworks.algafood.api.openapi.controller.RestaurantProductPhotoControllerOpenApi;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import com.lisboaworks.algafood.domain.model.Product;
 import com.lisboaworks.algafood.domain.model.ProductPhoto;
 import com.lisboaworks.algafood.domain.service.PhotoStorageService;
+import com.lisboaworks.algafood.domain.service.PhotoStorageService.RetrievedPhoto;
 import com.lisboaworks.algafood.domain.service.ProductPhotoCatalogService;
 import com.lisboaworks.algafood.domain.service.ProductRegisterService;
 import lombok.AllArgsConstructor;
@@ -23,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 @RestController
@@ -68,10 +67,10 @@ public class RestaurantProductPhotoController implements RestaurantProductPhotoC
 
     @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ProductPhotoDTO updatePhoto(@PathVariable Long restaurantId,
-                                       @PathVariable Long productId, @Valid ProductPhotoInput productPhotoInput) throws IOException {
+                                       @PathVariable Long productId,
+                                       @Valid ProductPhotoInput productPhotoInput,
+                                       @RequestPart MultipartFile file) throws IOException {
         Product product = productRegisterService.findOrThrowException(restaurantId, productId);
-
-        MultipartFile file = productPhotoInput.getFile();
 
         ProductPhoto productPhoto = new ProductPhoto();
         productPhoto.setProduct(product);
