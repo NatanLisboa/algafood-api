@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.api.controller;
 
+import com.lisboaworks.algafood.api.openapi.controller.RestaurantProductPhotoControllerOpenApi;
 import com.lisboaworks.algafood.domain.service.PhotoStorageService.RetrievedPhoto;
 import com.lisboaworks.algafood.api.assembler.ProductPhotoDTOAssembler;
 import com.lisboaworks.algafood.api.dto.ProductPhotoDTO;
@@ -26,22 +27,22 @@ import java.io.InputStream;
 import java.util.List;
 
 @RestController
-@RequestMapping("/restaurants/{restaurantId}/products/{productId}/photo")
+@RequestMapping(value = "/restaurants/{restaurantId}/products/{productId}/photo", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
-public class RestaurantProductPhotoController {
+public class RestaurantProductPhotoController implements RestaurantProductPhotoControllerOpenApi {
 
     private final ProductRegisterService productRegisterService;
     private final ProductPhotoCatalogService productPhotoCatalogService;
     private final ProductPhotoDTOAssembler productPhotoDTOAssembler;
     private final PhotoStorageService photoStorageService;
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public ProductPhotoDTO getPhoto(@PathVariable Long restaurantId, @PathVariable Long productId) {
         ProductPhoto productPhoto = productPhotoCatalogService.findOrThrowException(restaurantId, productId);
         return productPhotoDTOAssembler.toDTO(productPhoto);
     }
 
-    @GetMapping
+    @GetMapping(produces = MediaType.ALL_VALUE)
     public ResponseEntity<InputStreamResource> servePhoto(@PathVariable Long restaurantId,
                                                           @PathVariable Long productId, @RequestHeader(name = "accept") String acceptHeader) throws HttpMediaTypeNotAcceptableException {
         try {
