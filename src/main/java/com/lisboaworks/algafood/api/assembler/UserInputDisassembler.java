@@ -1,6 +1,6 @@
 package com.lisboaworks.algafood.api.assembler;
 
-import com.lisboaworks.algafood.api.dto.input.UserIdEmailInput;
+import com.lisboaworks.algafood.api.dto.input.UserNameEmailInput;
 import com.lisboaworks.algafood.api.dto.input.UserInput;
 import com.lisboaworks.algafood.domain.model.User;
 import lombok.AllArgsConstructor;
@@ -17,7 +17,7 @@ public class UserInputDisassembler {
         return modelMapper.map(userInput, User.class);
     }
 
-    public void copyToDomainObject(UserIdEmailInput userInput, User user) {
+    public void copyToDomainObject(UserNameEmailInput userInput, User user) {
         modelMapper.map(userInput, user);
     }
 

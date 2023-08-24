@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.api.dto.input;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,9 +10,11 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class UserChangePasswordInput {
 
+    @ApiModelProperty(example = "123")
     @NotBlank
     private String currentPassword;
 
+    @ApiModelProperty(example = "PotatoHead@123")
     @NotBlank
     private String newPassword;
 

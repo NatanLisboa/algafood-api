@@ -4,22 +4,24 @@ import com.lisboaworks.algafood.api.assembler.UserDTOAssembler;
 import com.lisboaworks.algafood.api.assembler.UserInputDisassembler;
 import com.lisboaworks.algafood.api.dto.UserDTO;
 import com.lisboaworks.algafood.api.dto.input.UserChangePasswordInput;
-import com.lisboaworks.algafood.api.dto.input.UserIdEmailInput;
+import com.lisboaworks.algafood.api.dto.input.UserNameEmailInput;
 import com.lisboaworks.algafood.api.dto.input.UserInput;
+import com.lisboaworks.algafood.api.openapi.controller.UserControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.User;
 import com.lisboaworks.algafood.domain.repository.UserRepository;
 import com.lisboaworks.algafood.domain.service.UserRegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
-public class UserController {
+public class UserController implements UserControllerOpenApi {
 
     private final UserRegisterService userRegisterService;
     private final UserDTOAssembler userDTOAssembler;
@@ -46,7 +48,7 @@ public class UserController {
 
     @PutMapping("/{userId}")
     public UserDTO update(@PathVariable Long userId,
-                             @RequestBody @Valid UserIdEmailInput newUserInput) {
+                             @RequestBody @Valid UserNameEmailInput newUserInput) {
         User user = userRegisterService.findOrThrowException(userId);
         userInputDisassembler.copyToDomainObject(newUserInput, user);
         return userDTOAssembler.toDTO(userRegisterService.save(user));

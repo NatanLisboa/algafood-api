@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.api.dto.input;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,13 +11,16 @@ import javax.validation.constraints.NotBlank;
 @Setter
 public class UserInput {
 
+    @ApiModelProperty(example = "David Coleman")
     @NotBlank
     private String name;
 
+    @ApiModelProperty(example = "david.coleman@gmail.com")
     @Email
     @NotBlank
     private String email;
 
+    @ApiModelProperty(example = "123")
     @NotBlank
     private String password;
 
