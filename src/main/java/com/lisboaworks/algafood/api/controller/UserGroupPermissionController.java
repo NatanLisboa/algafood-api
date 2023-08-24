@@ -2,18 +2,20 @@ package com.lisboaworks.algafood.api.controller;
 
 import com.lisboaworks.algafood.api.assembler.PermissionDTOAssembler;
 import com.lisboaworks.algafood.api.dto.PermissionDTO;
+import com.lisboaworks.algafood.api.openapi.controller.UserGroupPermissionControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.UserGroup;
 import com.lisboaworks.algafood.domain.service.UserGroupRegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("user-groups/{userGroupId}/permissions")
+@RequestMapping(value = "user-groups/{userGroupId}/permissions", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
-public class UserGroupPermissionController {
+public class UserGroupPermissionController implements UserGroupPermissionControllerOpenApi {
 
     private final PermissionDTOAssembler permissionDTOAssembler;
     private final UserGroupRegisterService userGroupRegisterService;
