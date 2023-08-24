@@ -2,6 +2,7 @@ package com.lisboaworks.algafood.api.controller;
 
 import com.lisboaworks.algafood.api.assembler.UserGroupDTOAssembler;
 import com.lisboaworks.algafood.api.dto.UserGroupDTO;
+import com.lisboaworks.algafood.api.openapi.controller.UserUserGroupControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.User;
 import com.lisboaworks.algafood.domain.service.UserRegisterService;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("users/{userId}/user-groups")
 @AllArgsConstructor
-public class UserUserGroupController {
+public class UserUserGroupController implements UserUserGroupControllerOpenApi {
 
     private final UserGroupDTOAssembler userGroupDTOAssembler;
     private final UserRegisterService userRegisterService;
