@@ -1,11 +1,12 @@
 package com.lisboaworks.algafood.api.controller;
 
 
+import com.lisboaworks.algafood.api.ResourceUriHelper;
 import com.lisboaworks.algafood.api.assembler.CityDTOAssembler;
 import com.lisboaworks.algafood.api.assembler.CityInputDisassembler;
-import com.lisboaworks.algafood.api.openapi.controller.CityControllerOpenApi;
 import com.lisboaworks.algafood.api.dto.CityDTO;
 import com.lisboaworks.algafood.api.dto.input.CityInput;
+import com.lisboaworks.algafood.api.openapi.controller.CityControllerOpenApi;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.StateNotFoundException;
 import com.lisboaworks.algafood.domain.model.City;
@@ -45,7 +46,9 @@ public class CityController implements CityControllerOpenApi {
     public CityDTO add(@RequestBody @Valid CityInput cityInput) {
         try {
         	City city = cityInputDisassembler.toDomainObject(cityInput);
-            return cityDTOAssembler.toDTO(cityRegisterService.save(city));
+            CityDTO cityDTO = cityDTOAssembler.toDTO(cityRegisterService.save(city));
+            ResourceUriHelper.addUriInResponseHeader(cityDTO.getId());
+            return cityDTO;
         } catch (StateNotFoundException e) {
             throw new BusinessRuleException(e.getMessage(), e);
         }
