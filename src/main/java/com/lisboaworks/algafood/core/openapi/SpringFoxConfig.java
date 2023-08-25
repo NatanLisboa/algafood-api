@@ -70,7 +70,8 @@ public class SpringFoxConfig {
                 .tags(new Tag("Restaurants", "Manage the restaurants"))
                 .tags(new Tag("States", "Manage the states"))
                 .tags(new Tag("Products", "Manage the products of a restaurant"))
-                .tags(new Tag("Users", "Manage the users"));
+                .tags(new Tag("Users", "Manage the users"))
+                .tags(new Tag("Statistics", "Algafood statistics"));
 
     }
 

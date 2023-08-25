@@ -151,7 +151,7 @@ insert into `order` (id, code, restaurant_id, customer_id, payment_method_id, ad
                     address_street_name, address_number, address_complement, address_district,
 	                status, creation_datetime, subtotal, shipping_fee, total_value)
 values (6, '0d8f95f5-6d97-41c4-ae24-12a1b00465ce', 1, 5, 1, 1, '38400-111', 'St Acre', '300', 'House number 2', 'Centre',
-        'CREATED', utc_timestamp, 63.70, 10.00, 73.70);
+        'CONFIRMED', utc_timestamp, 63.70, 10.00, 73.70);
 
 insert into order_item (id, order_id, product_id, quantity, unit_price, total_price, note)
 values (8, 6, 1, 2, 19.90, 39.80, 'More spicy, please');
