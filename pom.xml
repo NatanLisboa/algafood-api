@@ -20,6 +20,7 @@
         <jasperreports.version>6.20.5</jasperreports.version>
         <aws-java-sdk-s3.version>1.12.514</aws-java-sdk-s3.version>
         <spring-fox.version>3.0.0</spring-fox.version>
+        <spring-hateoas.version>2.1.2</spring-hateoas.version>
     </properties>
     <dependencies>
         <dependency>
@@ -137,6 +138,12 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-bean-validators</artifactId>
             <version>${spring-fox.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.hateoas</groupId>
+            <artifactId>spring-hateoas</artifactId>
+            <version>${spring-hateoas.version}</version>
         </dependency>
 
     </dependencies>
