@@ -21,6 +21,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(path = "/cities", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -42,14 +43,14 @@ public class CityController implements CityControllerOpenApi {
         City city = cityRegisterService.findOrThrowException(cityId);
         CityDTO cityDTO = cityDTOAssembler.toDTO(city);
 
-        cityDTO.add(linkTo(CityController.class)
-                .slash(cityDTO.getId()).withSelfRel());
+        cityDTO.add(linkTo(methodOn(CityController.class)
+                .findById(cityDTO.getId())).withSelfRel());
 
-        cityDTO.add(linkTo(CityController.class)
-                .withRel("cities"));
+        cityDTO.add(linkTo(methodOn(CityController.class)
+                .findAll()).withRel("cities"));
 
-        cityDTO.getState().add(linkTo(StateController.class)
-                .slash(cityDTO.getState().getId()).withSelfRel());
+        cityDTO.getState().add(linkTo(methodOn(StateController.class)
+                .findById(cityDTO.getState().getId())).withSelfRel());
 
         return cityDTO;
     }
