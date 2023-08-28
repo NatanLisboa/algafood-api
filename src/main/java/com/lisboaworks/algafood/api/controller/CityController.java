@@ -13,6 +13,8 @@ import com.lisboaworks.algafood.domain.model.City;
 import com.lisboaworks.algafood.domain.repository.CityRepository;
 import com.lisboaworks.algafood.domain.service.CityRegisterService;
 import lombok.AllArgsConstructor;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +40,17 @@ public class CityController implements CityControllerOpenApi {
     @GetMapping("/{cityId}")
     public CityDTO findById(@PathVariable Long cityId) {
         City city = cityRegisterService.findOrThrowException(cityId);
-        return cityDTOAssembler.toDTO(city);
+        CityDTO cityDTO = cityDTOAssembler.toDTO(city);
+
+//      cityDTO.add(Link.of("http://api.algafood.local:8080/cities/1", IanaLinkRelations.SELF));
+        cityDTO.add(Link.of("http://api.algafood.local:8080/cities/1"));
+
+//      cityDTO.add(Link.of("http://api.algafood.local:8080/cities", IanaLinkRelations.COLLECTION));
+        cityDTO.add(Link.of("http://api.algafood.local:8080/cities", "cities"));
+
+        cityDTO.getState().add(Link.of("http://api.algafood.local:8080/states/1"));
+
+        return cityDTO;
     }
 
     @PostMapping
