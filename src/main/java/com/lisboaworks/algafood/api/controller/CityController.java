@@ -13,14 +13,14 @@ import com.lisboaworks.algafood.domain.model.City;
 import com.lisboaworks.algafood.domain.repository.CityRepository;
 import com.lisboaworks.algafood.domain.service.CityRegisterService;
 import lombok.AllArgsConstructor;
-import org.springframework.hateoas.IanaLinkRelations;
-import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @RestController
 @RequestMapping(path = "/cities", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -42,13 +42,14 @@ public class CityController implements CityControllerOpenApi {
         City city = cityRegisterService.findOrThrowException(cityId);
         CityDTO cityDTO = cityDTOAssembler.toDTO(city);
 
-//      cityDTO.add(Link.of("http://api.algafood.local:8080/cities/1", IanaLinkRelations.SELF));
-        cityDTO.add(Link.of("http://api.algafood.local:8080/cities/1"));
+        cityDTO.add(linkTo(CityController.class)
+                .slash(cityDTO.getId()).withSelfRel());
 
-//      cityDTO.add(Link.of("http://api.algafood.local:8080/cities", IanaLinkRelations.COLLECTION));
-        cityDTO.add(Link.of("http://api.algafood.local:8080/cities", "cities"));
+        cityDTO.add(linkTo(CityController.class)
+                .withRel("cities"));
 
-        cityDTO.getState().add(Link.of("http://api.algafood.local:8080/states/1"));
+        cityDTO.getState().add(linkTo(StateController.class)
+                .slash(cityDTO.getState().getId()).withSelfRel());
 
         return cityDTO;
     }
