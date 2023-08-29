@@ -1,12 +1,12 @@
 package com.lisboaworks.algafood.core.openapi;
 
 import com.fasterxml.classmate.TypeResolver;
-import com.lisboaworks.algafood.api.dto.CuisineDTO;
-import com.lisboaworks.algafood.api.dto.OrderSummaryDTO;
+import com.lisboaworks.algafood.api.model.CuisineModel;
+import com.lisboaworks.algafood.api.model.OrderSummaryModel;
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
-import com.lisboaworks.algafood.api.openapi.dto.CuisinesDTOOpenApi;
-import com.lisboaworks.algafood.api.openapi.dto.OrdersDTOOpenApi;
-import com.lisboaworks.algafood.api.openapi.dto.PageableDTOOpenApi;
+import com.lisboaworks.algafood.api.openapi.model.CuisinesModelOpenApi;
+import com.lisboaworks.algafood.api.openapi.model.OrdersModelOpenApi;
+import com.lisboaworks.algafood.api.openapi.model.PageableModelOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.InputStreamResource;
@@ -52,14 +52,14 @@ public class SpringFoxConfig {
                 .globalResponses(HttpMethod.DELETE, this.globalDeleteResponseMessages())
                 .additionalModels(typeResolver.resolve(ApiException.class))
                 .ignoredParameterTypes(ServletWebRequest.class, InputStream.class, InputStreamResource.class)
-                .directModelSubstitute(Pageable.class, PageableDTOOpenApi.class)
+                .directModelSubstitute(Pageable.class, PageableModelOpenApi.class)
                 .alternateTypeRules(AlternateTypeRules.newRule(
-                        typeResolver.resolve(Page.class, CuisineDTO.class),
-                        CuisinesDTOOpenApi.class)
+                        typeResolver.resolve(Page.class, CuisineModel.class),
+                        CuisinesModelOpenApi.class)
                 )
                 .alternateTypeRules(AlternateTypeRules.newRule(
-                        typeResolver.resolve(Page.class, OrderSummaryDTO.class),
-                        OrdersDTOOpenApi.class)
+                        typeResolver.resolve(Page.class, OrderSummaryModel.class),
+                        OrdersModelOpenApi.class)
                 )
                 .apiInfo(this.apiInfo())
                 .tags(new Tag("Cities", "Manage the cities"))

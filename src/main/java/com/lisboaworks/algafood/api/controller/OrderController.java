@@ -1,11 +1,11 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.OrderDTOAssembler;
+import com.lisboaworks.algafood.api.assembler.OrderModelAssembler;
 import com.lisboaworks.algafood.api.assembler.OrderInputDisassembler;
-import com.lisboaworks.algafood.api.assembler.OrderSummaryDTOAssembler;
-import com.lisboaworks.algafood.api.dto.OrderDTO;
-import com.lisboaworks.algafood.api.dto.OrderSummaryDTO;
-import com.lisboaworks.algafood.api.dto.input.OrderInput;
+import com.lisboaworks.algafood.api.assembler.OrderSummaryModelAssembler;
+import com.lisboaworks.algafood.api.model.OrderModel;
+import com.lisboaworks.algafood.api.model.OrderSummaryModel;
+import com.lisboaworks.algafood.api.model.input.OrderInput;
 import com.lisboaworks.algafood.api.openapi.controller.OrderControllerOpenApi;
 import com.lisboaworks.algafood.core.data.PageableTranslator;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
@@ -33,33 +33,33 @@ import java.util.Map;
 @AllArgsConstructor
 public class OrderController implements OrderControllerOpenApi {
 
-    private final OrderDTOAssembler orderDTOAssembler;
+    private final OrderModelAssembler orderModelAssembler;
     private final OrderIssuanceService orderIssuanceService;
     private final OrderRepository orderRepository;
-    private final OrderSummaryDTOAssembler orderSummaryDTOAssembler;
+    private final OrderSummaryModelAssembler orderSummaryModelAssembler;
     private final OrderInputDisassembler orderInputDisassembler;
 
     @GetMapping
-    public Page<OrderSummaryDTO> findAll(OrderFilter filter, @PageableDefault(size = 5) Pageable pageable) {
+    public Page<OrderSummaryModel> findAll(OrderFilter filter, @PageableDefault(size = 5) Pageable pageable) {
         pageable = this.mapSortPropertiesNamesToMatchWithDomainModel(pageable);
         Page<Order> ordersPage = orderRepository.findAll(OrderSpecs.usingFilter(filter), pageable);
-        List<OrderSummaryDTO> ordersDTO = orderSummaryDTOAssembler.toDTOList(ordersPage.getContent());
-        Page<OrderSummaryDTO> ordersDTOPage = new PageImpl<>(ordersDTO, pageable, ordersPage.getTotalElements());
-        return ordersDTOPage;
+        List<OrderSummaryModel> ordersModel = orderSummaryModelAssembler.toCollectionModel(ordersPage.getContent());
+        Page<OrderSummaryModel> ordersModelPage = new PageImpl<>(ordersModel, pageable, ordersPage.getTotalElements());
+        return ordersModelPage;
     }
 
     @GetMapping("/{orderCode}")
-    public OrderDTO findById(@PathVariable String orderCode) {
+    public OrderModel findById(@PathVariable String orderCode) {
         Order order = orderIssuanceService.findOrThrowException(orderCode);
-        return orderDTOAssembler.toDTO(order);
+        return orderModelAssembler.toModel(order);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public OrderDTO issue(@RequestBody @Valid OrderInput orderInput) {
+    public OrderModel issue(@RequestBody @Valid OrderInput orderInput) {
         Order order = orderInputDisassembler.toDomainObject(orderInput);
         try {
-            return orderDTOAssembler.toDTO(orderIssuanceService.issue(order));
+            return orderModelAssembler.toModel(orderIssuanceService.issue(order));
         } catch (EntityNotFoundException e) {
             throw new BusinessRuleException(e.getMessage(), e);
         }

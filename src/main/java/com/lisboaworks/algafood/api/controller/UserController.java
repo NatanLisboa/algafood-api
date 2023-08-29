@@ -1,11 +1,11 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.UserDTOAssembler;
+import com.lisboaworks.algafood.api.assembler.UserModelAssembler;
 import com.lisboaworks.algafood.api.assembler.UserInputDisassembler;
-import com.lisboaworks.algafood.api.dto.UserDTO;
-import com.lisboaworks.algafood.api.dto.input.UserChangePasswordInput;
-import com.lisboaworks.algafood.api.dto.input.UserNameEmailInput;
-import com.lisboaworks.algafood.api.dto.input.UserInput;
+import com.lisboaworks.algafood.api.model.UserModel;
+import com.lisboaworks.algafood.api.model.input.UserChangePasswordInput;
+import com.lisboaworks.algafood.api.model.input.UserNameEmailInput;
+import com.lisboaworks.algafood.api.model.input.UserInput;
 import com.lisboaworks.algafood.api.openapi.controller.UserControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.User;
 import com.lisboaworks.algafood.domain.repository.UserRepository;
@@ -24,34 +24,34 @@ import java.util.List;
 public class UserController implements UserControllerOpenApi {
 
     private final UserRegisterService userRegisterService;
-    private final UserDTOAssembler userDTOAssembler;
+    private final UserModelAssembler userModelAssembler;
     private final UserRepository userRepository;
     private final UserInputDisassembler userInputDisassembler;
 
     @GetMapping
-    public List<UserDTO> findAll() {
-        return userDTOAssembler.toDTOList(userRepository.findAll());
+    public List<UserModel> findAll() {
+        return userModelAssembler.toCollectionModel(userRepository.findAll());
     }
 
     @GetMapping("/{userId}")
-    public UserDTO findById(@PathVariable Long userId) {
+    public UserModel findById(@PathVariable Long userId) {
         User user = userRegisterService.findOrThrowException(userId);
-        return userDTOAssembler.toDTO(user);
+        return userModelAssembler.toModel(user);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public UserDTO add(@Valid @RequestBody UserInput userInput) {
+    public UserModel add(@Valid @RequestBody UserInput userInput) {
         User user = userInputDisassembler.toDomainObject(userInput);
-        return userDTOAssembler.toDTO(userRegisterService.save(user));
+        return userModelAssembler.toModel(userRegisterService.save(user));
     }
 
     @PutMapping("/{userId}")
-    public UserDTO update(@PathVariable Long userId,
-                             @RequestBody @Valid UserNameEmailInput newUserInput) {
+    public UserModel update(@PathVariable Long userId,
+                            @RequestBody @Valid UserNameEmailInput newUserInput) {
         User user = userRegisterService.findOrThrowException(userId);
         userInputDisassembler.copyToDomainObject(newUserInput, user);
-        return userDTOAssembler.toDTO(userRegisterService.save(user));
+        return userModelAssembler.toModel(userRegisterService.save(user));
     }
 
     @PutMapping("/{userId}/password")

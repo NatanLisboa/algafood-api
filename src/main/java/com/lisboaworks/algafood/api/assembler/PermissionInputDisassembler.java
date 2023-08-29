@@ -1,6 +1,6 @@
 package com.lisboaworks.algafood.api.assembler;
 
-import com.lisboaworks.algafood.api.dto.input.PermissionInput;
+import com.lisboaworks.algafood.api.model.input.PermissionInput;
 import com.lisboaworks.algafood.domain.model.Permission;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;

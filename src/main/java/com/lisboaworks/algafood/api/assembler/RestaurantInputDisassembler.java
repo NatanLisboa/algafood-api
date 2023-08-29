@@ -1,6 +1,6 @@
 package com.lisboaworks.algafood.api.assembler;
 
-import com.lisboaworks.algafood.api.dto.input.RestaurantInput;
+import com.lisboaworks.algafood.api.model.input.RestaurantInput;
 import com.lisboaworks.algafood.domain.model.City;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.model.Restaurant;

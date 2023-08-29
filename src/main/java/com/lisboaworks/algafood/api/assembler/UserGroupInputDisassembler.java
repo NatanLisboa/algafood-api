@@ -1,6 +1,6 @@
 package com.lisboaworks.algafood.api.assembler;
 
-import com.lisboaworks.algafood.api.dto.input.UserGroupInput;
+import com.lisboaworks.algafood.api.model.input.UserGroupInput;
 import com.lisboaworks.algafood.domain.model.UserGroup;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;

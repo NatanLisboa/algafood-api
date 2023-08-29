@@ -1,6 +1,6 @@
 package com.lisboaworks.algafood.api.openapi.controller;
 
-import com.lisboaworks.algafood.api.dto.UserGroupDTO;
+import com.lisboaworks.algafood.api.model.UserGroupModel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -16,7 +16,7 @@ public interface UserUserGroupControllerOpenApi {
     @ApiResponses({
             @ApiResponse(responseCode = "404", description = "User not found")
     })
-    List<UserGroupDTO> findAll(@ApiParam(value = "User id", example = "1", required = true) Long userId);
+    List<UserGroupModel> findAll(@ApiParam(value = "User id", example = "1", required = true) Long userId);
 
     @ApiOperation("Associate user group to user")
     @ApiResponses({

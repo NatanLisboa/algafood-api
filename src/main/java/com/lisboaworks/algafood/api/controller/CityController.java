@@ -2,10 +2,10 @@ package com.lisboaworks.algafood.api.controller;
 
 
 import com.lisboaworks.algafood.api.ResourceUriHelper;
-import com.lisboaworks.algafood.api.assembler.CityDTOAssembler;
+import com.lisboaworks.algafood.api.assembler.CityModelAssembler;
 import com.lisboaworks.algafood.api.assembler.CityInputDisassembler;
-import com.lisboaworks.algafood.api.dto.CityDTO;
-import com.lisboaworks.algafood.api.dto.input.CityInput;
+import com.lisboaworks.algafood.api.model.CityModel;
+import com.lisboaworks.algafood.api.model.input.CityInput;
 import com.lisboaworks.algafood.api.openapi.controller.CityControllerOpenApi;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.StateNotFoundException;
@@ -28,40 +28,40 @@ public class CityController implements CityControllerOpenApi {
 
     private final CityRepository cityRepository;
     private final CityRegisterService cityRegisterService;
-    private final CityDTOAssembler cityDTOAssembler;
+    private final CityModelAssembler cityModelAssembler;
     private final CityInputDisassembler cityInputDisassembler;
     
     @GetMapping
-    public CollectionModel<CityDTO> findAll() {
+    public CollectionModel<CityModel> findAll() {
         List<City> cities = cityRepository.findAll();
-        return cityDTOAssembler.toCollectionModel(cities);
+        return cityModelAssembler.toCollectionModel(cities);
     }
 
     @GetMapping("/{cityId}")
-    public CityDTO findById(@PathVariable Long cityId) {
+    public CityModel findById(@PathVariable Long cityId) {
         City city = cityRegisterService.findOrThrowException(cityId);
-        return cityDTOAssembler.toModel(city);
+        return cityModelAssembler.toModel(city);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CityDTO add(@RequestBody @Valid CityInput cityInput) {
+    public CityModel add(@RequestBody @Valid CityInput cityInput) {
         try {
         	City city = cityInputDisassembler.toDomainObject(cityInput);
-            CityDTO cityDTO = cityDTOAssembler.toModel(cityRegisterService.save(city));
-            ResourceUriHelper.addUriInResponseHeader(cityDTO.getId());
-            return cityDTO;
+            CityModel cityModel = cityModelAssembler.toModel(cityRegisterService.save(city));
+            ResourceUriHelper.addUriInResponseHeader(cityModel.getId());
+            return cityModel;
         } catch (StateNotFoundException e) {
             throw new BusinessRuleException(e.getMessage(), e);
         }
     }
 
     @PutMapping("/{cityId}")
-    public CityDTO update(@PathVariable Long cityId, @RequestBody @Valid CityInput newCityInput) {
+    public CityModel update(@PathVariable Long cityId, @RequestBody @Valid CityInput newCityInput) {
         try {
             City city = cityRegisterService.findOrThrowException(cityId);
             cityInputDisassembler.copyToDomainObject(newCityInput, city);
-            return cityDTOAssembler.toModel(cityRegisterService.save(city));
+            return cityModelAssembler.toModel(cityRegisterService.save(city));
         } catch (StateNotFoundException e) {
             throw new BusinessRuleException(e.getMessage(), e);
         }

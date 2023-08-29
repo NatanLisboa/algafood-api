@@ -1,6 +1,6 @@
 package com.lisboaworks.algafood.api.openapi.controller;
 
-import com.lisboaworks.algafood.api.dto.PermissionDTO;
+import com.lisboaworks.algafood.api.model.PermissionModel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -16,7 +16,7 @@ public interface UserGroupPermissionControllerOpenApi {
     @ApiResponses({
             @ApiResponse(responseCode = "404", description = "User group not found")
     })
-    List<PermissionDTO> findAll(@ApiParam(value = "User group id", example = "1", required = true) Long userGroupId);
+    List<PermissionModel> findAll(@ApiParam(value = "User group id", example = "1", required = true) Long userGroupId);
 
     @ApiOperation("Associate permission to user group")
     @ApiResponses({

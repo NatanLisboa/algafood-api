@@ -1,8 +1,8 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.ProductPhotoDTOAssembler;
-import com.lisboaworks.algafood.api.dto.ProductPhotoDTO;
-import com.lisboaworks.algafood.api.dto.input.ProductPhotoInput;
+import com.lisboaworks.algafood.api.assembler.ProductPhotoModelAssembler;
+import com.lisboaworks.algafood.api.model.ProductPhotoModel;
+import com.lisboaworks.algafood.api.model.input.ProductPhotoInput;
 import com.lisboaworks.algafood.api.openapi.controller.RestaurantProductPhotoControllerOpenApi;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import com.lisboaworks.algafood.domain.model.Product;
@@ -32,13 +32,13 @@ public class RestaurantProductPhotoController implements RestaurantProductPhotoC
 
     private final ProductRegisterService productRegisterService;
     private final ProductPhotoCatalogService productPhotoCatalogService;
-    private final ProductPhotoDTOAssembler productPhotoDTOAssembler;
+    private final ProductPhotoModelAssembler productPhotoModelAssembler;
     private final PhotoStorageService photoStorageService;
 
     @GetMapping
-    public ProductPhotoDTO getPhoto(@PathVariable Long restaurantId, @PathVariable Long productId) {
+    public ProductPhotoModel getPhoto(@PathVariable Long restaurantId, @PathVariable Long productId) {
         ProductPhoto productPhoto = productPhotoCatalogService.findOrThrowException(restaurantId, productId);
-        return productPhotoDTOAssembler.toDTO(productPhoto);
+        return productPhotoModelAssembler.toModel(productPhoto);
     }
 
     @GetMapping(produces = MediaType.ALL_VALUE)
@@ -66,10 +66,10 @@ public class RestaurantProductPhotoController implements RestaurantProductPhotoC
     }
 
     @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ProductPhotoDTO updatePhoto(@PathVariable Long restaurantId,
-                                       @PathVariable Long productId,
-                                       @Valid ProductPhotoInput productPhotoInput,
-                                       @RequestPart MultipartFile file) throws IOException {
+    public ProductPhotoModel updatePhoto(@PathVariable Long restaurantId,
+                                         @PathVariable Long productId,
+                                         @Valid ProductPhotoInput productPhotoInput,
+                                         @RequestPart MultipartFile file) throws IOException {
         Product product = productRegisterService.findOrThrowException(restaurantId, productId);
 
         ProductPhoto productPhoto = new ProductPhoto();
@@ -81,7 +81,7 @@ public class RestaurantProductPhotoController implements RestaurantProductPhotoC
 
         ProductPhoto savedPhoto = productPhotoCatalogService.save(productPhoto, file.getInputStream());
 
-        return productPhotoDTOAssembler.toDTO(savedPhoto);
+        return productPhotoModelAssembler.toModel(savedPhoto);
     }
 
     @DeleteMapping

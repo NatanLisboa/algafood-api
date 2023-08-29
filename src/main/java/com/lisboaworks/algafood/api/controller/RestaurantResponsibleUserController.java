@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.UserDTOAssembler;
-import com.lisboaworks.algafood.api.dto.UserDTO;
+import com.lisboaworks.algafood.api.assembler.UserModelAssembler;
+import com.lisboaworks.algafood.api.model.UserModel;
 import com.lisboaworks.algafood.api.openapi.controller.RestaurantResponsibleUserControllerOpenApi;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import lombok.AllArgsConstructor;
@@ -16,11 +16,11 @@ import java.util.List;
 public class RestaurantResponsibleUserController implements RestaurantResponsibleUserControllerOpenApi {
 
     private final RestaurantRegisterService restaurantRegisterService;
-    private final UserDTOAssembler userDTOAssembler;
+    private final UserModelAssembler userModelAssembler;
 
     @GetMapping
-    public List<UserDTO> getAllResponsibleUsers(@PathVariable Long restaurantId) {
-        return userDTOAssembler.toDTOList(restaurantRegisterService.getAllResponsibleUsers(restaurantId));
+    public List<UserModel> getAllResponsibleUsers(@PathVariable Long restaurantId) {
+        return userModelAssembler.toCollectionModel(restaurantRegisterService.getAllResponsibleUsers(restaurantId));
     }
 
     @PutMapping("/{userId}")

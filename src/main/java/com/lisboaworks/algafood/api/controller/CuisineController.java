@@ -1,9 +1,9 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.CuisineDTOAssembler;
+import com.lisboaworks.algafood.api.assembler.CuisineModelAssembler;
 import com.lisboaworks.algafood.api.assembler.CuisineInputDisassembler;
-import com.lisboaworks.algafood.api.dto.CuisineDTO;
-import com.lisboaworks.algafood.api.dto.input.CuisineInput;
+import com.lisboaworks.algafood.api.model.CuisineModel;
+import com.lisboaworks.algafood.api.model.input.CuisineInput;
 import com.lisboaworks.algafood.api.openapi.controller.CuisineControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
@@ -27,36 +27,36 @@ public class CuisineController implements CuisineControllerOpenApi {
 
     private final CuisineRepository cuisineRepository;
     private final CuisineRegisterService cuisineRegisterService;
-    private final CuisineDTOAssembler cuisineDTOAssembler;
+    private final CuisineModelAssembler cuisineModelAssembler;
     private final CuisineInputDisassembler cuisineInputDisassembler;
 
     @GetMapping
-    public Page<CuisineDTO> findAll(@PageableDefault(size = 5) Pageable pageable) {
+    public Page<CuisineModel> findAll(@PageableDefault(size = 5) Pageable pageable) {
         Page<Cuisine> cuisinesPage = cuisineRepository.findAll(pageable);
-        List<CuisineDTO> cuisinesDTO = cuisineDTOAssembler.toDTOList(cuisinesPage.getContent());
-        Page<CuisineDTO> cuisinesDTOPage = new PageImpl<>(cuisinesDTO, pageable, cuisinesPage.getTotalElements());
-        return cuisinesDTOPage;
+        List<CuisineModel> cuisinesModel = cuisineModelAssembler.toCollectionModel(cuisinesPage.getContent());
+        Page<CuisineModel> cuisinesModelPage = new PageImpl<>(cuisinesModel, pageable, cuisinesPage.getTotalElements());
+        return cuisinesModelPage;
     }
 
     @GetMapping("/{cuisineId}")
-    public CuisineDTO findById(@PathVariable Long cuisineId) {
+    public CuisineModel findById(@PathVariable Long cuisineId) {
     	Cuisine cuisine = cuisineRegisterService.findOrThrowException(cuisineId);
-        return cuisineDTOAssembler.toDTO(cuisine);
+        return cuisineModelAssembler.toModel(cuisine);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CuisineDTO add(@Valid @RequestBody CuisineInput cuisineInput) {
+    public CuisineModel add(@Valid @RequestBody CuisineInput cuisineInput) {
     	Cuisine cuisine = cuisineInputDisassembler.toDomainObject(cuisineInput);
-        return cuisineDTOAssembler.toDTO(cuisineRegisterService.save(cuisine));
+        return cuisineModelAssembler.toModel(cuisineRegisterService.save(cuisine));
     }
 
     @PutMapping("/{cuisineId}")
-    public CuisineDTO update(@PathVariable Long cuisineId,
-                                          @RequestBody @Valid CuisineInput newCuisineInput) {
+    public CuisineModel update(@PathVariable Long cuisineId,
+                               @RequestBody @Valid CuisineInput newCuisineInput) {
         Cuisine cuisine = cuisineRegisterService.findOrThrowException(cuisineId);
         cuisineInputDisassembler.copyToDomainObject(newCuisineInput, cuisine);
-        return cuisineDTOAssembler.toDTO(cuisineRegisterService.save(cuisine));
+        return cuisineModelAssembler.toModel(cuisineRegisterService.save(cuisine));
     }
 
     @DeleteMapping("/{cuisineId}")

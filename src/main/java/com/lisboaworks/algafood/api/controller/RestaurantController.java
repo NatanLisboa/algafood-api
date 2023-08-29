@@ -1,11 +1,11 @@
 package com.lisboaworks.algafood.api.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.lisboaworks.algafood.api.assembler.RestaurantDTOAssembler;
+import com.lisboaworks.algafood.api.assembler.RestaurantModelAssembler;
 import com.lisboaworks.algafood.api.assembler.RestaurantInputDisassembler;
-import com.lisboaworks.algafood.api.dto.RestaurantDTO;
-import com.lisboaworks.algafood.api.dto.input.RestaurantInput;
-import com.lisboaworks.algafood.api.dto.view.RestaurantView;
+import com.lisboaworks.algafood.api.model.RestaurantModel;
+import com.lisboaworks.algafood.api.model.input.RestaurantInput;
+import com.lisboaworks.algafood.api.model.view.RestaurantView;
 import com.lisboaworks.algafood.api.openapi.controller.RestaurantControllerOpenApi;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.CityNotFoundException;
@@ -29,45 +29,45 @@ public class RestaurantController implements RestaurantControllerOpenApi {
 
     private final RestaurantRepository restaurantRepository;
     private final RestaurantRegisterService restaurantRegisterService;
-    private final RestaurantDTOAssembler restaurantDTOAssembler;
+    private final RestaurantModelAssembler restaurantModelAssembler;
     private final RestaurantInputDisassembler restaurantInputDisassembler;
 
     @GetMapping
     @JsonView(RestaurantView.Summary.class)
-    public List<RestaurantDTO> findAll() {
-        return restaurantDTOAssembler.toDTOList(restaurantRepository.findAll());
+    public List<RestaurantModel> findAll() {
+        return restaurantModelAssembler.toCollectionModel(restaurantRepository.findAll());
     }
 
     @GetMapping(params = "projection=only-name")
     @JsonView(RestaurantView.OnlyName.class)
-    public List<RestaurantDTO> findAllOnlyWithName() {
+    public List<RestaurantModel> findAllOnlyWithName() {
         return this.findAll();
     }
 
     @GetMapping("/{restaurantId}")
-    public RestaurantDTO findById(@PathVariable Long restaurantId) {
+    public RestaurantModel findById(@PathVariable Long restaurantId) {
     	Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
-    	return restaurantDTOAssembler.toDTO(restaurant);
+    	return restaurantModelAssembler.toModel(restaurant);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public RestaurantDTO add(@RequestBody @Valid RestaurantInput restaurantInput) {
+    public RestaurantModel add(@RequestBody @Valid RestaurantInput restaurantInput) {
         try {
         	Restaurant restaurant = restaurantInputDisassembler.toDomainObject(restaurantInput);
-            return restaurantDTOAssembler.toDTO(restaurantRegisterService.save(restaurant));
+            return restaurantModelAssembler.toModel(restaurantRegisterService.save(restaurant));
         } catch (CuisineNotFoundException | CityNotFoundException e) {
             throw new BusinessRuleException(e.getMessage());
         }
     }
 
     @PutMapping("/{restaurantId}")
-    public RestaurantDTO update(@PathVariable Long restaurantId,
-                                    @RequestBody @Valid RestaurantInput newRestaurantInput) {
+    public RestaurantModel update(@PathVariable Long restaurantId,
+                                  @RequestBody @Valid RestaurantInput newRestaurantInput) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
         restaurantInputDisassembler.copyToDomainObject(newRestaurantInput, restaurant);
         try {
-            return restaurantDTOAssembler.toDTO(restaurantRegisterService.save(restaurant));
+            return restaurantModelAssembler.toModel(restaurantRegisterService.save(restaurant));
         } catch (CuisineNotFoundException | CityNotFoundException e) {
             throw new BusinessRuleException(e.getMessage());
         }

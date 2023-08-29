@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.api.openapi.controller;
 
-import com.lisboaworks.algafood.api.dto.CityDTO;
-import com.lisboaworks.algafood.api.dto.input.CityInput;
+import com.lisboaworks.algafood.api.model.CityModel;
+import com.lisboaworks.algafood.api.model.input.CityInput;
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -16,7 +16,7 @@ import org.springframework.hateoas.CollectionModel;
 public interface CityControllerOpenApi {
 
     @ApiOperation("Get all registered cities")
-    CollectionModel<CityDTO> findAll();
+    CollectionModel<CityModel> findAll();
 
     @ApiResponses({
             @ApiResponse(responseCode = "400", description = "Invalid city id",
@@ -25,14 +25,14 @@ public interface CityControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Get a city by its id")
-    CityDTO findById(@ApiParam(value = "Id from a city", example = "1", required = true)
+    CityModel findById(@ApiParam(value = "Id from a city", example = "1", required = true)
                             Long cityId);
 
     @ApiOperation("Register a new city")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Registered city")
     })
-    CityDTO add(@ApiParam(name = "body", value = "New city representation", required = true)
+    CityModel add(@ApiParam(name = "body", value = "New city representation", required = true)
                        CityInput cityInput);
 
     @ApiResponses({
@@ -40,10 +40,10 @@ public interface CityControllerOpenApi {
             @ApiResponse(responseCode = "404", description = "City not found", content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Update an existing city")
-    CityDTO update(@ApiParam(value = "Id from a city", example = "1", required = true)
+    CityModel update(@ApiParam(value = "Id from a city", example = "1", required = true)
                           Long cityId,
 
-                          @ApiParam(name = "body", value = "City representation with new data")
+                     @ApiParam(name = "body", value = "City representation with new data")
                           CityInput newCityInput);
 
     @ApiResponses({

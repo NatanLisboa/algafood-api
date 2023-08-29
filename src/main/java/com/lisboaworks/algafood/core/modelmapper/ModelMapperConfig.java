@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.core.modelmapper;
 
-import com.lisboaworks.algafood.api.dto.AddressDTO;
-import com.lisboaworks.algafood.api.dto.input.OrderItemInput;
+import com.lisboaworks.algafood.api.model.AddressModel;
+import com.lisboaworks.algafood.api.model.input.OrderItemInput;
 import com.lisboaworks.algafood.domain.model.Address;
 import com.lisboaworks.algafood.domain.model.OrderItem;
 import org.modelmapper.ModelMapper;
@@ -18,10 +18,10 @@ public class ModelMapperConfig {
 
 		modelMapper.createTypeMap(OrderItemInput.class, OrderItem.class)
 				.addMappings(mapper -> mapper.skip(OrderItem::setId));
-		TypeMap<Address, AddressDTO> addressToAddressDTOTypeMap = modelMapper.createTypeMap(Address.class, AddressDTO.class);
-		addressToAddressDTOTypeMap.<String>addMapping(
+		TypeMap<Address, AddressModel> addressToAddressModelTypeMap = modelMapper.createTypeMap(Address.class, AddressModel.class);
+		addressToAddressModelTypeMap.<String>addMapping(
 				address -> address.getCity().getState().getName(),
-				(addressDTO, stateName) -> addressDTO.getCity().setState(stateName)
+				(addressModel, stateName) -> addressModel.getCity().setState(stateName)
 		);
 
 		return modelMapper;

@@ -1,9 +1,9 @@
 package com.lisboaworks.algafood.api.openapi.controller;
 
-import com.lisboaworks.algafood.api.dto.UserDTO;
-import com.lisboaworks.algafood.api.dto.input.UserChangePasswordInput;
-import com.lisboaworks.algafood.api.dto.input.UserNameEmailInput;
-import com.lisboaworks.algafood.api.dto.input.UserInput;
+import com.lisboaworks.algafood.api.model.UserModel;
+import com.lisboaworks.algafood.api.model.input.UserChangePasswordInput;
+import com.lisboaworks.algafood.api.model.input.UserNameEmailInput;
+import com.lisboaworks.algafood.api.model.input.UserInput;
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -19,7 +19,7 @@ import java.util.List;
 public interface UserControllerOpenApi {
 
     @ApiOperation("Get all registered users")
-    List<UserDTO> findAll();
+    List<UserModel> findAll();
 
     @ApiResponses({
             @ApiResponse(responseCode = "400", description = "Invalid user id",
@@ -28,14 +28,14 @@ public interface UserControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Get a user by its id")
-    UserDTO findById(@ApiParam(value = "Id from a user", example = "1", required = true)
+    UserModel findById(@ApiParam(value = "Id from a user", example = "1", required = true)
                             Long userId);
 
     @ApiOperation("Register a new user")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "User registered successfully")
     })
-    UserDTO add(@ApiParam(name = "body", value = "New user representation", required = true)
+    UserModel add(@ApiParam(name = "body", value = "New user representation", required = true)
                        UserInput userInput);
 
     @ApiResponses({
@@ -43,10 +43,10 @@ public interface UserControllerOpenApi {
             @ApiResponse(responseCode = "404", description = "User not found", content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Update an existing user")
-    UserDTO update(@ApiParam(value = "Id from a user", example = "1", required = true)
+    UserModel update(@ApiParam(value = "Id from a user", example = "1", required = true)
                           Long userId,
 
-                          @ApiParam(name = "body", value = "User representation with new data", required = true)
+                     @ApiParam(name = "body", value = "User representation with new data", required = true)
                    UserNameEmailInput newUserInput);
 
     @ApiOperation("Change user password")

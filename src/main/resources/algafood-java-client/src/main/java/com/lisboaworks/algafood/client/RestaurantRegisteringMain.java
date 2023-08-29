@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.client;
 
 import com.lisboaworks.algafood.client.api.RestaurantClient;
-import com.lisboaworks.algafood.client.api.RestaurantDTO;
+import com.lisboaworks.algafood.client.api.RestaurantModel;
 import com.lisboaworks.algafood.client.api.exception.AlgafoodApiException.Object;
 import com.lisboaworks.algafood.client.api.exception.ClientApiException;
 import com.lisboaworks.algafood.client.input.AddressInput;
@@ -39,7 +39,7 @@ public class RestaurantRegisteringMain {
         RestaurantClient restaurantClient = new RestaurantClient(new RestTemplate(), "http://api.algafood.local:8080");
 
         try {
-            RestaurantDTO savedRestaurant = restaurantClient.addRestaurant(restaurant);
+            RestaurantModel savedRestaurant = restaurantClient.addRestaurant(restaurant);
             System.out.println(savedRestaurant);
         } catch (ClientApiException e) {
             if (Objects.nonNull(e.getAlgafoodApiException())) {

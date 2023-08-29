@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.client.api;
 
 import com.lisboaworks.algafood.client.api.exception.ClientApiException;
-import com.lisboaworks.algafood.client.dto.RestaurantSummaryDTO;
+import com.lisboaworks.algafood.client.model.RestaurantSummaryModel;
 import com.lisboaworks.algafood.client.input.RestaurantInput;
 import lombok.AllArgsConstructor;
 import org.springframework.web.client.RestClientResponseException;
@@ -17,11 +17,11 @@ public class RestaurantClient {
     private RestTemplate restTemplate;
     private String url;
 
-    public List<RestaurantSummaryDTO> getAllRestaurants() {
+    public List<RestaurantSummaryModel> getAllRestaurants() {
         try {
             String resourceUri = url + RESOURCE_PATH;
-            RestaurantSummaryDTO[] restaurants = restTemplate
-                    .getForObject(resourceUri, RestaurantSummaryDTO[].class);
+            RestaurantSummaryModel[] restaurants = restTemplate
+                    .getForObject(resourceUri, RestaurantSummaryModel[].class);
 
             assert restaurants != null;
             return Arrays.asList(restaurants);
@@ -30,11 +30,11 @@ public class RestaurantClient {
         }
     }
 
-    public RestaurantDTO addRestaurant(RestaurantInput restaurantInput) {
+    public RestaurantModel addRestaurant(RestaurantInput restaurantInput) {
         String resourceUri = url + RESOURCE_PATH;
 
         try {
-            return restTemplate.postForObject(resourceUri, restaurantInput, RestaurantDTO.class);
+            return restTemplate.postForObject(resourceUri, restaurantInput, RestaurantModel.class);
         } catch (RestClientResponseException e) {
             throw new ClientApiException(e.getMessage(), e);
         }

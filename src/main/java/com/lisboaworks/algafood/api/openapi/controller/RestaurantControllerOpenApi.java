@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.api.openapi.controller;
 
-import com.lisboaworks.algafood.api.dto.RestaurantDTO;
-import com.lisboaworks.algafood.api.dto.input.RestaurantInput;
+import com.lisboaworks.algafood.api.model.RestaurantModel;
+import com.lisboaworks.algafood.api.model.input.RestaurantInput;
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import io.swagger.annotations.*;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -23,10 +23,10 @@ public interface RestaurantControllerOpenApi {
                     type = "string",
                     dataTypeClass = String.class)
     })
-    List<RestaurantDTO> findAll();
+    List<RestaurantModel> findAll();
 
     @ApiOperation(value = "Get restaurants", hidden = true)
-    List<RestaurantDTO> findAllOnlyWithName();
+    List<RestaurantModel> findAllOnlyWithName();
 
     @ApiResponses({
             @ApiResponse(responseCode = "400", description = "Invalid restaurant id",
@@ -35,13 +35,13 @@ public interface RestaurantControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation(value = "Get restaurant by id")
-    RestaurantDTO findById(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
+    RestaurantModel findById(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
 
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Restaurant registered successfully")
     })
     @ApiOperation(value = "Add new restaurant")
-    RestaurantDTO add(
+    RestaurantModel add(
                     @ApiParam(name = "body", value = "New restaurant representation", required = true)
                     RestaurantInput restaurantInput
     );
@@ -52,10 +52,10 @@ public interface RestaurantControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation(value = "Update restaurant")
-    RestaurantDTO update(@ApiParam(value = "Restaurant id", example = "1", required = true)
+    RestaurantModel update(@ApiParam(value = "Restaurant id", example = "1", required = true)
                          Long restaurantId,
 
-                         @ApiParam(name = "body", value = "Restaurant representation with new data", required = true)
+                           @ApiParam(name = "body", value = "Restaurant representation with new data", required = true)
                          RestaurantInput newRestaurantInput
     );
 

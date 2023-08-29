@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.PaymentMethodDTOAssembler;
-import com.lisboaworks.algafood.api.dto.PaymentMethodDTO;
+import com.lisboaworks.algafood.api.assembler.PaymentMethodModelAssembler;
+import com.lisboaworks.algafood.api.model.PaymentMethodModel;
 import com.lisboaworks.algafood.api.openapi.controller.RestaurantPaymentMethodControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
@@ -18,12 +18,12 @@ import java.util.List;
 public class RestaurantPaymentMethodController implements RestaurantPaymentMethodControllerOpenApi {
 
     private final RestaurantRegisterService restaurantRegisterService;
-    private final PaymentMethodDTOAssembler paymentMethodDTOAssembler;
+    private final PaymentMethodModelAssembler paymentMethodModelAssembler;
 
     @GetMapping
-    public List<PaymentMethodDTO> findAll(@PathVariable Long restaurantId) {
+    public List<PaymentMethodModel> findAll(@PathVariable Long restaurantId) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
-        return paymentMethodDTOAssembler.toDTOList(restaurant.getPaymentMethods());
+        return paymentMethodModelAssembler.toCollectionModel(restaurant.getPaymentMethods());
     }
 
     @PutMapping("/{paymentMethodId}")

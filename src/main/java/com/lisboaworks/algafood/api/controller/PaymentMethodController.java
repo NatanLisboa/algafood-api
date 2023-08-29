@@ -1,9 +1,9 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.PaymentMethodDTOAssembler;
+import com.lisboaworks.algafood.api.assembler.PaymentMethodModelAssembler;
 import com.lisboaworks.algafood.api.assembler.PaymentMethodInputDisassembler;
-import com.lisboaworks.algafood.api.dto.PaymentMethodDTO;
-import com.lisboaworks.algafood.api.dto.input.PaymentMethodInput;
+import com.lisboaworks.algafood.api.model.PaymentMethodModel;
+import com.lisboaworks.algafood.api.model.input.PaymentMethodInput;
 import com.lisboaworks.algafood.api.openapi.controller.PaymentMethodControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.PaymentMethod;
 import com.lisboaworks.algafood.domain.repository.PaymentMethodRepository;
@@ -29,12 +29,12 @@ import java.util.concurrent.TimeUnit;
 public class PaymentMethodController implements PaymentMethodControllerOpenApi {
 
     private final PaymentMethodRegisterService paymentMethodRegisterService;
-    private final PaymentMethodDTOAssembler paymentMethodDTOAssembler;
+    private final PaymentMethodModelAssembler paymentMethodModelAssembler;
     private final PaymentMethodRepository paymentMethodRepository;
     private final PaymentMethodInputDisassembler paymentMethodInputDisassembler;
 
     @GetMapping
-    public ResponseEntity<List<PaymentMethodDTO>> findAll(ServletWebRequest request) {
+    public ResponseEntity<List<PaymentMethodModel>> findAll(ServletWebRequest request) {
         ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
 
         String eTag = "0";
@@ -47,16 +47,16 @@ public class PaymentMethodController implements PaymentMethodControllerOpenApi {
         }
 
         List<PaymentMethod> paymentMethods = paymentMethodRepository.findAll();
-        List<PaymentMethodDTO> paymentMethodsDTO = paymentMethodDTOAssembler.toDTOList(paymentMethods);
+        List<PaymentMethodModel> paymentMethodsModel = paymentMethodModelAssembler.toCollectionModel(paymentMethods);
 
         return ResponseEntity.ok()
                 .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS).cachePublic())
                 .eTag(eTag)
-                .body(paymentMethodsDTO);
+                .body(paymentMethodsModel);
     }
 
     @GetMapping("/{paymentMethodId}")
-    public ResponseEntity<PaymentMethodDTO> findById(@PathVariable Long paymentMethodId, ServletWebRequest request) {
+    public ResponseEntity<PaymentMethodModel> findById(@PathVariable Long paymentMethodId, ServletWebRequest request) {
         ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
 
         String eTag = "0";
@@ -69,27 +69,27 @@ public class PaymentMethodController implements PaymentMethodControllerOpenApi {
         }
 
         PaymentMethod paymentMethod = paymentMethodRegisterService.findOrThrowException(paymentMethodId);
-        PaymentMethodDTO paymentMethodDTO = paymentMethodDTOAssembler.toDTO(paymentMethod);
+        PaymentMethodModel paymentMethodModel = paymentMethodModelAssembler.toModel(paymentMethod);
 
         return ResponseEntity.ok()
                 .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS))
                 .eTag(eTag)
-                .body(paymentMethodDTO);
+                .body(paymentMethodModel);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PaymentMethodDTO add(@Valid @RequestBody PaymentMethodInput paymentMethodInput) {
+    public PaymentMethodModel add(@Valid @RequestBody PaymentMethodInput paymentMethodInput) {
         PaymentMethod paymentMethod = paymentMethodInputDisassembler.toDomainObject(paymentMethodInput);
-        return paymentMethodDTOAssembler.toDTO(paymentMethodRegisterService.save(paymentMethod));
+        return paymentMethodModelAssembler.toModel(paymentMethodRegisterService.save(paymentMethod));
     }
 
     @PutMapping("/{paymentMethodId}")
-    public PaymentMethodDTO update(@PathVariable Long paymentMethodId,
-                             @RequestBody @Valid PaymentMethodInput newPaymentMethodInput) {
+    public PaymentMethodModel update(@PathVariable Long paymentMethodId,
+                                     @RequestBody @Valid PaymentMethodInput newPaymentMethodInput) {
         PaymentMethod paymentMethod = paymentMethodRegisterService.findOrThrowException(paymentMethodId);
         paymentMethodInputDisassembler.copyToDomainObject(newPaymentMethodInput, paymentMethod);
-        return paymentMethodDTOAssembler.toDTO(paymentMethodRegisterService.save(paymentMethod));
+        return paymentMethodModelAssembler.toModel(paymentMethodRegisterService.save(paymentMethod));
     }
 
     @DeleteMapping("/{paymentMethodId}")

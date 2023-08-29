@@ -1,9 +1,9 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.StateDTOAssembler;
+import com.lisboaworks.algafood.api.assembler.StateModelAssembler;
 import com.lisboaworks.algafood.api.assembler.StateInputDisassembler;
-import com.lisboaworks.algafood.api.dto.StateDTO;
-import com.lisboaworks.algafood.api.dto.input.StateInput;
+import com.lisboaworks.algafood.api.model.StateModel;
+import com.lisboaworks.algafood.api.model.input.StateInput;
 import com.lisboaworks.algafood.api.openapi.controller.StateControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.State;
 import com.lisboaworks.algafood.domain.repository.StateRepository;
@@ -22,33 +22,33 @@ public class StateController implements StateControllerOpenApi {
 
     private final StateRepository stateRepository;
     private final StateRegisterService stateRegisterService;
-    private final StateDTOAssembler stateDTOAssembler;
+    private final StateModelAssembler stateModelAssembler;
     private final StateInputDisassembler stateInputDisassembler;
 
     @GetMapping
-    public List<StateDTO> findAll() {
-        return stateDTOAssembler.toDTOList(stateRepository.findAll());
+    public List<StateModel> findAll() {
+        return stateModelAssembler.toCollectionModel(stateRepository.findAll());
     }
 
     @GetMapping("/{stateId}")
-    public StateDTO findById(@PathVariable Long stateId) {
+    public StateModel findById(@PathVariable Long stateId) {
     	State state = stateRegisterService.findOrThrowException(stateId);
-        return stateDTOAssembler.toDTO(state);
+        return stateModelAssembler.toModel(state);
     }
 
     @PostMapping
-    public StateDTO add(@RequestBody @Valid StateInput stateInput) {
+    public StateModel add(@RequestBody @Valid StateInput stateInput) {
     	State state = stateInputDisassembler.toDomainObject(stateInput);
-        return stateDTOAssembler.toDTO(stateRegisterService.save(state));
+        return stateModelAssembler.toModel(stateRegisterService.save(state));
     }
 
 
     @PutMapping("/{stateId}")
-    public StateDTO update(@PathVariable Long stateId,
-                                    @RequestBody @Valid StateInput newStateInput) {
+    public StateModel update(@PathVariable Long stateId,
+                             @RequestBody @Valid StateInput newStateInput) {
         State state = stateRegisterService.findOrThrowException(stateId);
         stateInputDisassembler.copyToDomainObject(newStateInput, state);
-        return stateDTOAssembler.toDTO(stateRegisterService.save(state));
+        return stateModelAssembler.toModel(stateRegisterService.save(state));
     }
 
     @DeleteMapping("/{stateId}")

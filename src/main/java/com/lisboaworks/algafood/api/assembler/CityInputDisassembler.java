@@ -1,6 +1,6 @@
 package com.lisboaworks.algafood.api.assembler;
 
-import com.lisboaworks.algafood.api.dto.input.CityInput;
+import com.lisboaworks.algafood.api.model.input.CityInput;
 import com.lisboaworks.algafood.domain.model.City;
 import com.lisboaworks.algafood.domain.model.State;
 import lombok.AllArgsConstructor;

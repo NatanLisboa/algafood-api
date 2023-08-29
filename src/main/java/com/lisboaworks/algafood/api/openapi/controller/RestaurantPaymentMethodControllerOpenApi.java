@@ -1,6 +1,6 @@
 package com.lisboaworks.algafood.api.openapi.controller;
 
-import com.lisboaworks.algafood.api.dto.PaymentMethodDTO;
+import com.lisboaworks.algafood.api.model.PaymentMethodModel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -16,7 +16,7 @@ public interface RestaurantPaymentMethodControllerOpenApi {
     @ApiResponses({
             @ApiResponse(responseCode = "404", description = "Restaurant not found")
     })
-    List<PaymentMethodDTO> findAll(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
+    List<PaymentMethodModel> findAll(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
 
     @ApiOperation("Associate payment method to restaurant")
     @ApiResponses({

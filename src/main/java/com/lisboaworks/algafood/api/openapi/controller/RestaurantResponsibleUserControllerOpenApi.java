@@ -1,6 +1,6 @@
 package com.lisboaworks.algafood.api.openapi.controller;
 
-import com.lisboaworks.algafood.api.dto.UserDTO;
+import com.lisboaworks.algafood.api.model.UserModel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -16,7 +16,7 @@ public interface RestaurantResponsibleUserControllerOpenApi {
     @ApiResponses({
             @ApiResponse(responseCode = "404", description = "Restaurant not found")
     })
-    List<UserDTO> getAllResponsibleUsers(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
+    List<UserModel> getAllResponsibleUsers(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
 
     @ApiOperation("Associate responsible user to restaurant")
     @ApiResponses({

@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.PermissionDTOAssembler;
-import com.lisboaworks.algafood.api.dto.PermissionDTO;
+import com.lisboaworks.algafood.api.assembler.PermissionModelAssembler;
+import com.lisboaworks.algafood.api.model.PermissionModel;
 import com.lisboaworks.algafood.api.openapi.controller.UserGroupPermissionControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.UserGroup;
 import com.lisboaworks.algafood.domain.service.UserGroupRegisterService;
@@ -17,13 +17,13 @@ import java.util.List;
 @AllArgsConstructor
 public class UserGroupPermissionController implements UserGroupPermissionControllerOpenApi {
 
-    private final PermissionDTOAssembler permissionDTOAssembler;
+    private final PermissionModelAssembler permissionModelAssembler;
     private final UserGroupRegisterService userGroupRegisterService;
 
     @GetMapping
-    public List<PermissionDTO> findAll(@PathVariable Long userGroupId) {
+    public List<PermissionModel> findAll(@PathVariable Long userGroupId) {
         UserGroup userGroup = userGroupRegisterService.findOrThrowException(userGroupId);
-        return permissionDTOAssembler.toDTOList(userGroup.getPermissions());
+        return permissionModelAssembler.toCollectionModel(userGroup.getPermissions());
     }
     
     @PutMapping("/{permissionId}")

@@ -1,9 +1,9 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.ProductDTOAssembler;
+import com.lisboaworks.algafood.api.assembler.ProductModelAssembler;
 import com.lisboaworks.algafood.api.assembler.ProductInputDisassembler;
-import com.lisboaworks.algafood.api.dto.ProductDTO;
-import com.lisboaworks.algafood.api.dto.input.ProductInput;
+import com.lisboaworks.algafood.api.model.ProductModel;
+import com.lisboaworks.algafood.api.model.input.ProductInput;
 import com.lisboaworks.algafood.api.openapi.controller.RestaurantProductControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.Product;
 import com.lisboaworks.algafood.domain.model.Restaurant;
@@ -25,13 +25,13 @@ public class RestaurantProductController implements RestaurantProductControllerO
 
     private final ProductRegisterService productRegisterService;
     private final RestaurantRegisterService restaurantRegisterService;
-    private final ProductDTOAssembler productDTOAssembler;
+    private final ProductModelAssembler productModelAssembler;
     private final ProductInputDisassembler productInputDisassembler;
     private final ProductRepository productRepository;
 
     @GetMapping
-    public List<ProductDTO> findAll(@PathVariable Long restaurantId,
-                                    @RequestParam(required = false) boolean includeInactiveProducts) {
+    public List<ProductModel> findAll(@PathVariable Long restaurantId,
+                                      @RequestParam(required = false) boolean includeInactiveProducts) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
         List<Product> allActiveProducts;
         if (includeInactiveProducts) {
@@ -39,29 +39,29 @@ public class RestaurantProductController implements RestaurantProductControllerO
         } else {
             allActiveProducts = productRepository.findActiveProductsByRestaurant(restaurant);
         }
-        return productDTOAssembler.toDTOList(allActiveProducts);
+        return productModelAssembler.toCollectionModel(allActiveProducts);
     }
 
     @GetMapping("/{productId}")
-    public ProductDTO findById(@PathVariable Long restaurantId, @PathVariable Long productId) {
+    public ProductModel findById(@PathVariable Long restaurantId, @PathVariable Long productId) {
         Product product = productRegisterService.findOrThrowException(restaurantId, productId);
-        return productDTOAssembler.toDTO(product);
+        return productModelAssembler.toModel(product);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductDTO add(@PathVariable Long restaurantId, @RequestBody @Valid ProductInput productInput) {
+    public ProductModel add(@PathVariable Long restaurantId, @RequestBody @Valid ProductInput productInput) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
         Product product = productInputDisassembler.toDomainObject(productInput);
         product.setRestaurant(restaurant);
-        return productDTOAssembler.toDTO(productRegisterService.save(product));
+        return productModelAssembler.toModel(productRegisterService.save(product));
     }
 
     @PutMapping("/{productId}")
-    public ProductDTO update(@PathVariable Long restaurantId, @PathVariable Long productId, @RequestBody @Valid ProductInput updateProductInput) {
+    public ProductModel update(@PathVariable Long restaurantId, @PathVariable Long productId, @RequestBody @Valid ProductInput updateProductInput) {
         Product product = productRegisterService.findOrThrowException(restaurantId, productId);
         productInputDisassembler.copyToDomainObject(updateProductInput, product);
-        return productDTOAssembler.toDTO(productRegisterService.save(product));
+        return productModelAssembler.toModel(productRegisterService.save(product));
     }
 
 }

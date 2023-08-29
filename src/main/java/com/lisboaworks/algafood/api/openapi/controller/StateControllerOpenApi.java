@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.api.openapi.controller;
 
-import com.lisboaworks.algafood.api.dto.StateDTO;
-import com.lisboaworks.algafood.api.dto.input.StateInput;
+import com.lisboaworks.algafood.api.model.StateModel;
+import com.lisboaworks.algafood.api.model.input.StateInput;
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,7 +17,7 @@ import java.util.List;
 public interface StateControllerOpenApi {
 
     @ApiOperation("Get all registered states")
-    List<StateDTO> findAll();
+    List<StateModel> findAll();
 
     @ApiResponses({
             @ApiResponse(responseCode = "400", description = "Invalid state id",
@@ -26,14 +26,14 @@ public interface StateControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Get a state by its id")
-    StateDTO findById(@ApiParam(value = "Id from a state", example = "1", required = true)
+    StateModel findById(@ApiParam(value = "Id from a state", example = "1", required = true)
                             Long stateId);
 
     @ApiOperation("Register a new state")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Registered state")
     })
-    StateDTO add(@ApiParam(name = "body", value = "New state representation", required = true)
+    StateModel add(@ApiParam(name = "body", value = "New state representation", required = true)
                        StateInput stateInput);
 
     @ApiResponses({
@@ -41,10 +41,10 @@ public interface StateControllerOpenApi {
             @ApiResponse(responseCode = "404", description = "State not found", content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Update an existing state")
-    StateDTO update(@ApiParam(value = "Id from a state", example = "1", required = true)
+    StateModel update(@ApiParam(value = "Id from a state", example = "1", required = true)
                           Long stateId,
 
-                          @ApiParam(name = "body", value = "State representation with new data", required = true)
+                      @ApiParam(name = "body", value = "State representation with new data", required = true)
                           StateInput newStateInput);
 
     @ApiResponses({

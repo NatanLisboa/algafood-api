@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.api.openapi.controller;
 
-import com.lisboaworks.algafood.api.dto.UserGroupDTO;
-import com.lisboaworks.algafood.api.dto.input.UserGroupInput;
+import com.lisboaworks.algafood.api.model.UserGroupModel;
+import com.lisboaworks.algafood.api.model.input.UserGroupInput;
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,7 +17,7 @@ import java.util.List;
 public interface UserGroupControllerOpenApi {
 
     @ApiOperation("Get all registered user groups")
-    List<UserGroupDTO> findAll();
+    List<UserGroupModel> findAll();
 
     @ApiResponses({
             @ApiResponse(responseCode = "400", description = "Invalid user group id",
@@ -26,14 +26,14 @@ public interface UserGroupControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Get a user group by its id")
-    UserGroupDTO findById(@ApiParam(value = "Id from a user group", example = "1", required = true)
+    UserGroupModel findById(@ApiParam(value = "Id from a user group", example = "1", required = true)
                             Long userGroupId);
 
     @ApiOperation("Register a new user group")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Registered user group")
     })
-    UserGroupDTO add(@ApiParam(name = "body", value = "New user group representation", required = true)
+    UserGroupModel add(@ApiParam(name = "body", value = "New user group representation", required = true)
                        UserGroupInput userGroupInput);
 
     @ApiResponses({
@@ -41,7 +41,7 @@ public interface UserGroupControllerOpenApi {
             @ApiResponse(responseCode = "404", description = "User group not found", content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation("Update an existing user group")
-    UserGroupDTO update(@ApiParam(value = "Id from a user group", example = "1", required = true)
+    UserGroupModel update(@ApiParam(value = "Id from a user group", example = "1", required = true)
                           Long userGroupId,
 
                           @ApiParam(name = "body", value = "User group representation with new data", required = true)

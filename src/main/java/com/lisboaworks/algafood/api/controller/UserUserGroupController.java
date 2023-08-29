@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.UserGroupDTOAssembler;
-import com.lisboaworks.algafood.api.dto.UserGroupDTO;
+import com.lisboaworks.algafood.api.assembler.UserGroupModelAssembler;
+import com.lisboaworks.algafood.api.model.UserGroupModel;
 import com.lisboaworks.algafood.api.openapi.controller.UserUserGroupControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.User;
 import com.lisboaworks.algafood.domain.service.UserRegisterService;
@@ -16,13 +16,13 @@ import java.util.List;
 @AllArgsConstructor
 public class UserUserGroupController implements UserUserGroupControllerOpenApi {
 
-    private final UserGroupDTOAssembler userGroupDTOAssembler;
+    private final UserGroupModelAssembler userGroupModelAssembler;
     private final UserRegisterService userRegisterService;
 
     @GetMapping
-    public List<UserGroupDTO> findAll(@PathVariable Long userId) {
+    public List<UserGroupModel> findAll(@PathVariable Long userId) {
         User user = userRegisterService.findOrThrowException(userId);
-        return userGroupDTOAssembler.toDTOList(user.getUserGroups());
+        return userGroupModelAssembler.toCollectionModel(user.getUserGroups());
     }
     
     @PutMapping("/{userGroupId}")
