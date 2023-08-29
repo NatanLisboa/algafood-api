@@ -13,6 +13,7 @@ import com.lisboaworks.algafood.domain.model.City;
 import com.lisboaworks.algafood.domain.repository.CityRepository;
 import com.lisboaworks.algafood.domain.service.CityRegisterService;
 import lombok.AllArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +35,24 @@ public class CityController implements CityControllerOpenApi {
     private final CityInputDisassembler cityInputDisassembler;
     
     @GetMapping
-    public List<CityDTO> findAll() {
-        return cityDTOAssembler.toDTOList(cityRepository.findAll());
+    public CollectionModel<CityDTO> findAll() {
+        List<CityDTO> cityDTOList = cityDTOAssembler.toDTOList(cityRepository.findAll());
+        CollectionModel<CityDTO> cityDTOCollectionModel = CollectionModel.of(cityDTOList);
+
+        cityDTOCollectionModel.forEach(cityDTO -> {
+            cityDTO.add(linkTo(methodOn(CityController.class)
+                    .findById(cityDTO.getId())).withSelfRel());
+
+            cityDTO.add(linkTo(methodOn(CityController.class)
+                    .findAll()).withRel("cities"));
+
+            cityDTO.getState().add(linkTo(methodOn(StateController.class)
+                    .findById(cityDTO.getState().getId())).withSelfRel());
+        });
+
+        cityDTOCollectionModel.add(linkTo(CityController.class).withSelfRel());
+
+        return cityDTOCollectionModel;
     }
 
     @GetMapping("/{cityId}")

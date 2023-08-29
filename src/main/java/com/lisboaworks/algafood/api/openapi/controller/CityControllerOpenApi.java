@@ -10,14 +10,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-
-import java.util.List;
+import org.springframework.hateoas.CollectionModel;
 
 @Api(tags = "Cities")
 public interface CityControllerOpenApi {
 
     @ApiOperation("Get all registered cities")
-    List<CityDTO> findAll();
+    CollectionModel<CityDTO> findAll();
 
     @ApiResponses({
             @ApiResponse(responseCode = "400", description = "Invalid city id",
