@@ -21,9 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 @RestController
 @RequestMapping(path = "/cities", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
@@ -36,40 +33,14 @@ public class CityController implements CityControllerOpenApi {
     
     @GetMapping
     public CollectionModel<CityDTO> findAll() {
-        List<CityDTO> cityDTOList = cityDTOAssembler.toDTOList(cityRepository.findAll());
-        CollectionModel<CityDTO> cityDTOCollectionModel = CollectionModel.of(cityDTOList);
-
-        cityDTOCollectionModel.forEach(cityDTO -> {
-            cityDTO.add(linkTo(methodOn(CityController.class)
-                    .findById(cityDTO.getId())).withSelfRel());
-
-            cityDTO.add(linkTo(methodOn(CityController.class)
-                    .findAll()).withRel("cities"));
-
-            cityDTO.getState().add(linkTo(methodOn(StateController.class)
-                    .findById(cityDTO.getState().getId())).withSelfRel());
-        });
-
-        cityDTOCollectionModel.add(linkTo(CityController.class).withSelfRel());
-
-        return cityDTOCollectionModel;
+        List<City> cities = cityRepository.findAll();
+        return cityDTOAssembler.toCollectionModel(cities);
     }
 
     @GetMapping("/{cityId}")
     public CityDTO findById(@PathVariable Long cityId) {
         City city = cityRegisterService.findOrThrowException(cityId);
-        CityDTO cityDTO = cityDTOAssembler.toDTO(city);
-
-        cityDTO.add(linkTo(methodOn(CityController.class)
-                .findById(cityDTO.getId())).withSelfRel());
-
-        cityDTO.add(linkTo(methodOn(CityController.class)
-                .findAll()).withRel("cities"));
-
-        cityDTO.getState().add(linkTo(methodOn(StateController.class)
-                .findById(cityDTO.getState().getId())).withSelfRel());
-
-        return cityDTO;
+        return cityDTOAssembler.toModel(city);
     }
 
     @PostMapping
@@ -77,7 +48,7 @@ public class CityController implements CityControllerOpenApi {
     public CityDTO add(@RequestBody @Valid CityInput cityInput) {
         try {
         	City city = cityInputDisassembler.toDomainObject(cityInput);
-            CityDTO cityDTO = cityDTOAssembler.toDTO(cityRegisterService.save(city));
+            CityDTO cityDTO = cityDTOAssembler.toModel(cityRegisterService.save(city));
             ResourceUriHelper.addUriInResponseHeader(cityDTO.getId());
             return cityDTO;
         } catch (StateNotFoundException e) {
@@ -90,7 +61,7 @@ public class CityController implements CityControllerOpenApi {
         try {
             City city = cityRegisterService.findOrThrowException(cityId);
             cityInputDisassembler.copyToDomainObject(newCityInput, city);
-            return cityDTOAssembler.toDTO(cityRegisterService.save(city));
+            return cityDTOAssembler.toModel(cityRegisterService.save(city));
         } catch (StateNotFoundException e) {
             throw new BusinessRuleException(e.getMessage(), e);
         }
