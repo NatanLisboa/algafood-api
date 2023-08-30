@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.CuisineModelAssembler;
 import com.lisboaworks.algafood.api.assembler.CuisineInputDisassembler;
+import com.lisboaworks.algafood.api.assembler.CuisineModelAssembler;
 import com.lisboaworks.algafood.api.model.CuisineModel;
 import com.lisboaworks.algafood.api.model.input.CuisineInput;
 import com.lisboaworks.algafood.api.openapi.controller.CuisineControllerOpenApi;
@@ -10,15 +10,15 @@ import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import com.lisboaworks.algafood.domain.service.CuisineRegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/cuisines", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -29,13 +29,14 @@ public class CuisineController implements CuisineControllerOpenApi {
     private final CuisineRegisterService cuisineRegisterService;
     private final CuisineModelAssembler cuisineModelAssembler;
     private final CuisineInputDisassembler cuisineInputDisassembler;
+    private final PagedResourcesAssembler<Cuisine> pagedResourcesAssembler;
 
     @GetMapping
-    public Page<CuisineModel> findAll(@PageableDefault(size = 5) Pageable pageable) {
+    public PagedModel<CuisineModel> findAll(@PageableDefault(size = 5) Pageable pageable) {
         Page<Cuisine> cuisinesPage = cuisineRepository.findAll(pageable);
-        List<CuisineModel> cuisinesModel = cuisineModelAssembler.toCollectionModel(cuisinesPage.getContent());
-        Page<CuisineModel> cuisinesModelPage = new PageImpl<>(cuisinesModel, pageable, cuisinesPage.getTotalElements());
-        return cuisinesModelPage;
+        PagedModel<CuisineModel> cuisinesPagedModel = pagedResourcesAssembler
+                .toModel(cuisinesPage, cuisineModelAssembler);
+        return cuisinesPagedModel;
     }
 
     @GetMapping("/{cuisineId}")

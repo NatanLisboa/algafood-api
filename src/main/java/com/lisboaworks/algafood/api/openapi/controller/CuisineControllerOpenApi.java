@@ -10,14 +10,14 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.PagedModel;
 
 @Api(tags = "Cuisines")
 public interface CuisineControllerOpenApi {
 
     @ApiOperation("Get all registered cuisines")
-    Page<CuisineModel> findAll(Pageable pageable);
+    PagedModel<CuisineModel> findAll(Pageable pageable);
 
     @ApiResponses({
             @ApiResponse(responseCode = "400", description = "Invalid cuisine id",
