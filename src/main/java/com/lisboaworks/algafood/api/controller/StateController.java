@@ -9,11 +9,11 @@ import com.lisboaworks.algafood.domain.model.State;
 import com.lisboaworks.algafood.domain.repository.StateRepository;
 import com.lisboaworks.algafood.domain.service.StateRegisterService;
 import lombok.AllArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/states")
@@ -26,7 +26,7 @@ public class StateController implements StateControllerOpenApi {
     private final StateInputDisassembler stateInputDisassembler;
 
     @GetMapping
-    public List<StateModel> findAll() {
+    public CollectionModel<StateModel> findAll() {
         return stateModelAssembler.toCollectionModel(stateRepository.findAll());
     }
 

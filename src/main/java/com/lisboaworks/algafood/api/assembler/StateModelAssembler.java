@@ -1,27 +1,41 @@
 package com.lisboaworks.algafood.api.assembler;
 
+import com.lisboaworks.algafood.api.controller.StateController;
 import com.lisboaworks.algafood.api.model.StateModel;
 import com.lisboaworks.algafood.domain.model.State;
-import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
-@AllArgsConstructor
-public class StateModelAssembler {
-	
-	private final ModelMapper modelMapper;
-	
-	public StateModel toModel(State state) {
-		return modelMapper.map(state, StateModel.class);
+public class StateModelAssembler extends RepresentationModelAssemblerSupport<State, StateModel> {
+
+	@Autowired
+	private ModelMapper modelMapper;
+
+	public StateModelAssembler() {
+		super(StateController.class, StateModel.class);
 	}
-	
-	public List<StateModel> toCollectionModel(List<State> states) {
-		return states.stream()
-				.map(state -> toModel(state))
-				.toList();		
+
+	public StateModel toModel(State state) {
+		StateModel stateModel = this.createModelWithId(state.getId(), state);
+
+		modelMapper.map(state, stateModel);
+
+		stateModel.add(linkTo(methodOn(StateController.class)
+				.findAll()).withRel("states"));
+
+		return stateModel;
+	}
+
+	public CollectionModel<StateModel> toCollectionModel(Iterable<? extends State> states) {
+		return super.toCollectionModel(states)
+				.add(linkTo(StateController.class).withSelfRel());
 	}
 
 }
