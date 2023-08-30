@@ -5,10 +5,9 @@ import com.lisboaworks.algafood.api.model.UserModel;
 import com.lisboaworks.algafood.api.openapi.controller.RestaurantResponsibleUserControllerOpenApi;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import lombok.AllArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/restaurants/{restaurantId}/responsible-users")
@@ -19,7 +18,7 @@ public class RestaurantResponsibleUserController implements RestaurantResponsibl
     private final UserModelAssembler userModelAssembler;
 
     @GetMapping
-    public List<UserModel> getAllResponsibleUsers(@PathVariable Long restaurantId) {
+    public CollectionModel<UserModel> getAllResponsibleUsers(@PathVariable Long restaurantId) {
         return userModelAssembler.toCollectionModel(restaurantRegisterService.getAllResponsibleUsers(restaurantId));
     }
 

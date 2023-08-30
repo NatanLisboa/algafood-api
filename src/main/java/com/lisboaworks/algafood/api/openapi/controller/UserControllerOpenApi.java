@@ -12,14 +12,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-
-import java.util.List;
+import org.springframework.hateoas.CollectionModel;
 
 @Api(tags = "Users")
 public interface UserControllerOpenApi {
 
     @ApiOperation("Get all registered users")
-    List<UserModel> findAll();
+    CollectionModel<UserModel> findAll();
 
     @ApiResponses({
             @ApiResponse(responseCode = "400", description = "Invalid user id",
