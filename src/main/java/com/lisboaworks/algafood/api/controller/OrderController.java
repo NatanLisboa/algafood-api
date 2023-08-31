@@ -7,6 +7,7 @@ import com.lisboaworks.algafood.api.model.OrderModel;
 import com.lisboaworks.algafood.api.model.OrderSummaryModel;
 import com.lisboaworks.algafood.api.model.input.OrderInput;
 import com.lisboaworks.algafood.api.openapi.controller.OrderControllerOpenApi;
+import com.lisboaworks.algafood.core.data.PageWrapper;
 import com.lisboaworks.algafood.core.data.PageableTranslator;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
@@ -42,10 +43,10 @@ public class OrderController implements OrderControllerOpenApi {
 
     @GetMapping
     public PagedModel<OrderSummaryModel> findAll(OrderFilter filter, @PageableDefault(size = 5) Pageable pageable) {
-        pageable = this.mapSortPropertiesNamesToMatchWithDomainModel(pageable);
-        Page<Order> ordersPage = orderRepository.findAll(OrderSpecs.usingFilter(filter), pageable);
-        PagedModel<OrderSummaryModel> ordersPagedModel = pagedResourcesAssembler.toModel(ordersPage, orderSummaryModelAssembler);
-        return ordersPagedModel;
+        Pageable mappedPageable = this.mapSortPropertiesNamesToMatchWithDomainModel(pageable);
+        Page<Order> ordersPage = orderRepository.findAll(OrderSpecs.usingFilter(filter), mappedPageable);
+        ordersPage = new PageWrapper<>(ordersPage, pageable);
+        return pagedResourcesAssembler.toModel(ordersPage, orderSummaryModelAssembler);
     }
 
     @GetMapping("/{orderCode}")
