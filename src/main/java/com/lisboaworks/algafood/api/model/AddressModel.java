@@ -3,10 +3,13 @@ package com.lisboaworks.algafood.api.model;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
+@Relation(collectionRelation = "addresses")
 @Getter
 @Setter
-public class AddressModel {
+public class AddressModel extends RepresentationModel<AddressModel> {
 
     @ApiModelProperty(example = "08140000")
     private String zipCode;

@@ -10,8 +10,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.PagedModel;
 
 @Api(tags = "Orders")
 public interface OrderControllerOpenApi {
@@ -21,7 +21,7 @@ public interface OrderControllerOpenApi {
             @ApiImplicitParam(value = "Names of properties to filter on the response, separated by a comma",
                     name = "fields", paramType = "query", type = "string", dataTypeClass = String.class)
     })
-    Page<OrderSummaryModel> findAll(OrderFilter filter, Pageable pageable);
+    PagedModel<OrderSummaryModel> findAll(OrderFilter filter, Pageable pageable);
 
     @ApiOperation("Get a registered order by its code")
     @ApiResponses({
