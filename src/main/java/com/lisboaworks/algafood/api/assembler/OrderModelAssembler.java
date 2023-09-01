@@ -1,14 +1,11 @@
 package com.lisboaworks.algafood.api.assembler;
 
+import com.lisboaworks.algafood.api.AlgaLinks;
 import com.lisboaworks.algafood.api.controller.*;
 import com.lisboaworks.algafood.api.model.OrderModel;
 import com.lisboaworks.algafood.domain.model.Order;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.TemplateVariable;
-import org.springframework.hateoas.TemplateVariables;
-import org.springframework.hateoas.UriTemplate;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +18,9 @@ public class OrderModelAssembler extends RepresentationModelAssemblerSupport<Ord
 	@Autowired
 	private ModelMapper modelMapper;
 
+	@Autowired
+	private AlgaLinks algaLinks;
+
 	public OrderModelAssembler() {
 		super(OrderController.class, OrderModel.class);
 	}
@@ -30,22 +30,7 @@ public class OrderModelAssembler extends RepresentationModelAssemblerSupport<Ord
 
 		modelMapper.map(order, orderModel);
 
-		TemplateVariables pageVariables = new TemplateVariables(
-				new TemplateVariable("page", TemplateVariable.VariableType.REQUEST_PARAM),
-				new TemplateVariable("size", TemplateVariable.VariableType.REQUEST_PARAM),
-				new TemplateVariable("sort", TemplateVariable.VariableType.REQUEST_PARAM)
-		);
-
-		TemplateVariables filterVariables = new TemplateVariables(
-				new TemplateVariable("customerId", TemplateVariable.VariableType.REQUEST_PARAM),
-				new TemplateVariable("restaurantId", TemplateVariable.VariableType.REQUEST_PARAM),
-				new TemplateVariable("startCreationDatetime", TemplateVariable.VariableType.REQUEST_PARAM),
-				new TemplateVariable("endCreationDatetime", TemplateVariable.VariableType.REQUEST_PARAM)
-		);
-
-		String ordersUrl = linkTo(OrderController.class).toUri().toString();
-
-		orderModel.add(Link.of(UriTemplate.of(ordersUrl, pageVariables.concat(filterVariables)), "orders"));
+		orderModel.add(algaLinks.linkToOrders());
 
 		orderModel.getPaymentMethod().add(linkTo(methodOn(PaymentMethodController.class)
 				.findById(order.getPaymentMethod().getId(), null)).withSelfRel());
