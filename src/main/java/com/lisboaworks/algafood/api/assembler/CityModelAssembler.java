@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.api.assembler;
 
+import com.lisboaworks.algafood.api.AlgaLinks;
 import com.lisboaworks.algafood.api.controller.CityController;
 import com.lisboaworks.algafood.api.controller.StateController;
 import com.lisboaworks.algafood.api.model.CityModel;
@@ -19,6 +20,9 @@ public class CityModelAssembler extends RepresentationModelAssemblerSupport<City
 	@Autowired
 	private ModelMapper modelMapper;
 
+	@Autowired
+	private AlgaLinks algaLinks;
+
 	public CityModelAssembler() {
 		super(CityController.class, CityModel.class);
 	}
@@ -29,11 +33,9 @@ public class CityModelAssembler extends RepresentationModelAssemblerSupport<City
 
 		modelMapper.map(city, cityModel);
 
-		cityModel.add(linkTo(methodOn(CityController.class)
-				.findAll()).withRel("cities"));
+		cityModel.add(algaLinks.linkToCities("cities"));
 
-		cityModel.getState().add(linkTo(methodOn(StateController.class)
-				.findById(cityModel.getState().getId())).withSelfRel());
+		cityModel.getState().add(algaLinks.linkToState(cityModel.getState().getId()));
 
 		return cityModel;
 	}

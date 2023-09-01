@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.api.assembler;
 
+import com.lisboaworks.algafood.api.AlgaLinks;
 import com.lisboaworks.algafood.api.controller.StateController;
 import com.lisboaworks.algafood.api.model.StateModel;
 import com.lisboaworks.algafood.domain.model.State;
@@ -18,6 +19,9 @@ public class StateModelAssembler extends RepresentationModelAssemblerSupport<Sta
 	@Autowired
 	private ModelMapper modelMapper;
 
+	@Autowired
+	private AlgaLinks algaLinks;
+
 	public StateModelAssembler() {
 		super(StateController.class, StateModel.class);
 	}
@@ -27,8 +31,7 @@ public class StateModelAssembler extends RepresentationModelAssemblerSupport<Sta
 
 		modelMapper.map(state, stateModel);
 
-		stateModel.add(linkTo(methodOn(StateController.class)
-				.findAll()).withRel("states"));
+		stateModel.add(algaLinks.linkToStates("states"));
 
 		return stateModel;
 	}

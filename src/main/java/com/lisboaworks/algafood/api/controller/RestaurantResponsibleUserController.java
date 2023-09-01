@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.api.controller;
 
+import com.lisboaworks.algafood.api.AlgaLinks;
 import com.lisboaworks.algafood.api.assembler.UserModelAssembler;
 import com.lisboaworks.algafood.api.model.UserModel;
 import com.lisboaworks.algafood.api.openapi.controller.RestaurantResponsibleUserControllerOpenApi;
@@ -19,13 +20,12 @@ public class RestaurantResponsibleUserController implements RestaurantResponsibl
 
     private final RestaurantRegisterService restaurantRegisterService;
     private final UserModelAssembler userModelAssembler;
-
+    private final AlgaLinks algaLinks;
     @GetMapping
     public CollectionModel<UserModel> getAllResponsibleUsers(@PathVariable Long restaurantId) {
         return userModelAssembler.toCollectionModel(restaurantRegisterService.getAllResponsibleUsers(restaurantId))
                 .removeLinks()
-                .add(linkTo(methodOn(RestaurantResponsibleUserController.class)
-                        .getAllResponsibleUsers(restaurantId)).withSelfRel());
+                .add(algaLinks.linkToRestaurantResponsibleUsers(restaurantId));
     }
 
     @PutMapping("/{userId}")

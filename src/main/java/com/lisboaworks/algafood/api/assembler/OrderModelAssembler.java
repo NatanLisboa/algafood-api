@@ -1,16 +1,13 @@
 package com.lisboaworks.algafood.api.assembler;
 
 import com.lisboaworks.algafood.api.AlgaLinks;
-import com.lisboaworks.algafood.api.controller.*;
+import com.lisboaworks.algafood.api.controller.OrderController;
 import com.lisboaworks.algafood.api.model.OrderModel;
 import com.lisboaworks.algafood.domain.model.Order;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class OrderModelAssembler extends RepresentationModelAssemblerSupport<Order, OrderModel> {
@@ -32,21 +29,15 @@ public class OrderModelAssembler extends RepresentationModelAssemblerSupport<Ord
 
 		orderModel.add(algaLinks.linkToOrders());
 
-		orderModel.getPaymentMethod().add(linkTo(methodOn(PaymentMethodController.class)
-				.findById(order.getPaymentMethod().getId(), null)).withSelfRel());
+		orderModel.getPaymentMethod().add(algaLinks.linkToPaymentMethod(order.getPaymentMethod().getId()));
 
-		orderModel.getRestaurant().add(linkTo(methodOn(RestaurantController.class)
-				.findById(order.getRestaurant().getId())).withSelfRel());
+		orderModel.getRestaurant().add(algaLinks.linkToRestaurant(order.getRestaurant().getId()));
 
-		orderModel.getCustomer().add(linkTo(methodOn(UserController.class)
-				.findById(order.getCustomer().getId())).withSelfRel());
+		orderModel.getCustomer().add(algaLinks.linkToUser(order.getCustomer().getId()));
 
-		orderModel.getDeliveryAddress().getCity().add(linkTo(methodOn(CityController.class)
-				.findById(order.getDeliveryAddress().getCity().getId())).withSelfRel());
+		orderModel.getDeliveryAddress().getCity().add(algaLinks.linkToCity(order.getDeliveryAddress().getCity().getId()));
 
-		orderModel.getItems().forEach(item -> item.add(linkTo(methodOn(RestaurantProductController.class)
-				.findById(order.getRestaurant().getId(), item.getProductId()))
-				.withSelfRel()));
+		orderModel.getItems().forEach(item -> item.add(algaLinks.linkToProduct(order.getRestaurant().getId(), item.getProductId(), "product")));
 
 		return orderModel;
 	}

@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.api.assembler;
 
+import com.lisboaworks.algafood.api.AlgaLinks;
 import com.lisboaworks.algafood.api.controller.CuisineController;
 import com.lisboaworks.algafood.api.model.CuisineModel;
 import com.lisboaworks.algafood.domain.model.Cuisine;
@@ -16,6 +17,9 @@ public class CuisineModelAssembler extends RepresentationModelAssemblerSupport<C
 	@Autowired
 	private ModelMapper modelMapper;
 
+	@Autowired
+	private AlgaLinks algaLinks;
+
 	public CuisineModelAssembler() {
 		super(CuisineController.class, CuisineModel.class);
 	}
@@ -26,7 +30,7 @@ public class CuisineModelAssembler extends RepresentationModelAssemblerSupport<C
 
 		modelMapper.map(cuisine, cuisineModel);
 
-		cuisineModel.add(linkTo(CuisineController.class).withRel("cuisines"));
+		cuisineModel.add(algaLinks.linkToCuisines("cuisines"));
 
 		return modelMapper.map(cuisine, CuisineModel.class);
 	}

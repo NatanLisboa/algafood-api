@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.api.assembler;
 
+import com.lisboaworks.algafood.api.AlgaLinks;
 import com.lisboaworks.algafood.api.controller.OrderController;
 import com.lisboaworks.algafood.api.controller.RestaurantController;
 import com.lisboaworks.algafood.api.controller.UserController;
@@ -19,6 +20,9 @@ public class OrderSummaryModelAssembler extends RepresentationModelAssemblerSupp
 	@Autowired
 	private ModelMapper modelMapper;
 
+	@Autowired
+	private AlgaLinks algaLinks;
+
 	public OrderSummaryModelAssembler() {
 		super(OrderController.class, OrderSummaryModel.class);
 	}
@@ -29,13 +33,11 @@ public class OrderSummaryModelAssembler extends RepresentationModelAssemblerSupp
 
 		modelMapper.map(order, orderSummaryModel);
 
-		orderSummaryModel.add(linkTo(OrderController.class).withRel("orders"));
+		orderSummaryModel.add(algaLinks.linkToOrders());
 
-		orderSummaryModel.getRestaurant().add(linkTo(methodOn(RestaurantController.class)
-				.findById(order.getRestaurant().getId())).withSelfRel());
+		orderSummaryModel.getRestaurant().add(algaLinks.linkToRestaurant(order.getRestaurant().getId()));
 
-		orderSummaryModel.getCustomer().add(linkTo(methodOn(UserController.class)
-				.findById(order.getCustomer().getId())).withSelfRel());
+		orderSummaryModel.getCustomer().add(algaLinks.linkToUser(order.getCustomer().getId()));
 
 		return orderSummaryModel;
 	}
