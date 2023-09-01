@@ -33,11 +33,19 @@ public class OrderModelAssembler extends RepresentationModelAssemblerSupport<Ord
 		TemplateVariables pageVariables = new TemplateVariables(
 				new TemplateVariable("page", TemplateVariable.VariableType.REQUEST_PARAM),
 				new TemplateVariable("size", TemplateVariable.VariableType.REQUEST_PARAM),
-				new TemplateVariable("sort", TemplateVariable.VariableType.REQUEST_PARAM));
+				new TemplateVariable("sort", TemplateVariable.VariableType.REQUEST_PARAM)
+		);
+
+		TemplateVariables filterVariables = new TemplateVariables(
+				new TemplateVariable("customerId", TemplateVariable.VariableType.REQUEST_PARAM),
+				new TemplateVariable("restaurantId", TemplateVariable.VariableType.REQUEST_PARAM),
+				new TemplateVariable("startCreationDatetime", TemplateVariable.VariableType.REQUEST_PARAM),
+				new TemplateVariable("endCreationDatetime", TemplateVariable.VariableType.REQUEST_PARAM)
+		);
 
 		String ordersUrl = linkTo(OrderController.class).toUri().toString();
 
-		orderModel.add(Link.of(UriTemplate.of(ordersUrl, pageVariables), "orders"));
+		orderModel.add(Link.of(UriTemplate.of(ordersUrl, pageVariables.concat(filterVariables)), "orders"));
 
 		orderModel.getPaymentMethod().add(linkTo(methodOn(PaymentMethodController.class)
 				.findById(order.getPaymentMethod().getId(), null)).withSelfRel());
