@@ -1673,6 +1673,31 @@
 								{
 									"key": "sort",
 									"value": "customerName,desc"
+								},
+								{
+									"key": "fields",
+									"value": "code,subtotal",
+									"disabled": true
+								},
+								{
+									"key": "customerId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "restaurantId",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "startCreationDatetime",
+									"value": "2023-07-01T00:00:00",
+									"disabled": true
+								},
+								{
+									"key": "endCreationDatetime",
+									"value": "2023-09-01T00:00:00",
+									"disabled": true
 								}
 							]
 						}
