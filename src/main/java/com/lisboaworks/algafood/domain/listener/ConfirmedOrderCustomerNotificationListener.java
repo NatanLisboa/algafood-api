@@ -5,7 +5,6 @@ import com.lisboaworks.algafood.domain.model.Order;
 import com.lisboaworks.algafood.domain.service.EmailSendingService;
 import com.lisboaworks.algafood.domain.service.EmailSendingService.Message;
 import lombok.AllArgsConstructor;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionalEventListener;
 

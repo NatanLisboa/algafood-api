@@ -1,11 +1,11 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.UserModelAssembler;
 import com.lisboaworks.algafood.api.assembler.UserInputDisassembler;
+import com.lisboaworks.algafood.api.assembler.UserModelAssembler;
 import com.lisboaworks.algafood.api.model.UserModel;
 import com.lisboaworks.algafood.api.model.input.UserChangePasswordInput;
-import com.lisboaworks.algafood.api.model.input.UserNameEmailInput;
 import com.lisboaworks.algafood.api.model.input.UserInput;
+import com.lisboaworks.algafood.api.model.input.UserNameEmailInput;
 import com.lisboaworks.algafood.api.openapi.controller.UserControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.User;
 import com.lisboaworks.algafood.domain.repository.UserRepository;

@@ -1,8 +1,8 @@
 package com.lisboaworks.algafood.api.openapi.controller;
 
+import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import com.lisboaworks.algafood.api.model.CityModel;
 import com.lisboaworks.algafood.api.model.input.CityInput;
-import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

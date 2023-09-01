@@ -1,9 +1,9 @@
 package com.lisboaworks.algafood.core.openapi;
 
 import com.fasterxml.classmate.TypeResolver;
+import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import com.lisboaworks.algafood.api.model.CuisineModel;
 import com.lisboaworks.algafood.api.model.OrderSummaryModel;
-import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import com.lisboaworks.algafood.api.openapi.model.CuisinesModelOpenApi;
 import com.lisboaworks.algafood.api.openapi.model.OrdersModelOpenApi;
 import com.lisboaworks.algafood.api.openapi.model.PageableModelOpenApi;

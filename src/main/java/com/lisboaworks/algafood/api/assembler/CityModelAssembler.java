@@ -2,7 +2,6 @@ package com.lisboaworks.algafood.api.assembler;
 
 import com.lisboaworks.algafood.api.AlgaLinks;
 import com.lisboaworks.algafood.api.controller.CityController;
-import com.lisboaworks.algafood.api.controller.StateController;
 import com.lisboaworks.algafood.api.model.CityModel;
 import com.lisboaworks.algafood.domain.model.City;
 import org.modelmapper.ModelMapper;
@@ -12,7 +11,6 @@ import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSuppor
 import org.springframework.stereotype.Component;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class CityModelAssembler extends RepresentationModelAssemblerSupport<City, CityModel> {

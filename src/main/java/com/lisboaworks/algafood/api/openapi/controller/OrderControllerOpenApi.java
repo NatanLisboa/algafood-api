@@ -1,9 +1,9 @@
 package com.lisboaworks.algafood.api.openapi.controller;
 
+import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import com.lisboaworks.algafood.api.model.OrderModel;
 import com.lisboaworks.algafood.api.model.OrderSummaryModel;
 import com.lisboaworks.algafood.api.model.input.OrderInput;
-import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import com.lisboaworks.algafood.domain.filter.OrderFilter;
 import io.swagger.annotations.*;
 import io.swagger.v3.oas.annotations.media.Content;

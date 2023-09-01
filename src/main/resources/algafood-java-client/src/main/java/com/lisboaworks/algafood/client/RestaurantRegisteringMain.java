@@ -2,7 +2,6 @@ package com.lisboaworks.algafood.client;
 
 import com.lisboaworks.algafood.client.api.RestaurantClient;
 import com.lisboaworks.algafood.client.api.RestaurantModel;
-import com.lisboaworks.algafood.client.api.exception.AlgafoodApiException.Object;
 import com.lisboaworks.algafood.client.api.exception.ClientApiException;
 import com.lisboaworks.algafood.client.input.AddressInput;
 import com.lisboaworks.algafood.client.input.CityIdInput;

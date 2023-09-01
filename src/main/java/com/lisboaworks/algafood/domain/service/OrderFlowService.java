@@ -1,8 +1,7 @@
 package com.lisboaworks.algafood.domain.service;
 
-import com.lisboaworks.algafood.domain.repository.OrderRepository;
-import com.lisboaworks.algafood.domain.service.EmailSendingService.Message;
 import com.lisboaworks.algafood.domain.model.Order;
+import com.lisboaworks.algafood.domain.repository.OrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

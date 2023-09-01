@@ -1,6 +1,5 @@
 package com.lisboaworks.algafood.core.email;
 
-import com.lisboaworks.algafood.core.email.EmailProperties.EmailSendingServiceImpl;
 import com.lisboaworks.algafood.domain.service.EmailSendingService;
 import com.lisboaworks.algafood.infrastructure.service.email.MockEmailSendingService;
 import com.lisboaworks.algafood.infrastructure.service.email.SandboxEmailSendingService;

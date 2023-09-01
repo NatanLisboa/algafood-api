@@ -2,8 +2,8 @@ package com.lisboaworks.algafood.api.controller;
 
 
 import com.lisboaworks.algafood.api.ResourceUriHelper;
-import com.lisboaworks.algafood.api.assembler.CityModelAssembler;
 import com.lisboaworks.algafood.api.assembler.CityInputDisassembler;
+import com.lisboaworks.algafood.api.assembler.CityModelAssembler;
 import com.lisboaworks.algafood.api.model.CityModel;
 import com.lisboaworks.algafood.api.model.input.CityInput;
 import com.lisboaworks.algafood.api.openapi.controller.CityControllerOpenApi;

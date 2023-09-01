@@ -1,10 +1,10 @@
 package com.lisboaworks.algafood.api.openapi.controller;
 
+import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import com.lisboaworks.algafood.api.model.UserModel;
 import com.lisboaworks.algafood.api.model.input.UserChangePasswordInput;
-import com.lisboaworks.algafood.api.model.input.UserNameEmailInput;
 import com.lisboaworks.algafood.api.model.input.UserInput;
-import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
+import com.lisboaworks.algafood.api.model.input.UserNameEmailInput;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

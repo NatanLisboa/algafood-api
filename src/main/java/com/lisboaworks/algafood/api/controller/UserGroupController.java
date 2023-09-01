@@ -1,10 +1,10 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.UserGroupModelAssembler;
 import com.lisboaworks.algafood.api.assembler.UserGroupInputDisassembler;
-import com.lisboaworks.algafood.api.openapi.controller.UserGroupControllerOpenApi;
+import com.lisboaworks.algafood.api.assembler.UserGroupModelAssembler;
 import com.lisboaworks.algafood.api.model.UserGroupModel;
 import com.lisboaworks.algafood.api.model.input.UserGroupInput;
+import com.lisboaworks.algafood.api.openapi.controller.UserGroupControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.UserGroup;
 import com.lisboaworks.algafood.domain.repository.UserGroupRepository;
 import com.lisboaworks.algafood.domain.service.UserGroupRegisterService;

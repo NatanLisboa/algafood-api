@@ -2,17 +2,12 @@ package com.lisboaworks.algafood.api.assembler;
 
 import com.lisboaworks.algafood.api.AlgaLinks;
 import com.lisboaworks.algafood.api.controller.OrderController;
-import com.lisboaworks.algafood.api.controller.RestaurantController;
-import com.lisboaworks.algafood.api.controller.UserController;
 import com.lisboaworks.algafood.api.model.OrderSummaryModel;
 import com.lisboaworks.algafood.domain.model.Order;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
 public class OrderSummaryModelAssembler extends RepresentationModelAssemblerSupport<Order, OrderSummaryModel> {

@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.StateModelAssembler;
 import com.lisboaworks.algafood.api.assembler.StateInputDisassembler;
+import com.lisboaworks.algafood.api.assembler.StateModelAssembler;
 import com.lisboaworks.algafood.api.model.StateModel;
 import com.lisboaworks.algafood.api.model.input.StateInput;
 import com.lisboaworks.algafood.api.openapi.controller.StateControllerOpenApi;

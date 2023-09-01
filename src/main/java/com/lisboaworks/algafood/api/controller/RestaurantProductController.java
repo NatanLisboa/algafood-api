@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.ProductModelAssembler;
 import com.lisboaworks.algafood.api.assembler.ProductInputDisassembler;
+import com.lisboaworks.algafood.api.assembler.ProductModelAssembler;
 import com.lisboaworks.algafood.api.model.ProductModel;
 import com.lisboaworks.algafood.api.model.input.ProductInput;
 import com.lisboaworks.algafood.api.openapi.controller.RestaurantProductControllerOpenApi;

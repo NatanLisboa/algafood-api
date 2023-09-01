@@ -1,6 +1,5 @@
 package com.lisboaworks.algafood.domain.service;
 
-import static com.lisboaworks.algafood.domain.service.PhotoStorageService.NewPhoto;
 import com.lisboaworks.algafood.domain.exception.ProductPhotoNotFoundException;
 import com.lisboaworks.algafood.domain.model.ProductPhoto;
 import com.lisboaworks.algafood.domain.repository.ProductRepository;
@@ -10,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
 import java.util.Optional;
+
+import static com.lisboaworks.algafood.domain.service.PhotoStorageService.NewPhoto;
 
 @Service
 @AllArgsConstructor

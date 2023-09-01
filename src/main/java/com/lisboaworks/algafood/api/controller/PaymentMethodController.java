@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.assembler.PaymentMethodModelAssembler;
 import com.lisboaworks.algafood.api.assembler.PaymentMethodInputDisassembler;
+import com.lisboaworks.algafood.api.assembler.PaymentMethodModelAssembler;
 import com.lisboaworks.algafood.api.model.PaymentMethodModel;
 import com.lisboaworks.algafood.api.model.input.PaymentMethodInput;
 import com.lisboaworks.algafood.api.openapi.controller.PaymentMethodControllerOpenApi;

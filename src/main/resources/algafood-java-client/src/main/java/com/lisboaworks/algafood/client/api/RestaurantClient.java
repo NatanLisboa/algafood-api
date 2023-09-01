@@ -1,8 +1,8 @@
 package com.lisboaworks.algafood.client.api;
 
 import com.lisboaworks.algafood.client.api.exception.ClientApiException;
-import com.lisboaworks.algafood.client.model.RestaurantSummaryModel;
 import com.lisboaworks.algafood.client.input.RestaurantInput;
+import com.lisboaworks.algafood.client.model.RestaurantSummaryModel;
 import lombok.AllArgsConstructor;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;

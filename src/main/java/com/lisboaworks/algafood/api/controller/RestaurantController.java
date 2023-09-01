@@ -1,8 +1,8 @@
 package com.lisboaworks.algafood.api.controller;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import com.lisboaworks.algafood.api.assembler.RestaurantModelAssembler;
 import com.lisboaworks.algafood.api.assembler.RestaurantInputDisassembler;
+import com.lisboaworks.algafood.api.assembler.RestaurantModelAssembler;
 import com.lisboaworks.algafood.api.model.RestaurantModel;
 import com.lisboaworks.algafood.api.model.input.RestaurantInput;
 import com.lisboaworks.algafood.api.model.view.RestaurantView;
