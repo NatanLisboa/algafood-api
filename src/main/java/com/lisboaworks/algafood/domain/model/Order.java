@@ -109,6 +109,18 @@ public class Order extends AbstractAggregateRoot<Order> {
         this.status = newStatus;
     }
 
+    public boolean canBeConfirmed() {
+        return this.getStatus().canBeChangedTo(OrderStatus.CONFIRMED);
+    }
+
+    public boolean canBeDelivered() {
+        return this.getStatus().canBeChangedTo(OrderStatus.DELIVERED);
+    }
+
+    public boolean canBeCancelled() {
+        return this.getStatus().canBeChangedTo(OrderStatus.CANCELLED);
+    }
+
     @PrePersist //JPA callback method called before persist some register
     private void generateCode() {
         this.setCode(UUID.randomUUID().toString());
