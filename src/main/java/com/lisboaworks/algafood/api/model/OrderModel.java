@@ -41,7 +41,7 @@ public class OrderModel extends RepresentationModel<OrderModel> {
     private OffsetDateTime deliveryDatetime;
 
     private PaymentMethodModel paymentMethod;
-    private RestaurantSummaryModel restaurant;
+    private RestaurantOnlyNameModel restaurant;
     private UserModel customer;
     private AddressModel deliveryAddress;
     private OrderStatus status;

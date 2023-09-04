@@ -2,12 +2,15 @@ package com.lisboaworks.algafood.api.openapi.controller;
 
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import com.lisboaworks.algafood.api.model.RestaurantModel;
+import com.lisboaworks.algafood.api.model.RestaurantOnlyNameModel;
+import com.lisboaworks.algafood.api.model.RestaurantSummaryModel;
 import com.lisboaworks.algafood.api.model.input.RestaurantInput;
 import io.swagger.annotations.*;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.hateoas.CollectionModel;
 
 import java.util.List;
 
@@ -23,10 +26,10 @@ public interface RestaurantControllerOpenApi {
                     type = "string",
                     dataTypeClass = String.class)
     })
-    List<RestaurantModel> findAll();
+    CollectionModel<RestaurantSummaryModel> findAll();
 
     @ApiOperation(value = "Get restaurants", hidden = true)
-    List<RestaurantModel> findAllOnlyWithName();
+    CollectionModel<RestaurantOnlyNameModel> findAllOnlyWithName();
 
     @ApiResponses({
             @ApiResponse(responseCode = "400", description = "Invalid restaurant id",

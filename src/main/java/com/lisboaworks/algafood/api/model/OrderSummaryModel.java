@@ -30,7 +30,7 @@ public class OrderSummaryModel extends RepresentationModel<OrderSummaryModel> {
     @ApiModelProperty(example = "2023-07-08T11:00:00Z")
     private OffsetDateTime creationDatetime;
 
-    private RestaurantSummaryModel restaurant;
+    private RestaurantOnlyNameModel restaurant;
     private UserModel customer;
     private OrderStatus status;
 

@@ -1,11 +1,13 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.lisboaworks.algafood.api.assembler.RestaurantInputDisassembler;
 import com.lisboaworks.algafood.api.assembler.RestaurantModelAssembler;
+import com.lisboaworks.algafood.api.assembler.RestaurantOnlyNameModelAssembler;
+import com.lisboaworks.algafood.api.assembler.RestaurantSummaryModelAssembler;
 import com.lisboaworks.algafood.api.model.RestaurantModel;
+import com.lisboaworks.algafood.api.model.RestaurantOnlyNameModel;
+import com.lisboaworks.algafood.api.model.RestaurantSummaryModel;
 import com.lisboaworks.algafood.api.model.input.RestaurantInput;
-import com.lisboaworks.algafood.api.model.view.RestaurantView;
 import com.lisboaworks.algafood.api.openapi.controller.RestaurantControllerOpenApi;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.CityNotFoundException;
@@ -15,6 +17,7 @@ import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import lombok.AllArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -31,17 +34,17 @@ public class RestaurantController implements RestaurantControllerOpenApi {
     private final RestaurantRegisterService restaurantRegisterService;
     private final RestaurantModelAssembler restaurantModelAssembler;
     private final RestaurantInputDisassembler restaurantInputDisassembler;
+    private final RestaurantSummaryModelAssembler restaurantSummaryModelAssembler;
+    private final RestaurantOnlyNameModelAssembler restaurantOnlyNameModelAssembler;
 
     @GetMapping
-    @JsonView(RestaurantView.Summary.class)
-    public List<RestaurantModel> findAll() {
-        return restaurantModelAssembler.toCollectionModel(restaurantRepository.findAll());
+    public CollectionModel<RestaurantSummaryModel> findAll() {
+        return restaurantSummaryModelAssembler.toCollectionModel(restaurantRepository.findAll());
     }
 
     @GetMapping(params = "projection=only-name")
-    @JsonView(RestaurantView.OnlyName.class)
-    public List<RestaurantModel> findAllOnlyWithName() {
-        return this.findAll();
+    public CollectionModel<RestaurantOnlyNameModel> findAllOnlyWithName() {
+        return restaurantOnlyNameModelAssembler.toCollectionModel(restaurantRepository.findAll());
     }
 
     @GetMapping("/{restaurantId}")

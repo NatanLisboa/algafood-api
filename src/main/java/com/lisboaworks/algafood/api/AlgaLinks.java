@@ -44,6 +44,14 @@ public class AlgaLinks {
                 .cancel(orderCode)).withRel(rel);
     }
 
+    public Link linkToRestaurants(String rel) {
+        return linkTo(RestaurantController.class).withRel(rel);
+    }
+
+    public Link linkToRestaurants() {
+        return this.linkToRestaurants(IanaLinkRelations.SELF_VALUE);
+    }
+
     public Link linkToRestaurant(Long restaurantId, String rel) {
         return linkTo(methodOn(RestaurantController.class)
                 .findById(restaurantId)).withRel(rel);
@@ -73,8 +81,8 @@ public class AlgaLinks {
     }
 
     public Link linkToRestaurantResponsibleUsers(Long restaurantId, String rel) {
-        return linkTo(methodOn(UserController.class)
-                .findById(restaurantId)).withRel(rel);
+        return linkTo(methodOn(RestaurantResponsibleUserController.class)
+                .getAllResponsibleUsers(restaurantId)).withRel(rel);
     }
 
     public Link linkToRestaurantResponsibleUsers(Long restaurantId) {
@@ -145,9 +153,27 @@ public class AlgaLinks {
         return this.linkToCuisines(IanaLinkRelations.SELF_VALUE);
     }
 
+    public Link linkToCuisine(Long cuisineId, String rel) {
+        return linkTo(methodOn(CuisineController.class)
+                .findById(cuisineId)).withRel(rel);
+    }
+
+    public Link linkToCuisine(Long cuisineId) {
+        return this.linkToCuisine(cuisineId, IanaLinkRelations.SELF_VALUE);
+    }
+
     public Link linkToPaymentMethod(Long paymentMethodId, String rel) {
         return linkTo(methodOn(PaymentMethodController.class)
                 .findById(paymentMethodId, null)).withRel(rel);
+    }
+
+    public Link linkToRestaurantPaymentMethods(Long restaurantId, String rel) {
+        return linkTo(methodOn(RestaurantPaymentMethodController.class)
+                .findAll(restaurantId)).withRel(rel);
+    }
+
+    public Link linkToRestaurantPaymentMethods(Long restaurantId) {
+        return this.linkToRestaurantPaymentMethods(restaurantId, IanaLinkRelations.SELF_VALUE);
     }
 
     public Link linkToPaymentMethod(Long paymentMethodId) {
