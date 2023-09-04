@@ -29,6 +29,21 @@ public class AlgaLinks {
         return Link.of(UriTemplate.of(ordersUrl, PAGINATION_VARIABLES.concat(filterVariables)), "orders");
     }
 
+    public Link linkToOrderConfirmation(String orderCode, String rel) {
+        return linkTo(methodOn(OrderFlowController.class)
+                .confirm(orderCode)).withRel(rel);
+    }
+
+    public Link linkToOrderDelivery(String orderCode, String rel) {
+        return linkTo(methodOn(OrderFlowController.class)
+                .deliver(orderCode)).withRel(rel);
+    }
+
+    public Link linkToOrderCancellation(String orderCode, String rel) {
+        return linkTo(methodOn(OrderFlowController.class)
+                .cancel(orderCode)).withRel(rel);
+    }
+
     public Link linkToRestaurant(Long restaurantId, String rel) {
         return linkTo(methodOn(RestaurantController.class)
                 .findById(restaurantId)).withRel(rel);
