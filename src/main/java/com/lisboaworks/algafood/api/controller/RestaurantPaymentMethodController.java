@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,9 +25,18 @@ public class RestaurantPaymentMethodController implements RestaurantPaymentMetho
     @GetMapping
     public CollectionModel<PaymentMethodModel> findAll(@PathVariable Long restaurantId) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
-        return paymentMethodModelAssembler.toCollectionModel(restaurant.getPaymentMethods())
+
+        CollectionModel<PaymentMethodModel> paymentMethodsModel = paymentMethodModelAssembler
+                .toCollectionModel(restaurant.getPaymentMethods())
                 .removeLinks()
                 .add(algaLinks.linkToRestaurantPaymentMethods(restaurantId));
+
+        paymentMethodsModel.getContent().forEach(paymentMethodModel -> paymentMethodModel
+                .add(algaLinks.linkToRestaurantPaymentMethodDisassociation(restaurantId, paymentMethodModel.getId(),
+                        "disassociate")
+        ));
+
+        return paymentMethodsModel;
     }
 
     @PutMapping("/{paymentMethodId}")
@@ -37,8 +47,10 @@ public class RestaurantPaymentMethodController implements RestaurantPaymentMetho
 
     @DeleteMapping("/{paymentMethodId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void disassociate(@PathVariable Long restaurantId, @PathVariable Long paymentMethodId) {
+    public ResponseEntity<Void> disassociate(@PathVariable Long restaurantId, @PathVariable Long paymentMethodId) {
         restaurantRegisterService.disassociatePaymentMethod(restaurantId, paymentMethodId);
+
+        return ResponseEntity.noContent().build();
     }
 
 }

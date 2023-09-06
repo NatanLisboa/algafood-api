@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.ResponseEntity;
 
 @Api(tags = "Restaurants")
 public interface RestaurantPaymentMethodControllerOpenApi {
@@ -30,7 +31,7 @@ public interface RestaurantPaymentMethodControllerOpenApi {
             @ApiResponse(responseCode = "204", description = "Payment method disassociated successfully from restaurant"),
             @ApiResponse(responseCode = "404", description = "Restaurant or payment method not found")
     })
-    void disassociate(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId,
+    ResponseEntity<Void> disassociate(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId,
                       @ApiParam(value = "Payment method id", example = "3", required = true) Long paymentMethodId);
 
 }
