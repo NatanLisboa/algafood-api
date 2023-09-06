@@ -29,7 +29,8 @@ public class RestaurantPaymentMethodController implements RestaurantPaymentMetho
         CollectionModel<PaymentMethodModel> paymentMethodsModel = paymentMethodModelAssembler
                 .toCollectionModel(restaurant.getPaymentMethods())
                 .removeLinks()
-                .add(algaLinks.linkToRestaurantPaymentMethods(restaurantId));
+                .add(algaLinks.linkToRestaurantPaymentMethods(restaurantId))
+                .add(algaLinks.linkToRestaurantPaymentMethodAssociation(restaurantId, "associate"));
 
         paymentMethodsModel.getContent().forEach(paymentMethodModel -> paymentMethodModel
                 .add(algaLinks.linkToRestaurantPaymentMethodDisassociation(restaurantId, paymentMethodModel.getId(),
@@ -41,8 +42,10 @@ public class RestaurantPaymentMethodController implements RestaurantPaymentMetho
 
     @PutMapping("/{paymentMethodId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void associate(@PathVariable Long restaurantId, @PathVariable Long paymentMethodId) {
+    public ResponseEntity<Void> associate(@PathVariable Long restaurantId, @PathVariable Long paymentMethodId) {
         restaurantRegisterService.associatePaymentMethod(restaurantId, paymentMethodId);
+
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{paymentMethodId}")

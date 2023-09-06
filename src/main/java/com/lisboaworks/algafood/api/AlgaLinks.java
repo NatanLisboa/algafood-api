@@ -215,6 +215,11 @@ public class AlgaLinks {
                 .disassociate(restaurantId, paymentMethodId)).withRel(rel);
     }
 
+    public Link linkToRestaurantPaymentMethodAssociation(Long restaurantId, String rel) {
+        return linkTo(methodOn(RestaurantPaymentMethodController.class)
+                .associate(restaurantId, null)).withRel(rel);
+    }
+
     public Link linkToPaymentMethod(Long paymentMethodId) {
         return this.linkToPaymentMethod(paymentMethodId, IanaLinkRelations.SELF_VALUE);
     }

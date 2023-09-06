@@ -23,7 +23,7 @@ public interface RestaurantPaymentMethodControllerOpenApi {
             @ApiResponse(responseCode = "204", description = "Payment method associated successfully to restaurant"),
             @ApiResponse(responseCode = "404", description = "Restaurant or payment method not found")
     })
-    void associate(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId,
+    ResponseEntity<Void> associate(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId,
                    @ApiParam(value = "Payment method id", example = "3", required = true) Long paymentMethodId);
 
     @ApiOperation("Disassociate payment method from restaurant")
