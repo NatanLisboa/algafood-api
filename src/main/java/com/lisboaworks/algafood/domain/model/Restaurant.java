@@ -108,4 +108,37 @@ public class Restaurant {
     public boolean hasProduct(Product product) {
         return this.products.contains(product);
     }
+
+    public Boolean isActive() {
+        return this.active;
+    }
+
+    public Boolean isInactive() {
+        return !this.isActive();
+    }
+
+    public Boolean isOpen() {
+        return this.open;
+    }
+
+    public Boolean isClosed() {
+        return !this.isOpen();
+    }
+
+    public Boolean canBeActivated() {
+        return this.isInactive();
+    }
+
+    public Boolean canBeInactivated() {
+        return this.isActive();
+    }
+
+    public Boolean canBeOpened() {
+        return this.isActive() && this.isClosed();
+    }
+
+    public Boolean canBeClosed() {
+        return this.isOpen();
+    }
+
 }

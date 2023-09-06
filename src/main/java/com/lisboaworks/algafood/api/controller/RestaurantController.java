@@ -20,6 +20,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -78,26 +79,34 @@ public class RestaurantController implements RestaurantControllerOpenApi {
 
     @PutMapping("/{restaurantId}/active")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void activate(@PathVariable Long restaurantId) {
+    public ResponseEntity<Void> activate(@PathVariable Long restaurantId) {
         restaurantRegisterService.activate(restaurantId);
+
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{restaurantId}/active")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void inactivate(@PathVariable Long restaurantId) {
+    public ResponseEntity<Void> inactivate(@PathVariable Long restaurantId) {
         restaurantRegisterService.inactivate(restaurantId);
+
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{restaurantId}/opening")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void open(@PathVariable Long restaurantId) {
+    public ResponseEntity<Void> open(@PathVariable Long restaurantId) {
         restaurantRegisterService.open(restaurantId);
+
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{restaurantId}/closure")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void close(@PathVariable Long restaurantId) {
+    public ResponseEntity<Void> close(@PathVariable Long restaurantId) {
         restaurantRegisterService.close(restaurantId);
+
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/activations")

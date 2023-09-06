@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -68,7 +69,7 @@ public interface RestaurantControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation(value = "Activate restaurant")
-    void activate(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
+    ResponseEntity<Void> activate(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
 
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Restaurant inactivated successfully"),
@@ -76,7 +77,7 @@ public interface RestaurantControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation(value = "Inactivate restaurant")
-    void inactivate(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
+    ResponseEntity<Void> inactivate(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
 
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Restaurant opened successfully"),
@@ -84,7 +85,7 @@ public interface RestaurantControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation(value = "Open restaurant")
-    void open(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
+    ResponseEntity<Void> open(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
 
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Restaurant closed successfully"),
@@ -92,7 +93,7 @@ public interface RestaurantControllerOpenApi {
                     content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
     @ApiOperation(value = "Close restaurant")
-    void close(@ApiParam(value = "Restaurant id", required = true) Long restaurantId);
+    ResponseEntity<Void> close(@ApiParam(value = "Restaurant id", required = true) Long restaurantId);
 
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Restaurants activated successfully")
