@@ -1,16 +1,16 @@
 package com.lisboaworks.algafood.api.controller;
 
+import com.lisboaworks.algafood.api.AlgaLinks;
 import com.lisboaworks.algafood.api.assembler.PaymentMethodModelAssembler;
 import com.lisboaworks.algafood.api.model.PaymentMethodModel;
 import com.lisboaworks.algafood.api.openapi.controller.RestaurantPaymentMethodControllerOpenApi;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import lombok.AllArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/restaurants/{restaurantId}/payment-methods", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -19,11 +19,14 @@ public class RestaurantPaymentMethodController implements RestaurantPaymentMetho
 
     private final RestaurantRegisterService restaurantRegisterService;
     private final PaymentMethodModelAssembler paymentMethodModelAssembler;
+    private final AlgaLinks algaLinks;
 
     @GetMapping
-    public List<PaymentMethodModel> findAll(@PathVariable Long restaurantId) {
+    public CollectionModel<PaymentMethodModel> findAll(@PathVariable Long restaurantId) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
-        return paymentMethodModelAssembler.toCollectionModel(restaurant.getPaymentMethods());
+        return paymentMethodModelAssembler.toCollectionModel(restaurant.getPaymentMethods())
+                .removeLinks()
+                .add(algaLinks.linkToRestaurantPaymentMethods(restaurantId));
     }
 
     @PutMapping("/{paymentMethodId}")

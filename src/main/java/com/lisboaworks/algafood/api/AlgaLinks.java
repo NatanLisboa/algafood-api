@@ -188,6 +188,14 @@ public class AlgaLinks {
         return this.linkToCuisine(cuisineId, IanaLinkRelations.SELF_VALUE);
     }
 
+    public Link linkToPaymentMethods(String rel) {
+        return linkTo(PaymentMethodController.class).withRel(rel);
+    }
+
+    public Link linkToPaymentMethods() {
+        return this.linkToPaymentMethods(IanaLinkRelations.SELF_VALUE);
+    }
+
     public Link linkToPaymentMethod(Long paymentMethodId, String rel) {
         return linkTo(methodOn(PaymentMethodController.class)
                 .findById(paymentMethodId, null)).withRel(rel);

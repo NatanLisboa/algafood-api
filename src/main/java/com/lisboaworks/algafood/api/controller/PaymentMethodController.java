@@ -9,6 +9,7 @@ import com.lisboaworks.algafood.domain.model.PaymentMethod;
 import com.lisboaworks.algafood.domain.repository.PaymentMethodRepository;
 import com.lisboaworks.algafood.domain.service.PaymentMethodRegisterService;
 import lombok.AllArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,7 +35,7 @@ public class PaymentMethodController implements PaymentMethodControllerOpenApi {
     private final PaymentMethodInputDisassembler paymentMethodInputDisassembler;
 
     @GetMapping
-    public ResponseEntity<List<PaymentMethodModel>> findAll(ServletWebRequest request) {
+    public ResponseEntity<CollectionModel<PaymentMethodModel>> findAll(ServletWebRequest request) {
         ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
 
         String eTag = "0";
@@ -46,8 +47,8 @@ public class PaymentMethodController implements PaymentMethodControllerOpenApi {
             return null;
         }
 
-        List<PaymentMethod> paymentMethods = paymentMethodRepository.findAll();
-        List<PaymentMethodModel> paymentMethodsModel = paymentMethodModelAssembler.toCollectionModel(paymentMethods);
+        CollectionModel<PaymentMethodModel> paymentMethodsModel = paymentMethodModelAssembler
+                .toCollectionModel(paymentMethodRepository.findAll());
 
         return ResponseEntity.ok()
                 .cacheControl(CacheControl.maxAge(10, TimeUnit.SECONDS).cachePublic())
