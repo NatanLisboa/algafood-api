@@ -16,6 +16,7 @@ import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSuppor
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
@@ -39,7 +40,9 @@ public class RestaurantModelAssembler extends RepresentationModelAssemblerSuppor
 
 		restaurantModel.getCuisine().add(algaLinks.linkToCuisine(restaurant.getCuisine().getId()));
 
-		restaurantModel.getAddress().getCity().add(algaLinks.linkToCity(restaurant.getAddress().getCity().getId()));
+		if (Objects.nonNull(restaurantModel.getAddress()) && Objects.nonNull(restaurantModel.getAddress().getCity())) {
+			restaurantModel.getAddress().getCity().add(algaLinks.linkToCity(restaurant.getAddress().getCity().getId()));
+		}
 
 		restaurantModel.add(algaLinks.linkToRestaurants("restaurants"));
 
@@ -58,6 +61,8 @@ public class RestaurantModelAssembler extends RepresentationModelAssemblerSuppor
 		if (restaurant.canBeClosed()) {
 			restaurantModel.add(algaLinks.linkToRestaurantClosure(restaurant.getId(), "close"));
 		}
+
+		restaurantModel.add(algaLinks.linkToRestaurantProducts(restaurant.getId(), "products"));
 
 		restaurantModel.add(algaLinks.linkToRestaurantPaymentMethods(restaurant.getId(), "payment-methods"));
 

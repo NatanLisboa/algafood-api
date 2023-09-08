@@ -142,14 +142,24 @@ public class AlgaLinks {
         return this.linkToCity(cityId, IanaLinkRelations.SELF_VALUE);
     }
 
-    public Link linkToProduct(Long restaurantId, Long productId, String rel) {
+    public Link linkToRestaurantProducts(Long restaurantId, String rel) {
+        return linkTo(methodOn(RestaurantProductController.class)
+                .findAll(restaurantId, null))
+                .withRel(rel);
+    }
+
+    public Link linkToRestaurantProducts(Long restaurantId) {
+        return this.linkToRestaurantProducts(restaurantId, IanaLinkRelations.SELF_VALUE);
+    }
+
+    public Link linkToRestaurantProduct(Long restaurantId, Long productId, String rel) {
         return linkTo(methodOn(RestaurantProductController.class)
 				.findById(restaurantId, productId))
                 .withRel(rel);
     }
 
-    public Link linkToProduct(Long restaurantId, Long productId) {
-        return this.linkToProduct(restaurantId, productId, IanaLinkRelations.SELF_VALUE);
+    public Link linkToRestaurantProduct(Long restaurantId, Long productId) {
+        return this.linkToRestaurantProduct(restaurantId, productId, IanaLinkRelations.SELF_VALUE);
     }
 
     public Link linkToStates(String rel) {

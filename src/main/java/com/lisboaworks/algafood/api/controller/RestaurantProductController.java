@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.api.controller;
 
+import com.lisboaworks.algafood.api.AlgaLinks;
 import com.lisboaworks.algafood.api.assembler.ProductInputDisassembler;
 import com.lisboaworks.algafood.api.assembler.ProductModelAssembler;
 import com.lisboaworks.algafood.api.model.ProductModel;
@@ -11,6 +12,7 @@ import com.lisboaworks.algafood.domain.repository.ProductRepository;
 import com.lisboaworks.algafood.domain.service.ProductRegisterService;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import lombok.AllArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -28,10 +30,11 @@ public class RestaurantProductController implements RestaurantProductControllerO
     private final ProductModelAssembler productModelAssembler;
     private final ProductInputDisassembler productInputDisassembler;
     private final ProductRepository productRepository;
+    private final AlgaLinks algaLinks;
 
     @GetMapping
-    public List<ProductModel> findAll(@PathVariable Long restaurantId,
-                                      @RequestParam(required = false) boolean includeInactiveProducts) {
+    public CollectionModel<ProductModel> findAll(@PathVariable Long restaurantId,
+                                                 @RequestParam(required = false, defaultValue = "false") Boolean includeInactiveProducts) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
         List<Product> allActiveProducts;
         if (includeInactiveProducts) {
@@ -39,7 +42,8 @@ public class RestaurantProductController implements RestaurantProductControllerO
         } else {
             allActiveProducts = productRepository.findActiveProductsByRestaurant(restaurant);
         }
-        return productModelAssembler.toCollectionModel(allActiveProducts);
+        return productModelAssembler.toCollectionModel(allActiveProducts)
+                .add(algaLinks.linkToRestaurantProducts(restaurantId));
     }
 
     @GetMapping("/{productId}")

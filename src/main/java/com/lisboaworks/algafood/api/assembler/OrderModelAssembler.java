@@ -49,7 +49,7 @@ public class OrderModelAssembler extends RepresentationModelAssemblerSupport<Ord
 
 		orderModel.getDeliveryAddress().getCity().add(algaLinks.linkToCity(order.getDeliveryAddress().getCity().getId()));
 
-		orderModel.getItems().forEach(item -> item.add(algaLinks.linkToProduct(order.getRestaurant().getId(), item.getProductId(), "product")));
+		orderModel.getItems().forEach(item -> item.add(algaLinks.linkToRestaurantProduct(order.getRestaurant().getId(), item.getProductId(), "product")));
 
 		return orderModel;
 	}

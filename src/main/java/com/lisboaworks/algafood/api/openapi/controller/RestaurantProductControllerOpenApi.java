@@ -10,8 +10,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-
-import java.util.List;
+import org.springframework.hateoas.CollectionModel;
 
 @Api(tags = "Products")
 public interface RestaurantProductControllerOpenApi {
@@ -21,8 +20,8 @@ public interface RestaurantProductControllerOpenApi {
             @ApiResponse(responseCode = "400", description = "Invalid restaurant id", content = @Content(schema = @Schema(implementation = ApiException.class))),
             @ApiResponse(responseCode = "404", description = "Restaurant not found", content = @Content(schema = @Schema(implementation = ApiException.class)))
     })
-    List<ProductModel> findAll(@ApiParam(value = "Id from a restaurant", example = "1", required = true) Long restaurantId,
-                               @ApiParam(value = "Flag to include inactive products (default: false)", example = "false") boolean includeInactiveProducts);
+    CollectionModel<ProductModel> findAll(@ApiParam(value = "Id from a restaurant", example = "1", required = true) Long restaurantId,
+                               @ApiParam(value = "Flag to include inactive products (default: false)", example = "false") Boolean includeInactiveProducts);
 
     @ApiOperation("Get restaurant product by its id")
     @ApiResponses({

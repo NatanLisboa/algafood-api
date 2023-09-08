@@ -1519,6 +1519,13 @@
 								"restaurants",
 								"1",
 								"products"
+							],
+							"query": [
+								{
+									"key": "includeInactiveProducts",
+									"value": "true",
+									"disabled": true
+								}
 							]
 						}
 					},
