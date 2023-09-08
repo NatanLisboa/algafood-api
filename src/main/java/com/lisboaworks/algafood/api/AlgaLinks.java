@@ -220,6 +220,16 @@ public class AlgaLinks {
                 .associate(restaurantId, null)).withRel(rel);
     }
 
+    public Link linkToRestaurantResponsibleUserAssociation(Long restaurantId, String rel) {
+        return linkTo(methodOn(RestaurantResponsibleUserController.class)
+                .associateResponsibleUser(restaurantId, null)).withRel(rel);
+    }
+
+    public Link linkToRestaurantResponsibleUserDisassociation(Long restaurantId, Long userId, String rel) {
+        return linkTo(methodOn(RestaurantResponsibleUserController.class)
+                .disassociateResponsibleUser(restaurantId, userId)).withRel(rel);
+    }
+
     public Link linkToPaymentMethod(Long paymentMethodId) {
         return this.linkToPaymentMethod(paymentMethodId, IanaLinkRelations.SELF_VALUE);
     }

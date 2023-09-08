@@ -8,6 +8,7 @@ import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,21 +21,33 @@ public class RestaurantResponsibleUserController implements RestaurantResponsibl
     private final AlgaLinks algaLinks;
     @GetMapping
     public CollectionModel<UserModel> getAllResponsibleUsers(@PathVariable Long restaurantId) {
-        return userModelAssembler.toCollectionModel(restaurantRegisterService.getAllResponsibleUsers(restaurantId))
+        CollectionModel<UserModel> responsibleUsersModel =
+                userModelAssembler.toCollectionModel(restaurantRegisterService.getAllResponsibleUsers(restaurantId))
                 .removeLinks()
-                .add(algaLinks.linkToRestaurantResponsibleUsers(restaurantId));
+                .add(algaLinks.linkToRestaurantResponsibleUsers(restaurantId))
+                .add(algaLinks.linkToRestaurantResponsibleUserAssociation(restaurantId, "associate"));
+
+        responsibleUsersModel.getContent().forEach(responsibleUserModel ->
+                responsibleUserModel.add(algaLinks.linkToRestaurantResponsibleUserDisassociation(restaurantId,
+                responsibleUserModel.getId(), "diassociate")));
+
+        return responsibleUsersModel;
     }
 
     @PutMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void associateResponsibleUser(@PathVariable Long restaurantId, @PathVariable Long userId) {
+    public ResponseEntity<Void> associateResponsibleUser(@PathVariable Long restaurantId, @PathVariable Long userId) {
         restaurantRegisterService.associateResponsibleUser(restaurantId, userId);
+
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void disassociateResponsibleUser(@PathVariable Long restaurantId, @PathVariable Long userId) {
+    public ResponseEntity<Void> disassociateResponsibleUser(@PathVariable Long restaurantId, @PathVariable Long userId) {
         restaurantRegisterService.disassociateResponsibleUser(restaurantId, userId);
+
+        return ResponseEntity.noContent().build();
     }
 
 }
