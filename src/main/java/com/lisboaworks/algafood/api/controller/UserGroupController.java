@@ -9,12 +9,12 @@ import com.lisboaworks.algafood.domain.model.UserGroup;
 import com.lisboaworks.algafood.domain.repository.UserGroupRepository;
 import com.lisboaworks.algafood.domain.service.UserGroupRegisterService;
 import lombok.AllArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping(path = "/user-groups", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -27,7 +27,7 @@ public class UserGroupController implements UserGroupControllerOpenApi {
     private final UserGroupInputDisassembler userGroupInputDisassembler;
 
     @GetMapping
-    public List<UserGroupModel> findAll() {
+    public CollectionModel<UserGroupModel> findAll() {
         return userGroupModelAssembler.toCollectionModel(userGroupRepository.findAll());
     }
 

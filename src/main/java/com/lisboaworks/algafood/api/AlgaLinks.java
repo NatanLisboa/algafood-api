@@ -115,13 +115,30 @@ public class AlgaLinks {
         return this.linkToRestaurantResponsibleUsers(restaurantId, IanaLinkRelations.SELF_VALUE);
     }
 
-    public Link linkToUserGroups(Long userId, String rel) {
+    public Link linkToUserGroups(String rel) {
+        return linkTo(UserGroupController.class).withRel(rel);
+    }
+
+    public Link linkToUserGroups() {
+        return this.linkToUserGroups(IanaLinkRelations.SELF_VALUE);
+    }
+
+    public Link linkToUserGroupsFromUser(Long userId, String rel) {
         return linkTo(methodOn(UserUserGroupController.class)
                 .findAll(userId)).withRel(rel);
     }
 
-    public Link linkToUserGroups(Long userId) {
-        return this.linkToUserGroups(userId, IanaLinkRelations.SELF_VALUE);
+    public Link linkToUserGroupsFromUser(Long userId) {
+        return this.linkToUserGroupsFromUser(userId, IanaLinkRelations.SELF_VALUE);
+    }
+
+    public Link linkToUserGroupPermissions(Long userGroupId, String rel) {
+        return linkTo(methodOn(UserGroupPermissionController.class)
+                .findAll(userGroupId)).withRel(rel);
+    }
+
+    public Link linkToUserGroupPermissions(Long userGroupId) {
+        return this.linkToUserGroupPermissions(userGroupId, IanaLinkRelations.SELF_VALUE);
     }
 
     public Link linkToCities(String rel) {

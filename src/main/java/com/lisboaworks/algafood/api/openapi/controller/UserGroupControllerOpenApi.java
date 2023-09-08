@@ -10,14 +10,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-
-import java.util.List;
+import org.springframework.hateoas.CollectionModel;
 
 @Api(tags = "User groups")
 public interface UserGroupControllerOpenApi {
 
     @ApiOperation("Get all registered user groups")
-    List<UserGroupModel> findAll();
+    CollectionModel<UserGroupModel> findAll();
 
     @ApiResponses({
             @ApiResponse(responseCode = "400", description = "Invalid user group id",
