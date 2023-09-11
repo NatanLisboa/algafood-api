@@ -2074,13 +2074,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "api.algafood.local:8080",
+					"raw": "api.algafood.local:8080/",
 					"host": [
 						"api",
 						"algafood",
 						"local"
 					],
-					"port": "8080"
+					"port": "8080",
+					"path": [
+						""
+					]
 				}
 			},
 			"response": []
