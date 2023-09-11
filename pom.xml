@@ -20,6 +20,7 @@
         <jasperreports.version>6.20.5</jasperreports.version>
         <aws-java-sdk-s3.version>1.12.514</aws-java-sdk-s3.version>
         <spring-fox.version>3.0.0</spring-fox.version>
+        <github-ziplet.version>2.4.1</github-ziplet.version>
     </properties>
     <dependencies>
         <dependency>
@@ -142,6 +143,26 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-hateoas</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.ziplet</groupId>
+            <artifactId>ziplet</artifactId>
+            <version>${github-ziplet.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>servlet-api</artifactId>
+                    <groupId>javax.servlet</groupId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-nop</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
