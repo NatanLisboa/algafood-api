@@ -6,8 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-
-import java.util.List;
+import org.springframework.hateoas.CollectionModel;
 
 @Api(tags = "Users")
 public interface UserUserGroupControllerOpenApi {
@@ -16,7 +15,7 @@ public interface UserUserGroupControllerOpenApi {
     @ApiResponses({
             @ApiResponse(responseCode = "404", description = "User not found")
     })
-    List<UserGroupModel> findAll(@ApiParam(value = "User id", example = "1", required = true) Long userId);
+    CollectionModel<UserGroupModel> findAll(@ApiParam(value = "User id", example = "1", required = true) Long userId);
 
     @ApiOperation("Associate user group to user")
     @ApiResponses({

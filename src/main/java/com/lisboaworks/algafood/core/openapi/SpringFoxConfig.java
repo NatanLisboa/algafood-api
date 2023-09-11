@@ -71,8 +71,8 @@ public class SpringFoxConfig {
                 .tags(new Tag("States", "Manage the states"))
                 .tags(new Tag("Products", "Manage the products of a restaurant"))
                 .tags(new Tag("Users", "Manage the users"))
+                .tags(new Tag("Permissions", "Manage the permissions"))
                 .tags(new Tag("Statistics", "Algafood statistics"));
-
     }
 
     public ApiInfo apiInfo() {

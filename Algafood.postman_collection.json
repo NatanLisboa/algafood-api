@@ -1417,7 +1417,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/user-groups/4/permissions",
+							"raw": "api.algafood.local:8080/user-groups/1/permissions",
 							"host": [
 								"api",
 								"algafood",
@@ -1426,7 +1426,7 @@
 							"port": "8080",
 							"path": [
 								"user-groups",
-								"4",
+								"1",
 								"permissions"
 							]
 						}
@@ -1492,6 +1492,32 @@
 								"4",
 								"permissions",
 								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Permissions",
+			"item": [
+				{
+					"name": "Get all permissions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://api.algafood.local:8080/permissions",
+							"protocol": "http",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"permissions"
 							]
 						}
 					},

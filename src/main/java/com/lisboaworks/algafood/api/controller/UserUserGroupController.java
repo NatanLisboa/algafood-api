@@ -6,10 +6,9 @@ import com.lisboaworks.algafood.api.openapi.controller.UserUserGroupControllerOp
 import com.lisboaworks.algafood.domain.model.User;
 import com.lisboaworks.algafood.domain.service.UserRegisterService;
 import lombok.AllArgsConstructor;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("users/{userId}/user-groups")
@@ -20,7 +19,7 @@ public class UserUserGroupController implements UserUserGroupControllerOpenApi {
     private final UserRegisterService userRegisterService;
 
     @GetMapping
-    public List<UserGroupModel> findAll(@PathVariable Long userId) {
+    public CollectionModel<UserGroupModel> findAll(@PathVariable Long userId) {
         User user = userRegisterService.findOrThrowException(userId);
         return userGroupModelAssembler.toCollectionModel(user.getUserGroups());
     }

@@ -141,6 +141,24 @@ public class AlgaLinks {
         return this.linkToUserGroupPermissions(userGroupId, IanaLinkRelations.SELF_VALUE);
     }
 
+    public Link linkToUserGroupPermissionAssociation(Long userGroupId, String rel) {
+        return linkTo(methodOn(UserGroupPermissionController.class)
+                .associate(userGroupId, null)).withRel(rel);
+    }
+
+    public Link linkToUserGroupPermissionDisassociation(Long userGroupId, Long permissionId, String rel) {
+        return linkTo(methodOn(UserGroupPermissionController.class)
+                .disassociate(userGroupId, permissionId)).withRel(rel);
+    }
+
+    public Link linkToPermissions(String rel) {
+        return linkTo(PermissionController.class).withRel(rel);
+    }
+
+    public Link linkToPermissions() {
+        return this.linkToPermissions(IanaLinkRelations.SELF_VALUE);
+    }
+
     public Link linkToCities(String rel) {
         return linkTo(methodOn(CityController.class)
                 .findAll()).withRel(rel);

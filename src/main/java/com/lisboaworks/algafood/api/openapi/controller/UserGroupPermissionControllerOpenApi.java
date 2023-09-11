@@ -6,8 +6,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-
-import java.util.List;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.ResponseEntity;
 
 @Api(tags = "User groups")
 public interface UserGroupPermissionControllerOpenApi {
@@ -16,14 +16,14 @@ public interface UserGroupPermissionControllerOpenApi {
     @ApiResponses({
             @ApiResponse(responseCode = "404", description = "User group not found")
     })
-    List<PermissionModel> findAll(@ApiParam(value = "User group id", example = "1", required = true) Long userGroupId);
+    CollectionModel<PermissionModel> findAll(@ApiParam(value = "User group id", example = "1", required = true) Long userGroupId);
 
     @ApiOperation("Associate permission to user group")
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Permission associated successfully to user group"),
             @ApiResponse(responseCode = "404", description = "User group or permission not found")
     })
-    void associate(@ApiParam(value = "User group id", example = "1", required = true) Long userGroupId,
+    ResponseEntity<Void> associate(@ApiParam(value = "User group id", example = "1", required = true) Long userGroupId,
                    @ApiParam(value = "Permission id", example = "2", required = true) Long permissionId);
 
     @ApiOperation("Disassociate permission from user group")
@@ -31,7 +31,7 @@ public interface UserGroupPermissionControllerOpenApi {
             @ApiResponse(responseCode = "204", description = "Permission disassociated successfully from user group"),
             @ApiResponse(responseCode = "404", description = "User group or permission not found")
     })
-    void disassociate(@ApiParam(value = "User group id", example = "1", required = true) Long userGroupId,
+    ResponseEntity<Void> disassociate(@ApiParam(value = "User group id", example = "1", required = true) Long userGroupId,
                       @ApiParam(value = "Permission id", example = "2", required = true) Long permissionId);
     
 }
