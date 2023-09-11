@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.ResponseEntity;
 
 @Api(tags = "Users")
 public interface UserUserGroupControllerOpenApi {
@@ -22,7 +23,7 @@ public interface UserUserGroupControllerOpenApi {
             @ApiResponse(responseCode = "204", description = "User group associated successfully to user"),
             @ApiResponse(responseCode = "404", description = "User or user group not found")
     })
-    void associate(@ApiParam(value = "User id", example = "1", required = true) Long userId,
+    ResponseEntity<Void> associate(@ApiParam(value = "User id", example = "1", required = true) Long userId,
                    @ApiParam(value = "User group id", example = "3", required = true) Long userGroupId);
 
     @ApiOperation("Disassociate user group from user")
@@ -30,7 +31,7 @@ public interface UserUserGroupControllerOpenApi {
             @ApiResponse(responseCode = "204", description = "User group disassociated successfully from user"),
             @ApiResponse(responseCode = "404", description = "User or user group not found")
     })
-    void disassociate(@ApiParam(value = "User id", example = "1", required = true) Long userId,
+    ResponseEntity<Void> disassociate(@ApiParam(value = "User id", example = "1", required = true) Long userId,
                       @ApiParam(value = "User group id", example = "3", required = true) Long userGroupId);
 
 }

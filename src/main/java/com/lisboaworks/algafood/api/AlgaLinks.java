@@ -151,6 +151,16 @@ public class AlgaLinks {
                 .disassociate(userGroupId, permissionId)).withRel(rel);
     }
 
+    public Link linkToAssociateUserGroupToUser(Long userId, String rel) {
+        return linkTo(methodOn(UserUserGroupController.class)
+                .associate(userId, null)).withRel(rel);
+    }
+
+    public Link linkToDisassociateUserGroupFromUser(Long userId, Long userGroupId, String rel) {
+        return linkTo(methodOn(UserUserGroupController.class)
+                .disassociate(userId, userGroupId)).withRel(rel);
+    }
+
     public Link linkToPermissions(String rel) {
         return linkTo(PermissionController.class).withRel(rel);
     }
