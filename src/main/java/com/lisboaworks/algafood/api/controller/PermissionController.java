@@ -1,6 +1,5 @@
 package com.lisboaworks.algafood.api.controller;
 
-import com.lisboaworks.algafood.api.AlgaLinks;
 import com.lisboaworks.algafood.api.assembler.PermissionModelAssembler;
 import com.lisboaworks.algafood.api.model.PermissionModel;
 import com.lisboaworks.algafood.api.openapi.controller.PermissionControllerOpenApi;
@@ -19,7 +18,6 @@ public class PermissionController implements PermissionControllerOpenApi {
 
     private final PermissionModelAssembler permissionModelAssembler;
     private final PermissionRepository permissionRepository;
-    private final AlgaLinks algaLinks;
 
     @GetMapping
     public CollectionModel<PermissionModel> findAll() {
