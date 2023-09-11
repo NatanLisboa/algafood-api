@@ -11,8 +11,14 @@ import org.springframework.http.ResponseEntity;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+import static com.lisboaworks.algafood.api.controller.StatisticsController.StatisticsModel;
+
 @Api(tags = "Statistics")
 public interface StatisticsControllerOpenApi {
+
+
+    @ApiOperation(value = "Statistics", hidden = true)
+    StatisticsModel statistics();
 
     @ApiOperation(value = "Get daily sales statistics", produces = "application/json, application/pdf")
     @ApiImplicitParams({

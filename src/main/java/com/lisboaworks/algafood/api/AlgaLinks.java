@@ -299,5 +299,23 @@ public class AlgaLinks {
         return this.linkToPaymentMethod(paymentMethodId, IanaLinkRelations.SELF_VALUE);
     }
 
+    public Link linkToStatistics(String rel) {
+        return linkTo(StatisticsController.class)
+                .withRel(rel);
+    }
+
+    public Link linkToDailySalesStatistics(String rel) {
+        final TemplateVariables filterVariables = new TemplateVariables(
+                new TemplateVariable("restaurantId", TemplateVariable.VariableType.REQUEST_PARAM),
+                new TemplateVariable("startCreationDatetime", TemplateVariable.VariableType.REQUEST_PARAM),
+                new TemplateVariable("endCreationDatetime", TemplateVariable.VariableType.REQUEST_PARAM),
+                new TemplateVariable("timeOffset", TemplateVariable.VariableType.REQUEST_PARAM)
+        );
+
+        String dailySalesStatisticsUrl = linkTo(methodOn(StatisticsController.class)
+                .getDailySales(null, null)).toUri().toString();
+
+        return Link.of(UriTemplate.of(dailySalesStatisticsUrl, filterVariables), rel);
+    }
 
 }

@@ -1,11 +1,13 @@
 package com.lisboaworks.algafood.api.controller;
 
+import com.lisboaworks.algafood.api.AlgaLinks;
 import com.lisboaworks.algafood.api.openapi.controller.StatisticsControllerOpenApi;
 import com.lisboaworks.algafood.domain.filter.DailySaleFilter;
 import com.lisboaworks.algafood.domain.model.statistics.DailySale;
 import com.lisboaworks.algafood.domain.service.SaleQueryService;
 import com.lisboaworks.algafood.domain.service.SaleReportService;
 import lombok.AllArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,16 @@ public class StatisticsController implements StatisticsControllerOpenApi {
     private static final String UTC_OFFSET = "+00:00";
     private final SaleQueryService saleQueryService;
     private final SaleReportService saleReportService;
+    private final AlgaLinks algaLinks;
+
+    @GetMapping
+    public StatisticsModel statistics() {
+        StatisticsModel statisticsModel = new StatisticsModel();
+
+        statisticsModel.add(algaLinks.linkToDailySalesStatistics("daily-sales"));
+
+        return statisticsModel;
+    }
 
     @GetMapping(path = "/daily-sales", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<DailySale> getDailySales(DailySaleFilter filter, @RequestParam(required = false, defaultValue = UTC_OFFSET) String timeOffset) {
@@ -41,6 +53,10 @@ public class StatisticsController implements StatisticsControllerOpenApi {
                 .contentType(MediaType.APPLICATION_PDF)
                 .headers(headers)
                 .body(bytesPdf);
+    }
+
+    public static class StatisticsModel extends RepresentationModel<StatisticsModel> {
+
     }
 
 }
