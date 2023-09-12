@@ -5,6 +5,7 @@ import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import com.lisboaworks.algafood.api.model.CityModel;
 import com.lisboaworks.algafood.api.model.CuisineModel;
 import com.lisboaworks.algafood.api.model.OrderSummaryModel;
+import com.lisboaworks.algafood.api.model.StateModel;
 import com.lisboaworks.algafood.api.openapi.model.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -67,6 +68,10 @@ public class SpringFoxConfig {
                 .alternateTypeRules(AlternateTypeRules.newRule(
                         typeResolver.resolve(CollectionModel.class, CityModel.class),
                         CitiesModelOpenApi.class)
+                )
+                .alternateTypeRules(AlternateTypeRules.newRule(
+                        typeResolver.resolve(CollectionModel.class, StateModel.class),
+                        StatesModelOpenApi.class)
                 )
                 .apiInfo(this.apiInfo())
                 .tags(new Tag("Cities", "Manage the cities"))
