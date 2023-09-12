@@ -2,17 +2,16 @@ package com.lisboaworks.algafood.core.openapi;
 
 import com.fasterxml.classmate.TypeResolver;
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
+import com.lisboaworks.algafood.api.model.CityModel;
 import com.lisboaworks.algafood.api.model.CuisineModel;
 import com.lisboaworks.algafood.api.model.OrderSummaryModel;
-import com.lisboaworks.algafood.api.openapi.model.CuisinesModelOpenApi;
-import com.lisboaworks.algafood.api.openapi.model.LinksModelOpenApi;
-import com.lisboaworks.algafood.api.openapi.model.OrdersModelOpenApi;
-import com.lisboaworks.algafood.api.openapi.model.PageableModelOpenApi;
+import com.lisboaworks.algafood.api.openapi.model.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Links;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -63,6 +62,10 @@ public class SpringFoxConfig {
                 .alternateTypeRules(AlternateTypeRules.newRule(
                         typeResolver.resolve(Page.class, OrderSummaryModel.class),
                         OrdersModelOpenApi.class)
+                )
+                .alternateTypeRules(AlternateTypeRules.newRule(
+                        typeResolver.resolve(CollectionModel.class, CityModel.class),
+                        CitiesModelOpenApi.class)
                 )
                 .apiInfo(this.apiInfo())
                 .tags(new Tag("Cities", "Manage the cities"))
