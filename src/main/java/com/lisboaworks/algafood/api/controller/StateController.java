@@ -11,12 +11,13 @@ import com.lisboaworks.algafood.domain.service.StateRegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/states")
+@RequestMapping(value = "/states", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class StateController implements StateControllerOpenApi {
 
