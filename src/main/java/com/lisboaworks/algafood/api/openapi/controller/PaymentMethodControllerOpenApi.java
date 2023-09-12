@@ -3,6 +3,7 @@ package com.lisboaworks.algafood.api.openapi.controller;
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import com.lisboaworks.algafood.api.model.PaymentMethodModel;
 import com.lisboaworks.algafood.api.model.input.PaymentMethodInput;
+import com.lisboaworks.algafood.api.openapi.model.PaymentMethodsModelOpenApi;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -17,7 +18,10 @@ import org.springframework.web.context.request.ServletWebRequest;
 @Api(tags = "Payment methods")
 public interface PaymentMethodControllerOpenApi {
 
-    @ApiOperation("Get all registered payment methods")
+    @ApiOperation(value = "Get all registered payment methods")
+    @io.swagger.annotations.ApiResponses(value = {
+            @io.swagger.annotations.ApiResponse(code = 200, message = "OK", response = PaymentMethodsModelOpenApi.class)
+    })
     ResponseEntity<CollectionModel<PaymentMethodModel>> findAll(ServletWebRequest request);
 
     @ApiResponses({

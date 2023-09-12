@@ -2,10 +2,7 @@ package com.lisboaworks.algafood.core.openapi;
 
 import com.fasterxml.classmate.TypeResolver;
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
-import com.lisboaworks.algafood.api.model.CityModel;
-import com.lisboaworks.algafood.api.model.CuisineModel;
-import com.lisboaworks.algafood.api.model.OrderSummaryModel;
-import com.lisboaworks.algafood.api.model.StateModel;
+import com.lisboaworks.algafood.api.model.*;
 import com.lisboaworks.algafood.api.openapi.model.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +15,7 @@ import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.ServletWebRequest;
 import springfox.documentation.builders.*;
 import springfox.documentation.schema.AlternateTypeRules;
@@ -72,6 +70,10 @@ public class SpringFoxConfig {
                 .alternateTypeRules(AlternateTypeRules.newRule(
                         typeResolver.resolve(CollectionModel.class, StateModel.class),
                         StatesModelOpenApi.class)
+                )
+                .alternateTypeRules(AlternateTypeRules.newRule(
+                        typeResolver.resolve(CollectionModel.class, PaymentMethodModel.class),
+                        PaymentMethodsModelOpenApi.class)
                 )
                 .apiInfo(this.apiInfo())
                 .tags(new Tag("Cities", "Manage the cities"))
