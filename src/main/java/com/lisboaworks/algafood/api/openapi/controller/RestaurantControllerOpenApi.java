@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public interface RestaurantControllerOpenApi {
     })
     CollectionModel<RestaurantSummaryModel> findAll();
 
+    @ApiIgnore
     @ApiOperation(value = "Get restaurants", hidden = true)
     CollectionModel<RestaurantOnlyNameModel> findAllOnlyWithName();
 
