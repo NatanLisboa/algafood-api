@@ -7,7 +7,6 @@ import com.lisboaworks.algafood.api.openapi.model.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.InputStreamResource;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Links;
@@ -59,8 +58,8 @@ public class SpringFoxConfig {
                         CuisinesModelOpenApi.class)
                 )
                 .alternateTypeRules(AlternateTypeRules.newRule(
-                        typeResolver.resolve(Page.class, OrderSummaryModel.class),
-                        OrdersModelOpenApi.class)
+                        typeResolver.resolve(PagedModel.class, OrderSummaryModel.class),
+                        OrdersSummaryModelOpenApi.class)
                 )
                 .alternateTypeRules(AlternateTypeRules.newRule(
                         typeResolver.resolve(CollectionModel.class, CityModel.class),
