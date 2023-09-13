@@ -81,6 +81,10 @@ public class SpringFoxConfig {
                         typeResolver.resolve(CollectionModel.class, PermissionModel.class),
                         PermissionsModelOpenApi.class)
                 )
+                .alternateTypeRules(AlternateTypeRules.newRule(
+                        typeResolver.resolve(CollectionModel.class, ProductModel.class),
+                        ProductsModelOpenApi.class)
+                )
                 .apiInfo(this.apiInfo())
                 .tags(new Tag("Cities", "Manage the cities"))
                 .tags(new Tag("User groups", "Manage the user groups"))
