@@ -12,12 +12,12 @@ import java.util.List;
 @Data
 public class UserGroupsModelOpenApi {
 
-    private UserGroupEmbeddedModelOpenApi _embedded;
+    private UserGroupsEmbeddedModelOpenApi _embedded;
     private Links _links;
 
     @ApiModel("UserGroupsEmbeddedModel")
     @Data
-    public static class UserGroupEmbeddedModelOpenApi {
+    public static class UserGroupsEmbeddedModelOpenApi {
 
        @JsonProperty("user-groups")
        private List<UserGroupModel> userGroups;

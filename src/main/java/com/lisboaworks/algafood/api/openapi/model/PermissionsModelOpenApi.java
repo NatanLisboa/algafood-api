@@ -11,12 +11,12 @@ import java.util.List;
 @Data
 public class PermissionsModelOpenApi {
 
-    private PermissionEmbeddedModelOpenApi _embedded;
+    private PermissionsEmbeddedModelOpenApi _embedded;
     private Links _links;
 
     @ApiModel("PermissionsEmbeddedModel")
     @Data
-    public static class PermissionEmbeddedModelOpenApi {
+    public static class PermissionsEmbeddedModelOpenApi {
 
         private List<PermissionModel> permissions;
 
