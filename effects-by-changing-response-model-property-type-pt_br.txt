@@ -1,0 +1,11 @@
+20.4. Evitando quebrar os clientes: alteração de tipo de propriedade do modelo
+
+Objeto de resposta:
+ - Alteração de um tipo AMPLO para um tipo ESPECÍFICO (Ex.: string -> float): Há retrocompatibilidade
+ - Alteração de um tipo ESPECÍFICO para um tipo AMPLO (Ex.: float -> string): Quebra de compatibilidade
+    - Solução alternativa à alteração de um tipo ESPECÍFICO para um tipo AMPLO: Adição de uma nova propriedade no modelo
+    do tipo AMPLO destino, depreciando a propriedade antiga de tipo ESPECÍFICO
+
+Objeto enviado na requisição:
+ - Alteração de um tipo AMPLO para um tipo ESPECÍFICO (Ex.: string -> float): Quebra de compatibilidade
+ - Alteração de um tipo ESPECÍFICO para um tipo AMPLO (Ex.: float -> string): Há retrocompatibilidade
