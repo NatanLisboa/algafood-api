@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.core.modelmapper;
 
-import com.lisboaworks.algafood.api.model.AddressModel;
-import com.lisboaworks.algafood.api.model.input.OrderItemInput;
+import com.lisboaworks.algafood.api.v1.model.AddressModel;
+import com.lisboaworks.algafood.api.v1.model.input.OrderItemInput;
 import com.lisboaworks.algafood.domain.model.Address;
 import com.lisboaworks.algafood.domain.model.OrderItem;
 import org.modelmapper.ModelMapper;

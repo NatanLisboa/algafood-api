@@ -2,8 +2,8 @@ package com.lisboaworks.algafood.core.openapi;
 
 import com.fasterxml.classmate.TypeResolver;
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
-import com.lisboaworks.algafood.api.model.*;
-import com.lisboaworks.algafood.api.openapi.model.*;
+import com.lisboaworks.algafood.api.v1.model.*;
+import com.lisboaworks.algafood.api.v1.openapi.model.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.InputStreamResource;
