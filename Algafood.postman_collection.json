@@ -909,7 +909,13 @@
 					"name": "Get all cities",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/vnd.algafood.v1+json",
+								"type": "default"
+							}
+						],
 						"url": {
 							"raw": "api.algafood.local:8080/cities",
 							"host": [
