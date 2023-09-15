@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/statistics")
+@RequestMapping("/v1/statistics")
 @AllArgsConstructor
 public class StatisticsController implements StatisticsControllerOpenApi {
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/permissions", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/permissions", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class PermissionController implements PermissionControllerOpenApi {
 

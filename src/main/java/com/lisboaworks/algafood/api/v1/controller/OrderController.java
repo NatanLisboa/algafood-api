@@ -30,7 +30,7 @@ import javax.validation.Valid;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/orders", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/orders", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class OrderController implements OrderControllerOpenApi {
 

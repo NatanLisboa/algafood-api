@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/orders/{orderCode}")
+@RequestMapping("/v1/orders/{orderCode}")
 @AllArgsConstructor
 public class OrderFlowController implements OrderFlowControllerOpenApi {
 

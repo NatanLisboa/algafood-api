@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("users/{userId}/user-groups")
+@RequestMapping("/v1/users/{userId}/user-groups")
 @AllArgsConstructor
 public class UserUserGroupController implements UserUserGroupControllerOpenApi {
 

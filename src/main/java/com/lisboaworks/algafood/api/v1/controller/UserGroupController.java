@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(path = "/user-groups", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/user-groups", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class UserGroupController implements UserGroupControllerOpenApi {
 
