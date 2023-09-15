@@ -906,147 +906,287 @@
 			"name": "Cities",
 			"item": [
 				{
-					"name": "Get all cities",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/vnd.algafood.v1+json",
-								"type": "default"
-							}
-						],
-						"url": {
-							"raw": "api.algafood.local:8080/cities",
-							"host": [
-								"api",
-								"algafood",
-								"local"
-							],
-							"port": "8080",
-							"path": [
-								"cities"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get city by id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "api.algafood.local:8080/cities/1",
-							"host": [
-								"api",
-								"algafood",
-								"local"
-							],
-							"port": "8080",
-							"path": [
-								"cities",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Add city",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Mumbai\",\r\n    \"state\": {\r\n        \"id\": 1\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "V1",
+					"item": [
+						{
+							"name": "Get all cities - V1",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v1+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "api.algafood.local:8080/cities",
+									"host": [
+										"api",
+										"algafood",
+										"local"
+									],
+									"port": "8080",
+									"path": [
+										"cities"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "api.algafood.local:8080/cities",
-							"host": [
-								"api",
-								"algafood",
-								"local"
-							],
-							"port": "8080",
-							"path": [
-								"cities"
-							]
+						{
+							"name": "Get city by id - V1",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "api.algafood.local:8080/cities/1",
+									"host": [
+										"api",
+										"algafood",
+										"local"
+									],
+									"port": "8080",
+									"path": [
+										"cities",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add city - V1",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Mumbai\",\r\n    \"state\": {\r\n        \"id\": 1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "api.algafood.local:8080/cities",
+									"host": [
+										"api",
+										"algafood",
+										"local"
+									],
+									"port": "8080",
+									"path": [
+										"cities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update city - V1",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/xml",
+										"type": "default",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Mumbai City\",\r\n    \"state\": {\r\n        \"id\": 2\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "api.algafood.local:8080/cities/1",
+									"host": [
+										"api",
+										"algafood",
+										"local"
+									],
+									"port": "8080",
+									"path": [
+										"cities",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete city - V1",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "api.algafood.local:8080/cities/3",
+									"host": [
+										"api",
+										"algafood",
+										"local"
+									],
+									"port": "8080",
+									"path": [
+										"cities",
+										"3"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Update city",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/xml",
-								"type": "default",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Mumbai City\",\r\n    \"state\": {\r\n        \"id\": 2\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"name": "V2",
+					"item": [
+						{
+							"name": "Get all cities - V2",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v2+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "api.algafood.local:8080/cities",
+									"host": [
+										"api",
+										"algafood",
+										"local"
+									],
+									"port": "8080",
+									"path": [
+										"cities"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "api.algafood.local:8080/cities/1",
-							"host": [
-								"api",
-								"algafood",
-								"local"
-							],
-							"port": "8080",
-							"path": [
-								"cities",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete city",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
+						{
+							"name": "Get city by id - V2",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v2+json",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "api.algafood.local:8080/cities/1",
+									"host": [
+										"api",
+										"algafood",
+										"local"
+									],
+									"port": "8080",
+									"path": [
+										"cities",
+										"1"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "api.algafood.local:8080/cities/3",
-							"host": [
-								"api",
-								"algafood",
-								"local"
-							],
-							"port": "8080",
-							"path": [
-								"cities",
-								"3"
-							]
+						{
+							"name": "Add city - V2",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v2+json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cityName\": \"Mumbai\",\r\n    \"stateId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "api.algafood.local:8080/cities",
+									"host": [
+										"api",
+										"algafood",
+										"local"
+									],
+									"port": "8080",
+									"path": [
+										"cities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update city - V2",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/xml",
+										"type": "default",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/vnd.algafood.v2+json",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cityName\": \"Mumbai City\",\r\n    \"stateId\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "api.algafood.local:8080/cities/1",
+									"host": [
+										"api",
+										"algafood",
+										"local"
+									],
+									"port": "8080",
+									"path": [
+										"cities",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				}
 			]
 		},
