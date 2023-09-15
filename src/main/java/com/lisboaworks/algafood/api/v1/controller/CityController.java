@@ -7,7 +7,6 @@ import com.lisboaworks.algafood.api.v1.assembler.CityModelAssembler;
 import com.lisboaworks.algafood.api.v1.model.CityModel;
 import com.lisboaworks.algafood.api.v1.model.input.CityInput;
 import com.lisboaworks.algafood.api.v1.openapi.controller.CityControllerOpenApi;
-import com.lisboaworks.algafood.core.web.AlgaMediaTypes;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.StateNotFoundException;
 import com.lisboaworks.algafood.domain.model.City;
@@ -16,13 +15,14 @@ import com.lisboaworks.algafood.domain.service.CityRegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/cities", produces = AlgaMediaTypes.V1_APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/v1/cities", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
 public class CityController implements CityControllerOpenApi {
 

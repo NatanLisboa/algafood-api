@@ -912,15 +912,9 @@
 							"name": "Get all cities - V1",
 							"request": {
 								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/vnd.algafood.v1+json",
-										"type": "default"
-									}
-								],
+								"header": [],
 								"url": {
-									"raw": "api.algafood.local:8080/cities",
+									"raw": "api.algafood.local:8080/v1/cities",
 									"host": [
 										"api",
 										"algafood",
@@ -928,6 +922,7 @@
 									],
 									"port": "8080",
 									"path": [
+										"v1",
 										"cities"
 									]
 								}
@@ -940,7 +935,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "api.algafood.local:8080/cities/1",
+									"raw": "api.algafood.local:8080/v1/cities/1",
 									"host": [
 										"api",
 										"algafood",
@@ -948,6 +943,7 @@
 									],
 									"port": "8080",
 									"path": [
+										"v1",
 										"cities",
 										"1"
 									]
@@ -970,7 +966,7 @@
 									}
 								},
 								"url": {
-									"raw": "api.algafood.local:8080/cities",
+									"raw": "api.algafood.local:8080/v1/cities",
 									"host": [
 										"api",
 										"algafood",
@@ -978,6 +974,7 @@
 									],
 									"port": "8080",
 									"path": [
+										"v1",
 										"cities"
 									]
 								}
@@ -988,14 +985,7 @@
 							"name": "Update city - V1",
 							"request": {
 								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/xml",
-										"type": "default",
-										"disabled": true
-									}
-								],
+								"header": [],
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n    \"name\": \"Mumbai City\",\r\n    \"state\": {\r\n        \"id\": 2\r\n    }\r\n}",
@@ -1006,7 +996,7 @@
 									}
 								},
 								"url": {
-									"raw": "api.algafood.local:8080/cities/1",
+									"raw": "api.algafood.local:8080/v1/cities/1",
 									"host": [
 										"api",
 										"algafood",
@@ -1014,6 +1004,7 @@
 									],
 									"port": "8080",
 									"path": [
+										"v1",
 										"cities",
 										"1"
 									]
@@ -1036,7 +1027,7 @@
 									}
 								},
 								"url": {
-									"raw": "api.algafood.local:8080/cities/3",
+									"raw": "api.algafood.local:8080/v1/cities/3",
 									"host": [
 										"api",
 										"algafood",
@@ -1044,6 +1035,7 @@
 									],
 									"port": "8080",
 									"path": [
+										"v1",
 										"cities",
 										"3"
 									]
@@ -1060,15 +1052,9 @@
 							"name": "Get all cities - V2",
 							"request": {
 								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/vnd.algafood.v2+json",
-										"type": "default"
-									}
-								],
+								"header": [],
 								"url": {
-									"raw": "api.algafood.local:8080/cities",
+									"raw": "api.algafood.local:8080/v2/cities",
 									"host": [
 										"api",
 										"algafood",
@@ -1076,6 +1062,7 @@
 									],
 									"port": "8080",
 									"path": [
+										"v2",
 										"cities"
 									]
 								}
@@ -1086,15 +1073,9 @@
 							"name": "Get city by id - V2",
 							"request": {
 								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/vnd.algafood.v2+json",
-										"type": "default"
-									}
-								],
+								"header": [],
 								"url": {
-									"raw": "api.algafood.local:8080/cities/1",
+									"raw": "api.algafood.local:8080/v2/cities/1",
 									"host": [
 										"api",
 										"algafood",
@@ -1102,6 +1083,7 @@
 									],
 									"port": "8080",
 									"path": [
+										"v2",
 										"cities",
 										"1"
 									]
@@ -1113,13 +1095,7 @@
 							"name": "Add city - V2",
 							"request": {
 								"method": "POST",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/vnd.algafood.v2+json",
-										"type": "default"
-									}
-								],
+								"header": [],
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n    \"cityName\": \"Mumbai\",\r\n    \"stateId\": 1\r\n}",
@@ -1130,7 +1106,7 @@
 									}
 								},
 								"url": {
-									"raw": "api.algafood.local:8080/cities",
+									"raw": "api.algafood.local:8080/v2/cities",
 									"host": [
 										"api",
 										"algafood",
@@ -1138,6 +1114,7 @@
 									],
 									"port": "8080",
 									"path": [
+										"v2",
 										"cities"
 									]
 								}
@@ -1148,19 +1125,7 @@
 							"name": "Update city - V2",
 							"request": {
 								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "application/xml",
-										"type": "default",
-										"disabled": true
-									},
-									{
-										"key": "Accept",
-										"value": "application/vnd.algafood.v2+json",
-										"type": "default"
-									}
-								],
+								"header": [],
 								"body": {
 									"mode": "raw",
 									"raw": "{\r\n    \"cityName\": \"Mumbai City\",\r\n    \"stateId\": 2\r\n}",
@@ -1171,7 +1136,7 @@
 									}
 								},
 								"url": {
-									"raw": "api.algafood.local:8080/cities/1",
+									"raw": "api.algafood.local:8080/v2/cities/1",
 									"host": [
 										"api",
 										"algafood",
@@ -1179,8 +1144,40 @@
 									],
 									"port": "8080",
 									"path": [
+										"v2",
 										"cities",
 										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete city - V2",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "api.algafood.local:8080/v2/cities/3",
+									"host": [
+										"api",
+										"algafood",
+										"local"
+									],
+									"port": "8080",
+									"path": [
+										"v2",
+										"cities",
+										"3"
 									]
 								}
 							},

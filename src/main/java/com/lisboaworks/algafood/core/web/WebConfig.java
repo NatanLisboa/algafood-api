@@ -24,11 +24,6 @@ public class WebConfig implements WebMvcConfigurer {
         return new ShallowEtagHeaderFilter();
     }
 
-    @Override
-    public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-        configurer.defaultContentType(AlgaMediaTypes.V2_APPLICATION_JSON);
-    }
-
     @Bean
     public Filter compressingFilter() {
         return new CompressingFilter();
