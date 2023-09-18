@@ -30,7 +30,7 @@ public class CuisineModelAssembler extends RepresentationModelAssemblerSupport<C
 
 		cuisineModel.add(algaLinks.linkToCuisines("cuisines"));
 
-		return modelMapper.map(cuisine, CuisineModel.class);
+		return cuisineModel;
 	}
 
 }
