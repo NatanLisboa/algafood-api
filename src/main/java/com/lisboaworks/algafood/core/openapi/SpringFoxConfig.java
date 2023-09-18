@@ -35,14 +35,14 @@ import java.util.function.Consumer;
 public class SpringFoxConfig {
 
     @Bean
-    public Docket apiDocket() {
+    public Docket apiDocketV1() {
         TypeResolver typeResolver = new TypeResolver();
 
-
         return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("V1")
                 .select()
                     .apis(RequestHandlerSelectors.basePackage("com.lisboaworks.algafood.api"))
-                    .paths(PathSelectors.any())
+                    .paths(PathSelectors.ant("/v1/**"))
                 .build()
                 .useDefaultResponseMessages(false)
                 .globalResponses(HttpMethod.GET, this.globalGetResponseMessages())
@@ -93,7 +93,7 @@ public class SpringFoxConfig {
                         typeResolver.resolve(CollectionModel.class, UserModel.class),
                         UsersModelOpenApi.class)
                 )
-                .apiInfo(this.apiInfo())
+                .apiInfo(this.apiInfoV1())
                 .tags(new Tag("Cities", "Manage the cities"))
                 .tags(new Tag("User groups", "Manage the user groups"))
                 .tags(new Tag("Cuisines", "Manage the cuisines"))
@@ -107,11 +107,42 @@ public class SpringFoxConfig {
                 .tags(new Tag("Statistics", "Algafood statistics"));
     }
 
-    public ApiInfo apiInfo() {
+    @Bean
+    public Docket apiDocketV2() {
+        TypeResolver typeResolver = new TypeResolver();
+
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("V2")
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.lisboaworks.algafood.api"))
+                .paths(PathSelectors.ant("/v2/**"))
+                .build()
+                .useDefaultResponseMessages(false)
+                .globalResponses(HttpMethod.GET, this.globalGetResponseMessages())
+                .globalResponses(HttpMethod.POST, this.globalPostPutResponseMessages())
+                .globalResponses(HttpMethod.PUT, this.globalPostPutResponseMessages())
+                .globalResponses(HttpMethod.DELETE, this.globalDeleteResponseMessages())
+                .additionalModels(typeResolver.resolve(ApiException.class))
+                .ignoredParameterTypes(ServletWebRequest.class, InputStream.class, InputStreamResource.class)
+                .directModelSubstitute(Pageable.class, PageableModelOpenApi.class)
+                .directModelSubstitute(Links.class, LinksModelOpenApi.class)
+                .apiInfo(this.apiInfoV2());
+    }
+
+    public ApiInfo apiInfoV1() {
         return new ApiInfoBuilder()
                 .title("Algafood API")
                 .description("Open API to customers and restaurants")
                 .version("1")
+                .contact(new Contact("Natan da Fonseca Lisboa", "https://github.com/NatanLisboa", "natanflisboa1@gmail.com"))
+                .build();
+    }
+
+    public ApiInfo apiInfoV2() {
+        return new ApiInfoBuilder()
+                .title("Algafood API")
+                .description("Open API to customers and restaurants")
+                .version("2")
                 .contact(new Contact("Natan da Fonseca Lisboa", "https://github.com/NatanLisboa", "natanflisboa1@gmail.com"))
                 .build();
     }
