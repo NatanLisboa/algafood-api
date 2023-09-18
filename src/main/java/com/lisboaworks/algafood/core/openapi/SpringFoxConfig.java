@@ -4,6 +4,8 @@ import com.fasterxml.classmate.TypeResolver;
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import com.lisboaworks.algafood.api.v1.model.*;
 import com.lisboaworks.algafood.api.v1.openapi.model.*;
+import com.lisboaworks.algafood.api.v2.model.CityModelV2;
+import com.lisboaworks.algafood.api.v2.model.CuisineModelV2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.InputStreamResource;
@@ -126,6 +128,16 @@ public class SpringFoxConfig {
                 .ignoredParameterTypes(ServletWebRequest.class, InputStream.class, InputStreamResource.class)
                 .directModelSubstitute(Pageable.class, PageableModelOpenApi.class)
                 .directModelSubstitute(Links.class, LinksModelOpenApi.class)
+                .alternateTypeRules(AlternateTypeRules.newRule(
+                        typeResolver.resolve(CollectionModel.class, CityModelV2.class),
+                        CitiesModelOpenApiV2.class)
+                )
+                .alternateTypeRules(AlternateTypeRules.newRule(
+                        typeResolver.resolve(PagedModel.class, CuisineModelV2.class),
+                        CuisinesModelOpenApiV2.class)
+                )
+                .tags(new Tag("Cities", "Manage the cities"))
+                .tags(new Tag("Cuisines", "Manage the cuisines"))
                 .apiInfo(this.apiInfoV2());
     }
 

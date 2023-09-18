@@ -4,6 +4,7 @@ import com.lisboaworks.algafood.api.v2.assembler.CuisineInputDisassemblerV2;
 import com.lisboaworks.algafood.api.v2.assembler.CuisineModelAssemblerV2;
 import com.lisboaworks.algafood.api.v2.model.CuisineModelV2;
 import com.lisboaworks.algafood.api.v2.model.input.CuisineInputV2;
+import com.lisboaworks.algafood.api.v2.openapi.CuisineControllerOpenApiV2;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import com.lisboaworks.algafood.domain.service.CuisineRegisterService;
@@ -22,7 +23,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(path = "/v2/cuisines", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
-public class CuisineControllerV2 {
+public class CuisineControllerV2 implements CuisineControllerOpenApiV2 {
 
     private final CuisineRepository cuisineRepository;
     private final CuisineRegisterService cuisineRegisterService;

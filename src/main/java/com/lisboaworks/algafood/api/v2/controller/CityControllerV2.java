@@ -5,6 +5,7 @@ import com.lisboaworks.algafood.api.v2.assembler.CityInputDisassemblerV2;
 import com.lisboaworks.algafood.api.v2.assembler.CityModelAssemblerV2;
 import com.lisboaworks.algafood.api.v2.model.CityModelV2;
 import com.lisboaworks.algafood.api.v2.model.input.CityInputV2;
+import com.lisboaworks.algafood.api.v2.openapi.CityControllerOpenApiV2;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.StateNotFoundException;
 import com.lisboaworks.algafood.domain.model.City;
@@ -22,7 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/v2/cities", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
-public class CityControllerV2 {
+public class CityControllerV2 implements CityControllerOpenApiV2 {
 
     private final CityRepository cityRepository;
     private final CityRegisterService cityRegisterService;
