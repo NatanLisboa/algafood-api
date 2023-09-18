@@ -1,6 +1,5 @@
 package com.lisboaworks.algafood.api.v2.assembler;
 
-import com.lisboaworks.algafood.api.v1.model.input.CuisineInput;
 import com.lisboaworks.algafood.api.v2.model.input.CuisineInputV2;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import lombok.AllArgsConstructor;

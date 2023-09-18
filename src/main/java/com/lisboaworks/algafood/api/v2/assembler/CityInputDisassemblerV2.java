@@ -1,6 +1,5 @@
 package com.lisboaworks.algafood.api.v2.assembler;
 
-import com.lisboaworks.algafood.api.v1.model.input.CityInput;
 import com.lisboaworks.algafood.api.v2.model.input.CityInputV2;
 import com.lisboaworks.algafood.domain.model.City;
 import com.lisboaworks.algafood.domain.model.State;

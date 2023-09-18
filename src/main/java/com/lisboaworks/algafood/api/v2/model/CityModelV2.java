@@ -1,6 +1,5 @@
 package com.lisboaworks.algafood.api.v2.model;
 
-import com.lisboaworks.algafood.api.v1.model.StateModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
