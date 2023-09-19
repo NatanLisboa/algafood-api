@@ -36,7 +36,7 @@ import java.util.function.Consumer;
 @EnableSwagger2
 public class SpringFoxConfig {
 
-    @Bean
+    //@Bean
     public Docket apiDocketV1() {
         TypeResolver typeResolver = new TypeResolver();
 
