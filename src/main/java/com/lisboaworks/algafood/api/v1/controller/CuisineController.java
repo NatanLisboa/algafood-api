@@ -9,6 +9,7 @@ import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import com.lisboaworks.algafood.domain.service.CuisineRegisterService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -23,6 +24,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping(path = "/v1/cuisines", produces = MediaType.APPLICATION_JSON_VALUE)
 @AllArgsConstructor
+@Slf4j
 public class CuisineController implements CuisineControllerOpenApi {
 
     private final CuisineRepository cuisineRepository;
@@ -33,6 +35,8 @@ public class CuisineController implements CuisineControllerOpenApi {
 
     @GetMapping
     public PagedModel<CuisineModel> findAll(@PageableDefault(size = 5) Pageable pageable) {
+        log.info("Searching for cuisines with pages containing {} records...", pageable.getPageSize());
+
         Page<Cuisine> cuisinesPage = cuisineRepository.findAll(pageable);
         PagedModel<CuisineModel> cuisinesPagedModel = pagedResourcesAssembler
                 .toModel(cuisinesPage, cuisineModelAssembler);
