@@ -143,8 +143,10 @@ public class SpringFoxConfig {
 
     public ApiInfo apiInfoV1() {
         return new ApiInfoBuilder()
-                .title("Algafood API")
-                .description("Open API to customers and restaurants")
+                .title("Algafood API (Deprecated)")
+                .description("Open API to customers and restaurants.<br>" +
+                        "<strong>This API version is deprecated and will cease to exist from 01/01/2024. Use the API " +
+                        "newest version</strong>")
                 .version("1")
                 .contact(new Contact("Natan da Fonseca Lisboa", "https://github.com/NatanLisboa", "natanflisboa1@gmail.com"))
                 .build();
