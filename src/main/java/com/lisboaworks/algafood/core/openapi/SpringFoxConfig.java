@@ -4,8 +4,6 @@ import com.fasterxml.classmate.TypeResolver;
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import com.lisboaworks.algafood.api.v1.model.*;
 import com.lisboaworks.algafood.api.v1.openapi.model.*;
-import com.lisboaworks.algafood.api.v2.model.CityModelV2;
-import com.lisboaworks.algafood.api.v2.model.CuisineModelV2;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.InputStreamResource;
@@ -36,7 +34,7 @@ import java.util.function.Consumer;
 @EnableSwagger2
 public class SpringFoxConfig {
 
-    //@Bean
+    @Bean
     public Docket apiDocketV1() {
         TypeResolver typeResolver = new TypeResolver();
 
@@ -109,54 +107,11 @@ public class SpringFoxConfig {
                 .tags(new Tag("Statistics", "Algafood statistics"));
     }
 
-    @Bean
-    public Docket apiDocketV2() {
-        TypeResolver typeResolver = new TypeResolver();
-
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("V2")
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.lisboaworks.algafood.api"))
-                .paths(PathSelectors.ant("/v2/**"))
-                .build()
-                .useDefaultResponseMessages(false)
-                .globalResponses(HttpMethod.GET, this.globalGetResponseMessages())
-                .globalResponses(HttpMethod.POST, this.globalPostPutResponseMessages())
-                .globalResponses(HttpMethod.PUT, this.globalPostPutResponseMessages())
-                .globalResponses(HttpMethod.DELETE, this.globalDeleteResponseMessages())
-                .additionalModels(typeResolver.resolve(ApiException.class))
-                .ignoredParameterTypes(ServletWebRequest.class, InputStream.class, InputStreamResource.class)
-                .directModelSubstitute(Pageable.class, PageableModelOpenApi.class)
-                .directModelSubstitute(Links.class, LinksModelOpenApi.class)
-                .alternateTypeRules(AlternateTypeRules.newRule(
-                        typeResolver.resolve(CollectionModel.class, CityModelV2.class),
-                        CitiesModelOpenApiV2.class)
-                )
-                .alternateTypeRules(AlternateTypeRules.newRule(
-                        typeResolver.resolve(PagedModel.class, CuisineModelV2.class),
-                        CuisinesModelOpenApiV2.class)
-                )
-                .tags(new Tag("Cities", "Manage the cities"))
-                .tags(new Tag("Cuisines", "Manage the cuisines"))
-                .apiInfo(this.apiInfoV2());
-    }
-
     public ApiInfo apiInfoV1() {
-        return new ApiInfoBuilder()
-                .title("Algafood API (Deprecated)")
-                .description("Open API to customers and restaurants.<br>" +
-                        "<strong>This API version is deprecated and will cease to exist from 01/01/2024. Use the API " +
-                        "newest version</strong>")
-                .version("1")
-                .contact(new Contact("Natan da Fonseca Lisboa", "https://github.com/NatanLisboa", "natanflisboa1@gmail.com"))
-                .build();
-    }
-
-    public ApiInfo apiInfoV2() {
         return new ApiInfoBuilder()
                 .title("Algafood API")
                 .description("Open API to customers and restaurants")
-                .version("2")
+                .version("1")
                 .contact(new Contact("Natan da Fonseca Lisboa", "https://github.com/NatanLisboa", "natanflisboa1@gmail.com"))
                 .build();
     }

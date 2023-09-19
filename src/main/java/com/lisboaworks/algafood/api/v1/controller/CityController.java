@@ -31,7 +31,6 @@ public class CityController implements CityControllerOpenApi {
     private final CityModelAssembler cityModelAssembler;
     private final CityInputDisassembler cityInputDisassembler;
 
-    @Deprecated
     @GetMapping
     public CollectionModel<CityModel> findAll() {
         List<City> cities = cityRepository.findAll();

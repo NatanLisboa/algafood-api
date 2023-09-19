@@ -1,422 +1,213 @@
 {
 	"info": {
-		"_postman_id": "2a40eda8-d3a0-4a26-8e49-50c1366f3f93",
+		"_postman_id": "9b1f944d-3cec-4896-b3ee-3a81748c7cf5",
 		"name": "Algafood",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29852448"
 	},
 	"item": [
 		{
 			"name": "Cuisines",
 			"item": [
 				{
-					"name": "V1",
-					"item": [
-						{
-							"name": "Get paginated cuisines - V1",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/xml",
-										"type": "default",
-										"disabled": true
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "default"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/xml",
-										"type": "default",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "api.algafood.local:8080/v1/cuisines?size=1&page=0",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"cuisines"
-									],
-									"query": [
-										{
-											"key": "size",
-											"value": "1"
-										},
-										{
-											"key": "page",
-											"value": "0"
-										},
-										{
-											"key": "sort",
-											"value": "name,desc",
-											"disabled": true
-										},
-										{
-											"key": "sort",
-											"value": "id",
-											"disabled": true
-										}
-									]
-								}
+					"name": "Get paginated cuisines",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "default",
+								"disabled": true
 							},
-							"response": []
-						},
-						{
-							"name": "Get cuisine by id - V1",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/xml",
-										"type": "default",
-										"disabled": true
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "default"
-									}
-								],
-								"url": {
-									"raw": "api.algafood.local:8080/v1/cuisines/1",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"cuisines",
-										"1"
-									]
-								}
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
 							},
-							"response": []
-						},
-						{
-							"name": "Add cuisine - V1",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/xml",
-										"type": "default",
-										"disabled": true
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Brazilian\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+							{
+								"key": "Content-Type",
+								"value": "application/xml",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "api.algafood.local:8080/v1/cuisines?size=1&page=0",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cuisines"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "1"
 								},
-								"url": {
-									"raw": "api.algafood.local:8080/v1/cuisines",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"cuisines"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Update cuisine - V1",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/xml",
-										"type": "default",
-										"disabled": true
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Brazilian\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+								{
+									"key": "page",
+									"value": "0"
 								},
-								"url": {
-									"raw": "api.algafood.local:8080/v1/cuisines/1",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"cuisines",
-										"1"
-									]
+								{
+									"key": "sort",
+									"value": "name,desc",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "id",
+									"disabled": true
 								}
-							},
-							"response": []
-						},
-						{
-							"name": "Delete cuisine - V1",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "api.algafood.local:8080/v1/cuisines/3",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"cuisines",
-										"3"
-									]
-								}
-							},
-							"response": []
+							]
 						}
-					]
+					},
+					"response": []
 				},
 				{
-					"name": "V2",
-					"item": [
-						{
-							"name": "Get paginated cuisines - V2",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/xml",
-										"type": "default",
-										"disabled": true
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "default"
-									},
-									{
-										"key": "Content-Type",
-										"value": "application/xml",
-										"type": "default",
-										"disabled": true
-									}
-								],
-								"url": {
-									"raw": "api.algafood.local:8080/v2/cuisines?size=1&page=0",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v2",
-										"cuisines"
-									],
-									"query": [
-										{
-											"key": "size",
-											"value": "1"
-										},
-										{
-											"key": "page",
-											"value": "0"
-										},
-										{
-											"key": "sort",
-											"value": "name,desc",
-											"disabled": true
-										},
-										{
-											"key": "sort",
-											"value": "id",
-											"disabled": true
-										}
-									]
-								}
+					"name": "Get cuisine by id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "default",
+								"disabled": true
 							},
-							"response": []
-						},
-						{
-							"name": "Get cuisine by id - V2",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/xml",
-										"type": "default",
-										"disabled": true
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "default"
-									}
-								],
-								"url": {
-									"raw": "api.algafood.local:8080/v2/cuisines/1",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v2",
-										"cuisines",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Add cuisine - V2",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/xml",
-										"type": "default",
-										"disabled": true
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Brazilian\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "api.algafood.local:8080/v2/cuisines",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v2",
-										"cuisines"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Update cuisine - V2",
-							"request": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Accept",
-										"value": "application/xml",
-										"type": "default",
-										"disabled": true
-									},
-									{
-										"key": "Accept",
-										"value": "application/json",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Brazilian\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "api.algafood.local:8080/v2/cuisines/1",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v2",
-										"cuisines",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Delete cuisine - V2",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "api.algafood.local:8080/v2/cuisines/4",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v2",
-										"cuisines",
-										"4"
-									]
-								}
-							},
-							"response": []
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "api.algafood.local:8080/v1/cuisines/1",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cuisines",
+								"1"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "Add cuisine",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "default",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Brazilian\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "api.algafood.local:8080/v1/cuisines",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cuisines"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update cuisine",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/xml",
+								"type": "default",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Brazilian\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "api.algafood.local:8080/v1/cuisines/1",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cuisines",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete cuisine",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "api.algafood.local:8080/v1/cuisines/3",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cuisines",
+								"3"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1148,284 +939,139 @@
 			"name": "Cities",
 			"item": [
 				{
-					"name": "V1",
-					"item": [
-						{
-							"name": "Get all cities - V1",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "api.algafood.local:8080/v1/cities",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"cities"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get city by id - V1",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "api.algafood.local:8080/v1/cities/1",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"cities",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Add city - V1",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Mumbai\",\r\n    \"state\": {\r\n        \"id\": 1\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "api.algafood.local:8080/v1/cities",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"cities"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Update city - V1",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"name\": \"Mumbai City\",\r\n    \"state\": {\r\n        \"id\": 2\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "api.algafood.local:8080/v1/cities/1",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"cities",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Delete city - V1",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "api.algafood.local:8080/v1/cities/3",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v1",
-										"cities",
-										"3"
-									]
-								}
-							},
-							"response": []
+					"name": "Get all cities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.algafood.local:8080/v1/cities",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cities"
+							]
 						}
-					]
+					},
+					"response": []
 				},
 				{
-					"name": "V2",
-					"item": [
-						{
-							"name": "Get all cities - V2",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "api.algafood.local:8080/v2/cities",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v2",
-										"cities"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get city by id - V2",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "api.algafood.local:8080/v2/cities/1",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v2",
-										"cities",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Add city - V2",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"cityName\": \"Mumbai\",\r\n    \"stateId\": 1\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "api.algafood.local:8080/v2/cities",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v2",
-										"cities"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Update city - V2",
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"cityName\": \"Mumbai City\",\r\n    \"stateId\": 2\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "api.algafood.local:8080/v2/cities/1",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v2",
-										"cities",
-										"1"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Delete city - V2",
-							"request": {
-								"method": "DELETE",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "api.algafood.local:8080/v2/cities/3",
-									"host": [
-										"api",
-										"algafood",
-										"local"
-									],
-									"port": "8080",
-									"path": [
-										"v2",
-										"cities",
-										"3"
-									]
-								}
-							},
-							"response": []
+					"name": "Get city by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "api.algafood.local:8080/v1/cities/1",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cities",
+								"1"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "Add city",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Mumbai\",\r\n    \"state\": {\r\n        \"id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "api.algafood.local:8080/v1/cities",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update city",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Mumbai City\",\r\n    \"state\": {\r\n        \"id\": 2\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "api.algafood.local:8080/v1/cities/1",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cities",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete city",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "api.algafood.local:8080/v1/cities/3",
+							"host": [
+								"api",
+								"algafood",
+								"local"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"cities",
+								"3"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
