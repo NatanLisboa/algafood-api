@@ -37,6 +37,10 @@ public class CuisineController implements CuisineControllerOpenApi {
     public PagedModel<CuisineModel> findAll(@PageableDefault(size = 5) Pageable pageable) {
         log.info("Searching for cuisines with pages containing {} records...", pageable.getPageSize());
 
+        if (true) {
+            throw new RuntimeException("Exception test");
+        }
+
         Page<Cuisine> cuisinesPage = cuisineRepository.findAll(pageable);
         PagedModel<CuisineModel> cuisinesPagedModel = pagedResourcesAssembler
                 .toModel(cuisinesPage, cuisineModelAssembler);
