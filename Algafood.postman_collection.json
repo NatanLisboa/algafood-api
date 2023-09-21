@@ -55,12 +55,7 @@
 								},
 								{
 									"key": "sort",
-									"value": "name,desc",
-									"disabled": true
-								},
-								{
-									"key": "sort",
-									"value": "id",
+									"value": "id,name,desc",
 									"disabled": true
 								}
 							]
@@ -2150,6 +2145,47 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "123456",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "algafood",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api-password",
+			"value": "123456"
 		}
 	]
 }
