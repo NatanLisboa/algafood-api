@@ -2184,6 +2184,52 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Check token",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "web123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "algafood-web",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "token",
+									"value": "1gsxFHgXso2EUr_rVOXvZaluO2g",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "auth.algafood.local:8081/oauth/check_token",
+							"host": [
+								"auth",
+								"algafood",
+								"local"
+							],
+							"port": "8081",
+							"path": [
+								"oauth",
+								"check_token"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -2209,8 +2255,8 @@
 		}
 	],
 	"auth": {
-		"type": "basic",
-		"basic": [
+		"type": "oauth2",
+		"oauth2": [
 			{
 				"key": "password",
 				"value": "123456",
@@ -2219,6 +2265,36 @@
 			{
 				"key": "username",
 				"value": "algafood",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "web123",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "algafood-web",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "auth.algafood.local:8081/oauth/token",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "password_credentials",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "Token Algafood",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
 				"type": "string"
 			}
 		]
