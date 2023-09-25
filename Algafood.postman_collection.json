@@ -2186,6 +2186,57 @@
 					"response": []
 				},
 				{
+					"name": "Refresh token - Request token",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "web123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "algafood-web",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "refresh_token",
+									"value": "78pBCTMFvVzfk0L7Px_mCHPF_Sk",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "auth.algafood.local:8081/oauth/token",
+							"host": [
+								"auth",
+								"algafood",
+								"local"
+							],
+							"port": "8081",
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Check token",
 					"request": {
 						"auth": {
@@ -2255,46 +2306,11 @@
 		}
 	],
 	"auth": {
-		"type": "oauth2",
-		"oauth2": [
+		"type": "bearer",
+		"bearer": [
 			{
-				"key": "password",
-				"value": "123456",
-				"type": "string"
-			},
-			{
-				"key": "username",
-				"value": "algafood",
-				"type": "string"
-			},
-			{
-				"key": "clientSecret",
-				"value": "web123",
-				"type": "string"
-			},
-			{
-				"key": "clientId",
-				"value": "algafood-web",
-				"type": "string"
-			},
-			{
-				"key": "accessTokenUrl",
-				"value": "auth.algafood.local:8081/oauth/token",
-				"type": "string"
-			},
-			{
-				"key": "grant_type",
-				"value": "password_credentials",
-				"type": "string"
-			},
-			{
-				"key": "tokenName",
-				"value": "Token Algafood",
-				"type": "string"
-			},
-			{
-				"key": "addTokenTo",
-				"value": "header",
+				"key": "token",
+				"value": "xhbzCK-QAKz1WVjhpD6TUa_eoi8",
 				"type": "string"
 			}
 		]
