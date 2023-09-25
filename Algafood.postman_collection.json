@@ -2153,6 +2153,11 @@
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
 									"key": "username",
 									"value": "algafood",
 									"type": "text"
@@ -2160,11 +2165,6 @@
 								{
 									"key": "password",
 									"value": "123456",
-									"type": "text"
-								},
-								{
-									"key": "grant_type",
-									"value": "password",
 									"type": "text"
 								}
 							]
@@ -2210,12 +2210,58 @@
 							"urlencoded": [
 								{
 									"key": "refresh_token",
-									"value": "78pBCTMFvVzfk0L7Px_mCHPF_Sk",
+									"value": "UtS11Qr9NcOdleuYtShgq-yw6h8",
 									"type": "text"
 								},
 								{
 									"key": "grant_type",
 									"value": "refresh_token",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "auth.algafood.local:8081/oauth/token",
+							"host": [
+								"auth",
+								"algafood",
+								"local"
+							],
+							"port": "8081",
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Client credentials - Request token",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "invoicing123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "invoicing",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
 									"type": "text"
 								}
 							]
@@ -2306,11 +2352,36 @@
 		}
 	],
 	"auth": {
-		"type": "bearer",
-		"bearer": [
+		"type": "oauth2",
+		"oauth2": [
 			{
-				"key": "token",
-				"value": "xhbzCK-QAKz1WVjhpD6TUa_eoi8",
+				"key": "tokenName",
+				"value": "Algafood Token",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "invoicing123",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "invoicing",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "auth.algafood.local:8081/oauth/token",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "client_credentials",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
 				"type": "string"
 			}
 		]
