@@ -2186,6 +2186,62 @@
 					"response": []
 				},
 				{
+					"name": "Authorization Code - Request token",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "food123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "food-analytics",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "nF2mOT",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://client-application",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "auth.algafood.local:8081/oauth/token",
+							"host": [
+								"auth",
+								"algafood",
+								"local"
+							],
+							"port": "8081",
+							"path": [
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Refresh token - Request token",
 					"request": {
 						"auth": {
