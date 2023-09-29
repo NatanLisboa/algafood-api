@@ -16,6 +16,7 @@ public class ResourceServerConfig {
             .authorizeRequests()
                 .anyRequest().authenticated()
             .and()
+            .cors().and()
             .oauth2ResourceServer().opaqueToken();
 
         return http.build();
