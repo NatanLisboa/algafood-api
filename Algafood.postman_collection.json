@@ -2189,19 +2189,7 @@
 					"name": "Authorization Code - Request token",
 					"request": {
 						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "food123",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "food-analytics",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [],
@@ -2215,12 +2203,22 @@
 								},
 								{
 									"key": "code",
-									"value": "nF2mOT",
+									"value": "FHIaaq",
 									"type": "text"
 								},
 								{
 									"key": "redirect_uri",
-									"value": "http://client-application",
+									"value": "http://www.foodanalytics.local:8082",
+									"type": "text"
+								},
+								{
+									"key": "code_verifier",
+									"value": "238497asdfkjahkd23487",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "food-analytics",
 									"type": "text"
 								}
 							]
