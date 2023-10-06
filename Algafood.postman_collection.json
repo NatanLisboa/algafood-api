@@ -2455,6 +2455,49 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Token key",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "web123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "algafood-web",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "auth.algafood.local:8081/oauth/token_key",
+							"host": [
+								"auth",
+								"algafood",
+								"local"
+							],
+							"port": "8081",
+							"path": [
+								"oauth",
+								"token_key"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
