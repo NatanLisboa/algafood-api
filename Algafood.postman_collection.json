@@ -2159,12 +2159,12 @@
 								},
 								{
 									"key": "username",
-									"value": "algafood",
+									"value": "joao.man@algafood.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "123456",
+									"value": "123",
 									"type": "text"
 								}
 							]

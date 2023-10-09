@@ -81,12 +81,12 @@ insert into payment_method (description, last_update_datetime) values ('Cash', u
 insert into restaurant_payment_method (restaurant_id, payment_method_id) values (1, 1), (1, 2), (2, 2), (3, 1), (3, 2);
 
 insert into user (name, email, password, register_datetime) values
-('João da Silva', 'joao.man@algafood.com', '123', utc_timestamp),
-('Maria Joaquina', 'maria.sel@algafood.com', '123', utc_timestamp),
-('José Souza', 'jose.aux@algafood.com', '123', utc_timestamp),
-('Sebastião Martins', 'sebastiao.reg@algafood.com', '123', utc_timestamp),
-('Leonardo Narita', 'senhor.war14+leonardo@gmail.com', '123', utc_timestamp),
-('Natan Lisboa', 'senhor.war14+natan@gmail.com', '123', utc_timestamp);
+('João da Silva', 'joao.man@algafood.com', '$2a$12$dBKguAPVAy70zx2hk6BJT.iKGVlPoDi31CnfREidU6Xj49qbjo07a', utc_timestamp),
+('Maria Joaquina', 'maria.sel@algafood.com', '$2a$12$dBKguAPVAy70zx2hk6BJT.iKGVlPoDi31CnfREidU6Xj49qbjo07a', utc_timestamp),
+('José Souza', 'jose.aux@algafood.com', '$2a$12$dBKguAPVAy70zx2hk6BJT.iKGVlPoDi31CnfREidU6Xj49qbjo07a', utc_timestamp),
+('Sebastião Martins', 'sebastiao.reg@algafood.com', '$2a$12$dBKguAPVAy70zx2hk6BJT.iKGVlPoDi31CnfREidU6Xj49qbjo07a', utc_timestamp),
+('Leonardo Narita', 'senhor.war14+leonardo@gmail.com', '$2a$12$dBKguAPVAy70zx2hk6BJT.iKGVlPoDi31CnfREidU6Xj49qbjo07a', utc_timestamp),
+('Natan Lisboa', 'senhor.war14+natan@gmail.com', '$2a$12$dBKguAPVAy70zx2hk6BJT.iKGVlPoDi31CnfREidU6Xj49qbjo07a', utc_timestamp);
 
 insert into user_user_group(user_id, user_group_id) values (1, 1), (1, 2), (2, 2), (3, 3), (3, 2), (4, 4);
 
