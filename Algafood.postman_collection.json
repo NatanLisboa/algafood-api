@@ -1198,7 +1198,7 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/users/2/password",
+							"raw": "api.algafood.local:8080/v1/users/7/password",
 							"host": [
 								"api",
 								"algafood",
@@ -1208,7 +1208,7 @@
 							"path": [
 								"v1",
 								"users",
-								"2",
+								"7",
 								"password"
 							]
 						}
@@ -2203,7 +2203,7 @@
 								},
 								{
 									"key": "code",
-									"value": "9ppPBz",
+									"value": "3LwJGn",
 									"type": "text"
 								},
 								{
@@ -2213,7 +2213,7 @@
 								},
 								{
 									"key": "code_verifier",
-									"value": "lriuBjyOroSMP48HVn5qZhVnwv8D_qTMZTFof3zhuRk",
+									"value": "pPNXtdysvV9C-fWgzLjFNDJbdDv2-zsI3onee26lznU",
 									"type": "text"
 								},
 								{
@@ -2526,28 +2526,38 @@
 		"type": "oauth2",
 		"oauth2": [
 			{
-				"key": "tokenName",
-				"value": "Algafood Token",
-				"type": "string"
-			},
-			{
-				"key": "clientSecret",
-				"value": "invoicing123",
-				"type": "string"
-			},
-			{
-				"key": "clientId",
-				"value": "invoicing",
+				"key": "authUrl",
+				"value": "http://auth.algafood.local:8081/oauth/authorize?response_type=code&client_id=food-analytics&redirect_uri=http://www.foodanalytics.local:8082&code_challenge=g4KvTGjXOyAwUphhSNYXHfFh80LVgn4sTKf15uDePHM&code_challenge_method=s256",
 				"type": "string"
 			},
 			{
 				"key": "accessTokenUrl",
-				"value": "auth.algafood.local:8081/oauth/token",
+				"value": "http://auth.algafood.local:8081/oauth/authorize?response_type=code&client_id=food-analytics&redirect_uri=http://www.foodanalytics.local:8082",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "food-analytics",
+				"type": "string"
+			},
+			{
+				"key": "redirect_uri",
+				"value": "http://client-application",
 				"type": "string"
 			},
 			{
 				"key": "grant_type",
-				"value": "client_credentials",
+				"value": "authorization_code_with_pkce",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "Algafood Token",
 				"type": "string"
 			},
 			{

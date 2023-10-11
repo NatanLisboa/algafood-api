@@ -6,6 +6,7 @@ import com.lisboaworks.algafood.domain.model.User;
 import com.lisboaworks.algafood.domain.model.UserGroup;
 import com.lisboaworks.algafood.domain.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,7 @@ public class UserRegisterService {
 
     private final UserRepository userRepository;
     private final UserGroupRegisterService userGroupRegisterService;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public User save(User user) {
@@ -27,6 +29,10 @@ public class UserRegisterService {
         if (userSearchedByEmail.isPresent() && !userSearchedByEmail.get().equals(user)) {
             throw new BusinessRuleException(String.format("There is a user already registered with the email '%s'. " +
                     "Please, change the email address and try again.", user.getEmail()));
+        }
+
+        if (user.isNew()) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
 
         return userRepository.save(user);
@@ -41,11 +47,11 @@ public class UserRegisterService {
     public void changePassword(Long userId, String currentPassword, String newPassword) {
         User user = this.findOrThrowException(userId);
 
-        if (!user.passwordMatchesWith(currentPassword)) {
+        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
             throw new BusinessRuleException("Current password sent does not match with user password");
         }
 
-        user.setPassword(newPassword);
+        user.setPassword(passwordEncoder.encode(newPassword));
     }
 
     @Transactional

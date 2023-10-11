@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -40,10 +41,6 @@ public class User {
     )
     private Set<UserGroup> userGroups = new HashSet<>();
 
-    public boolean passwordMatchesWith(String password) {
-        return this.password.equals(password);
-    }
-
     public void addUserGroup(UserGroup userGroup) {
         userGroups.add(userGroup);
     }
@@ -52,4 +49,7 @@ public class User {
         userGroups.remove(userGroup);
     }
 
+    public boolean isNew() {
+        return Objects.isNull(this.id);
+    }
 }
