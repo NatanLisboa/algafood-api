@@ -61,18 +61,46 @@ insert into product (name, description, price, active, restaurant_id) values ('T
 insert into product (name, description, price, active, restaurant_id) values ('Hambúrguer gostosississississississimo', 'Cheeseburger dipped in cheese fondue', 110.00, true, 4);
 insert into product (name, description, price, active, restaurant_id) values ('Coxinha de abóbora', 'Fried cone-shaped dough filled with pumpkin', 15.00, true, 4);
 
-insert into permission (name, description) values ('GET_CUISINES', 'Allow get cuisines');
-insert into permission (name, description) values ('EDIT_CUISINES', 'Allow edit cuisines');
+insert into permission (id, name, description) values (1, 'GET_CUISINES', 'Allow get cuisines');
+insert into permission (id, name, description) values (2, 'EDIT_CUISINES', 'Allow edit cuisines');
+insert into permission (id, name, description) values (3, 'GET_PAYMENT_METHODS', 'Allow get payment methods');
+insert into permission (id, name, description) values (4, 'EDIT_PAYMENT_METHODS', 'Allow edit payment methods');
+insert into permission (id, name, description) values (5, 'GET_CITIES', 'Allow get cities');
+insert into permission (id, name, description) values (6, 'EDIT_CITIES', 'Allow edit cities');
+insert into permission (id, name, description) values (7, 'GET_STATES', 'Allow get states');
+insert into permission (id, name, description) values (8, 'EDIT_STATES', 'Allow edit states');
+insert into permission (id, name, description) values (9, 'GET_USERS', 'Allow get users');
+insert into permission (id, name, description) values (10, 'EDIT_USERS', 'Allow edit users');
+insert into permission (id, name, description) values (11, 'GET_RESTAURANTS', 'Allow get restaurants');
+insert into permission (id, name, description) values (12, 'EDIT_RESTAURANTS', 'Allow edit restaurants');
+insert into permission (id, name, description) values (13, 'GET_PRODUCTS', 'Allow get products');
+insert into permission (id, name, description) values (14, 'EDIT_PRODUCTS', 'Allow edit products');
+insert into permission (id, name, description) values (15, 'GET_ORDERS', 'Allow get orders');
+insert into permission (id, name, description) values (16, 'MANAGE_ORDERS', 'Allow manage orders');
+insert into permission (id, name, description) values (17, 'GENERATE_REPORTS', 'Allow generate reports');
 
 insert into user_group (name) values ('Manager');
 insert into user_group (name) values ('Seller');
 insert into user_group (name) values ('Secretary');
 insert into user_group (name) values ('Register officer');
 
-insert into user_group_permission(user_group_id, permission_id) values (1, 1);
-insert into user_group_permission(user_group_id, permission_id) values (1, 2);
-insert into user_group_permission(user_group_id, permission_id) values (2, 1);
-insert into user_group_permission(user_group_id, permission_id) values (3, 2);
+# Add permissions to the manager group
+insert into user_group_permission (user_group_id, permission_id)
+select 1, id from permission;
+
+# Add permissions to the seller group
+insert into user_group_permission (user_group_id, permission_id)
+select 2, id from permission where name like 'GET_%';
+
+insert into user_group_permission (user_group_id, permission_id) values (2, 14);
+
+# Add permissions to the secretary group
+insert into user_group_permission (user_group_id, permission_id)
+select 3, id from permission where name like 'GET_%';
+
+# Add permissions to the register officer group
+insert into user_group_permission (user_group_id, permission_id)
+select 4, id from permission where name like '%_RESTAURANTS' or name like '%_PRODUCTS';
 
 insert into payment_method (description, last_update_datetime) values ('Credit card', utc_timestamp);
 insert into payment_method (description, last_update_datetime) values ('Debit card', utc_timestamp);
