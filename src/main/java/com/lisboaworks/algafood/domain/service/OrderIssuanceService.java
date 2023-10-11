@@ -1,5 +1,6 @@
 package com.lisboaworks.algafood.domain.service;
 
+import com.lisboaworks.algafood.core.security.SecurityHelper;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.OrderNotFoundException;
 import com.lisboaworks.algafood.domain.model.*;
@@ -19,12 +20,12 @@ public class OrderIssuanceService {
     private final CityRegisterService cityRegisterService;
     private final UserRegisterService userRegisterService;
     private final ProductRegisterService productRegisterService;
+    private final SecurityHelper securityHelper;
 
     @Transactional
     public Order issue(Order order) {
 
-        //TODO: Get authenticated customer
-        this.mockCustomer(order);
+        this.getAuthenticatedCustomer(order);
 
         this.validateOrder(order);
         this.validateOrderItems(order);
@@ -64,9 +65,9 @@ public class OrderIssuanceService {
         }
     }
 
-    private void mockCustomer(Order order) {
+    private void getAuthenticatedCustomer(Order order) {
         User customer = new User();
-        customer.setId(1L);
+        customer.setId(securityHelper.getUserId());
         order.setCustomer(customer);
     }
 
