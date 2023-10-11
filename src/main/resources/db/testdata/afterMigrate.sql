@@ -116,7 +116,7 @@ insert into user (name, email, password, register_datetime) values
 ('Leonardo Narita', 'senhor.war14+leonardo@gmail.com', '$2a$12$dBKguAPVAy70zx2hk6BJT.iKGVlPoDi31CnfREidU6Xj49qbjo07a', utc_timestamp),
 ('Natan Lisboa', 'senhor.war14+natan@gmail.com', '$2a$12$dBKguAPVAy70zx2hk6BJT.iKGVlPoDi31CnfREidU6Xj49qbjo07a', utc_timestamp);
 
-insert into user_user_group(user_id, user_group_id) values (1, 1), (1, 2), (2, 2), (3, 3), (3, 2), (4, 4);
+insert into user_user_group(user_id, user_group_id) values (1, 1), (1, 2), (2, 2), (3, 3), (4, 4);
 
 insert into restaurant_responsible_user(restaurant_id, user_id) values (1, 1), (2, 2), (3, 3), (3, 2);
 
