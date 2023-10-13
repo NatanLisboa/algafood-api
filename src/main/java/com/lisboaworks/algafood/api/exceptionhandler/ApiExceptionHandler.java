@@ -17,6 +17,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -96,6 +97,21 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         return this.handleExceptionInternal(ex, entityAlreadyInUseException, new HttpHeaders(), status, request);
     }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<?> handleAccessDeniedException(AccessDeniedException ex, WebRequest request) {
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        ApiExceptionType apiExceptionType = ApiExceptionType.ACCESS_DENIED;
+        String detail = "Access is denied";
+        String message = "You do not have the enough permissions to perform this operation";
+
+        ApiException accessDeniedException = createApiExceptionBuilder(status, apiExceptionType, detail)
+                .userMessage(message)
+                .build();
+
+        return this.handleExceptionInternal(ex, accessDeniedException, new HttpHeaders(), status, request);
+    }
+
 
     @Override
     protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
