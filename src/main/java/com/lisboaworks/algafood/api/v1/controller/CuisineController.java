@@ -5,6 +5,7 @@ import com.lisboaworks.algafood.api.v1.assembler.CuisineModelAssembler;
 import com.lisboaworks.algafood.api.v1.model.CuisineModel;
 import com.lisboaworks.algafood.api.v1.model.input.CuisineInput;
 import com.lisboaworks.algafood.api.v1.openapi.controller.CuisineControllerOpenApi;
+import com.lisboaworks.algafood.core.security.CheckSecurity;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import com.lisboaworks.algafood.domain.repository.CuisineRepository;
 import com.lisboaworks.algafood.domain.service.CuisineRegisterService;
@@ -17,7 +18,6 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -35,7 +35,7 @@ public class CuisineController implements CuisineControllerOpenApi {
     private final PagedResourcesAssembler<Cuisine> pagedResourcesAssembler;
 
     @GetMapping
-    @PreAuthorize("isAuthenticated()")
+    @CheckSecurity.Cuisines.CanGet
     public PagedModel<CuisineModel> findAll(@PageableDefault(size = 5) Pageable pageable) {
         log.info("Searching for cuisines with pages containing {} records...", pageable.getPageSize());
 
@@ -46,14 +46,14 @@ public class CuisineController implements CuisineControllerOpenApi {
     }
 
     @GetMapping("/{cuisineId}")
-    @PreAuthorize("isAuthenticated()")
+    @CheckSecurity.Cuisines.CanGet
     public CuisineModel findById(@PathVariable Long cuisineId) {
     	Cuisine cuisine = cuisineRegisterService.findOrThrowException(cuisineId);
         return cuisineModelAssembler.toModel(cuisine);
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('EDIT_CUISINES')")
+    @CheckSecurity.Cuisines.CanEdit
     @ResponseStatus(HttpStatus.CREATED)
     public CuisineModel add(@Valid @RequestBody CuisineInput cuisineInput) {
     	Cuisine cuisine = cuisineInputDisassembler.toDomainObject(cuisineInput);
@@ -61,7 +61,7 @@ public class CuisineController implements CuisineControllerOpenApi {
     }
 
     @PutMapping("/{cuisineId}")
-    @PreAuthorize("hasAuthority('EDIT_CUISINES')")
+    @CheckSecurity.Cuisines.CanEdit
     public CuisineModel update(@PathVariable Long cuisineId,
                                @RequestBody @Valid CuisineInput newCuisineInput) {
         Cuisine cuisine = cuisineRegisterService.findOrThrowException(cuisineId);
@@ -70,7 +70,7 @@ public class CuisineController implements CuisineControllerOpenApi {
     }
 
     @DeleteMapping("/{cuisineId}")
-    @PreAuthorize("hasAuthority('EDIT_CUISINES')")
+    @CheckSecurity.Cuisines.CanEdit
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long cuisineId) {
         cuisineRegisterService.delete(cuisineId);
