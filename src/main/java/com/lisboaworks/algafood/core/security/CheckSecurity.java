@@ -11,12 +11,12 @@ public @interface CheckSecurity {
 
     @interface Cuisines {
 
-        @PreAuthorize("isAuthenticated()")
+        @PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanGet { }
 
-        @PreAuthorize("hasAuthority('EDIT_CUISINES')")
+        @PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDIT_CUISINES')")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanEdit { }
