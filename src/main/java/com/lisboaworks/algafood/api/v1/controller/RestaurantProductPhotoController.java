@@ -4,6 +4,7 @@ import com.lisboaworks.algafood.api.v1.assembler.ProductPhotoModelAssembler;
 import com.lisboaworks.algafood.api.v1.model.ProductPhotoModel;
 import com.lisboaworks.algafood.api.v1.model.input.ProductPhotoInput;
 import com.lisboaworks.algafood.api.v1.openapi.controller.RestaurantProductPhotoControllerOpenApi;
+import com.lisboaworks.algafood.core.security.CheckSecurity;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import com.lisboaworks.algafood.domain.model.Product;
 import com.lisboaworks.algafood.domain.model.ProductPhoto;
@@ -36,6 +37,7 @@ public class RestaurantProductPhotoController implements RestaurantProductPhotoC
     private final PhotoStorageService photoStorageService;
 
     @GetMapping
+    @CheckSecurity.Restaurants.CanGet
     public ProductPhotoModel getPhoto(@PathVariable Long restaurantId, @PathVariable Long productId) {
         ProductPhoto productPhoto = productPhotoCatalogService.findOrThrowException(restaurantId, productId);
         return productPhotoModelAssembler.toModel(productPhoto);
@@ -66,6 +68,7 @@ public class RestaurantProductPhotoController implements RestaurantProductPhotoC
     }
 
     @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @CheckSecurity.Restaurants.CanEdit
     public ProductPhotoModel updatePhoto(@PathVariable Long restaurantId,
                                          @PathVariable Long productId,
                                          @Valid ProductPhotoInput productPhotoInput,
@@ -86,6 +89,7 @@ public class RestaurantProductPhotoController implements RestaurantProductPhotoC
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.Restaurants.CanEdit
     public void deletePhoto(@PathVariable Long restaurantId, @PathVariable Long productId) {
         productPhotoCatalogService.delete(restaurantId, productId);
     }

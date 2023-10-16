@@ -9,6 +9,7 @@ import com.lisboaworks.algafood.api.v1.model.RestaurantOnlyNameModel;
 import com.lisboaworks.algafood.api.v1.model.RestaurantSummaryModel;
 import com.lisboaworks.algafood.api.v1.model.input.RestaurantInput;
 import com.lisboaworks.algafood.api.v1.openapi.controller.RestaurantControllerOpenApi;
+import com.lisboaworks.algafood.core.security.CheckSecurity;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.CityNotFoundException;
 import com.lisboaworks.algafood.domain.exception.CuisineNotFoundException;
@@ -39,16 +40,19 @@ public class RestaurantController implements RestaurantControllerOpenApi {
     private final RestaurantOnlyNameModelAssembler restaurantOnlyNameModelAssembler;
 
     @GetMapping
+    @CheckSecurity.Restaurants.CanGet
     public CollectionModel<RestaurantSummaryModel> findAll() {
         return restaurantSummaryModelAssembler.toCollectionModel(restaurantRepository.findAll());
     }
 
     @GetMapping(params = "projection=only-name")
+    @CheckSecurity.Restaurants.CanGet
     public CollectionModel<RestaurantOnlyNameModel> findAllOnlyWithName() {
         return restaurantOnlyNameModelAssembler.toCollectionModel(restaurantRepository.findAll());
     }
 
     @GetMapping("/{restaurantId}")
+    @CheckSecurity.Restaurants.CanGet
     public RestaurantModel findById(@PathVariable Long restaurantId) {
     	Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
     	return restaurantModelAssembler.toModel(restaurant);
@@ -56,6 +60,7 @@ public class RestaurantController implements RestaurantControllerOpenApi {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @CheckSecurity.Restaurants.CanEdit
     public RestaurantModel add(@RequestBody @Valid RestaurantInput restaurantInput) {
         try {
         	Restaurant restaurant = restaurantInputDisassembler.toDomainObject(restaurantInput);
@@ -66,6 +71,7 @@ public class RestaurantController implements RestaurantControllerOpenApi {
     }
 
     @PutMapping("/{restaurantId}")
+    @CheckSecurity.Restaurants.CanEdit
     public RestaurantModel update(@PathVariable Long restaurantId,
                                   @RequestBody @Valid RestaurantInput newRestaurantInput) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
@@ -79,6 +85,7 @@ public class RestaurantController implements RestaurantControllerOpenApi {
 
     @PutMapping("/{restaurantId}/active")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.Restaurants.CanEdit
     public ResponseEntity<Void> activate(@PathVariable Long restaurantId) {
         restaurantRegisterService.activate(restaurantId);
 
@@ -87,6 +94,7 @@ public class RestaurantController implements RestaurantControllerOpenApi {
 
     @DeleteMapping("/{restaurantId}/active")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.Restaurants.CanEdit
     public ResponseEntity<Void> inactivate(@PathVariable Long restaurantId) {
         restaurantRegisterService.inactivate(restaurantId);
 
@@ -95,6 +103,7 @@ public class RestaurantController implements RestaurantControllerOpenApi {
 
     @PutMapping("/{restaurantId}/opening")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.Restaurants.CanEdit
     public ResponseEntity<Void> open(@PathVariable Long restaurantId) {
         restaurantRegisterService.open(restaurantId);
 
@@ -103,6 +112,7 @@ public class RestaurantController implements RestaurantControllerOpenApi {
 
     @PutMapping("/{restaurantId}/closure")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.Restaurants.CanEdit
     public ResponseEntity<Void> close(@PathVariable Long restaurantId) {
         restaurantRegisterService.close(restaurantId);
 
@@ -111,6 +121,7 @@ public class RestaurantController implements RestaurantControllerOpenApi {
 
     @PutMapping("/activations")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.Restaurants.CanEdit
     public void activateMultiples(@RequestBody List<Long> restaurantIds) {
         try {
             restaurantRegisterService.activate(restaurantIds);
@@ -121,6 +132,7 @@ public class RestaurantController implements RestaurantControllerOpenApi {
 
     @DeleteMapping("/activations")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.Restaurants.CanEdit
     public void inactivateMultiples(@RequestBody List<Long> restaurantIds) {
         try {
             restaurantRegisterService.inactivate(restaurantIds);

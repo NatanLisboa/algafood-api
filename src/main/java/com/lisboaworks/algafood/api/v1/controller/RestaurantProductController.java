@@ -6,6 +6,7 @@ import com.lisboaworks.algafood.api.v1.assembler.ProductModelAssembler;
 import com.lisboaworks.algafood.api.v1.model.ProductModel;
 import com.lisboaworks.algafood.api.v1.model.input.ProductInput;
 import com.lisboaworks.algafood.api.v1.openapi.controller.RestaurantProductControllerOpenApi;
+import com.lisboaworks.algafood.core.security.CheckSecurity;
 import com.lisboaworks.algafood.domain.model.Product;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.repository.ProductRepository;
@@ -33,6 +34,7 @@ public class RestaurantProductController implements RestaurantProductControllerO
     private final AlgaLinks algaLinks;
 
     @GetMapping
+    @CheckSecurity.Restaurants.CanGet
     public CollectionModel<ProductModel> findAll(@PathVariable Long restaurantId,
                                                  @RequestParam(required = false, defaultValue = "false") Boolean includeInactiveProducts) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
@@ -47,6 +49,7 @@ public class RestaurantProductController implements RestaurantProductControllerO
     }
 
     @GetMapping("/{productId}")
+    @CheckSecurity.Restaurants.CanGet
     public ProductModel findById(@PathVariable Long restaurantId, @PathVariable Long productId) {
         Product product = productRegisterService.findOrThrowException(restaurantId, productId);
         return productModelAssembler.toModel(product);
@@ -54,6 +57,7 @@ public class RestaurantProductController implements RestaurantProductControllerO
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @CheckSecurity.Restaurants.CanEdit
     public ProductModel add(@PathVariable Long restaurantId, @RequestBody @Valid ProductInput productInput) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
         Product product = productInputDisassembler.toDomainObject(productInput);
@@ -62,6 +66,7 @@ public class RestaurantProductController implements RestaurantProductControllerO
     }
 
     @PutMapping("/{productId}")
+    @CheckSecurity.Restaurants.CanEdit
     public ProductModel update(@PathVariable Long restaurantId, @PathVariable Long productId, @RequestBody @Valid ProductInput updateProductInput) {
         Product product = productRegisterService.findOrThrowException(restaurantId, productId);
         productInputDisassembler.copyToDomainObject(updateProductInput, product);

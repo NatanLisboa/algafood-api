@@ -4,6 +4,7 @@ import com.lisboaworks.algafood.api.v1.AlgaLinks;
 import com.lisboaworks.algafood.api.v1.assembler.UserModelAssembler;
 import com.lisboaworks.algafood.api.v1.model.UserModel;
 import com.lisboaworks.algafood.api.v1.openapi.controller.RestaurantResponsibleUserControllerOpenApi;
+import com.lisboaworks.algafood.core.security.CheckSecurity;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
@@ -20,6 +21,7 @@ public class RestaurantResponsibleUserController implements RestaurantResponsibl
     private final UserModelAssembler userModelAssembler;
     private final AlgaLinks algaLinks;
     @GetMapping
+    @CheckSecurity.Restaurants.CanGet
     public CollectionModel<UserModel> getAllResponsibleUsers(@PathVariable Long restaurantId) {
         CollectionModel<UserModel> responsibleUsersModel =
                 userModelAssembler.toCollectionModel(restaurantRegisterService.getAllResponsibleUsers(restaurantId))
@@ -36,6 +38,7 @@ public class RestaurantResponsibleUserController implements RestaurantResponsibl
 
     @PutMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.Restaurants.CanEdit
     public ResponseEntity<Void> associateResponsibleUser(@PathVariable Long restaurantId, @PathVariable Long userId) {
         restaurantRegisterService.associateResponsibleUser(restaurantId, userId);
 
@@ -44,6 +47,7 @@ public class RestaurantResponsibleUserController implements RestaurantResponsibl
 
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.Restaurants.CanEdit
     public ResponseEntity<Void> disassociateResponsibleUser(@PathVariable Long restaurantId, @PathVariable Long userId) {
         restaurantRegisterService.disassociateResponsibleUser(restaurantId, userId);
 

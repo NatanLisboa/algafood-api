@@ -4,6 +4,7 @@ import com.lisboaworks.algafood.api.v1.AlgaLinks;
 import com.lisboaworks.algafood.api.v1.assembler.PaymentMethodModelAssembler;
 import com.lisboaworks.algafood.api.v1.model.PaymentMethodModel;
 import com.lisboaworks.algafood.api.v1.openapi.controller.RestaurantPaymentMethodControllerOpenApi;
+import com.lisboaworks.algafood.core.security.CheckSecurity;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class RestaurantPaymentMethodController implements RestaurantPaymentMetho
     private final AlgaLinks algaLinks;
 
     @GetMapping
+    @CheckSecurity.Restaurants.CanGet
     public CollectionModel<PaymentMethodModel> findAll(@PathVariable Long restaurantId) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
 
@@ -42,6 +44,7 @@ public class RestaurantPaymentMethodController implements RestaurantPaymentMetho
 
     @PutMapping("/{paymentMethodId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.Restaurants.CanEdit
     public ResponseEntity<Void> associate(@PathVariable Long restaurantId, @PathVariable Long paymentMethodId) {
         restaurantRegisterService.associatePaymentMethod(restaurantId, paymentMethodId);
 
@@ -50,6 +53,7 @@ public class RestaurantPaymentMethodController implements RestaurantPaymentMetho
 
     @DeleteMapping("/{paymentMethodId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.Restaurants.CanEdit
     public ResponseEntity<Void> disassociate(@PathVariable Long restaurantId, @PathVariable Long paymentMethodId) {
         restaurantRegisterService.disassociatePaymentMethod(restaurantId, paymentMethodId);
 
