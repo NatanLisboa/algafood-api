@@ -60,7 +60,7 @@ public class RestaurantController implements RestaurantControllerOpenApi {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @CheckSecurity.Restaurants.CanEdit
+    @CheckSecurity.Restaurants.CanManageRegister
     public RestaurantModel add(@RequestBody @Valid RestaurantInput restaurantInput) {
         try {
         	Restaurant restaurant = restaurantInputDisassembler.toDomainObject(restaurantInput);
@@ -71,7 +71,7 @@ public class RestaurantController implements RestaurantControllerOpenApi {
     }
 
     @PutMapping("/{restaurantId}")
-    @CheckSecurity.Restaurants.CanEdit
+    @CheckSecurity.Restaurants.CanManageRegister
     public RestaurantModel update(@PathVariable Long restaurantId,
                                   @RequestBody @Valid RestaurantInput newRestaurantInput) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
@@ -85,7 +85,7 @@ public class RestaurantController implements RestaurantControllerOpenApi {
 
     @PutMapping("/{restaurantId}/active")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CheckSecurity.Restaurants.CanEdit
+    @CheckSecurity.Restaurants.CanManageRegister
     public ResponseEntity<Void> activate(@PathVariable Long restaurantId) {
         restaurantRegisterService.activate(restaurantId);
 
@@ -94,7 +94,7 @@ public class RestaurantController implements RestaurantControllerOpenApi {
 
     @DeleteMapping("/{restaurantId}/active")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CheckSecurity.Restaurants.CanEdit
+    @CheckSecurity.Restaurants.CanManageRegister
     public ResponseEntity<Void> inactivate(@PathVariable Long restaurantId) {
         restaurantRegisterService.inactivate(restaurantId);
 
@@ -103,7 +103,7 @@ public class RestaurantController implements RestaurantControllerOpenApi {
 
     @PutMapping("/{restaurantId}/opening")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CheckSecurity.Restaurants.CanEdit
+    @CheckSecurity.Restaurants.CanManageOperation
     public ResponseEntity<Void> open(@PathVariable Long restaurantId) {
         restaurantRegisterService.open(restaurantId);
 
@@ -112,7 +112,7 @@ public class RestaurantController implements RestaurantControllerOpenApi {
 
     @PutMapping("/{restaurantId}/closure")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CheckSecurity.Restaurants.CanEdit
+    @CheckSecurity.Restaurants.CanManageOperation
     public ResponseEntity<Void> close(@PathVariable Long restaurantId) {
         restaurantRegisterService.close(restaurantId);
 
@@ -121,7 +121,7 @@ public class RestaurantController implements RestaurantControllerOpenApi {
 
     @PutMapping("/activations")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CheckSecurity.Restaurants.CanEdit
+    @CheckSecurity.Restaurants.CanManageRegister
     public void activateMultiples(@RequestBody List<Long> restaurantIds) {
         try {
             restaurantRegisterService.activate(restaurantIds);
@@ -132,7 +132,7 @@ public class RestaurantController implements RestaurantControllerOpenApi {
 
     @DeleteMapping("/activations")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CheckSecurity.Restaurants.CanEdit
+    @CheckSecurity.Restaurants.CanManageRegister
     public void inactivateMultiples(@RequestBody List<Long> restaurantIds) {
         try {
             restaurantRegisterService.inactivate(restaurantIds);

@@ -57,7 +57,7 @@ public class RestaurantProductController implements RestaurantProductControllerO
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @CheckSecurity.Restaurants.CanEdit
+    @CheckSecurity.Restaurants.CanManageOperation
     public ProductModel add(@PathVariable Long restaurantId, @RequestBody @Valid ProductInput productInput) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
         Product product = productInputDisassembler.toDomainObject(productInput);
@@ -66,7 +66,7 @@ public class RestaurantProductController implements RestaurantProductControllerO
     }
 
     @PutMapping("/{productId}")
-    @CheckSecurity.Restaurants.CanEdit
+    @CheckSecurity.Restaurants.CanManageOperation
     public ProductModel update(@PathVariable Long restaurantId, @PathVariable Long productId, @RequestBody @Valid ProductInput updateProductInput) {
         Product product = productRegisterService.findOrThrowException(restaurantId, productId);
         productInputDisassembler.copyToDomainObject(updateProductInput, product);

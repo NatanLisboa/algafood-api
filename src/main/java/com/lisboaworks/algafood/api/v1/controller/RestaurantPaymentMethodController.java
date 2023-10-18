@@ -44,7 +44,7 @@ public class RestaurantPaymentMethodController implements RestaurantPaymentMetho
 
     @PutMapping("/{paymentMethodId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CheckSecurity.Restaurants.CanEdit
+    @CheckSecurity.Restaurants.CanManageOperation
     public ResponseEntity<Void> associate(@PathVariable Long restaurantId, @PathVariable Long paymentMethodId) {
         restaurantRegisterService.associatePaymentMethod(restaurantId, paymentMethodId);
 
@@ -53,7 +53,7 @@ public class RestaurantPaymentMethodController implements RestaurantPaymentMetho
 
     @DeleteMapping("/{paymentMethodId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CheckSecurity.Restaurants.CanEdit
+    @CheckSecurity.Restaurants.CanManageOperation
     public ResponseEntity<Void> disassociate(@PathVariable Long restaurantId, @PathVariable Long paymentMethodId) {
         restaurantRegisterService.disassociatePaymentMethod(restaurantId, paymentMethodId);
 

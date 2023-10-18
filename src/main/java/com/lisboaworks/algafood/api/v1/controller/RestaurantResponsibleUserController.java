@@ -38,7 +38,7 @@ public class RestaurantResponsibleUserController implements RestaurantResponsibl
 
     @PutMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CheckSecurity.Restaurants.CanEdit
+    @CheckSecurity.Restaurants.CanManageRegister
     public ResponseEntity<Void> associateResponsibleUser(@PathVariable Long restaurantId, @PathVariable Long userId) {
         restaurantRegisterService.associateResponsibleUser(restaurantId, userId);
 
@@ -47,7 +47,7 @@ public class RestaurantResponsibleUserController implements RestaurantResponsibl
 
     @DeleteMapping("/{userId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CheckSecurity.Restaurants.CanEdit
+    @CheckSecurity.Restaurants.CanManageRegister
     public ResponseEntity<Void> disassociateResponsibleUser(@PathVariable Long restaurantId, @PathVariable Long userId) {
         restaurantRegisterService.disassociateResponsibleUser(restaurantId, userId);
 
