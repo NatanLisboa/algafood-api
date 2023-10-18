@@ -100,7 +100,8 @@ insert into payment_method (description, last_update_datetime) values ('Credit c
 insert into payment_method (description, last_update_datetime) values ('Debit card', utc_timestamp);
 insert into payment_method (description, last_update_datetime) values ('Cash', utc_timestamp);
 
-insert into restaurant_payment_method (restaurant_id, payment_method_id) values (1, 1), (1, 2), (2, 2), (3, 1), (3, 2);
+insert into restaurant_payment_method (restaurant_id, payment_method_id) values (1, 1), (1, 2), (2, 2), (3, 1), (3, 2),
+(4, 1), (4, 2), (4, 3);
 
 insert into user (name, email, password, register_datetime) values
 ('João da Silva', 'joao.man@algafood.com', '$2a$12$dBKguAPVAy70zx2hk6BJT.iKGVlPoDi31CnfREidU6Xj49qbjo07a', utc_timestamp),
@@ -113,7 +114,7 @@ insert into user (name, email, password, register_datetime) values
 
 insert into user_user_group(user_id, user_group_id) values (1, 1), (1, 2), (2, 2), (3, 3), (4, 4);
 
-insert into restaurant_responsible_user(restaurant_id, user_id) values (1, 1), (2, 2), (3, 3), (3, 2), (1, 7), (3, 7);
+insert into restaurant_responsible_user(restaurant_id, user_id) values (1, 1), (2, 2), (3, 3), (3, 2), (1, 7), (4, 7);
 
 insert into `order` (id, code, restaurant_id, customer_id, payment_method_id, address_city_id, address_zip_code,
                     address_street_name, address_number, address_complement, address_district,
