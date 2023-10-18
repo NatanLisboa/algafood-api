@@ -9,6 +9,7 @@ import com.lisboaworks.algafood.api.v1.model.input.OrderInput;
 import com.lisboaworks.algafood.api.v1.openapi.controller.OrderControllerOpenApi;
 import com.lisboaworks.algafood.core.data.PageWrapper;
 import com.lisboaworks.algafood.core.data.PageableTranslator;
+import com.lisboaworks.algafood.core.security.CheckSecurity;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.EntityNotFoundException;
 import com.lisboaworks.algafood.domain.filter.OrderFilter;
@@ -50,6 +51,7 @@ public class OrderController implements OrderControllerOpenApi {
     }
 
     @GetMapping("/{orderCode}")
+    @CheckSecurity.Orders.CanGetById
     public OrderModel findById(@PathVariable String orderCode) {
         Order order = orderIssuanceService.findOrThrowException(orderCode);
         return orderModelAssembler.toModel(order);
