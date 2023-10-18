@@ -108,12 +108,12 @@ insert into user (name, email, password, register_datetime) values
 ('José Souza', 'jose.aux@algafood.com', '$2a$12$dBKguAPVAy70zx2hk6BJT.iKGVlPoDi31CnfREidU6Xj49qbjo07a', utc_timestamp),
 ('Sebastião Martins', 'sebastiao.reg@algafood.com', '$2a$12$dBKguAPVAy70zx2hk6BJT.iKGVlPoDi31CnfREidU6Xj49qbjo07a', utc_timestamp),
 ('Leonardo Narita', 'senhor.war14+leonardo@gmail.com', '$2a$12$dBKguAPVAy70zx2hk6BJT.iKGVlPoDi31CnfREidU6Xj49qbjo07a', utc_timestamp),
-('Natan Lisboa', 'senhor.war14+natan@gmail.com', '$2a$12$dBKguAPVAy70zx2hk6BJT.iKGVlPoDi31CnfREidU6Xj49qbjo07a', utc_timestamp);
+('Natan Lisboa', 'senhor.war14+natan@gmail.com', '$2a$12$dBKguAPVAy70zx2hk6BJT.iKGVlPoDi31CnfREidU6Xj49qbjo07a', utc_timestamp),
+('Naoki', 'naoki.own@gmail.com', '$2a$12$dBKguAPVAy70zx2hk6BJT.iKGVlPoDi31CnfREidU6Xj49qbjo07a', utc_timestamp);
 
 insert into user_user_group(user_id, user_group_id) values (1, 1), (1, 2), (2, 2), (3, 3), (4, 4);
 
-insert into restaurant_responsible_user(restaurant_id, user_id) values (1, 1), (2, 2), (3, 3), (3, 2);
-
+insert into restaurant_responsible_user(restaurant_id, user_id) values (1, 1), (2, 2), (3, 3), (3, 2), (1, 7), (3, 7);
 
 insert into `order` (id, code, restaurant_id, customer_id, payment_method_id, address_city_id, address_zip_code,
                     address_street_name, address_number, address_complement, address_district,
