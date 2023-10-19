@@ -47,6 +47,13 @@ public @interface CheckSecurity {
 
     @interface Orders {
 
+        @PreAuthorize("hasAuthority('SCOPE_READ') and (hasAuthority('GET_ORDERS') or " +
+                "@securityHelper.getUserId() == #filter.customerId or " +
+                "@securityHelper.manageRestaurant(#filter.restaurantId))")
+        @Retention(RetentionPolicy.RUNTIME)
+        @Target(ElementType.METHOD)
+        @interface CanGetAll { }
+
         @PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
         @PostAuthorize("hasAuthority('GET_ORDERS') or " +
         "@securityHelper.getUserId() == returnObject.customer.id or " +

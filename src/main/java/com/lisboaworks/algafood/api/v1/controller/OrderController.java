@@ -43,6 +43,7 @@ public class OrderController implements OrderControllerOpenApi {
     private final PagedResourcesAssembler<Order> pagedResourcesAssembler;
 
     @GetMapping
+    @CheckSecurity.Orders.CanGetAll
     public PagedModel<OrderSummaryModel> findAll(OrderFilter filter, @PageableDefault(size = 5) Pageable pageable) {
         Pageable mappedPageable = this.mapSortPropertiesNamesToMatchWithDomainModel(pageable);
         Page<Order> ordersPage = orderRepository.findAll(OrderSpecs.usingFilter(filter), mappedPageable);
