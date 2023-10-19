@@ -62,6 +62,10 @@ public @interface CheckSecurity {
         @Target(ElementType.METHOD)
         @interface CanGetById { }
 
+        @PreAuthorize("hasAuthority('SCOPE_WRITE') and (hasAuthority('MANAGE_ORDERS') or " +
+                        "@securityHelper.isOrderManagedByUser(#orderCode))")
+        @interface CanManageOrders { }
+
     }
 
 }
