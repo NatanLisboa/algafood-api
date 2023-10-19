@@ -1,5 +1,7 @@
 package com.lisboaworks.algafood.core.security;
 
+import com.lisboaworks.algafood.domain.model.Order;
+import com.lisboaworks.algafood.domain.repository.OrderRepository;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -14,6 +16,7 @@ import java.util.Objects;
 public class SecurityHelper {
 
     private final RestaurantRepository restaurantRepository;
+    private final OrderRepository orderRepository;
 
     public Authentication getAuthentication() {
         return SecurityContextHolder.getContext().getAuthentication();
@@ -31,6 +34,10 @@ public class SecurityHelper {
         }
 
         return restaurantRepository.existsResponsibleUser(restaurantId, this.getUserId());
+    }
+
+    public boolean manageOrderRestaurant(String orderCode) {
+        return orderRepository.isOrderManagedByUser(orderCode, this.getUserId());
     }
 
 }
