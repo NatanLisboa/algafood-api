@@ -117,4 +117,29 @@ public @interface CheckSecurity {
 
     }
 
+    @interface UsersUserGroupsPermissions {
+
+        @PreAuthorize("hasAuthority('SCOPE_READ') and hasAuthority('GET_USERS_USER_GROUPS_PERMISSIONS')")
+        @Retention(RetentionPolicy.RUNTIME)
+        @Target(ElementType.METHOD)
+        @interface CanGet { }
+
+        @PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDIT_USERS_USER_GROUPS_PERMISSIONS')")
+        @Retention(RetentionPolicy.RUNTIME)
+        @Target(ElementType.METHOD)
+        @interface CanEdit { }
+
+        @PreAuthorize("hasAuthority('SCOPE_WRITE') and #userId == @securityHelper.getUserId()")
+        @Retention(RetentionPolicy.RUNTIME)
+        @Target(ElementType.METHOD)
+        @interface CanChangeOwnPassword { }
+
+        @PreAuthorize("hasAuthority('SCOPE_WRITE') and (hasAuthority('EDIT_USERS_USER_GROUPS_PERMISSIONS') or " +
+                "#userId == @securityHelper.getUserId())")
+        @Retention(RetentionPolicy.RUNTIME)
+        @Target(ElementType.METHOD)
+        @interface CanModifyUserData { }
+
+    }
+
 }

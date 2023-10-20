@@ -5,6 +5,7 @@ import com.lisboaworks.algafood.api.v1.assembler.UserGroupModelAssembler;
 import com.lisboaworks.algafood.api.v1.model.UserGroupModel;
 import com.lisboaworks.algafood.api.v1.model.input.UserGroupInput;
 import com.lisboaworks.algafood.api.v1.openapi.controller.UserGroupControllerOpenApi;
+import com.lisboaworks.algafood.core.security.CheckSecurity;
 import com.lisboaworks.algafood.domain.model.UserGroup;
 import com.lisboaworks.algafood.domain.repository.UserGroupRepository;
 import com.lisboaworks.algafood.domain.service.UserGroupRegisterService;
@@ -27,11 +28,13 @@ public class UserGroupController implements UserGroupControllerOpenApi {
     private final UserGroupInputDisassembler userGroupInputDisassembler;
 
     @GetMapping
+    @CheckSecurity.UsersUserGroupsPermissions.CanGet
     public CollectionModel<UserGroupModel> findAll() {
         return userGroupModelAssembler.toCollectionModel(userGroupRepository.findAll());
     }
 
     @GetMapping("/{userGroupId}")
+    @CheckSecurity.UsersUserGroupsPermissions.CanGet
     public UserGroupModel findById(@PathVariable Long userGroupId) {
         UserGroup userGroup = userGroupRegisterService.findOrThrowException(userGroupId);
         return userGroupModelAssembler.toModel(userGroup);
@@ -39,12 +42,14 @@ public class UserGroupController implements UserGroupControllerOpenApi {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @CheckSecurity.UsersUserGroupsPermissions.CanEdit
     public UserGroupModel add(@Valid @RequestBody UserGroupInput userGroupInput) {
         UserGroup userGroup = userGroupInputDisassembler.toDomainObject(userGroupInput);
         return userGroupModelAssembler.toModel(userGroupRegisterService.save(userGroup));
     }
 
     @PutMapping("/{userGroupId}")
+    @CheckSecurity.UsersUserGroupsPermissions.CanEdit
     public UserGroupModel update(@PathVariable Long userGroupId,
                                  @RequestBody @Valid UserGroupInput newUserGroupInput) {
         UserGroup userGroup = userGroupRegisterService.findOrThrowException(userGroupId);
@@ -54,6 +59,7 @@ public class UserGroupController implements UserGroupControllerOpenApi {
 
     @DeleteMapping("/{userGroupId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.UsersUserGroupsPermissions.CanEdit
     public void delete(@PathVariable Long userGroupId) {
         userGroupRegisterService.delete(userGroupId);
     }

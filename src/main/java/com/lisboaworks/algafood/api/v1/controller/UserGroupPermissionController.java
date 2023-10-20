@@ -4,6 +4,7 @@ import com.lisboaworks.algafood.api.v1.AlgaLinks;
 import com.lisboaworks.algafood.api.v1.assembler.PermissionModelAssembler;
 import com.lisboaworks.algafood.api.v1.model.PermissionModel;
 import com.lisboaworks.algafood.api.v1.openapi.controller.UserGroupPermissionControllerOpenApi;
+import com.lisboaworks.algafood.core.security.CheckSecurity;
 import com.lisboaworks.algafood.domain.model.UserGroup;
 import com.lisboaworks.algafood.domain.service.UserGroupRegisterService;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class UserGroupPermissionController implements UserGroupPermissionControl
     private final AlgaLinks algaLinks;
 
     @GetMapping
+    @CheckSecurity.UsersUserGroupsPermissions.CanGet
     public CollectionModel<PermissionModel> findAll(@PathVariable Long userGroupId) {
         UserGroup userGroup = userGroupRegisterService.findOrThrowException(userGroupId);
         CollectionModel<PermissionModel> userGroupPermissionsModel = permissionModelAssembler.toCollectionModel(userGroup.getPermissions());
@@ -36,6 +38,7 @@ public class UserGroupPermissionController implements UserGroupPermissionControl
     
     @PutMapping("/{permissionId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.UsersUserGroupsPermissions.CanEdit
     public ResponseEntity<Void> associate(@PathVariable Long userGroupId, @PathVariable Long permissionId) {
         userGroupRegisterService.associatePermission(userGroupId, permissionId);
         return ResponseEntity.noContent().build();
@@ -43,6 +46,7 @@ public class UserGroupPermissionController implements UserGroupPermissionControl
 
     @DeleteMapping("/{permissionId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.UsersUserGroupsPermissions.CanEdit
     public ResponseEntity<Void> disassociate(@PathVariable Long userGroupId, @PathVariable Long permissionId) {
         userGroupRegisterService.disassociatePermission(userGroupId, permissionId);
         return ResponseEntity.noContent().build();

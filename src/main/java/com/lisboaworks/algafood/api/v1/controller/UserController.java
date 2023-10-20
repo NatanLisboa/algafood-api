@@ -7,6 +7,7 @@ import com.lisboaworks.algafood.api.v1.model.input.UserChangePasswordInput;
 import com.lisboaworks.algafood.api.v1.model.input.UserInput;
 import com.lisboaworks.algafood.api.v1.model.input.UserNameEmailInput;
 import com.lisboaworks.algafood.api.v1.openapi.controller.UserControllerOpenApi;
+import com.lisboaworks.algafood.core.security.CheckSecurity;
 import com.lisboaworks.algafood.domain.model.User;
 import com.lisboaworks.algafood.domain.repository.UserRepository;
 import com.lisboaworks.algafood.domain.service.UserRegisterService;
@@ -29,11 +30,13 @@ public class UserController implements UserControllerOpenApi {
     private final UserInputDisassembler userInputDisassembler;
 
     @GetMapping
+    @CheckSecurity.UsersUserGroupsPermissions.CanGet
     public CollectionModel<UserModel> findAll() {
         return userModelAssembler.toCollectionModel(userRepository.findAll());
     }
 
     @GetMapping("/{userId}")
+    @CheckSecurity.UsersUserGroupsPermissions.CanGet
     public UserModel findById(@PathVariable Long userId) {
         User user = userRegisterService.findOrThrowException(userId);
         return userModelAssembler.toModel(user);
@@ -47,6 +50,7 @@ public class UserController implements UserControllerOpenApi {
     }
 
     @PutMapping("/{userId}")
+    @CheckSecurity.UsersUserGroupsPermissions.CanModifyUserData
     public UserModel update(@PathVariable Long userId,
                             @RequestBody @Valid UserNameEmailInput newUserInput) {
         User user = userRegisterService.findOrThrowException(userId);
@@ -56,6 +60,7 @@ public class UserController implements UserControllerOpenApi {
 
     @PutMapping("/{userId}/password")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.UsersUserGroupsPermissions.CanChangeOwnPassword
     public void changePassword(@PathVariable Long userId,
                           @RequestBody @Valid UserChangePasswordInput newPasswordInput) {
         userRegisterService.changePassword(userId, newPasswordInput.getCurrentPassword(), newPasswordInput.getNewPassword());
