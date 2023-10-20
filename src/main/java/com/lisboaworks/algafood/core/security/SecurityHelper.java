@@ -1,6 +1,5 @@
 package com.lisboaworks.algafood.core.security;
 
-import com.lisboaworks.algafood.domain.model.Order;
 import com.lisboaworks.algafood.domain.repository.OrderRepository;
 import com.lisboaworks.algafood.domain.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
