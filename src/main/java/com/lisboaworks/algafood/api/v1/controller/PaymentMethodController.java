@@ -5,6 +5,7 @@ import com.lisboaworks.algafood.api.v1.assembler.PaymentMethodModelAssembler;
 import com.lisboaworks.algafood.api.v1.model.PaymentMethodModel;
 import com.lisboaworks.algafood.api.v1.model.input.PaymentMethodInput;
 import com.lisboaworks.algafood.api.v1.openapi.controller.PaymentMethodControllerOpenApi;
+import com.lisboaworks.algafood.core.security.CheckSecurity;
 import com.lisboaworks.algafood.domain.model.PaymentMethod;
 import com.lisboaworks.algafood.domain.repository.PaymentMethodRepository;
 import com.lisboaworks.algafood.domain.service.PaymentMethodRegisterService;
@@ -34,6 +35,7 @@ public class PaymentMethodController implements PaymentMethodControllerOpenApi {
     private final PaymentMethodInputDisassembler paymentMethodInputDisassembler;
 
     @GetMapping
+    @CheckSecurity.PaymentMethods.CanGet
     public ResponseEntity<CollectionModel<PaymentMethodModel>> findAll(ServletWebRequest request) {
         ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
 
@@ -56,6 +58,7 @@ public class PaymentMethodController implements PaymentMethodControllerOpenApi {
     }
 
     @GetMapping("/{paymentMethodId}")
+    @CheckSecurity.PaymentMethods.CanGet
     public ResponseEntity<PaymentMethodModel> findById(@PathVariable Long paymentMethodId, ServletWebRequest request) {
         ShallowEtagHeaderFilter.disableContentCaching(request.getRequest());
 
@@ -79,12 +82,14 @@ public class PaymentMethodController implements PaymentMethodControllerOpenApi {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @CheckSecurity.PaymentMethods.CanEdit
     public PaymentMethodModel add(@Valid @RequestBody PaymentMethodInput paymentMethodInput) {
         PaymentMethod paymentMethod = paymentMethodInputDisassembler.toDomainObject(paymentMethodInput);
         return paymentMethodModelAssembler.toModel(paymentMethodRegisterService.save(paymentMethod));
     }
 
     @PutMapping("/{paymentMethodId}")
+    @CheckSecurity.PaymentMethods.CanEdit
     public PaymentMethodModel update(@PathVariable Long paymentMethodId,
                                      @RequestBody @Valid PaymentMethodInput newPaymentMethodInput) {
         PaymentMethod paymentMethod = paymentMethodRegisterService.findOrThrowException(paymentMethodId);
@@ -94,6 +99,7 @@ public class PaymentMethodController implements PaymentMethodControllerOpenApi {
 
     @DeleteMapping("/{paymentMethodId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.PaymentMethods.CanEdit
     public void delete(@PathVariable Long paymentMethodId) {
         paymentMethodRegisterService.delete(paymentMethodId);
     }
