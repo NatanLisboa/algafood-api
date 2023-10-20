@@ -41,6 +41,7 @@ public class StateController implements StateControllerOpenApi {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @CheckSecurity.States.CanEdit
     public StateModel add(@RequestBody @Valid StateInput stateInput) {
     	State state = stateInputDisassembler.toDomainObject(stateInput);
