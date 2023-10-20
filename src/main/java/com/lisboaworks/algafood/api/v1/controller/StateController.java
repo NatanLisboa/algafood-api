@@ -48,7 +48,6 @@ public class StateController implements StateControllerOpenApi {
         return stateModelAssembler.toModel(stateRegisterService.save(state));
     }
 
-
     @PutMapping("/{stateId}")
     @CheckSecurity.States.CanEdit
     public StateModel update(@PathVariable Long stateId,
