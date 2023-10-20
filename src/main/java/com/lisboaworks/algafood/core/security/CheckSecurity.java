@@ -62,6 +62,11 @@ public @interface CheckSecurity {
         @Target(ElementType.METHOD)
         @interface CanGetById { }
 
+        @PreAuthorize("hasAuthority('SCOPE_WRITE') and isAuthenticated()")
+        @Retention(RetentionPolicy.RUNTIME)
+        @Target(ElementType.METHOD)
+        @interface CanCreate { }
+
         @PreAuthorize("hasAuthority('SCOPE_WRITE') and (hasAuthority('MANAGE_ORDERS') or " +
                         "@securityHelper.manageOrderRestaurant(#orderCode))")
         @Retention(RetentionPolicy.RUNTIME)

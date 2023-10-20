@@ -60,6 +60,7 @@ public class OrderController implements OrderControllerOpenApi {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @CheckSecurity.Orders.CanCreate
     public OrderModel issue(@RequestBody @Valid OrderInput orderInput) {
         Order order = orderInputDisassembler.toDomainObject(orderInput);
         try {
