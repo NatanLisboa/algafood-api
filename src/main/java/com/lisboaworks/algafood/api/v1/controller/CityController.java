@@ -7,6 +7,7 @@ import com.lisboaworks.algafood.api.v1.assembler.CityModelAssembler;
 import com.lisboaworks.algafood.api.v1.model.CityModel;
 import com.lisboaworks.algafood.api.v1.model.input.CityInput;
 import com.lisboaworks.algafood.api.v1.openapi.controller.CityControllerOpenApi;
+import com.lisboaworks.algafood.core.security.CheckSecurity;
 import com.lisboaworks.algafood.domain.exception.BusinessRuleException;
 import com.lisboaworks.algafood.domain.exception.StateNotFoundException;
 import com.lisboaworks.algafood.domain.model.City;
@@ -32,12 +33,14 @@ public class CityController implements CityControllerOpenApi {
     private final CityInputDisassembler cityInputDisassembler;
 
     @GetMapping
+    @CheckSecurity.Cities.CanGet
     public CollectionModel<CityModel> findAll() {
         List<City> cities = cityRepository.findAll();
         return cityModelAssembler.toCollectionModel(cities);
     }
 
     @GetMapping("/{cityId}")
+    @CheckSecurity.Cities.CanGet
     public CityModel findById(@PathVariable Long cityId) {
         City city = cityRegisterService.findOrThrowException(cityId);
         return cityModelAssembler.toModel(city);
@@ -45,6 +48,7 @@ public class CityController implements CityControllerOpenApi {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @CheckSecurity.Cities.CanEdit
     public CityModel add(@RequestBody @Valid CityInput cityInput) {
         try {
         	City city = cityInputDisassembler.toDomainObject(cityInput);
@@ -57,6 +61,7 @@ public class CityController implements CityControllerOpenApi {
     }
 
     @PutMapping("/{cityId}")
+    @CheckSecurity.Cities.CanEdit
     public CityModel update(@PathVariable Long cityId, @RequestBody @Valid CityInput newCityInput) {
         try {
             City city = cityRegisterService.findOrThrowException(cityId);
@@ -70,6 +75,7 @@ public class CityController implements CityControllerOpenApi {
 
     @DeleteMapping("/{cityId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @CheckSecurity.Cities.CanEdit
     public void delete(@PathVariable Long cityId) {
         cityRegisterService.delete(cityId);
     }
