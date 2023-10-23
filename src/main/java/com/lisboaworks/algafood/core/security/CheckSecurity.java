@@ -70,7 +70,7 @@ public @interface CheckSecurity {
         @PreAuthorize("@securityHelper.canManageOrder(#orderCode)")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
-        @interface CanManageOrders { }
+        @interface CanManage { }
 
     }
 

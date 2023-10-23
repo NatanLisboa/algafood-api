@@ -17,7 +17,7 @@ public class OrderFlowController implements OrderFlowControllerOpenApi {
 
     @PutMapping("/confirmation")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CheckSecurity.Orders.CanManageOrders
+    @CheckSecurity.Orders.CanManage
     public ResponseEntity<Void> confirm(@PathVariable String orderCode) {
         orderFlowService.confirm(orderCode);
 
@@ -26,7 +26,7 @@ public class OrderFlowController implements OrderFlowControllerOpenApi {
 
     @PutMapping("/cancellation")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CheckSecurity.Orders.CanManageOrders
+    @CheckSecurity.Orders.CanManage
     public ResponseEntity<Void> cancel(@PathVariable String orderCode) {
         orderFlowService.cancel(orderCode);
 
@@ -35,7 +35,7 @@ public class OrderFlowController implements OrderFlowControllerOpenApi {
 
     @PutMapping("/delivery")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @CheckSecurity.Orders.CanManageOrders
+    @CheckSecurity.Orders.CanManage
     public ResponseEntity<Void> deliver(@PathVariable String orderCode) {
         orderFlowService.deliver(orderCode);
 
