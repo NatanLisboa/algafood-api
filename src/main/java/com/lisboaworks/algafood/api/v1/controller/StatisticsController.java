@@ -2,6 +2,7 @@ package com.lisboaworks.algafood.api.v1.controller;
 
 import com.lisboaworks.algafood.api.v1.AlgaLinks;
 import com.lisboaworks.algafood.api.v1.openapi.controller.StatisticsControllerOpenApi;
+import com.lisboaworks.algafood.core.security.CheckSecurity;
 import com.lisboaworks.algafood.domain.filter.DailySaleFilter;
 import com.lisboaworks.algafood.domain.model.statistics.DailySale;
 import com.lisboaworks.algafood.domain.service.SaleQueryService;
@@ -29,6 +30,7 @@ public class StatisticsController implements StatisticsControllerOpenApi {
     private final AlgaLinks algaLinks;
 
     @GetMapping
+    @CheckSecurity.Statistics.CanGet
     public StatisticsModel statistics() {
         StatisticsModel statisticsModel = new StatisticsModel();
 
@@ -38,11 +40,13 @@ public class StatisticsController implements StatisticsControllerOpenApi {
     }
 
     @GetMapping(path = "/daily-sales", produces = MediaType.APPLICATION_JSON_VALUE)
+    @CheckSecurity.Statistics.CanGet
     public List<DailySale> getDailySales(DailySaleFilter filter, @RequestParam(required = false, defaultValue = UTC_OFFSET) String timeOffset) {
         return saleQueryService.getDailySales(filter, timeOffset);
     }
 
     @GetMapping(path = "/daily-sales", produces = MediaType.APPLICATION_PDF_VALUE)
+    @CheckSecurity.Statistics.CanGet
     public ResponseEntity<byte[]> getDailySalesPdf(DailySaleFilter filter, @RequestParam(required = false, defaultValue = UTC_OFFSET) String timeOffset) {
         byte[] bytesPdf = saleReportService.issueDailySales(filter, timeOffset);
 

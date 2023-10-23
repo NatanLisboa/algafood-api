@@ -142,4 +142,13 @@ public @interface CheckSecurity {
 
     }
 
+    @interface Statistics {
+
+        @PreAuthorize("hasAuthority('SCOPE_READ') and hasAuthority('GENERATE_REPORTS')")
+        @Retention(RetentionPolicy.RUNTIME)
+        @Target(ElementType.METHOD)
+        @interface CanGet { }
+
+    }
+
 }
