@@ -1198,7 +1198,7 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/users/7/password",
+							"raw": "api.algafood.local:8080/v1/users/1/password",
 							"host": [
 								"api",
 								"algafood",
@@ -1208,7 +1208,7 @@
 							"path": [
 								"v1",
 								"users",
-								"7",
+								"1",
 								"password"
 							]
 						}
@@ -1730,7 +1730,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/orders?sort=customerName,desc",
+							"raw": "api.algafood.local:8080/v1/orders?customerId=6&restaurantId=1",
 							"host": [
 								"api",
 								"algafood",
@@ -1754,7 +1754,8 @@
 								},
 								{
 									"key": "sort",
-									"value": "customerName,desc"
+									"value": "customerName,desc",
+									"disabled": true
 								},
 								{
 									"key": "fields",
@@ -1763,13 +1764,11 @@
 								},
 								{
 									"key": "customerId",
-									"value": "1",
-									"disabled": true
+									"value": "6"
 								},
 								{
 									"key": "restaurantId",
-									"value": "1",
-									"disabled": true
+									"value": "1"
 								},
 								{
 									"key": "startCreationDatetime",
@@ -1804,7 +1803,7 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/orders/522be832-c93b-4164-a390-e62114e6177d",
+							"raw": "api.algafood.local:8080/v1/orders/5d7346cc-21fe-42d1-a652-fc072c516bc2",
 							"host": [
 								"api",
 								"algafood",
@@ -1814,7 +1813,7 @@
 							"path": [
 								"v1",
 								"orders",
-								"522be832-c93b-4164-a390-e62114e6177d"
+								"5d7346cc-21fe-42d1-a652-fc072c516bc2"
 							]
 						}
 					},
@@ -1827,7 +1826,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"restaurant\": {\r\n        \"id\": 1\r\n    },\r\n    \"paymentMethod\": {\r\n        \"id\": 1\r\n    },\r\n    \"deliveryAddress\": {\r\n        \"zipCode\": \"38400-000\",\r\n        \"streetName\": \"Rua Floriano Peixoto\",\r\n        \"number\": \"600\",\r\n        \"complement\": \"Apto 704\",\r\n        \"district\": \"Brasil\",\r\n        \"city\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    \"items\": [\r\n        {\r\n            \"productId\": 1,\r\n            \"quantity\": 3,\r\n            \"note\": \"Without pepper\"\r\n        },\r\n        {\r\n            \"productId\": 2,\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"restaurant\": {\r\n        \"id\": 4\r\n    },\r\n    \"paymentMethod\": {\r\n        \"id\": 3\r\n    },\r\n    \"deliveryAddress\": {\r\n        \"zipCode\": \"38400-000\",\r\n        \"streetName\": \"Rua Floriano Peixoto\",\r\n        \"number\": \"600\",\r\n        \"complement\": \"Apto 704\",\r\n        \"district\": \"Brasil\",\r\n        \"city\": {\r\n            \"id\": 1\r\n        }\r\n    },\r\n    \"items\": [\r\n        {\r\n            \"productId\": 6,\r\n            \"quantity\": 1\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1856,7 +1855,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/orders/522be832-c93b-4164-a390-e62114e6177d/confirmation",
+							"raw": "api.algafood.local:8080/v1/orders/0e36f841-8507-4d28-bb91-3f23adee4492/confirmation",
 							"host": [
 								"api",
 								"algafood",
@@ -1866,7 +1865,7 @@
 							"path": [
 								"v1",
 								"orders",
-								"522be832-c93b-4164-a390-e62114e6177d",
+								"0e36f841-8507-4d28-bb91-3f23adee4492",
 								"confirmation"
 							]
 						}
@@ -1879,7 +1878,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/orders/522be832-c93b-4164-a390-e62114e6177d/cancellation",
+							"raw": "api.algafood.local:8080/v1/orders/0e36f841-8507-4d28-bb91-3f23adee4492/cancellation",
 							"host": [
 								"api",
 								"algafood",
@@ -1889,7 +1888,7 @@
 							"path": [
 								"v1",
 								"orders",
-								"522be832-c93b-4164-a390-e62114e6177d",
+								"0e36f841-8507-4d28-bb91-3f23adee4492",
 								"cancellation"
 							]
 						}
@@ -1902,7 +1901,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/orders/522be832-c93b-4164-a390-e62114e6177d/delivery",
+							"raw": "api.algafood.local:8080/v1/orders/0e36f841-8507-4d28-bb91-3f23adee4492/delivery",
 							"host": [
 								"api",
 								"algafood",
@@ -1912,7 +1911,7 @@
 							"path": [
 								"v1",
 								"orders",
-								"522be832-c93b-4164-a390-e62114e6177d",
+								"0e36f841-8507-4d28-bb91-3f23adee4492",
 								"delivery"
 							]
 						}
@@ -2040,7 +2039,7 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/natan/IdeaProjects/algafood-api/src/test/resources/image/tom-yum-goong.jpg"
+									"src": "/C:/Users/natan/projetos-e-estudos/back-end/algafood-photo-catalog/tom-yum-goong.jpg"
 								},
 								{
 									"key": "description",
@@ -2136,13 +2135,13 @@
 							"type": "basic",
 							"basic": [
 								{
-									"key": "password",
-									"value": "web123",
+									"key": "username",
+									"value": "algafood-web",
 									"type": "string"
 								},
 								{
-									"key": "username",
-									"value": "algafood-web",
+									"key": "password",
+									"value": "web123",
 									"type": "string"
 								}
 							]
@@ -2203,7 +2202,7 @@
 								},
 								{
 									"key": "code",
-									"value": "3LwJGn",
+									"value": "Vj9VDq",
 									"type": "text"
 								},
 								{
@@ -2213,7 +2212,7 @@
 								},
 								{
 									"key": "code_verifier",
-									"value": "pPNXtdysvV9C-fWgzLjFNDJbdDv2-zsI3onee26lznU",
+									"value": "lriuBjyOroSMP48HVn5qZhVnwv8D_qTMZTFof3zhuRk",
 									"type": "text"
 								},
 								{
@@ -2234,80 +2233,6 @@
 							"path": [
 								"oauth",
 								"token"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Implicit - Request token",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "food123",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "food-analytics",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "grant_type",
-									"value": "authorization_code",
-									"type": "text"
-								},
-								{
-									"key": "code",
-									"value": "nF2mOT",
-									"type": "text"
-								},
-								{
-									"key": "redirect_uri",
-									"value": "http://client-application",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "auth.algafood.local:8081/oauth/authorize?response_type=token&client_id=webadmin&state=abc&redirect_uri=http://client-application",
-							"host": [
-								"auth",
-								"algafood",
-								"local"
-							],
-							"port": "8081",
-							"path": [
-								"oauth",
-								"authorize"
-							],
-							"query": [
-								{
-									"key": "response_type",
-									"value": "token"
-								},
-								{
-									"key": "client_id",
-									"value": "webadmin"
-								},
-								{
-									"key": "state",
-									"value": "abc"
-								},
-								{
-									"key": "redirect_uri",
-									"value": "http://client-application"
-								}
 							]
 						}
 					},
@@ -2435,7 +2360,7 @@
 							"urlencoded": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTY1NjM1NjAsInVzZXJfbmFtZSI6ImFsZ2Fmb29kIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJqdGkiOiJCdGxOMURpU2pFdjFKRUhaUEx2cmRidjZCaUkiLCJjbGllbnRfaWQiOiJhbGdhZm9vZC13ZWIiLCJzY29wZSI6WyJ3cml0ZSIsInJlYWQiXX0.jhw_VFgRbSMDHv3TJs6ffquA4CHKWzs6RlNuKSX3TkA",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsX25hbWUiOiJOYXRhbiBMaXNib2EiLCJ1c2VyX2lkIjo2LCJ1c2VyX25hbWUiOiJzZW5ob3Iud2FyMTQrbmF0YW5AZ21haWwuY29tIiwic2NvcGUiOlsiV1JJVEUiLCJSRUFEIl0sImV4cCI6MTY5Nzc3MTA1MiwianRpIjoiOFo0aXhmek5EX1dHWDkwakVPcHFoVTZJbTVBIiwiY2xpZW50X2lkIjoiYWxnYWZvb2Qtd2ViIn0.b97hnd4120_bPenzZAr-BtMw9qSIyBdVugyugFce7J1Yhen-Uewiq6a2TU7IObZ9Fv6-DNzr2ZOzJgh3qtm2ML0zK3ZpgSkdssPiqemP8mfONnYUnqrL8y8Z7GQhCM8XNVMMN07wOagukkoxF_M5pTowtwVQRmtOK4_GCid_lMLbzlGva92VRuZ8TEJ6SWjAcHslxjSS4-t54qmFqt6GZgQ7Ra4CjrkxUgAqAhYUEJDvUGQdU_DnJRgdqFirCVVFnPIGSGSwnJPFDZecBkujpmQDtaXPeQOR7kazJsV86oNA__hop5hgm5TFmvOR4sQYN3AyklVzMoD38VGzXanAFw",
 									"type": "text"
 								}
 							]
