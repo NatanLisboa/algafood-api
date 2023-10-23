@@ -3,6 +3,7 @@ package com.lisboaworks.algafood.api.v1.assembler;
 import com.lisboaworks.algafood.api.v1.AlgaLinks;
 import com.lisboaworks.algafood.api.v1.controller.OrderController;
 import com.lisboaworks.algafood.api.v1.model.OrderModel;
+import com.lisboaworks.algafood.core.security.SecurityHelper;
 import com.lisboaworks.algafood.domain.model.Order;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +13,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderModelAssembler extends RepresentationModelAssemblerSupport<Order, OrderModel> {
 
-	@Autowired
-	private ModelMapper modelMapper;
+	private final ModelMapper modelMapper;
+	private final AlgaLinks algaLinks;
+	private final SecurityHelper securityHelper;
 
 	@Autowired
-	private AlgaLinks algaLinks;
-
-	public OrderModelAssembler() {
+	public OrderModelAssembler(ModelMapper modelMapper, AlgaLinks algaLinks,
+							   SecurityHelper securityHelper) {
 		super(OrderController.class, OrderModel.class);
+		this.modelMapper = modelMapper;
+		this.algaLinks = algaLinks;
+		this.securityHelper = securityHelper;
 	}
 
 	public OrderModel toModel(Order order) {
@@ -29,16 +33,18 @@ public class OrderModelAssembler extends RepresentationModelAssemblerSupport<Ord
 
 		orderModel.add(algaLinks.linkToOrders("orders"));
 
-		if (order.canBeConfirmed()) {
-			orderModel.add(algaLinks.linkToOrderConfirmation(order.getCode(), "confirm"));
-		}
+		if (securityHelper.canManageOrder(order.getCode())) {
+			if (order.canBeConfirmed()) {
+				orderModel.add(algaLinks.linkToOrderConfirmation(order.getCode(), "confirm"));
+			}
 
-		if (order.canBeCancelled()) {
-			orderModel.add(algaLinks.linkToOrderCancellation(order.getCode(), "cancel"));
-		}
+			if (order.canBeCancelled()) {
+				orderModel.add(algaLinks.linkToOrderCancellation(order.getCode(), "cancel"));
+			}
 
-		if (order.canBeDelivered()) {
-			orderModel.add(algaLinks.linkToOrderDelivery(order.getCode(), "deliver"));
+			if (order.canBeDelivered()) {
+				orderModel.add(algaLinks.linkToOrderDelivery(order.getCode(), "deliver"));
+			}
 		}
 
 		orderModel.getPaymentMethod().add(algaLinks.linkToPaymentMethod(order.getPaymentMethod().getId()));

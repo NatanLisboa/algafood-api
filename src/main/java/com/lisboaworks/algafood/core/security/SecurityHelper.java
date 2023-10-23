@@ -44,4 +44,14 @@ public class SecurityHelper {
                 && this.getUserId().equals(userId);
     }
 
+    public boolean hasAuthority(String authorityName) {
+        return this.getAuthentication().getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals(authorityName));
+    }
+
+    public boolean canManageOrder(String orderCode) {
+        return this.hasAuthority("SCOPE_WRITE") && (this.hasAuthority("MANAGE_ORDERS") ||
+                this.manageOrderRestaurant(orderCode));
+    }
+
 }
