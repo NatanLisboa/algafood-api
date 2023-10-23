@@ -48,7 +48,7 @@ public @interface CheckSecurity {
     @interface Orders {
 
         @PreAuthorize("hasAuthority('SCOPE_READ') and (hasAuthority('GET_ORDERS') or " +
-                "@securityHelper.getUserId() == #filter.customerId or " +
+                "@securityHelper.isAuthenticatedUserEquals(#filter.customerId) or " +
                 "@securityHelper.manageRestaurant(#filter.restaurantId))")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
@@ -56,7 +56,7 @@ public @interface CheckSecurity {
 
         @PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
         @PostAuthorize("hasAuthority('GET_ORDERS') or " +
-        "@securityHelper.getUserId() == returnObject.customer.id or " +
+        "@securityHelper.isAuthenticatedUserEquals(returnObject.customer.id) or " +
         "@securityHelper.manageRestaurant(returnObject.restaurant.id)")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
@@ -129,13 +129,13 @@ public @interface CheckSecurity {
         @Target(ElementType.METHOD)
         @interface CanEdit { }
 
-        @PreAuthorize("hasAuthority('SCOPE_WRITE') and #userId == @securityHelper.getUserId()")
+        @PreAuthorize("hasAuthority('SCOPE_WRITE') and @securityHelper.isAuthenticatedUserEquals(#userId)")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanChangeOwnPassword { }
 
         @PreAuthorize("hasAuthority('SCOPE_WRITE') and (hasAuthority('EDIT_USERS_USER_GROUPS_PERMISSIONS') or " +
-                "#userId == @securityHelper.getUserId())")
+                "@securityHelper.isAuthenticatedUserEquals(#userId))")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanModifyUserData { }

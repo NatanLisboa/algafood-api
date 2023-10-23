@@ -39,4 +39,9 @@ public class SecurityHelper {
         return orderRepository.isOrderManagedByUser(orderCode, this.getUserId());
     }
 
+    public boolean isAuthenticatedUserEquals(Long userId) {
+        return Objects.nonNull(this.getUserId()) && Objects.nonNull(userId)
+                && this.getUserId().equals(userId);
+    }
+
 }
