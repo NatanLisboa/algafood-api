@@ -50,8 +50,8 @@ public class SecurityHelper {
     }
 
     public boolean canManageOrder(String orderCode) {
-        return this.hasAuthority("SCOPE_WRITE") && (this.hasAuthority("MANAGE_ORDERS") ||
-                this.manageOrderRestaurant(orderCode));
+        return hasAuthority("SCOPE_WRITE") && (hasAuthority("MANAGE_ORDERS") ||
+                manageOrderRestaurant(orderCode));
     }
 
 }
