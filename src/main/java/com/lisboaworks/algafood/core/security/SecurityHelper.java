@@ -21,6 +21,18 @@ public class SecurityHelper {
         return SecurityContextHolder.getContext().getAuthentication();
     }
 
+    public boolean isAuthenticated() {
+        return this.getAuthentication().isAuthenticated();
+    }
+
+    public boolean hasScopeRead() {
+        return hasAuthority("SCOPE_READ");
+    }
+
+    public boolean hasScopeWrite() {
+        return hasAuthority("SCOPE_WRITE");
+    }
+
     public Long getUserId() {
         Jwt jwt = (Jwt) this.getAuthentication().getPrincipal();
 
@@ -54,4 +66,38 @@ public class SecurityHelper {
                 manageOrderRestaurant(orderCode));
     }
 
+    public boolean canGetPaymentMethods() {
+        return hasScopeRead() && isAuthenticated();
+    }
+
+    public boolean canGetRestaurants() {
+        return hasScopeRead() && isAuthenticated();
+    }
+
+    public boolean canGetCuisines() {
+        return hasScopeRead() && isAuthenticated();
+    }
+
+    public boolean canEditCuisines() {
+        return hasScopeWrite() && hasAuthority("EDIT_CUISINES");
+    }
+
+    public boolean canManageRestaurantsRegister() {
+        return hasScopeWrite() && hasAuthority("EDIT_RESTAURANTS");
+    }
+
+    public boolean canManageRestaurantOperation(Long restaurantId) {
+        return hasScopeWrite() && (hasAuthority("EDIT_RESTAURANTS") || manageRestaurant(restaurantId));
+    }
+
+    public boolean canGetAllOrders(Long customerId, Long restaurantId) {
+        //hasAuthority('SCOPE_READ') and (hasAuthority('GET_ORDERS') or " +
+        //        "@securityHelper.isAuthenticatedUserEquals(#filter.customerId) or " +
+        //                "@securityHelper.manageRestaurant(#filter.restaurantId))
+        return hasScopeRead() && (hasAuthority("GET_ORDERS") ||
+                isAuthenticatedUserEquals(customerId) ||
+                manageRestaurant(restaurantId));
+    }
+
 }
+

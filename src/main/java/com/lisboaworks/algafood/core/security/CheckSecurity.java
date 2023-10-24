@@ -12,12 +12,12 @@ public @interface CheckSecurity {
 
     @interface Cuisines {
 
-        @PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
+        @PreAuthorize("@securityHelper.canGetCuisines()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanGet { }
 
-        @PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDIT_CUISINES')")
+        @PreAuthorize("@securityHelper.canEditCuisines()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanEdit { }
@@ -26,19 +26,17 @@ public @interface CheckSecurity {
 
     @interface Restaurants {
 
-        @PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
+        @PreAuthorize("@securityHelper.canGetRestaurants()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanGet { }
 
-        @PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDIT_RESTAURANTS')")
+        @PreAuthorize("@securityHelper.canManageRestaurantsRegister()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanManageRegister { }
 
-        @PreAuthorize("hasAuthority('SCOPE_WRITE') and " +
-                "(hasAuthority('EDIT_RESTAURANTS') or" +
-                "@securityHelper.manageRestaurant(#restaurantId))")
+        @PreAuthorize("@securityHelper.canManageRestaurantOperation(#restaurantId)")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanManageOperation { }
@@ -47,9 +45,7 @@ public @interface CheckSecurity {
 
     @interface Orders {
 
-        @PreAuthorize("hasAuthority('SCOPE_READ') and (hasAuthority('GET_ORDERS') or " +
-                "@securityHelper.isAuthenticatedUserEquals(#filter.customerId) or " +
-                "@securityHelper.manageRestaurant(#filter.restaurantId))")
+        @PreAuthorize("@securityHelper.canGetAllOrders(#filter.customerId,#filter.restaurantId)")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanGetAll { }
@@ -76,7 +72,7 @@ public @interface CheckSecurity {
 
     @interface PaymentMethods {
 
-        @PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
+        @PreAuthorize("@securityHelper.canGetPaymentMethods()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanGet { }
