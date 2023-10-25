@@ -50,7 +50,7 @@ public @interface CheckSecurity {
         @Target(ElementType.METHOD)
         @interface CanGetAll { }
 
-        @PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
+        @PreAuthorize("@securityHelper.canGetOrdersById()")
         @PostAuthorize("hasAuthority('GET_ORDERS') or " +
         "@securityHelper.isAuthenticatedUserEquals(returnObject.customer.id) or " +
         "@securityHelper.manageRestaurant(returnObject.restaurant.id)")
@@ -58,7 +58,7 @@ public @interface CheckSecurity {
         @Target(ElementType.METHOD)
         @interface CanGetById { }
 
-        @PreAuthorize("hasAuthority('SCOPE_WRITE') and isAuthenticated()")
+        @PreAuthorize("@securityHelper.canCreateOrders()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanCreate { }
@@ -77,7 +77,7 @@ public @interface CheckSecurity {
         @Target(ElementType.METHOD)
         @interface CanGet { }
 
-        @PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDIT_PAYMENT_METHODS')")
+        @PreAuthorize("@securityHelper.canEditPaymentMethods()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanEdit { }
@@ -86,12 +86,12 @@ public @interface CheckSecurity {
 
     @interface Cities {
 
-        @PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
+        @PreAuthorize("@securityHelper.canGetCities()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanGet { }
 
-        @PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDIT_CITIES')")
+        @PreAuthorize("@securityHelper.canEditCities()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanEdit { }
@@ -100,12 +100,12 @@ public @interface CheckSecurity {
 
     @interface States {
 
-        @PreAuthorize("hasAuthority('SCOPE_READ') and isAuthenticated()")
+        @PreAuthorize("@securityHelper.canGetStates()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanGet { }
 
-        @PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDIT_STATES')")
+        @PreAuthorize("@securityHelper.canEditStates()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanEdit { }
@@ -114,23 +114,22 @@ public @interface CheckSecurity {
 
     @interface UsersUserGroupsPermissions {
 
-        @PreAuthorize("hasAuthority('SCOPE_READ') and hasAuthority('GET_USERS_USER_GROUPS_PERMISSIONS')")
+        @PreAuthorize("@securityHelper.canGetUsersUserGroupsAndPermissions()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanGet { }
 
-        @PreAuthorize("hasAuthority('SCOPE_WRITE') and hasAuthority('EDIT_USERS_USER_GROUPS_PERMISSIONS')")
+        @PreAuthorize("@securityHelper.canEditUsersUserGroupsAndPermissions()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanEdit { }
 
-        @PreAuthorize("hasAuthority('SCOPE_WRITE') and @securityHelper.isAuthenticatedUserEquals(#userId)")
+        @PreAuthorize("@securityHelper.canChangeOwnPassword(#userId)")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanChangeOwnPassword { }
 
-        @PreAuthorize("hasAuthority('SCOPE_WRITE') and (hasAuthority('EDIT_USERS_USER_GROUPS_PERMISSIONS') or " +
-                "@securityHelper.isAuthenticatedUserEquals(#userId))")
+        @PreAuthorize("@securityHelper.canModifyUserData(#userId)")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanModifyUserData { }
@@ -139,7 +138,7 @@ public @interface CheckSecurity {
 
     @interface Statistics {
 
-        @PreAuthorize("hasAuthority('SCOPE_READ') and hasAuthority('GENERATE_REPORTS')")
+        @PreAuthorize("@securityHelper.canGetStatistics()")
         @Retention(RetentionPolicy.RUNTIME)
         @Target(ElementType.METHOD)
         @interface CanGet { }

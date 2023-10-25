@@ -3,6 +3,7 @@ package com.lisboaworks.algafood.api.v1.assembler;
 import com.lisboaworks.algafood.api.v1.AlgaLinks;
 import com.lisboaworks.algafood.api.v1.controller.CuisineController;
 import com.lisboaworks.algafood.api.v1.model.CuisineModel;
+import com.lisboaworks.algafood.core.security.SecurityHelper;
 import com.lisboaworks.algafood.domain.model.Cuisine;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +13,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class CuisineModelAssembler extends RepresentationModelAssemblerSupport<Cuisine, CuisineModel> {
 
-	@Autowired
-	private ModelMapper modelMapper;
+	private final ModelMapper modelMapper;
+	private final AlgaLinks algaLinks;
+	private final SecurityHelper securityHelper;
 
 	@Autowired
-	private AlgaLinks algaLinks;
-
-	public CuisineModelAssembler() {
+	public CuisineModelAssembler(ModelMapper modelMapper, AlgaLinks algaLinks, SecurityHelper securityHelper) {
 		super(CuisineController.class, CuisineModel.class);
+		this.modelMapper = modelMapper;
+		this.algaLinks = algaLinks;
+		this.securityHelper = securityHelper;
 	}
 
 	@Override
@@ -28,7 +31,9 @@ public class CuisineModelAssembler extends RepresentationModelAssemblerSupport<C
 
 		modelMapper.map(cuisine, cuisineModel);
 
-		cuisineModel.add(algaLinks.linkToCuisines("cuisines"));
+		if (securityHelper.canGetCuisines()) {
+			cuisineModel.add(algaLinks.linkToCuisines("cuisines"));
+		}
 
 		return cuisineModel;
 	}

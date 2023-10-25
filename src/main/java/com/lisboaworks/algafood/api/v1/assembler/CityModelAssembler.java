@@ -3,6 +3,7 @@ package com.lisboaworks.algafood.api.v1.assembler;
 import com.lisboaworks.algafood.api.v1.AlgaLinks;
 import com.lisboaworks.algafood.api.v1.controller.CityController;
 import com.lisboaworks.algafood.api.v1.model.CityModel;
+import com.lisboaworks.algafood.core.security.SecurityHelper;
 import com.lisboaworks.algafood.domain.model.City;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,16 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 @Component
 public class CityModelAssembler extends RepresentationModelAssemblerSupport<City, CityModel> {
 
-	@Autowired
-	private ModelMapper modelMapper;
+	private final ModelMapper modelMapper;
+	private final AlgaLinks algaLinks;
+	private final SecurityHelper securityHelper;
 
 	@Autowired
-	private AlgaLinks algaLinks;
-
-	public CityModelAssembler() {
+	public CityModelAssembler(ModelMapper modelMapper, AlgaLinks algaLinks, SecurityHelper securityHelper) {
 		super(CityController.class, CityModel.class);
+		this.modelMapper = modelMapper;
+		this.algaLinks = algaLinks;
+		this.securityHelper = securityHelper;
 	}
 
 	@Override
@@ -31,9 +34,13 @@ public class CityModelAssembler extends RepresentationModelAssemblerSupport<City
 
 		modelMapper.map(city, cityModel);
 
-		cityModel.add(algaLinks.linkToCities("cities"));
+		if (securityHelper.canGetCities()) {
+			cityModel.add(algaLinks.linkToCities("cities"));
+		}
 
-		cityModel.getState().add(algaLinks.linkToState(cityModel.getState().getId()));
+		if (securityHelper.canGetStates()) {
+			cityModel.getState().add(algaLinks.linkToState(cityModel.getState().getId()));
+		}
 
 		return cityModel;
 	}

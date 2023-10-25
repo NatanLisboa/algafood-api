@@ -51,15 +51,21 @@ public class OrderModelAssembler extends RepresentationModelAssemblerSupport<Ord
 			orderModel.getPaymentMethod().add(algaLinks.linkToPaymentMethod(order.getPaymentMethod().getId()));
 		}
 
-		if (securityHelper.canGetPaymentMethods()) {
+		if (securityHelper.canGetRestaurants()) {
 			orderModel.getRestaurant().add(algaLinks.linkToRestaurant(order.getRestaurant().getId()));
 		}
 
-		orderModel.getCustomer().add(algaLinks.linkToUser(order.getCustomer().getId()));
+		if (securityHelper.canGetUsersUserGroupsAndPermissions()) {
+			orderModel.getCustomer().add(algaLinks.linkToUser(order.getCustomer().getId()));
+		}
 
-		orderModel.getDeliveryAddress().getCity().add(algaLinks.linkToCity(order.getDeliveryAddress().getCity().getId()));
+		if (securityHelper.canGetCities()) {
+			orderModel.getDeliveryAddress().getCity().add(algaLinks.linkToCity(order.getDeliveryAddress().getCity().getId()));
+		}
 
-		orderModel.getItems().forEach(item -> item.add(algaLinks.linkToRestaurantProduct(order.getRestaurant().getId(), item.getProductId(), "product")));
+		if (securityHelper.canGetRestaurants()) {
+			orderModel.getItems().forEach(item -> item.add(algaLinks.linkToRestaurantProduct(order.getRestaurant().getId(), item.getProductId(), "product")));
+		}
 
 		return orderModel;
 	}
