@@ -5,6 +5,7 @@ import com.lisboaworks.algafood.api.v1.assembler.UserModelAssembler;
 import com.lisboaworks.algafood.api.v1.model.UserModel;
 import com.lisboaworks.algafood.api.v1.openapi.controller.RestaurantResponsibleUserControllerOpenApi;
 import com.lisboaworks.algafood.core.security.CheckSecurity;
+import com.lisboaworks.algafood.core.security.SecurityHelper;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
@@ -20,20 +21,25 @@ public class RestaurantResponsibleUserController implements RestaurantResponsibl
     private final RestaurantRegisterService restaurantRegisterService;
     private final UserModelAssembler userModelAssembler;
     private final AlgaLinks algaLinks;
+    private final SecurityHelper securityHelper;
+
     @GetMapping
     @CheckSecurity.Restaurants.CanGet
     public CollectionModel<UserModel> getAllResponsibleUsers(@PathVariable Long restaurantId) {
-        CollectionModel<UserModel> responsibleUsersModel =
+        CollectionModel<UserModel> responsibleUsersCollectionModel =
                 userModelAssembler.toCollectionModel(restaurantRegisterService.getAllResponsibleUsers(restaurantId))
                 .removeLinks()
-                .add(algaLinks.linkToRestaurantResponsibleUsers(restaurantId))
-                .add(algaLinks.linkToRestaurantResponsibleUserAssociation(restaurantId, "associate"));
+                .add(algaLinks.linkToRestaurantResponsibleUsers(restaurantId));
 
-        responsibleUsersModel.getContent().forEach(responsibleUserModel ->
-                responsibleUserModel.add(algaLinks.linkToRestaurantResponsibleUserDisassociation(restaurantId,
-                responsibleUserModel.getId(), "diassociate")));
+        if (securityHelper.canManageRestaurantsRegister()) {
+            responsibleUsersCollectionModel.add(algaLinks.linkToRestaurantResponsibleUserAssociation(restaurantId, "associate"));
 
-        return responsibleUsersModel;
+            responsibleUsersCollectionModel.getContent().forEach(responsibleUserModel ->
+                    responsibleUserModel.add(algaLinks.linkToRestaurantResponsibleUserDisassociation(restaurantId,
+                            responsibleUserModel.getId(), "diassociate")));
+        }
+
+        return responsibleUsersCollectionModel;
     }
 
     @PutMapping("/{userId}")

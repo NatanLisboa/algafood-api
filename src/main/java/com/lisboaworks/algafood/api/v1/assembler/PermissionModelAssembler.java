@@ -3,6 +3,7 @@ package com.lisboaworks.algafood.api.v1.assembler;
 import com.lisboaworks.algafood.api.v1.AlgaLinks;
 import com.lisboaworks.algafood.api.v1.controller.PermissionController;
 import com.lisboaworks.algafood.api.v1.model.PermissionModel;
+import com.lisboaworks.algafood.core.security.SecurityHelper;
 import com.lisboaworks.algafood.domain.model.Permission;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,16 @@ import java.util.Collection;
 @Component
 public class PermissionModelAssembler extends RepresentationModelAssemblerSupport<Permission, PermissionModel> {
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
+    private final AlgaLinks algaLinks;
+    private final SecurityHelper securityHelper;
 
     @Autowired
-    private AlgaLinks algaLinks;
-
-    public PermissionModelAssembler() {
+    public PermissionModelAssembler(ModelMapper modelMapper, AlgaLinks algaLinks, SecurityHelper securityHelper) {
         super(PermissionController.class, PermissionModel.class);
+        this.modelMapper = modelMapper;
+        this.algaLinks = algaLinks;
+        this.securityHelper = securityHelper;
     }
 
     public PermissionModel toModel(Permission permission) {
@@ -30,8 +33,13 @@ public class PermissionModelAssembler extends RepresentationModelAssemblerSuppor
     }
 
     public CollectionModel<PermissionModel> toCollectionModel(Collection<Permission> permissions) {
-        return super.toCollectionModel(permissions)
-                .add(algaLinks.linkToPermissions());
+        CollectionModel<PermissionModel> permissionsCollectionModel = super.toCollectionModel(permissions);
+
+        if (securityHelper.canGetUsersUserGroupsAndPermissions()) {
+            permissionsCollectionModel.add(algaLinks.linkToPermissions());
+        }
+
+        return permissionsCollectionModel;
     }
 
 }

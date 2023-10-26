@@ -96,6 +96,10 @@ public class SecurityHelper {
                 manageRestaurant(restaurantId));
     }
 
+    public boolean canGetAllOrders() {
+        return isAuthenticated() && hasScopeRead();
+    }
+
     public boolean canGetOrdersById() {
         return hasScopeRead() && isAuthenticated();
     }

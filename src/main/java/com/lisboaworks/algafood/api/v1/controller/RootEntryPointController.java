@@ -1,6 +1,7 @@
 package com.lisboaworks.algafood.api.v1.controller;
 
 import com.lisboaworks.algafood.api.v1.AlgaLinks;
+import com.lisboaworks.algafood.core.security.SecurityHelper;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.MediaType;
@@ -14,21 +15,45 @@ import org.springframework.web.bind.annotation.RestController;
 public class RootEntryPointController {
 
     private final AlgaLinks algaLinks;
+    private final SecurityHelper securityHelper;
 
     @GetMapping
     public RootEntryPointModel root() {
         RootEntryPointModel rootEntryPointModel = new RootEntryPointModel();
 
-        rootEntryPointModel.add(algaLinks.linkToCuisines("cuisines"));
-        rootEntryPointModel.add(algaLinks.linkToOrders("orders"));
-        rootEntryPointModel.add(algaLinks.linkToRestaurants("restaurants"));
-        rootEntryPointModel.add(algaLinks.linkToUserGroups("user-groups"));
-        rootEntryPointModel.add(algaLinks.linkToUsers("users"));
-        rootEntryPointModel.add(algaLinks.linkToPermissions("permissions"));
-        rootEntryPointModel.add(algaLinks.linkToPaymentMethods("payment-methods"));
-        rootEntryPointModel.add(algaLinks.linkToStates("states"));
-        rootEntryPointModel.add(algaLinks.linkToCities("cities"));
-        rootEntryPointModel.add(algaLinks.linkToStatistics("statistics"));
+        if (securityHelper.canGetCuisines()) {
+            rootEntryPointModel.add(algaLinks.linkToCuisines("cuisines"));
+        }
+
+        if (securityHelper.canGetAllOrders()) {
+            rootEntryPointModel.add(algaLinks.linkToOrders("orders"));
+        }
+
+        if (securityHelper.canGetRestaurants()) {
+            rootEntryPointModel.add(algaLinks.linkToRestaurants("restaurants"));
+        }
+
+        if (securityHelper.canGetUsersUserGroupsAndPermissions()) {
+            rootEntryPointModel.add(algaLinks.linkToUserGroups("user-groups"));
+            rootEntryPointModel.add(algaLinks.linkToUsers("users"));
+            rootEntryPointModel.add(algaLinks.linkToPermissions("permissions"));
+        }
+
+        if (securityHelper.canGetPaymentMethods()) {
+            rootEntryPointModel.add(algaLinks.linkToPaymentMethods("payment-methods"));
+        }
+
+        if (securityHelper.canGetStates()) {
+            rootEntryPointModel.add(algaLinks.linkToStates("states"));
+        }
+
+        if (securityHelper.canGetCities()) {
+            rootEntryPointModel.add(algaLinks.linkToCities("cities"));
+        }
+
+        if (securityHelper.canGetStatistics()) {
+            rootEntryPointModel.add(algaLinks.linkToStatistics("statistics"));
+        }
 
         return rootEntryPointModel;
     }

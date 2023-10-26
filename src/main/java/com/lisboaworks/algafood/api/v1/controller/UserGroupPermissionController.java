@@ -5,6 +5,7 @@ import com.lisboaworks.algafood.api.v1.assembler.PermissionModelAssembler;
 import com.lisboaworks.algafood.api.v1.model.PermissionModel;
 import com.lisboaworks.algafood.api.v1.openapi.controller.UserGroupPermissionControllerOpenApi;
 import com.lisboaworks.algafood.core.security.CheckSecurity;
+import com.lisboaworks.algafood.core.security.SecurityHelper;
 import com.lisboaworks.algafood.domain.model.UserGroup;
 import com.lisboaworks.algafood.domain.service.UserGroupRegisterService;
 import lombok.AllArgsConstructor;
@@ -22,16 +23,20 @@ public class UserGroupPermissionController implements UserGroupPermissionControl
     private final PermissionModelAssembler permissionModelAssembler;
     private final UserGroupRegisterService userGroupRegisterService;
     private final AlgaLinks algaLinks;
+    private final SecurityHelper securityHelper;
 
     @GetMapping
     @CheckSecurity.UsersUserGroupsPermissions.CanGet
     public CollectionModel<PermissionModel> findAll(@PathVariable Long userGroupId) {
         UserGroup userGroup = userGroupRegisterService.findOrThrowException(userGroupId);
         CollectionModel<PermissionModel> userGroupPermissionsModel = permissionModelAssembler.toCollectionModel(userGroup.getPermissions());
-        userGroupPermissionsModel.add(algaLinks.linkToUserGroupPermissionAssociation(userGroupId, "associate"));
 
-        userGroupPermissionsModel.getContent().forEach(permission -> permission.add(algaLinks
-                .linkToUserGroupPermissionDisassociation(userGroupId, permission.getId(), "disassociate")));
+        if (securityHelper.canEditUsersUserGroupsAndPermissions()) {
+            userGroupPermissionsModel.add(algaLinks.linkToUserGroupPermissionAssociation(userGroupId, "associate"));
+
+            userGroupPermissionsModel.getContent().forEach(permission -> permission.add(algaLinks
+                    .linkToUserGroupPermissionDisassociation(userGroupId, permission.getId(), "disassociate")));
+        }
 
         return userGroupPermissionsModel;
     }

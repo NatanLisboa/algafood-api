@@ -3,6 +3,7 @@ package com.lisboaworks.algafood.api.v1.assembler;
 import com.lisboaworks.algafood.api.v1.AlgaLinks;
 import com.lisboaworks.algafood.api.v1.controller.RestaurantProductController;
 import com.lisboaworks.algafood.api.v1.model.ProductModel;
+import com.lisboaworks.algafood.core.security.SecurityHelper;
 import com.lisboaworks.algafood.domain.model.Product;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +13,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductModelAssembler extends RepresentationModelAssemblerSupport<Product, ProductModel> {
 
-    @Autowired
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
+    private final AlgaLinks algaLinks;
+    private final SecurityHelper securityHelper;
 
     @Autowired
-    private AlgaLinks algaLinks;
-
-    public ProductModelAssembler() {
+    public ProductModelAssembler(ModelMapper modelMapper, AlgaLinks algaLinks, SecurityHelper securityHelper) {
         super(RestaurantProductController.class, ProductModel.class);
+        this.modelMapper = modelMapper;
+        this.algaLinks = algaLinks;
+        this.securityHelper = securityHelper;
     }
 
     public ProductModel toModel(Product product) {
@@ -27,10 +30,12 @@ public class ProductModelAssembler extends RepresentationModelAssemblerSupport<P
 
         modelMapper.map(product, productModel);
 
-        productModel.add(algaLinks.linkToRestaurantProducts(product.getRestaurant().getId(), "products"));
+        if (securityHelper.canGetRestaurants()) {
+            productModel.add(algaLinks.linkToRestaurantProducts(product.getRestaurant().getId(), "products"));
 
-        productModel.add(algaLinks.linkToRestaurantProductPhoto(product.getRestaurant().getId(), product.getId(),
-                "photo"));
+            productModel.add(algaLinks.linkToRestaurantProductPhoto(product.getRestaurant().getId(), product.getId(),
+                    "photo"));
+        }
 
         return productModel;
     }

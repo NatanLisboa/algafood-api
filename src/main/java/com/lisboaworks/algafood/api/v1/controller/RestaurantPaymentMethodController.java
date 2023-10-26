@@ -5,6 +5,7 @@ import com.lisboaworks.algafood.api.v1.assembler.PaymentMethodModelAssembler;
 import com.lisboaworks.algafood.api.v1.model.PaymentMethodModel;
 import com.lisboaworks.algafood.api.v1.openapi.controller.RestaurantPaymentMethodControllerOpenApi;
 import com.lisboaworks.algafood.core.security.CheckSecurity;
+import com.lisboaworks.algafood.core.security.SecurityHelper;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import com.lisboaworks.algafood.domain.service.RestaurantRegisterService;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ public class RestaurantPaymentMethodController implements RestaurantPaymentMetho
     private final RestaurantRegisterService restaurantRegisterService;
     private final PaymentMethodModelAssembler paymentMethodModelAssembler;
     private final AlgaLinks algaLinks;
+    private final SecurityHelper securityHelper;
 
     @GetMapping
     @CheckSecurity.Restaurants.CanGet
@@ -30,14 +32,18 @@ public class RestaurantPaymentMethodController implements RestaurantPaymentMetho
 
         CollectionModel<PaymentMethodModel> paymentMethodsModel = paymentMethodModelAssembler
                 .toCollectionModel(restaurant.getPaymentMethods())
-                .removeLinks()
-                .add(algaLinks.linkToRestaurantPaymentMethods(restaurantId))
-                .add(algaLinks.linkToRestaurantPaymentMethodAssociation(restaurantId, "associate"));
+                .removeLinks();
 
-        paymentMethodsModel.getContent().forEach(paymentMethodModel -> paymentMethodModel
-                .add(algaLinks.linkToRestaurantPaymentMethodDisassociation(restaurantId, paymentMethodModel.getId(),
-                        "disassociate")
-        ));
+        paymentMethodsModel.add(algaLinks.linkToRestaurantPaymentMethods(restaurantId));
+
+        if (securityHelper.canManageRestaurantOperation(restaurantId)) {
+            paymentMethodsModel.add(algaLinks.linkToRestaurantPaymentMethodAssociation(restaurantId, "associate"));
+
+            paymentMethodsModel.getContent().forEach(paymentMethodModel -> paymentMethodModel
+                    .add(algaLinks.linkToRestaurantPaymentMethodDisassociation(restaurantId, paymentMethodModel.getId(),
+                            "disassociate")
+                    ));
+        }
 
         return paymentMethodsModel;
     }

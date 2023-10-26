@@ -2,7 +2,9 @@ package com.lisboaworks.algafood.api.v1.assembler;
 
 import com.lisboaworks.algafood.api.v1.AlgaLinks;
 import com.lisboaworks.algafood.api.v1.controller.RestaurantController;
+import com.lisboaworks.algafood.api.v1.model.RestaurantModel;
 import com.lisboaworks.algafood.api.v1.model.RestaurantOnlyNameModel;
+import com.lisboaworks.algafood.core.security.SecurityHelper;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +17,17 @@ import java.util.List;
 @Component
 public class RestaurantOnlyNameModelAssembler extends RepresentationModelAssemblerSupport<Restaurant, RestaurantOnlyNameModel> {
 
-	@Autowired
-	private ModelMapper modelMapper;
+	private final ModelMapper modelMapper;
+	private final AlgaLinks algaLinks;
+	private final SecurityHelper securityHelper;
 
 	@Autowired
-	private AlgaLinks algaLinks;
-
-	public RestaurantOnlyNameModelAssembler() {
+	public RestaurantOnlyNameModelAssembler(ModelMapper modelMapper, AlgaLinks algaLinks,
+											SecurityHelper securityHelper) {
 		super(RestaurantController.class, RestaurantOnlyNameModel.class);
+		this.modelMapper = modelMapper;
+		this.algaLinks = algaLinks;
+		this.securityHelper = securityHelper;
 	}
 
 	public RestaurantOnlyNameModel toModel(Restaurant restaurant) {
@@ -30,14 +35,21 @@ public class RestaurantOnlyNameModelAssembler extends RepresentationModelAssembl
 
 		modelMapper.map(restaurant, restaurantOnlyNameModel);
 
-		restaurantOnlyNameModel.add(algaLinks.linkToRestaurants("restaurants"));
+		if (securityHelper.canGetRestaurants()) {
+			restaurantOnlyNameModel.add(algaLinks.linkToRestaurants("restaurants"));
+		}
 
 		return restaurantOnlyNameModel;
 	}
 
 	public CollectionModel<RestaurantOnlyNameModel> toCollectionModel(List<Restaurant> restaurants) {
-		return super.toCollectionModel(restaurants)
-				.add(algaLinks.linkToRestaurants());
+		CollectionModel<RestaurantOnlyNameModel> restaurantsCollectionModel = super.toCollectionModel(restaurants);
+
+		if (securityHelper.canGetRestaurants()) {
+			restaurantsCollectionModel.add(algaLinks.linkToRestaurants());
+		}
+
+		return restaurantsCollectionModel;
 	}
 
 }
