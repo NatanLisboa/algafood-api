@@ -29,19 +29,19 @@ public class UserGroupPermissionController implements UserGroupPermissionControl
     @CheckSecurity.UsersUserGroupsPermissions.CanGet
     public CollectionModel<PermissionModel> findAll(@PathVariable Long userGroupId) {
         UserGroup userGroup = userGroupRegisterService.findOrThrowException(userGroupId);
-        CollectionModel<PermissionModel> userGroupPermissionsModel = permissionModelAssembler.toCollectionModel(userGroup.getPermissions())
+        CollectionModel<PermissionModel> permissionsCollectionModel = permissionModelAssembler.toCollectionModel(userGroup.getPermissions())
                 .removeLinks();
 
-        userGroupPermissionsModel.add(algaLinks.linkToUserGroupPermissions(userGroupId));
+        permissionsCollectionModel.add(algaLinks.linkToUserGroupPermissions(userGroupId));
 
         if (securityHelper.canEditUsersUserGroupsAndPermissions()) {
-            userGroupPermissionsModel.add(algaLinks.linkToUserGroupPermissionAssociation(userGroupId, "associate"));
+            permissionsCollectionModel.add(algaLinks.linkToUserGroupPermissionAssociation(userGroupId, "associate"));
 
-            userGroupPermissionsModel.getContent().forEach(permission -> permission.add(algaLinks
+            permissionsCollectionModel.getContent().forEach(permission -> permission.add(algaLinks
                     .linkToUserGroupPermissionDisassociation(userGroupId, permission.getId(), "disassociate")));
         }
 
-        return userGroupPermissionsModel;
+        return permissionsCollectionModel;
     }
     
     @PutMapping("/{permissionId}")

@@ -28,8 +28,9 @@ public class RestaurantResponsibleUserController implements RestaurantResponsibl
     public CollectionModel<UserModel> getAllResponsibleUsers(@PathVariable Long restaurantId) {
         CollectionModel<UserModel> responsibleUsersCollectionModel =
                 userModelAssembler.toCollectionModel(restaurantRegisterService.getAllResponsibleUsers(restaurantId))
-                .removeLinks()
-                .add(algaLinks.linkToRestaurantResponsibleUsers(restaurantId));
+                .removeLinks();
+
+        responsibleUsersCollectionModel.add(algaLinks.linkToRestaurantResponsibleUsers(restaurantId));
 
         if (securityHelper.canManageRestaurantsRegister()) {
             responsibleUsersCollectionModel.add(algaLinks.linkToRestaurantResponsibleUserAssociation(restaurantId, "associate"));

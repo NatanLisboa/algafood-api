@@ -28,18 +28,18 @@ public class UserUserGroupController implements UserUserGroupControllerOpenApi {
     @CheckSecurity.UsersUserGroupsPermissions.CanGet
     public CollectionModel<UserGroupModel> findAll(@PathVariable Long userId) {
         User user = userRegisterService.findOrThrowException(userId);
-        CollectionModel<UserGroupModel> userGroupsModel = userGroupModelAssembler
+        CollectionModel<UserGroupModel> userGroupsCollectionModel = userGroupModelAssembler
                 .toCollectionModel(user.getUserGroups())
                 .removeLinks();
 
         if (securityHelper.canEditUsersUserGroupsAndPermissions()) {
-            userGroupsModel.add(algaLinks.linkToAssociateUserGroupToUser(userId, "associate"));
+            userGroupsCollectionModel.add(algaLinks.linkToAssociateUserGroupToUser(userId, "associate"));
 
-            userGroupsModel.getContent().forEach(userGroupModel -> userGroupModel.add(algaLinks
+            userGroupsCollectionModel.getContent().forEach(userGroupModel -> userGroupModel.add(algaLinks
                     .linkToDisassociateUserGroupFromUser(userId, userGroupModel.getId(), "disassociate")));
         }
 
-        return userGroupsModel;
+        return userGroupsCollectionModel;
     }
     
     @PutMapping("/{userGroupId}")

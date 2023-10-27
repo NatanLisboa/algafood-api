@@ -30,22 +30,22 @@ public class RestaurantPaymentMethodController implements RestaurantPaymentMetho
     public CollectionModel<PaymentMethodModel> findAll(@PathVariable Long restaurantId) {
         Restaurant restaurant = restaurantRegisterService.findOrThrowException(restaurantId);
 
-        CollectionModel<PaymentMethodModel> paymentMethodsModel = paymentMethodModelAssembler
+        CollectionModel<PaymentMethodModel> paymentMethodsCollectionModel = paymentMethodModelAssembler
                 .toCollectionModel(restaurant.getPaymentMethods())
                 .removeLinks();
 
-        paymentMethodsModel.add(algaLinks.linkToRestaurantPaymentMethods(restaurantId));
+        paymentMethodsCollectionModel.add(algaLinks.linkToRestaurantPaymentMethods(restaurantId));
 
         if (securityHelper.canManageRestaurantOperation(restaurantId)) {
-            paymentMethodsModel.add(algaLinks.linkToRestaurantPaymentMethodAssociation(restaurantId, "associate"));
+            paymentMethodsCollectionModel.add(algaLinks.linkToRestaurantPaymentMethodAssociation(restaurantId, "associate"));
 
-            paymentMethodsModel.getContent().forEach(paymentMethodModel -> paymentMethodModel
+            paymentMethodsCollectionModel.getContent().forEach(paymentMethodModel -> paymentMethodModel
                     .add(algaLinks.linkToRestaurantPaymentMethodDisassociation(restaurantId, paymentMethodModel.getId(),
                             "disassociate")
                     ));
         }
 
-        return paymentMethodsModel;
+        return paymentMethodsCollectionModel;
     }
 
     @PutMapping("/{paymentMethodId}")
