@@ -36,7 +36,7 @@ public class RestaurantResponsibleUserController implements RestaurantResponsibl
 
             responsibleUsersCollectionModel.getContent().forEach(responsibleUserModel ->
                     responsibleUserModel.add(algaLinks.linkToRestaurantResponsibleUserDisassociation(restaurantId,
-                            responsibleUserModel.getId(), "diassociate")));
+                            responsibleUserModel.getId(), "disassociate")));
         }
 
         return responsibleUsersCollectionModel;
