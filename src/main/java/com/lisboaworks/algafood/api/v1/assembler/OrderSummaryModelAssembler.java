@@ -31,7 +31,7 @@ public class OrderSummaryModelAssembler extends RepresentationModelAssemblerSupp
 
 		modelMapper.map(order, orderSummaryModel);
 
-		if (securityHelper.canGetAllOrders(order.getCustomer().getId(), order.getRestaurant().getId())) {
+		if (securityHelper.canGetAllOrders()) {
 			orderSummaryModel.add(algaLinks.linkToOrders("orders"));
 		}
 

@@ -31,7 +31,9 @@ public class OrderModelAssembler extends RepresentationModelAssemblerSupport<Ord
 
 		modelMapper.map(order, orderModel);
 
-		orderModel.add(algaLinks.linkToOrders("orders"));
+		if (securityHelper.canGetAllOrders()) {
+			orderModel.add(algaLinks.linkToOrders("orders"));
+		}
 
 		if (securityHelper.canManageOrder(order.getCode())) {
 			if (order.canBeConfirmed()) {
@@ -53,6 +55,9 @@ public class OrderModelAssembler extends RepresentationModelAssemblerSupport<Ord
 
 		if (securityHelper.canGetRestaurants()) {
 			orderModel.getRestaurant().add(algaLinks.linkToRestaurant(order.getRestaurant().getId()));
+			orderModel.getItems()
+					.forEach(item -> item.add(algaLinks.linkToRestaurantProduct(order.getRestaurant().getId(),
+							item.getProductId(), "product")));
 		}
 
 		if (securityHelper.canGetUsersUserGroupsAndPermissions()) {
@@ -61,10 +66,6 @@ public class OrderModelAssembler extends RepresentationModelAssemblerSupport<Ord
 
 		if (securityHelper.canGetCities()) {
 			orderModel.getDeliveryAddress().getCity().add(algaLinks.linkToCity(order.getDeliveryAddress().getCity().getId()));
-		}
-
-		if (securityHelper.canGetRestaurants()) {
-			orderModel.getItems().forEach(item -> item.add(algaLinks.linkToRestaurantProduct(order.getRestaurant().getId(), item.getProductId(), "product")));
 		}
 
 		return orderModel;

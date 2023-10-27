@@ -24,7 +24,7 @@ public class RestaurantResponsibleUserController implements RestaurantResponsibl
     private final SecurityHelper securityHelper;
 
     @GetMapping
-    @CheckSecurity.Restaurants.CanGet
+    @CheckSecurity.Restaurants.CanManageRegister
     public CollectionModel<UserModel> getAllResponsibleUsers(@PathVariable Long restaurantId) {
         CollectionModel<UserModel> responsibleUsersCollectionModel =
                 userModelAssembler.toCollectionModel(restaurantRegisterService.getAllResponsibleUsers(restaurantId))

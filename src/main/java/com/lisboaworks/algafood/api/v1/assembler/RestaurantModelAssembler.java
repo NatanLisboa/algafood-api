@@ -6,7 +6,6 @@ import com.lisboaworks.algafood.api.v1.model.RestaurantModel;
 import com.lisboaworks.algafood.core.security.SecurityHelper;
 import com.lisboaworks.algafood.domain.model.Restaurant;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
@@ -44,6 +43,10 @@ public class RestaurantModelAssembler extends RepresentationModelAssemblerSuppor
 
 		if (securityHelper.canGetRestaurants()) {
 			restaurantModel.add(algaLinks.linkToRestaurants("restaurants"));
+
+			restaurantModel.add(algaLinks.linkToRestaurantProducts(restaurant.getId(), "products"));
+
+			restaurantModel.add(algaLinks.linkToRestaurantPaymentMethods(restaurant.getId(), "payment-methods"));
 		}
 
 		if (securityHelper.canManageRestaurantsRegister()) {
@@ -54,6 +57,8 @@ public class RestaurantModelAssembler extends RepresentationModelAssemblerSuppor
 			if (restaurant.canBeInactivated()) {
 				restaurantModel.add(algaLinks.linkToRestaurantInactivation(restaurant.getId(), "inactivate"));
 			}
+
+			restaurantModel.add(algaLinks.linkToRestaurantResponsibleUsers(restaurant.getId(), "responsible-users"));
 		}
 
 		if (securityHelper.canManageRestaurantOperation(restaurant.getId())) {
@@ -64,14 +69,6 @@ public class RestaurantModelAssembler extends RepresentationModelAssemblerSuppor
 			if (restaurant.canBeClosed()) {
 				restaurantModel.add(algaLinks.linkToRestaurantClosure(restaurant.getId(), "close"));
 			}
-		}
-
-		if (securityHelper.canGetRestaurants()) {
-			restaurantModel.add(algaLinks.linkToRestaurantProducts(restaurant.getId(), "products"));
-
-			restaurantModel.add(algaLinks.linkToRestaurantPaymentMethods(restaurant.getId(), "payment-methods"));
-
-			restaurantModel.add(algaLinks.linkToRestaurantResponsibleUsers(restaurant.getId(), "responsible-users"));
 		}
 
 		return restaurantModel;

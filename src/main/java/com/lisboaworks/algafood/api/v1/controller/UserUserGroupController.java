@@ -29,7 +29,8 @@ public class UserUserGroupController implements UserUserGroupControllerOpenApi {
     public CollectionModel<UserGroupModel> findAll(@PathVariable Long userId) {
         User user = userRegisterService.findOrThrowException(userId);
         CollectionModel<UserGroupModel> userGroupsModel = userGroupModelAssembler
-                .toCollectionModel(user.getUserGroups());
+                .toCollectionModel(user.getUserGroups())
+                .removeLinks();
 
         if (securityHelper.canEditUsersUserGroupsAndPermissions()) {
             userGroupsModel.add(algaLinks.linkToAssociateUserGroupToUser(userId, "associate"));
