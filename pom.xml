@@ -22,6 +22,8 @@
         <spring-fox.version>3.0.0</spring-fox.version>
         <github-ziplet.version>2.4.1</github-ziplet.version>
         <logback-ext-loggly.version>0.1.5</logback-ext-loggly.version>
+        <spring-scurity-oauth2.version>2.5.2.RELEASE</spring-scurity-oauth2.version>
+        <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
     </properties>
     <dependencies>
         <dependency>
@@ -180,6 +182,18 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-jwt</artifactId>
+            <version>${spring-security-jwt.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>${spring-scurity-oauth2.version}</version>
         </dependency>
 
     </dependencies>
