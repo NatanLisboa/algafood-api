@@ -2,6 +2,7 @@ package com.lisboaworks.algafood;
 
 import com.lisboaworks.algafood.infrastructure.repository.CustomJpaRepositoryImpl;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
