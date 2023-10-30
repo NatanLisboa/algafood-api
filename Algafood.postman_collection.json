@@ -1167,7 +1167,7 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/users/5",
+							"raw": "api.algafood.local:8080/v1/users/1",
 							"host": [
 								"api",
 								"algafood",
@@ -1177,7 +1177,7 @@
 							"path": [
 								"v1",
 								"users",
-								"5"
+								"1"
 							]
 						}
 					},
@@ -1730,7 +1730,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/orders?customerId=6&restaurantId=1",
+							"raw": "api.algafood.local:8080/v1/orders?restaurantId=4&customerId=5",
 							"host": [
 								"api",
 								"algafood",
@@ -1763,12 +1763,8 @@
 									"disabled": true
 								},
 								{
-									"key": "customerId",
-									"value": "6"
-								},
-								{
 									"key": "restaurantId",
-									"value": "1"
+									"value": "4"
 								},
 								{
 									"key": "startCreationDatetime",
@@ -1779,6 +1775,10 @@
 									"key": "endCreationDatetime",
 									"value": "2023-09-01T00:00:00",
 									"disabled": true
+								},
+								{
+									"key": "customerId",
+									"value": "5"
 								}
 							]
 						}
@@ -1803,7 +1803,7 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/orders/5d7346cc-21fe-42d1-a652-fc072c516bc2",
+							"raw": "api.algafood.local:8080/v1/orders/5c9c50b1-f078-43e1-951c-22b6833ce91a",
 							"host": [
 								"api",
 								"algafood",
@@ -1813,7 +1813,7 @@
 							"path": [
 								"v1",
 								"orders",
-								"5d7346cc-21fe-42d1-a652-fc072c516bc2"
+								"5c9c50b1-f078-43e1-951c-22b6833ce91a"
 							]
 						}
 					},
@@ -1855,7 +1855,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/orders/0e36f841-8507-4d28-bb91-3f23adee4492/confirmation",
+							"raw": "api.algafood.local:8080/v1/orders/5c9c50b1-f078-43e1-951c-22b6833ce91a/confirmation",
 							"host": [
 								"api",
 								"algafood",
@@ -1865,7 +1865,7 @@
 							"path": [
 								"v1",
 								"orders",
-								"0e36f841-8507-4d28-bb91-3f23adee4492",
+								"5c9c50b1-f078-43e1-951c-22b6833ce91a",
 								"confirmation"
 							]
 						}
@@ -1878,7 +1878,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/orders/0e36f841-8507-4d28-bb91-3f23adee4492/cancellation",
+							"raw": "api.algafood.local:8080/v1/orders/5c9c50b1-f078-43e1-951c-22b6833ce91a/cancellation",
 							"host": [
 								"api",
 								"algafood",
@@ -1888,7 +1888,7 @@
 							"path": [
 								"v1",
 								"orders",
-								"0e36f841-8507-4d28-bb91-3f23adee4492",
+								"5c9c50b1-f078-43e1-951c-22b6833ce91a",
 								"cancellation"
 							]
 						}
@@ -1901,7 +1901,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/orders/0e36f841-8507-4d28-bb91-3f23adee4492/delivery",
+							"raw": "api.algafood.local:8080/v1/orders/5c9c50b1-f078-43e1-951c-22b6833ce91a/delivery",
 							"host": [
 								"api",
 								"algafood",
@@ -1911,7 +1911,7 @@
 							"path": [
 								"v1",
 								"orders",
-								"0e36f841-8507-4d28-bb91-3f23adee4492",
+								"5c9c50b1-f078-43e1-951c-22b6833ce91a",
 								"delivery"
 							]
 						}
@@ -2169,13 +2169,13 @@
 							]
 						},
 						"url": {
-							"raw": "auth.algafood.local:8081/oauth/token",
+							"raw": "api.algafood.local:8080/oauth/token",
 							"host": [
-								"auth",
+								"api",
 								"algafood",
 								"local"
 							],
-							"port": "8081",
+							"port": "8080",
 							"path": [
 								"oauth",
 								"token"
@@ -2202,7 +2202,7 @@
 								},
 								{
 									"key": "code",
-									"value": "Vj9VDq",
+									"value": "mzDb2v",
 									"type": "text"
 								},
 								{
@@ -2223,13 +2223,13 @@
 							]
 						},
 						"url": {
-							"raw": "auth.algafood.local:8081/oauth/token",
+							"raw": "api.algafood.local:8080/oauth/token",
 							"host": [
-								"auth",
+								"api",
 								"algafood",
 								"local"
 							],
-							"port": "8081",
+							"port": "8080",
 							"path": [
 								"oauth",
 								"token"
@@ -2274,13 +2274,13 @@
 							]
 						},
 						"url": {
-							"raw": "auth.algafood.local:8081/oauth/token",
+							"raw": "api.algafood.local:8080/oauth/token",
 							"host": [
-								"auth",
+								"api",
 								"algafood",
 								"local"
 							],
-							"port": "8081",
+							"port": "8080",
 							"path": [
 								"oauth",
 								"token"
@@ -2320,13 +2320,13 @@
 							]
 						},
 						"url": {
-							"raw": "auth.algafood.local:8081/oauth/token",
+							"raw": "api.algafood.local:8080/oauth/token",
 							"host": [
-								"auth",
+								"api",
 								"algafood",
 								"local"
 							],
-							"port": "8081",
+							"port": "8080",
 							"path": [
 								"oauth",
 								"token"
@@ -2366,13 +2366,13 @@
 							]
 						},
 						"url": {
-							"raw": "auth.algafood.local:8081/oauth/check_token",
+							"raw": "api.algafood.local:8080/oauth/check_token",
 							"host": [
-								"auth",
+								"api",
 								"algafood",
 								"local"
 							],
-							"port": "8081",
+							"port": "8080",
 							"path": [
 								"oauth",
 								"check_token"
@@ -2409,13 +2409,13 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "auth.algafood.local:8081/oauth/token_key",
+							"raw": "api.algafood.local:8080/oauth/token_key",
 							"host": [
-								"auth",
+								"api",
 								"algafood",
 								"local"
 							],
-							"port": "8081",
+							"port": "8080",
 							"path": [
 								"oauth",
 								"token_key"
