@@ -17,11 +17,9 @@ import org.springframework.http.MediaType;
 import org.springframework.web.context.request.ServletWebRequest;
 import springfox.documentation.builders.*;
 import springfox.documentation.schema.AlternateTypeRules;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.service.Response;
-import springfox.documentation.service.Tag;
+import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -93,6 +91,8 @@ public class SpringFoxConfig {
                         typeResolver.resolve(CollectionModel.class, UserModel.class),
                         UsersModelOpenApi.class)
                 )
+                .securitySchemes(List.of(this.securityScheme()))
+                .securityContexts(List.of(this.securityContext()))
                 .apiInfo(this.apiInfoV1())
                 .tags(new Tag("Cities", "Manage the cities"))
                 .tags(new Tag("User groups", "Manage the user groups"))
@@ -114,6 +114,35 @@ public class SpringFoxConfig {
                 .version("1")
                 .contact(new Contact("Natan da Fonseca Lisboa", "https://github.com/NatanLisboa", "natanflisboa1@gmail.com"))
                 .build();
+    }
+
+    private SecurityScheme securityScheme() {
+        return new OAuthBuilder()
+                .name("Algafood")
+                .grantTypes(this.grantTypes())
+                .scopes(this.scopes())
+                .build();
+    }
+
+    private SecurityContext securityContext() {
+        SecurityReference securityReference = SecurityReference.builder()
+                .reference("Algafood")
+                .scopes(this.scopes().toArray(new AuthorizationScope[0]))
+                .build();
+
+        return SecurityContext.builder()
+                .securityReferences(List.of(securityReference))
+                .operationSelector(operationContext -> true)
+                .build();
+    }
+
+    private List<GrantType> grantTypes() {
+        return List.of(new ResourceOwnerPasswordCredentialsGrant("/oauth/token"));
+    }
+
+    private List<AuthorizationScope> scopes() {
+        return List.of(new AuthorizationScope("READ", "Read access"),
+                new AuthorizationScope("WRITE", "Write access"));
     }
 
     private List<Response> globalGetResponseMessages() {
