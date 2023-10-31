@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,16 +58,16 @@
 </head>
 
 <body class="text-center">
-<form class="form-signin">
+<form class="form-signin" th:action="@{/login}" method="post">
     <h1 class="h3 mb-3 font-weight-normal">Access to Algafood</h1>
 
-    <p class="alert alert-danger">
+    <p class="alert alert-danger" th:if="${#bools.isTrue(param.error)}">
         The e-mail or password does not match
     </p>
 
-    <input type="email" class="form-control" placeholder="Your e-mail" required autofocus>
+    <input type="email" name="username" class="form-control" placeholder="Your e-mail" required autofocus>
 
-    <input type="password" class="form-control" placeholder="Your password" required>
+    <input type="password" name="password" class="form-control" placeholder="Your password" required>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
 </form>
