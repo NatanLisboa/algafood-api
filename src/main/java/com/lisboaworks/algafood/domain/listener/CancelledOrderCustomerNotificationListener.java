@@ -20,7 +20,7 @@ public class CancelledOrderCustomerNotificationListener {
 
         Message message = Message.builder()
                 .subject(order.getRestaurant().getName() + " - Cancelled order")
-                .body("cancelled-order.html")
+                .body("emails/cancelled-order.html")
                 .variable("order", order)
                 .receiver(order.getCustomer().getEmail())
                 .build();

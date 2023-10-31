@@ -20,7 +20,7 @@ public class ConfirmedOrderCustomerNotificationListener {
 
         Message message = Message.builder()
                 .subject(order.getRestaurant().getName() + " - Confirmed order")
-                .body("confirmed-order.html")
+                .body("emails/confirmed-order.html")
                 .variable("order", order)
                 .receiver(order.getCustomer().getEmail())
                 .build();
