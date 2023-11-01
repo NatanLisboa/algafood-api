@@ -1,6 +1,5 @@
 package com.lisboaworks.algafood.core.io;
 
-import com.mysql.cj.util.Base64Decoder;
 import org.springframework.boot.context.event.ApplicationContextInitializedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.io.ByteArrayResource;

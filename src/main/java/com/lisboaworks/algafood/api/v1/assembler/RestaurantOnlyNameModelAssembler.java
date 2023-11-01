@@ -2,7 +2,6 @@ package com.lisboaworks.algafood.api.v1.assembler;
 
 import com.lisboaworks.algafood.api.v1.AlgaLinks;
 import com.lisboaworks.algafood.api.v1.controller.RestaurantController;
-import com.lisboaworks.algafood.api.v1.model.RestaurantModel;
 import com.lisboaworks.algafood.api.v1.model.RestaurantOnlyNameModel;
 import com.lisboaworks.algafood.core.security.SecurityHelper;
 import com.lisboaworks.algafood.domain.model.Restaurant;
