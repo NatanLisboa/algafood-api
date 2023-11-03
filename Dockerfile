@@ -2,7 +2,9 @@ FROM openjdk:17-jdk-oraclelinux8
 
 WORKDIR /app
 
-COPY target/*.jar /app/algafood-api.jar
+ARG JAR_FILE
+
+COPY target/${JAR_FILE} /app/algafood-api.jar
 
 EXPOSE 8080
 
