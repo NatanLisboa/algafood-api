@@ -1,0 +1,26 @@
+networks:
+  algafood-network:
+      driver: bridge
+
+services:
+  algafood-mysql:
+      image: mysql:8.0
+      environment:
+        MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      ports:
+        - "3306:3306"
+      networks:
+        - algafood-network
+
+  algafood-api:
+    image: algafood-api
+    environment:
+      DB_HOST: algafood-mysql
+      algafood-storage-s3-access-key-id: ${S3_ACCESS_KEY_ID}
+      algafood-storage-s3-secret-access-key: ${S3_SECRET_ACCESS_KEY}
+    ports:
+      - "8080:8080"
+    networks:
+      - algafood-network
+    depends_on:
+      - algafood-mysql
