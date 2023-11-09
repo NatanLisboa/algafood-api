@@ -1,6 +1,26 @@
 -- Disable foreign key checks
 set foreign_key_checks = 0;
 
+-- Lock writing in all tables (to prevent concurrent access from two Docker containers)
+lock tables
+city write,
+cuisine write,
+state write,
+payment_method write,
+user_group write,
+user_group_permission write,
+permission write,
+product write,
+restaurant write,
+restaurant_payment_method write,
+user write,
+user_user_group write,
+restaurant_responsible_user write,
+`order` write,
+order_item write,
+product_photo write,
+oauth_client_details write;
+
 -- Delete all from tables
 delete from city;
 delete from cuisine;
@@ -247,3 +267,5 @@ values (
   'READ,WRITE', 'client_credentials', null, 'GET_ORDERS,GENERATE_REPORTS',
   null, null, null
 );
+
+unlock tables;
