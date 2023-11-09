@@ -16,8 +16,6 @@ services:
     image: algafood-api
     environment:
       DB_HOST: algafood-mysql
-      algafood-storage-s3-access-key-id: ${S3_ACCESS_KEY_ID}
-      algafood-storage-s3-secret-access-key: ${S3_SECRET_ACCESS_KEY}
     ports:
       - "8080:8080"
     networks:
