@@ -33,13 +33,10 @@
 							}
 						],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/cuisines?size=1&page=0",
+							"raw": "{{environmentUrl}}/v1/cuisines?size=1&page=0",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"cuisines"
@@ -50,13 +47,13 @@
 									"value": "1"
 								},
 								{
-									"key": "page",
-									"value": "0"
-								},
-								{
 									"key": "sort",
 									"value": "id,name,desc",
 									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "0"
 								}
 							]
 						}
@@ -81,13 +78,10 @@
 							}
 						],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/cuisines/1",
+							"raw": "{{environmentUrl}}/v1/cuisines/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"cuisines",
@@ -124,13 +118,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/cuisines",
+							"raw": "{{environmentUrl}}/v1/cuisines",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"cuisines"
@@ -166,13 +157,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/cuisines/1",
+							"raw": "{{environmentUrl}}/v1/cuisines/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"cuisines",
@@ -188,13 +176,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/cuisines/3",
+							"raw": "{{environmentUrl}}/v1/cuisines/3",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"cuisines",
@@ -221,13 +206,10 @@
 							}
 						],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/states",
+							"raw": "{{environmentUrl}}/v1/states",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"states"
@@ -242,13 +224,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/states/1",
+							"raw": "{{environmentUrl}}/v1/states/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"states",
@@ -273,13 +252,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/states",
+							"raw": "{{environmentUrl}}/v1/states",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"states"
@@ -303,13 +279,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/states/1",
+							"raw": "{{environmentUrl}}/v1/states/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"states",
@@ -334,13 +307,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/states/3",
+							"raw": "{{environmentUrl}}/v1/states/3",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"states",
@@ -367,13 +337,10 @@
 							}
 						],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/payment-methods",
+							"raw": "{{environmentUrl}}/v1/payment-methods",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"payment-methods"
@@ -388,13 +355,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/payment-methods/1",
+							"raw": "{{environmentUrl}}/v1/payment-methods/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"payment-methods",
@@ -419,13 +383,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/payment-methods",
+							"raw": "{{environmentUrl}}/v1/payment-methods",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"payment-methods"
@@ -449,13 +410,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/payment-methods/1",
+							"raw": "{{environmentUrl}}/v1/payment-methods/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"payment-methods",
@@ -480,13 +438,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/payment-methods/4",
+							"raw": "{{environmentUrl}}/v1/payment-methods/4",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"payment-methods",
@@ -507,13 +462,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants",
+							"raw": "{{environmentUrl}}/v1/restaurants",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants"
@@ -528,13 +480,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants?projection=only-name",
+							"raw": "{{environmentUrl}}/v1/restaurants?projection=only-name",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants"
@@ -555,13 +504,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1",
+							"raw": "{{environmentUrl}}/v1/restaurants/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -586,13 +532,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants",
+							"raw": "{{environmentUrl}}/v1/restaurants",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants"
@@ -616,13 +559,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/3",
+							"raw": "{{environmentUrl}}/v1/restaurants/3",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -638,13 +578,10 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1/active",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/active",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -661,13 +598,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1/active",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/active",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -693,13 +627,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/activations",
+							"raw": "{{environmentUrl}}/v1/restaurants/activations",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -724,13 +655,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/activations",
+							"raw": "{{environmentUrl}}/v1/restaurants/activations",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -746,13 +674,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1/payment-methods",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/payment-methods",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -769,13 +694,10 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1/payment-methods/2",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/payment-methods/2",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -793,13 +715,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1/payment-methods/2",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/payment-methods/2",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -817,13 +736,10 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1/opening",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/opening",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -840,13 +756,10 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1/closure",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/closure",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -863,13 +776,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1/responsible-users",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/responsible-users",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -886,13 +796,10 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1/responsible-users/2",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/responsible-users/2",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -910,13 +817,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1/responsible-users/2",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/responsible-users/2",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -939,13 +843,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/cities",
+							"raw": "{{environmentUrl}}/v1/cities",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"cities"
@@ -960,13 +861,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/cities/1",
+							"raw": "{{environmentUrl}}/v1/cities/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"cities",
@@ -991,13 +889,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/cities",
+							"raw": "{{environmentUrl}}/v1/cities",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"cities"
@@ -1021,13 +916,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/cities/1",
+							"raw": "{{environmentUrl}}/v1/cities/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"cities",
@@ -1052,13 +944,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/cities/3",
+							"raw": "{{environmentUrl}}/v1/cities/3",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"cities",
@@ -1085,13 +974,10 @@
 							}
 						],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/users",
+							"raw": "{{environmentUrl}}/v1/users",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"users"
@@ -1106,13 +992,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/users/1",
+							"raw": "{{environmentUrl}}/v1/users/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"users",
@@ -1137,13 +1020,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/users",
+							"raw": "{{environmentUrl}}/v1/users",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"users"
@@ -1167,13 +1047,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/users/1",
+							"raw": "{{environmentUrl}}/v1/users/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"users",
@@ -1198,13 +1075,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/users/1/password",
+							"raw": "{{environmentUrl}}/v1/users/1/password",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"users",
@@ -1221,13 +1095,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/users/1/user-groups",
+							"raw": "{{environmentUrl}}/v1/users/1/user-groups",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"users",
@@ -1253,13 +1124,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/users/1/user-groups/1",
+							"raw": "{{environmentUrl}}/v1/users/1/user-groups/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"users",
@@ -1286,13 +1154,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/users/1/user-groups/1",
+							"raw": "{{environmentUrl}}/v1/users/1/user-groups/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"users",
@@ -1321,13 +1186,10 @@
 							}
 						],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/user-groups",
+							"raw": "{{environmentUrl}}/v1/user-groups",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"user-groups"
@@ -1342,13 +1204,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/user-groups/1",
+							"raw": "{{environmentUrl}}/v1/user-groups/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"user-groups",
@@ -1373,13 +1232,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/user-groups",
+							"raw": "{{environmentUrl}}/v1/user-groups",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"user-groups"
@@ -1403,13 +1259,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/user-groups/1",
+							"raw": "{{environmentUrl}}/v1/user-groups/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"user-groups",
@@ -1434,13 +1287,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/user-groups/3",
+							"raw": "{{environmentUrl}}/v1/user-groups/3",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"user-groups",
@@ -1456,13 +1306,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/user-groups/1/permissions",
+							"raw": "{{environmentUrl}}/v1/user-groups/1/permissions",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"user-groups",
@@ -1488,13 +1335,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/user-groups/4/permissions/1",
+							"raw": "{{environmentUrl}}/v1/user-groups/4/permissions/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"user-groups",
@@ -1521,13 +1365,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/user-groups/4/permissions/1",
+							"raw": "{{environmentUrl}}/v1/user-groups/4/permissions/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"user-groups",
@@ -1550,14 +1391,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://api.algafood.local:8080/v1/permissions",
-							"protocol": "http",
+							"raw": "{{environmentUrl}}/v1/permissions",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"permissions"
@@ -1577,13 +1414,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1/products",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/products",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -1607,13 +1441,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1/products?includeInactiveProducts=true",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/products?includeInactiveProducts=true",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -1636,13 +1467,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1/products/1",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/products/1",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -1669,13 +1497,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/2/products",
+							"raw": "{{environmentUrl}}/v1/restaurants/2/products",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -1701,13 +1526,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/2/products/3",
+							"raw": "{{environmentUrl}}/v1/restaurants/2/products/3",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -1730,13 +1552,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/orders?restaurantId=4&customerId=5",
+							"raw": "{{environmentUrl}}/v1/orders?restaurantId=4&customerId=5",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"orders"
@@ -1803,13 +1622,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/orders/5c9c50b1-f078-43e1-951c-22b6833ce91a",
+							"raw": "{{environmentUrl}}/v1/orders/5c9c50b1-f078-43e1-951c-22b6833ce91a",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"orders",
@@ -1834,13 +1650,10 @@
 							}
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/orders",
+							"raw": "{{environmentUrl}}/v1/orders",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"orders"
@@ -1855,13 +1668,10 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/orders/5c9c50b1-f078-43e1-951c-22b6833ce91a/confirmation",
+							"raw": "{{environmentUrl}}/v1/orders/5c9c50b1-f078-43e1-951c-22b6833ce91a/confirmation",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"orders",
@@ -1878,13 +1688,10 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/orders/5c9c50b1-f078-43e1-951c-22b6833ce91a/cancellation",
+							"raw": "{{environmentUrl}}/v1/orders/5c9c50b1-f078-43e1-951c-22b6833ce91a/cancellation",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"orders",
@@ -1901,13 +1708,10 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/orders/5c9c50b1-f078-43e1-951c-22b6833ce91a/delivery",
+							"raw": "{{environmentUrl}}/v1/orders/5c9c50b1-f078-43e1-951c-22b6833ce91a/delivery",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"orders",
@@ -1941,13 +1745,10 @@
 							}
 						],
 						"url": {
-							"raw": "api.algafood.local:8080/v1/statistics/daily-sales",
+							"raw": "{{environmentUrl}}/v1/statistics/daily-sales",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"statistics",
@@ -2009,13 +1810,10 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1/products/1/photo",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/products/1/photo",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -2049,13 +1847,10 @@
 							]
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1/products/1/photo",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/products/1/photo",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -2078,13 +1873,10 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/v1/restaurants/1/products/1/photo",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/products/1/photo",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v1",
 								"restaurants",
@@ -2108,13 +1900,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "api.algafood.local:8080/v2/api-docs",
+							"raw": "{{environmentUrl}}/v2/api-docs",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"v2",
 								"api-docs"
@@ -2169,13 +1958,10 @@
 							]
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/oauth/token",
+							"raw": "{{environmentUrl}}/oauth/token",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"oauth",
 								"token"
@@ -2202,7 +1988,7 @@
 								},
 								{
 									"key": "code",
-									"value": "mzDb2v",
+									"value": "r59S1G",
 									"type": "text"
 								},
 								{
@@ -2223,13 +2009,10 @@
 							]
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/oauth/token",
+							"raw": "{{environmentUrl}}/oauth/token",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"oauth",
 								"token"
@@ -2274,13 +2057,10 @@
 							]
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/oauth/token",
+							"raw": "{{environmentUrl}}/oauth/token",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"oauth",
 								"token"
@@ -2320,13 +2100,10 @@
 							]
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/oauth/token",
+							"raw": "{{environmentUrl}}/oauth/token",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"oauth",
 								"token"
@@ -2366,13 +2143,10 @@
 							]
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/oauth/check_token",
+							"raw": "{{environmentUrl}}/oauth/check_token",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"oauth",
 								"check_token"
@@ -2409,13 +2183,10 @@
 							"urlencoded": []
 						},
 						"url": {
-							"raw": "api.algafood.local:8080/oauth/token_key",
+							"raw": "{{environmentUrl}}/oauth/token_key",
 							"host": [
-								"api",
-								"algafood",
-								"local"
+								"{{environmentUrl}}"
 							],
-							"port": "8080",
 							"path": [
 								"oauth",
 								"token_key"
@@ -2432,15 +2203,29 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "api.algafood.local:8080/v1",
+					"raw": "{{environmentUrl}}/v1",
 					"host": [
-						"api",
-						"algafood",
-						"local"
+						"{{environmentUrl}}"
 					],
-					"port": "8080",
 					"path": [
 						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Host check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{environmentUrl}}/hostcheck",
+					"host": [
+						"{{environmentUrl}}"
+					],
+					"path": [
+						"hostcheck"
 					]
 				}
 			},
