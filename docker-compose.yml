@@ -22,6 +22,11 @@ services:
     depends_on:
       - algafood-mysql
 
+  algafood-redis:
+    image: redis:7.2.3-alpine
+    networks:
+      - algafood-network
+
   algafood-proxy:
     build: ./nginx
     image: algafood-proxy
