@@ -8,11 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class MockEmailSendingService implements EmailSendingService {
 
     @Autowired
-    private SmtpEmailSendingService smtpEmailSendingService;
+    private EmailTemplateProcessor emailTemplateProcessor;
 
     @Override
     public void send(Message message) {
-        log.info(smtpEmailSendingService.processTemplate(message));
+        log.info(emailTemplateProcessor.processTemplate(message));
     }
 
 }
