@@ -9,6 +9,7 @@ import com.lisboaworks.algafood.domain.service.PhotoStorageService;
 import com.lisboaworks.algafood.infrastructure.service.storage.LocalPhotoStorageService;
 import com.lisboaworks.algafood.infrastructure.service.storage.S3PhotoStorageService;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,6 +20,7 @@ public class StorageConfig {
     private final StorageProperties storageProperties;
 
     @Bean
+    @ConditionalOnProperty(name = "algafood.storage.storageType", havingValue = "s3")
     public AmazonS3 amazonS3() {
         BasicAWSCredentials credentials = new BasicAWSCredentials(
                 storageProperties.getS3().getAccessKeyId(),
