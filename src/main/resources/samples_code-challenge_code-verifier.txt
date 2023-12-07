@@ -3,3 +3,4 @@ Code Challenge: QLIfPh-xtRfFyGsmRC_Fc1mxSLHwn5KNBPnUYV25ziA
 
 Local: http://api.algafood.local:8080/oauth/authorize?response_type=code&client_id=food-analytics&redirect_uri=http://www.foodanalytics.local:8082&code_challenge=QLIfPh-xtRfFyGsmRC_Fc1mxSLHwn5KNBPnUYV25ziA&code_challenge_method=s256
 Local - Docker: http://api.algafood.local/oauth/authorize?response_type=code&client_id=food-analytics&redirect_uri=http://www.foodanalytics.local:8082&code_challenge=QLIfPh-xtRfFyGsmRC_Fc1mxSLHwn5KNBPnUYV25ziA&code_challenge_method=s256
+Production: https://www.algafoodapi.com.br/oauth/authorize?response_type=code&client_id=food-analytics&redirect_uri=http://www.foodanalytics.local:8082&code_challenge=QLIfPh-xtRfFyGsmRC_Fc1mxSLHwn5KNBPnUYV25ziA&code_challenge_method=s256

@@ -1810,16 +1810,16 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{environmentUrl}}/v1/restaurants/1/products/1/photo",
+							"raw": "{{environmentUrl}}/v1/restaurants/2/products/7/photo",
 							"host": [
 								"{{environmentUrl}}"
 							],
 							"path": [
 								"v1",
 								"restaurants",
-								"1",
+								"2",
 								"products",
-								"1",
+								"7",
 								"photo"
 							]
 						}
@@ -1837,26 +1837,26 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": "/C:/Users/natan/projetos-e-estudos/back-end/algafood-photo-catalog/tom-yum-goong.jpg"
+									"src": "/D:/desenvolvimento/algafood-photo-catalog/garlic-naan.jpg"
 								},
 								{
 									"key": "description",
-									"value": "Spicy shrimp soup",
+									"value": "Bread seasoned with garlic",
 									"type": "default"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{environmentUrl}}/v1/restaurants/1/products/1/photo",
+							"raw": "{{environmentUrl}}/v1/restaurants/2/products/7/photo",
 							"host": [
 								"{{environmentUrl}}"
 							],
 							"path": [
 								"v1",
 								"restaurants",
-								"1",
+								"2",
 								"products",
-								"1",
+								"7",
 								"photo"
 							]
 						}
@@ -1873,16 +1873,16 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{environmentUrl}}/v1/restaurants/1/products/1/photo",
+							"raw": "{{environmentUrl}}/v1/restaurants/2/products/7/photo",
 							"host": [
 								"{{environmentUrl}}"
 							],
 							"path": [
 								"v1",
 								"restaurants",
-								"1",
+								"2",
 								"products",
-								"1",
+								"7",
 								"photo"
 							]
 						}
@@ -1988,7 +1988,7 @@
 								},
 								{
 									"key": "code",
-									"value": "XQsrPW",
+									"value": "pAjE8p",
 									"type": "text"
 								},
 								{
