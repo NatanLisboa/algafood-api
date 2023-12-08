@@ -5,11 +5,11 @@ import com.lisboaworks.algafood.api.v1.model.RestaurantModel;
 import com.lisboaworks.algafood.api.v1.model.RestaurantOnlyNameModel;
 import com.lisboaworks.algafood.api.v1.model.RestaurantSummaryModel;
 import com.lisboaworks.algafood.api.v1.model.input.RestaurantInput;
-import io.swagger.annotations.*;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
+
+
+
+
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import springfox.documentation.annotations.ApiIgnore;

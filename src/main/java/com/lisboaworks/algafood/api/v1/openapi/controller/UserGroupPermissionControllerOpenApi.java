@@ -1,11 +1,11 @@
 package com.lisboaworks.algafood.api.v1.openapi.controller;
 
 import com.lisboaworks.algafood.api.v1.model.PermissionModel;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
+
+
+
+
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 
@@ -33,5 +33,5 @@ public interface UserGroupPermissionControllerOpenApi {
     })
     ResponseEntity<Void> disassociate(@ApiParam(value = "User group id", example = "1", required = true) Long userGroupId,
                       @ApiParam(value = "Permission id", example = "2", required = true) Long permissionId);
-    
+
 }

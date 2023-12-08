@@ -5,11 +5,11 @@ import com.lisboaworks.algafood.api.v1.model.OrderModel;
 import com.lisboaworks.algafood.api.v1.model.OrderSummaryModel;
 import com.lisboaworks.algafood.api.v1.model.input.OrderInput;
 import com.lisboaworks.algafood.domain.filter.OrderFilter;
-import io.swagger.annotations.*;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
+
+
+
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.PagedModel;
 

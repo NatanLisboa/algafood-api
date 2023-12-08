@@ -2,10 +2,10 @@ package com.lisboaworks.algafood.api.v1.openapi.controller;
 
 import com.lisboaworks.algafood.domain.filter.DailySaleFilter;
 import com.lisboaworks.algafood.domain.model.statistics.DailySale;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+
+
+
+
 import org.springframework.http.ResponseEntity;
 
 import java.time.OffsetDateTime;

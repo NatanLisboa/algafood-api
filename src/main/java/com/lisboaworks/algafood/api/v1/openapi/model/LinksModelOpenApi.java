@@ -1,6 +1,6 @@
 package com.lisboaworks.algafood.api.v1.openapi.model;
 
-import io.swagger.annotations.ApiModel;
+
 import lombok.Getter;
 import lombok.Setter;
 

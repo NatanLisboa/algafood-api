@@ -2,7 +2,7 @@ package com.lisboaworks.algafood.api.v1.openapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.lisboaworks.algafood.api.v1.model.UserGroupModel;
-import io.swagger.annotations.ApiModel;
+
 import lombok.Data;
 import org.springframework.hateoas.Links;
 

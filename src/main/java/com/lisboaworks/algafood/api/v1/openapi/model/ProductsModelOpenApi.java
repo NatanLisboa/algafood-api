@@ -1,7 +1,7 @@
 package com.lisboaworks.algafood.api.v1.openapi.model;
 
 import com.lisboaworks.algafood.api.v1.model.ProductModel;
-import io.swagger.annotations.ApiModel;
+
 import lombok.Data;
 import org.springframework.hateoas.Links;
 

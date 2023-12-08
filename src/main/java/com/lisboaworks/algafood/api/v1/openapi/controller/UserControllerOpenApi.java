@@ -5,13 +5,13 @@ import com.lisboaworks.algafood.api.v1.model.UserModel;
 import com.lisboaworks.algafood.api.v1.model.input.UserChangePasswordInput;
 import com.lisboaworks.algafood.api.v1.model.input.UserInput;
 import com.lisboaworks.algafood.api.v1.model.input.UserNameEmailInput;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
+
+
+
+
+
+
 import org.springframework.hateoas.CollectionModel;
 
 @Api(tags = "Users")

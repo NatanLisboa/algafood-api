@@ -4,13 +4,13 @@ import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import com.lisboaworks.algafood.api.v1.model.PaymentMethodModel;
 import com.lisboaworks.algafood.api.v1.model.input.PaymentMethodInput;
 import com.lisboaworks.algafood.api.v1.openapi.model.PaymentMethodsModelOpenApi;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
+
+
+
+
+
+
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -19,8 +19,8 @@ import org.springframework.web.context.request.ServletWebRequest;
 public interface PaymentMethodControllerOpenApi {
 
     @ApiOperation(value = "Get all registered payment methods")
-    @io.swagger.annotations.ApiResponses(value = {
-            @io.swagger.annotations.ApiResponse(code = 200, message = "OK", response = PaymentMethodsModelOpenApi.class)
+
+
     })
     ResponseEntity<CollectionModel<PaymentMethodModel>> findAll(ServletWebRequest request);
 

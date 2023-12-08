@@ -1,6 +1,6 @@
 package com.lisboaworks.algafood.api.v1.model.input;
 
-import io.swagger.annotations.ApiModelProperty;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,22 +12,22 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class AddressInput {
 
-    @ApiModelProperty(example = "08140000")
+
     @NotBlank
     private String zipCode;
 
-    @ApiModelProperty(example = "St. One")
+
     @NotBlank
     private String streetName;
 
-    @ApiModelProperty(example = "2")
+
     @NotBlank
     private String number;
 
-    @ApiModelProperty(example = "Apartment 1A")
+
     private String complement;
 
-    @ApiModelProperty(example = "St. John")
+
     @NotBlank
     private String district;
 
