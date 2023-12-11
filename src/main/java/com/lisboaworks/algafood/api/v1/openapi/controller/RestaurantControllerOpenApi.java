@@ -4,11 +4,13 @@ import com.lisboaworks.algafood.api.v1.model.RestaurantModel;
 import com.lisboaworks.algafood.api.v1.model.RestaurantOnlyNameModel;
 import com.lisboaworks.algafood.api.v1.model.RestaurantSummaryModel;
 import com.lisboaworks.algafood.api.v1.model.input.RestaurantInput;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
+@SecurityRequirement(name = "security_auth")
 public interface RestaurantControllerOpenApi {
 
     CollectionModel<RestaurantSummaryModel> findAll();
