@@ -1,7 +1,6 @@
 package com.lisboaworks.algafood.api.v1.openapi.model;
 
 import com.lisboaworks.algafood.api.v1.model.CuisineModel;
-
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,8 +8,6 @@ import org.springframework.hateoas.Links;
 
 import java.util.List;
 
-
-@ApiModel("CuisinesModel")
 @Getter
 @Setter
 public class CuisinesModelOpenApi {
@@ -19,7 +16,6 @@ public class CuisinesModelOpenApi {
     private Links _links;
     private PageModelOpenApi page;
 
-    @ApiModel("CuisinesEmbeddedModel")
     @Data
     public static class CuisinesEmbeddedModelOpenApi {
 

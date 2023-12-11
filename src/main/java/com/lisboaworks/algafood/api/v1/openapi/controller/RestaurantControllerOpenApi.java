@@ -1,112 +1,36 @@
 package com.lisboaworks.algafood.api.v1.openapi.controller;
 
-import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
 import com.lisboaworks.algafood.api.v1.model.RestaurantModel;
 import com.lisboaworks.algafood.api.v1.model.RestaurantOnlyNameModel;
 import com.lisboaworks.algafood.api.v1.model.RestaurantSummaryModel;
 import com.lisboaworks.algafood.api.v1.model.input.RestaurantInput;
-
-
-
-
-
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
-@Api(tags = "Restaurants")
 public interface RestaurantControllerOpenApi {
 
-    @ApiOperation(value = "Get restaurants")
-    @ApiImplicitParams({
-            @ApiImplicitParam(value = "Order projections name",
-                    allowableValues = "only-name",
-                    name = "projection",
-                    paramType = "query",
-                    type = "string",
-                    dataTypeClass = String.class)
-    })
     CollectionModel<RestaurantSummaryModel> findAll();
 
-    @ApiIgnore
-    @ApiOperation(value = "Get restaurants", hidden = true)
     CollectionModel<RestaurantOnlyNameModel> findAllOnlyWithName();
 
-    @ApiResponses({
-            @ApiResponse(responseCode = "400", description = "Invalid restaurant id",
-                    content = @Content(schema = @Schema(implementation = ApiException.class))),
-            @ApiResponse(responseCode = "404", description = "Restaurant not found",
-                    content = @Content(schema = @Schema(implementation = ApiException.class)))
-    })
-    @ApiOperation(value = "Get restaurant by id")
-    RestaurantModel findById(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
+    RestaurantModel findById(Long restaurantId);
 
-    @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Restaurant registered successfully")
-    })
-    @ApiOperation(value = "Add new restaurant")
-    RestaurantModel add(
-                    @ApiParam(name = "body", value = "New restaurant representation", required = true)
-                    RestaurantInput restaurantInput
-    );
+    RestaurantModel add(RestaurantInput restaurantInput);
 
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Restaurant updated successfully"),
-            @ApiResponse(responseCode = "404", description = "Restaurant not found",
-                    content = @Content(schema = @Schema(implementation = ApiException.class)))
-    })
-    @ApiOperation(value = "Update restaurant")
-    RestaurantModel update(@ApiParam(value = "Restaurant id", example = "1", required = true)
-                         Long restaurantId,
+    RestaurantModel update(Long restaurantId, RestaurantInput newRestaurantInput);
 
-                           @ApiParam(name = "body", value = "Restaurant representation with new data", required = true)
-                         RestaurantInput newRestaurantInput
-    );
+    ResponseEntity<Void> activate(Long restaurantId);
 
-    @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Restaurant activated successfully"),
-            @ApiResponse(responseCode = "404", description = "Restaurant not found",
-                    content = @Content(schema = @Schema(implementation = ApiException.class)))
-    })
-    @ApiOperation(value = "Activate restaurant")
-    ResponseEntity<Void> activate(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
+    ResponseEntity<Void> inactivate(Long restaurantId);
 
-    @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Restaurant inactivated successfully"),
-            @ApiResponse(responseCode = "404", description = "Restaurant not found",
-                    content = @Content(schema = @Schema(implementation = ApiException.class)))
-    })
-    @ApiOperation(value = "Inactivate restaurant")
-    ResponseEntity<Void> inactivate(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
+    ResponseEntity<Void> open(Long restaurantId);
 
-    @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Restaurant opened successfully"),
-            @ApiResponse(responseCode = "404", description = "Restaurant not found",
-                    content = @Content(schema = @Schema(implementation = ApiException.class)))
-    })
-    @ApiOperation(value = "Open restaurant")
-    ResponseEntity<Void> open(@ApiParam(value = "Restaurant id", example = "1", required = true) Long restaurantId);
+    ResponseEntity<Void> close(Long restaurantId);
 
-    @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Restaurant closed successfully"),
-            @ApiResponse(responseCode = "404", description = "Restaurant not found",
-                    content = @Content(schema = @Schema(implementation = ApiException.class)))
-    })
-    @ApiOperation(value = "Close restaurant")
-    ResponseEntity<Void> close(@ApiParam(value = "Restaurant id", required = true) Long restaurantId);
+    void activateMultiples(List<Long> restaurantIds);
 
-    @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Restaurants activated successfully")
-    })
-    @ApiOperation(value = "Activate multiple restaurants")
-    void activateMultiples(@ApiParam(value = "Restaurants ids", required = true) List<Long> restaurantIds);
-
-    @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Restaurants inactivated successfully")
-    })
-    @ApiOperation(value = "Inactivate multiple restaurants")
-    void inactivateMultiples(@ApiParam(value = "Restaurants ids", required = true) List<Long> restaurantIds);
+    void inactivateMultiples(List<Long> restaurantIds);
 
 }

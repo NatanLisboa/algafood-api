@@ -1,37 +1,15 @@
 package com.lisboaworks.algafood.api.v1.openapi.controller;
 
 import com.lisboaworks.algafood.api.v1.model.PermissionModel;
-
-
-
-
-
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 
-@Api(tags = "User groups")
 public interface UserGroupPermissionControllerOpenApi {
 
-    @ApiOperation("Get all permissions from user group")
-    @ApiResponses({
-            @ApiResponse(responseCode = "404", description = "User group not found")
-    })
-    CollectionModel<PermissionModel> findAll(@ApiParam(value = "User group id", example = "1", required = true) Long userGroupId);
+    CollectionModel<PermissionModel> findAll(Long userGroupId);
 
-    @ApiOperation("Associate permission to user group")
-    @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Permission associated successfully to user group"),
-            @ApiResponse(responseCode = "404", description = "User group or permission not found")
-    })
-    ResponseEntity<Void> associate(@ApiParam(value = "User group id", example = "1", required = true) Long userGroupId,
-                   @ApiParam(value = "Permission id", example = "2", required = true) Long permissionId);
+    ResponseEntity<Void> associate(Long userGroupId, Long permissionId);
 
-    @ApiOperation("Disassociate permission from user group")
-    @ApiResponses({
-            @ApiResponse(responseCode = "204", description = "Permission disassociated successfully from user group"),
-            @ApiResponse(responseCode = "404", description = "User group or permission not found")
-    })
-    ResponseEntity<Void> disassociate(@ApiParam(value = "User group id", example = "1", required = true) Long userGroupId,
-                      @ApiParam(value = "Permission id", example = "2", required = true) Long permissionId);
+    ResponseEntity<Void> disassociate(Long userGroupId, Long permissionId);
 
 }
