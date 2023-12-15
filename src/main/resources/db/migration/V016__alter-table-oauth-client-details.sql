@@ -1,0 +1,2 @@
+alter table oauth_client_details
+modify column web_server_redirect_uri longtext;
