@@ -11,9 +11,11 @@ import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
 import io.swagger.v3.oas.models.servers.Server;
 import io.swagger.v3.oas.models.servers.ServerVariables;
+import io.swagger.v3.oas.models.tags.Tag;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -42,13 +44,13 @@ public class SpringDocConfig {
                 ).externalDocs(new ExternalDocumentation()
                         .description("SpringDoc")
                         .url("https://springdoc.org")
-                )
-                .servers(List.of(
+                ).servers(List.of(
                         new Server().description("Local").url("http://localhost:8080"),
                         new Server().description("Local (Docker)").url("http://localhost"),
                         new Server().description("Production").url("https://www.algafoodapi.com.br")
+                )).tags(Arrays.asList(
+                        new Tag().name("Cities").description("Manage the cities")
                 ));
-
     }
 
 }
