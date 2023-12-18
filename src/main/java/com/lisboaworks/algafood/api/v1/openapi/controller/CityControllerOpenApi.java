@@ -3,6 +3,8 @@ package com.lisboaworks.algafood.api.v1.openapi.controller;
 import com.lisboaworks.algafood.api.v1.model.CityModel;
 import com.lisboaworks.algafood.api.v1.model.input.CityInput;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.hateoas.CollectionModel;
@@ -15,15 +17,16 @@ public interface CityControllerOpenApi {
     CollectionModel<CityModel> findAll();
 
     @Operation(summary = "Get a city by its id")
-    CityModel findById(Long cityId);
+    CityModel findById(@Parameter(description = "City id", example = "1", required = true) Long cityId);
 
     @Operation(summary = "Register a city", description = "Register of a city. Needs a valid state and name")
-    CityModel add(CityInput cityInput);
+    CityModel add(@RequestBody(description = "Representation of a new city", required = true) CityInput cityInput);
 
     @Operation(summary = "Update a city by its id")
-    CityModel update(Long cityId, CityInput newCityInput);
+    CityModel update(@Parameter(description = "City id", example = "1", required = true) Long cityId,
+                     @RequestBody(description = "Representation of a city with updated data", required = true) CityInput newCityInput);
 
     @Operation(summary = "Delete a city by its id")
-    void delete(Long cityId);
+    void delete(@Parameter(description = "City id", example = "1", required = true) Long cityId);
 
 }
