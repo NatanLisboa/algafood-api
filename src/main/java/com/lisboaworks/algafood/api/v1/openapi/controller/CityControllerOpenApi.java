@@ -4,7 +4,10 @@ import com.lisboaworks.algafood.api.v1.model.CityModel;
 import com.lisboaworks.algafood.api.v1.model.input.CityInput;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.hateoas.CollectionModel;
@@ -16,7 +19,12 @@ public interface CityControllerOpenApi {
     @Operation(summary = "Get all the cities")
     CollectionModel<CityModel> findAll();
 
-    @Operation(summary = "Get a city by its id")
+    @Operation(summary = "Get a city by its id", responses = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400", description = "Invalid city id",
+                    content = @Content(schema = @Schema)
+            )
+    })
     CityModel findById(@Parameter(description = "City id", example = "1", required = true) Long cityId);
 
     @Operation(summary = "Register a city", description = "Register of a city. Needs a valid state and name")
