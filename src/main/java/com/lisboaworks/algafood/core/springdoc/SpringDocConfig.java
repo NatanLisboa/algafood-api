@@ -9,9 +9,12 @@ import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.responses.ApiResponse;
+import io.swagger.v3.oas.models.responses.ApiResponses;
 import io.swagger.v3.oas.models.servers.Server;
 import io.swagger.v3.oas.models.servers.ServerVariables;
 import io.swagger.v3.oas.models.tags.Tag;
+import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -51,6 +54,28 @@ public class SpringDocConfig {
                 )).tags(Arrays.asList(
                         new Tag().name("Cities").description("Manage the cities")
                 ));
+    }
+
+    @Bean
+    public OpenApiCustomiser openApiCustomiser() {
+        return openApi -> {
+            openApi.getPaths().values()
+                    .stream()
+                    .flatMap(pathItem -> pathItem.readOperations().stream())
+                    .forEach(operation -> {
+                        ApiResponses responses = operation.getResponses();
+
+                        ApiResponse resourceNotFound = new ApiResponse().description("Resource not found");
+                        ApiResponse withoutRepresentation = new ApiResponse().description("Resource does not have a representation " +
+                                "that could be accepted by consumer");
+                        ApiResponse internalServerError = new ApiResponse().description("Internal server error");
+
+                        responses.addApiResponse("404", resourceNotFound);
+                        responses.addApiResponse("406", withoutRepresentation);
+                        responses.addApiResponse("500", internalServerError);
+
+                    });
+        };
     }
 
 }
