@@ -60,21 +60,41 @@ public class SpringDocConfig {
     public OpenApiCustomiser openApiCustomiser() {
         return openApi -> {
             openApi.getPaths().values()
-                    .stream()
-                    .flatMap(pathItem -> pathItem.readOperations().stream())
-                    .forEach(operation -> {
-                        ApiResponses responses = operation.getResponses();
-
-                        ApiResponse resourceNotFound = new ApiResponse().description("Resource not found");
-                        ApiResponse withoutRepresentation = new ApiResponse().description("Resource does not have a representation " +
-                                "that could be accepted by consumer");
-                        ApiResponse internalServerError = new ApiResponse().description("Internal server error");
-
-                        responses.addApiResponse("404", resourceNotFound);
-                        responses.addApiResponse("406", withoutRepresentation);
-                        responses.addApiResponse("500", internalServerError);
-
-                    });
+                    .forEach(pathItem -> pathItem.readOperationsMap()
+                            .forEach((httpMethod, operation) -> {
+                                ApiResponses responses = operation.getResponses();
+                                switch (httpMethod) {
+                                    case GET:
+                                        responses.addApiResponse("404", new ApiResponse().description("Resource " +
+                                                "not found"));
+                                        responses.addApiResponse("406", new ApiResponse().description("Resource " +
+                                                "does not have representation that could be accepted by consumer"));
+                                        responses.addApiResponse("500", new ApiResponse().description("Internal " +
+                                                "server error"));
+                                        break;
+                                    case POST:
+                                        responses.addApiResponse("400", new ApiResponse().description("Bad request"));
+                                        responses.addApiResponse("500", new ApiResponse().description("Internal " +
+                                                "server error"));
+                                        break;
+                                    case PUT:
+                                        responses.addApiResponse("400", new ApiResponse().description("Bad request"));
+                                        responses.addApiResponse("404", new ApiResponse().description("Resource " +
+                                                "not found"));
+                                        responses.addApiResponse("500", new ApiResponse().description("Internal " +
+                                                "server error"));
+                                        break;
+                                    case DELETE:
+                                        responses.addApiResponse("404", new ApiResponse().description("Resource " +
+                                                "not found"));
+                                        responses.addApiResponse("500", new ApiResponse().description("Internal " +
+                                                "server error"));
+                                        break;
+                                    default:
+                                        responses.addApiResponse("500", new ApiResponse().description("Internal " +
+                                                "server error"));
+                                }
+                            }));
         };
     }
 
