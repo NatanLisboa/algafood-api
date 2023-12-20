@@ -22,7 +22,7 @@ public interface CityControllerOpenApi {
     @Operation(summary = "Get a city by its id", responses = {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "400", description = "Invalid city id",
-                    content = @Content(schema = @Schema)
+                    content = @Content(schema = @Schema(ref = "ApiException"))
             )
     })
     CityModel findById(@Parameter(description = "City id", example = "1", required = true) Long cityId);
