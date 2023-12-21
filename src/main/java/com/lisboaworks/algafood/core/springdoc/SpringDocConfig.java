@@ -63,7 +63,8 @@ public class SpringDocConfig {
                         new Server().description("Local (Docker)").url("http://localhost"),
                         new Server().description("Production").url("https://www.algafoodapi.com.br")
                 )).tags(Arrays.asList(
-                        new Tag().name("Cities").description("Manage the cities")
+                        new Tag().name("Cities").description("Manage the cities"),
+                        new Tag().name("User groups").description("Manage the user groups")
                 )).components(new Components().schemas(this.generateSchemas())
                         .responses(this.generateResponses()));
     }
