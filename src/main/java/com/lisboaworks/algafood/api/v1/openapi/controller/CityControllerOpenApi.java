@@ -23,6 +23,9 @@ public interface CityControllerOpenApi {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "400", description = "Invalid city id",
                     content = @Content(schema = @Schema(ref = "ApiException"))
+            ),
+            @ApiResponse(responseCode = "404", description = "City not found",
+                    content = @Content(schema = @Schema(ref = "ApiException"))
             )
     })
     CityModel findById(@Parameter(description = "City id", example = "1", required = true) Long cityId);
@@ -30,11 +33,27 @@ public interface CityControllerOpenApi {
     @Operation(summary = "Register a city", description = "Register of a city. Needs a valid state and name")
     CityModel add(@RequestBody(description = "Representation of a new city", required = true) CityInput cityInput);
 
-    @Operation(summary = "Update a city by its id")
+    @Operation(summary = "Update a city by its id", responses = {
+            @ApiResponse(responseCode = "200"),
+            @ApiResponse(responseCode = "400", description = "Invalid city id",
+                    content = @Content(schema = @Schema(ref = "ApiException"))
+            ),
+            @ApiResponse(responseCode = "404", description = "City not found",
+                    content = @Content(schema = @Schema(ref = "ApiException"))
+            )
+    })
     CityModel update(@Parameter(description = "City id", example = "1", required = true) Long cityId,
                      @RequestBody(description = "Representation of a city with updated data", required = true) CityInput newCityInput);
 
-    @Operation(summary = "Delete a city by its id")
+    @Operation(summary = "Delete a city by its id", responses = {
+            @ApiResponse(responseCode = "204"),
+            @ApiResponse(responseCode = "400", description = "Invalid city id",
+                    content = @Content(schema = @Schema(ref = "ApiException"))
+            ),
+            @ApiResponse(responseCode = "404", description = "City not found",
+                    content = @Content(schema = @Schema(ref = "ApiException"))
+            )
+    })
     void delete(@Parameter(description = "City id", example = "1", required = true) Long cityId);
 
 }
