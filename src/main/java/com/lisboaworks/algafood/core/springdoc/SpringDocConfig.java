@@ -64,7 +64,8 @@ public class SpringDocConfig {
                         new Server().description("Production").url("https://www.algafoodapi.com.br")
                 )).tags(Arrays.asList(
                         new Tag().name("Cities").description("Manage the cities"),
-                        new Tag().name("User groups").description("Manage the user groups")
+                        new Tag().name("User groups").description("Manage the user groups"),
+                        new Tag().name("Cuisines").description("Manage the cuisines")
                 )).components(new Components().schemas(this.generateSchemas())
                         .responses(this.generateResponses()));
     }
