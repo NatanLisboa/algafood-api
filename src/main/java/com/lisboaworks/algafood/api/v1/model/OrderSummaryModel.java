@@ -31,7 +31,10 @@ public class OrderSummaryModel extends RepresentationModel<OrderSummaryModel> {
     private OffsetDateTime creationDatetime;
 
     private RestaurantOnlyNameModel restaurant;
+
     private UserModel customer;
+
+    @Schema(example = "CREATED")
     private OrderStatus status;
 
 }

@@ -27,7 +27,7 @@ import java.lang.annotation.Target;
 @Parameter(
         in = ParameterIn.QUERY,
         name = "sort",
-        description = "Sorting criteria",
+        description = "Sorting properties (e.g. name,asc)",
         examples = {
                 @ExampleObject("name"),
                 @ExampleObject("name,asc"),
