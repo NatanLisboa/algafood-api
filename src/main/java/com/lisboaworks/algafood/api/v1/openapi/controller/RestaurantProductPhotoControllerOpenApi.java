@@ -3,8 +3,10 @@ package com.lisboaworks.algafood.api.v1.openapi.controller;
 import com.lisboaworks.algafood.api.v1.model.ProductPhotoModel;
 import com.lisboaworks.algafood.api.v1.model.input.ProductPhotoInput;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.core.io.InputStreamResource;
@@ -26,10 +28,10 @@ public interface RestaurantProductPhotoControllerOpenApi {
     })
     ProductPhotoModel getPhoto(Long restaurantId, Long productId);
 
-    ProductPhotoModel updatePhoto(Long restaurantId,
-                                  Long productId,
-                                  ProductPhotoInput productPhotoInput,
-                                  MultipartFile file) throws IOException;
+    @Operation(summary = "Update restaurant product photo")
+    ProductPhotoModel updatePhoto(@Parameter(description = "Restaurant id", example = "1", required = true) Long restaurantId,
+                                  @Parameter(description = "Product id", example = "1", required = true) Long productId,
+                                  @RequestBody(required = true) ProductPhotoInput productPhotoInput) throws IOException;
 
     @Operation(hidden = true)
     ResponseEntity<InputStreamResource> servePhoto(Long restaurantId, Long productId, String acceptHeader) throws HttpMediaTypeNotAcceptableException;

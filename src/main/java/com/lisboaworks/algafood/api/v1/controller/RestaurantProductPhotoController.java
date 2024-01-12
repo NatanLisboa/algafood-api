@@ -71,9 +71,10 @@ public class RestaurantProductPhotoController implements RestaurantProductPhotoC
     @CheckSecurity.Restaurants.CanManageOperation
     public ProductPhotoModel updatePhoto(@PathVariable Long restaurantId,
                                          @PathVariable Long productId,
-                                         @Valid ProductPhotoInput productPhotoInput,
-                                         @RequestPart MultipartFile file) throws IOException {
+                                         @Valid ProductPhotoInput productPhotoInput) throws IOException {
         Product product = productRegisterService.findOrThrowException(restaurantId, productId);
+
+        MultipartFile file = productPhotoInput.getFile();
 
         ProductPhoto productPhoto = new ProductPhoto();
         productPhoto.setProduct(product);
