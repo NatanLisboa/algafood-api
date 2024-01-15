@@ -67,7 +67,8 @@ public class SpringDocConfig {
                         new Tag().name("User groups").description("Manage the user groups"),
                         new Tag().name("Cuisines").description("Manage the cuisines"),
                         new Tag().name("Payment methods").description("Manage the payment methods"),
-                        new Tag().name("Orders").description("Manage the orders")
+                        new Tag().name("Orders").description("Manage the orders"),
+                        new Tag().name("Restaurants").description("Manage the restaurants")
                 )).components(new Components().schemas(this.generateSchemas())
                         .responses(this.generateResponses()));
     }
