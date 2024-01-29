@@ -1,6 +1,7 @@
 package com.lisboaworks.algafood.core.springdoc;
 
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
+import com.lisboaworks.algafood.domain.filter.DailySaleFilter;
 import io.swagger.v3.core.converter.ModelConverters;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.OAuthFlow;
@@ -71,7 +72,8 @@ public class SpringDocConfig {
                         new Tag().name("Restaurants").description("Manage the restaurants"),
                         new Tag().name("States").description("Manage the states"),
                         new Tag().name("Products").description("Manage the products"),
-                        new Tag().name("Users").description("Manage the users")
+                        new Tag().name("Users").description("Manage the users"),
+                        new Tag().name("Statistics").description("Generate Algafood statistics")
                 )).components(new Components().schemas(this.generateSchemas())
                         .responses(this.generateResponses()));
     }
