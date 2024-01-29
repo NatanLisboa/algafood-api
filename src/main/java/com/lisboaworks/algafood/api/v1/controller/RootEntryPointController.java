@@ -2,6 +2,7 @@ package com.lisboaworks.algafood.api.v1.controller;
 
 import com.lisboaworks.algafood.api.v1.AlgaLinks;
 import com.lisboaworks.algafood.core.security.SecurityHelper;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.MediaType;
@@ -18,6 +19,7 @@ public class RootEntryPointController {
     private final SecurityHelper securityHelper;
 
     @GetMapping
+    @Operation(hidden = true)
     public RootEntryPointModel root() {
         RootEntryPointModel rootEntryPointModel = new RootEntryPointModel();
 
