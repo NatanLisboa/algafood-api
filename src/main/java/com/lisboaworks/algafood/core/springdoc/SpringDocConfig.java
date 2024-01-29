@@ -1,6 +1,7 @@
 package com.lisboaworks.algafood.core.springdoc;
 
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
+import com.lisboaworks.algafood.api.v1.openapi.model.LinksModelOpenApi;
 import io.swagger.v3.core.converter.ModelConverters;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.OAuthFlow;
@@ -19,6 +20,7 @@ import io.swagger.v3.oas.models.responses.ApiResponse;
 import io.swagger.v3.oas.models.responses.ApiResponses;
 import io.swagger.v3.oas.models.servers.Server;
 import io.swagger.v3.oas.models.tags.Tag;
+import org.springdoc.core.SpringDocUtils;
 import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,6 +52,11 @@ public class SpringDocConfig {
 
     @Bean
     public OpenAPI openAPI() {
+
+        SpringDocUtils.getConfig().replaceWithClass(
+                org.springframework.hateoas.Links.class,
+                LinksModelOpenApi.class);
+
         return new OpenAPI()
                 .info(new Info()
                         .title("Algafood API")
