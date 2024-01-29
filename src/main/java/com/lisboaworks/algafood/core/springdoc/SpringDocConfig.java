@@ -1,7 +1,6 @@
 package com.lisboaworks.algafood.core.springdoc;
 
 import com.lisboaworks.algafood.api.exceptionhandler.ApiException;
-import com.lisboaworks.algafood.domain.filter.DailySaleFilter;
 import io.swagger.v3.core.converter.ModelConverters;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
 import io.swagger.v3.oas.annotations.security.OAuthFlow;
@@ -24,7 +23,10 @@ import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -73,7 +75,8 @@ public class SpringDocConfig {
                         new Tag().name("States").description("Manage the states"),
                         new Tag().name("Products").description("Manage the products"),
                         new Tag().name("Users").description("Manage the users"),
-                        new Tag().name("Statistics").description("Generate Algafood statistics")
+                        new Tag().name("Statistics").description("Generate Algafood statistics"),
+                        new Tag().name("Permissions").description("Manage the permissions")
                 )).components(new Components().schemas(this.generateSchemas())
                         .responses(this.generateResponses()));
     }
