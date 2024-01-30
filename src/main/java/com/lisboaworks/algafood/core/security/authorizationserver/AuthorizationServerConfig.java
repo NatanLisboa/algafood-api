@@ -37,6 +37,7 @@ public class AuthorizationServerConfig {
                 .build();
     }
 
+    @Bean
     public RegisteredClientRepository registeredClientRepository(PasswordEncoder passwordEncoder) {
 
         RegisteredClient algafoodBackend = RegisteredClient
