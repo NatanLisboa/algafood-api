@@ -2166,6 +2166,49 @@
 					"response": []
 				},
 				{
+					"name": "OAuth2 Introspect",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "backend123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "algafood-backend",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{environmentUrl}}/oauth2/introspect",
+							"host": [
+								"{{environmentUrl}}"
+							],
+							"path": [
+								"oauth2",
+								"introspect"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Token key",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
