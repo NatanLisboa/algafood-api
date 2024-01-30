@@ -33,7 +33,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{environmentUrl}}/v1/cuisines?size=1&page=0",
+							"raw": "{{environmentUrl}}/v1/cuisines",
 							"host": [
 								"{{environmentUrl}}"
 							],
@@ -43,17 +43,9 @@
 							],
 							"query": [
 								{
-									"key": "size",
-									"value": "1"
-								},
-								{
 									"key": "sort",
 									"value": "id,name,desc",
 									"disabled": true
-								},
-								{
-									"key": "page",
-									"value": "0"
 								}
 							]
 						}
@@ -1810,16 +1802,16 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{environmentUrl}}/v1/restaurants/2/products/7/photo",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/products/2/photo",
 							"host": [
 								"{{environmentUrl}}"
 							],
 							"path": [
 								"v1",
 								"restaurants",
-								"2",
+								"1",
 								"products",
-								"7",
+								"2",
 								"photo"
 							]
 						}
@@ -1847,16 +1839,16 @@
 							]
 						},
 						"url": {
-							"raw": "{{environmentUrl}}/v1/restaurants/2/products/7/photo",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/products/2/photo",
 							"host": [
 								"{{environmentUrl}}"
 							],
 							"path": [
 								"v1",
 								"restaurants",
-								"2",
+								"1",
 								"products",
-								"7",
+								"2",
 								"photo"
 							]
 						}
@@ -1873,16 +1865,16 @@
 							"formdata": []
 						},
 						"url": {
-							"raw": "{{environmentUrl}}/v1/restaurants/2/products/7/photo",
+							"raw": "{{environmentUrl}}/v1/restaurants/1/products/2/photo",
 							"host": [
 								"{{environmentUrl}}"
 							],
 							"path": [
 								"v1",
 								"restaurants",
-								"2",
+								"1",
 								"products",
-								"7",
+								"2",
 								"photo"
 							]
 						}
@@ -2071,18 +2063,31 @@
 				},
 				{
 					"name": "Client credentials - Request token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"access_token\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "basic",
 							"basic": [
 								{
 									"key": "password",
-									"value": "invoicing123",
+									"value": "backend123",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "invoicing",
+									"value": "algafood-backend",
 									"type": "string"
 								}
 							]
@@ -2096,16 +2101,21 @@
 									"key": "grant_type",
 									"value": "client_credentials",
 									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "READ",
+									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{environmentUrl}}/oauth/token",
+							"raw": "{{environmentUrl}}/oauth2/token",
 							"host": [
 								"{{environmentUrl}}"
 							],
 							"path": [
-								"oauth",
+								"oauth2",
 								"token"
 							]
 						}
