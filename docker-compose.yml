@@ -21,7 +21,8 @@ services:
       - SPRING_SESSION_STORE_TYPE=redis
       - SPRING_REDIS_HOST=algafood-redis
       - SPRING_PROFILES_ACTIVE=development
-      - OAUTH_CLIENT_SECRET=$OAUTH_CLIENT_SECRET
+      - OAUTH2_CLIENT_ID=$OAUTH2_CLIENT_ID
+      - OAUTH2_CLIENT_SECRET=$OAUTH2_CLIENT_SECRET
     networks:
       - algafood-network
     depends_on:
