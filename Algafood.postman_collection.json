@@ -1910,158 +1910,6 @@
 			"name": "OAuth2",
 			"item": [
 				{
-					"name": "Password flow - Request token",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "username",
-									"value": "algafood-web",
-									"type": "string"
-								},
-								{
-									"key": "password",
-									"value": "web123",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "grant_type",
-									"value": "password",
-									"type": "text"
-								},
-								{
-									"key": "username",
-									"value": "joao.man@algafood.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "123",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{environmentUrl}}/oauth/token",
-							"host": [
-								"{{environmentUrl}}"
-							],
-							"path": [
-								"oauth",
-								"token"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Authorization Code - Request token",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "grant_type",
-									"value": "authorization_code",
-									"type": "text"
-								},
-								{
-									"key": "code",
-									"value": "pAjE8p",
-									"type": "text"
-								},
-								{
-									"key": "redirect_uri",
-									"value": "http://www.foodanalytics.local:8082",
-									"type": "text"
-								},
-								{
-									"key": "code_verifier",
-									"value": "lriuBjyOroSMP48HVn5qZhVnwv8D_qTMZTFof3zhuRk",
-									"type": "text"
-								},
-								{
-									"key": "client_id",
-									"value": "food-analytics",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{environmentUrl}}/oauth/token",
-							"host": [
-								"{{environmentUrl}}"
-							],
-							"path": [
-								"oauth",
-								"token"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Refresh token - Request token",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "web123",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "algafood-web",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "refresh_token",
-									"value": "UtS11Qr9NcOdleuYtShgq-yw6h8",
-									"type": "text"
-								},
-								{
-									"key": "grant_type",
-									"value": "refresh_token",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{environmentUrl}}/oauth/token",
-							"host": [
-								"{{environmentUrl}}"
-							],
-							"path": [
-								"oauth",
-								"token"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Client credentials - Request token",
 					"event": [
 						{
@@ -2123,49 +1971,6 @@
 					"response": []
 				},
 				{
-					"name": "Check token",
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "web123",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "algafood-web",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsX25hbWUiOiJOYXRhbiBMaXNib2EiLCJ1c2VyX2lkIjo2LCJ1c2VyX25hbWUiOiJzZW5ob3Iud2FyMTQrbmF0YW5AZ21haWwuY29tIiwic2NvcGUiOlsiV1JJVEUiLCJSRUFEIl0sImV4cCI6MTY5Nzc3MTA1MiwianRpIjoiOFo0aXhmek5EX1dHWDkwakVPcHFoVTZJbTVBIiwiY2xpZW50X2lkIjoiYWxnYWZvb2Qtd2ViIn0.b97hnd4120_bPenzZAr-BtMw9qSIyBdVugyugFce7J1Yhen-Uewiq6a2TU7IObZ9Fv6-DNzr2ZOzJgh3qtm2ML0zK3ZpgSkdssPiqemP8mfONnYUnqrL8y8Z7GQhCM8XNVMMN07wOagukkoxF_M5pTowtwVQRmtOK4_GCid_lMLbzlGva92VRuZ8TEJ6SWjAcHslxjSS4-t54qmFqt6GZgQ7Ra4CjrkxUgAqAhYUEJDvUGQdU_DnJRgdqFirCVVFnPIGSGSwnJPFDZecBkujpmQDtaXPeQOR7kazJsV86oNA__hop5hgm5TFmvOR4sQYN3AyklVzMoD38VGzXanAFw",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{environmentUrl}}/oauth/check_token",
-							"host": [
-								"{{environmentUrl}}"
-							],
-							"path": [
-								"oauth",
-								"check_token"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "OAuth2 Introspect",
 					"request": {
 						"auth": {
@@ -2196,53 +2001,56 @@
 							]
 						},
 						"url": {
-							"raw": "{{environmentUrl}}/oauth2/introspect",
+							"raw": "{{environmentUrl}}/oauth2/revoke",
 							"host": [
 								"{{environmentUrl}}"
 							],
 							"path": [
 								"oauth2",
-								"introspect"
+								"revoke"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Token key",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "OAuth2 Revoke",
 					"request": {
 						"auth": {
 							"type": "basic",
 							"basic": [
 								{
 									"key": "password",
-									"value": "web123",
+									"value": "backend123",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "algafood-web",
+									"value": "algafood-backend",
 									"type": "string"
 								}
 							]
 						},
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "urlencoded",
-							"urlencoded": []
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
-							"raw": "{{environmentUrl}}/oauth/token_key",
+							"raw": "{{environmentUrl}}/oauth2/revoke",
 							"host": [
 								"{{environmentUrl}}"
 							],
 							"path": [
-								"oauth",
-								"token_key"
+								"oauth2",
+								"revoke"
 							]
 						}
 					},
