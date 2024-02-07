@@ -2055,6 +2055,24 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "OAuth2 JWKS",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{environmentUrl}}/oauth2/jwks",
+							"host": [
+								"{{environmentUrl}}"
+							],
+							"path": [
+								"oauth2",
+								"jwks"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
