@@ -824,6 +824,26 @@
 					},
 					"response": []
 				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -948,6 +968,26 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -1161,6 +1201,26 @@
 					},
 					"response": []
 				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -1372,6 +1432,26 @@
 					},
 					"response": []
 				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
 			]
 		},
 		{
@@ -1394,6 +1474,26 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -1532,6 +1632,26 @@
 						}
 					},
 					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -2112,46 +2232,11 @@
 		}
 	],
 	"auth": {
-		"type": "oauth2",
-		"oauth2": [
+		"type": "bearer",
+		"bearer": [
 			{
-				"key": "authUrl",
-				"value": "http://auth.algafood.local:8081/oauth/authorize?response_type=code&client_id=food-analytics&redirect_uri=http://www.foodanalytics.local:8082&code_challenge=g4KvTGjXOyAwUphhSNYXHfFh80LVgn4sTKf15uDePHM&code_challenge_method=s256",
-				"type": "string"
-			},
-			{
-				"key": "accessTokenUrl",
-				"value": "http://auth.algafood.local:8081/oauth/authorize?response_type=code&client_id=food-analytics&redirect_uri=http://www.foodanalytics.local:8082",
-				"type": "string"
-			},
-			{
-				"key": "clientSecret",
-				"value": "",
-				"type": "string"
-			},
-			{
-				"key": "clientId",
-				"value": "food-analytics",
-				"type": "string"
-			},
-			{
-				"key": "redirect_uri",
-				"value": "http://client-application",
-				"type": "string"
-			},
-			{
-				"key": "grant_type",
-				"value": "authorization_code_with_pkce",
-				"type": "string"
-			},
-			{
-				"key": "tokenName",
-				"value": "Algafood Token",
-				"type": "string"
-			},
-			{
-				"key": "addTokenTo",
-				"value": "header",
+				"key": "token",
+				"value": "{{access_token}}",
 				"type": "string"
 			}
 		]
