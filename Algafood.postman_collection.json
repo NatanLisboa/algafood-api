@@ -2091,6 +2091,82 @@
 					"response": []
 				},
 				{
+					"name": "Authorization Code - Request token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.environment.set(\"access_token\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "web123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "algafood-web",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "READ",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{environmentUrl}}/authorized",
+									"type": "text"
+								},
+								{
+									"key": "code_verifier",
+									"value": "abc123",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "uMEZDhyyvdRHwmc0Vqqr3NdC76zQVsFBh8pAQfIz-NKKmIa8hCq13EVm7vE3C2ewOdhQK5MPvdce44tW7pox0BfPPEECTb-wi3f4k9NVI8RQEgewhC1xTzN8XjEiEQa_",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{environmentUrl}}/oauth2/token",
+							"host": [
+								"{{environmentUrl}}"
+							],
+							"path": [
+								"oauth2",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "OAuth2 Introspect",
 					"request": {
 						"auth": {
@@ -2189,6 +2265,76 @@
 							"path": [
 								"oauth2",
 								"jwks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OAuth2 Request Authorization Code",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "web123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "algafood-web",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{environmentUrl}}/oauth2/authorize?response_type=code&client_id=algafood-web&state=abc&redirect_uri={{environmentUrl}}/authorized&scope=READ WRITE&code_challenge=bKE9UspwyIPg8LsQHkJaiehiTeUdstI5JZOvaoQRgJA&code_challenge_method=S256",
+							"host": [
+								"{{environmentUrl}}"
+							],
+							"path": [
+								"oauth2",
+								"authorize"
+							],
+							"query": [
+								{
+									"key": "response_type",
+									"value": "code"
+								},
+								{
+									"key": "client_id",
+									"value": "algafood-web"
+								},
+								{
+									"key": "state",
+									"value": "abc"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "{{environmentUrl}}/authorized"
+								},
+								{
+									"key": "scope",
+									"value": "READ WRITE"
+								},
+								{
+									"key": "code_challenge",
+									"value": "bKE9UspwyIPg8LsQHkJaiehiTeUdstI5JZOvaoQRgJA"
+								},
+								{
+									"key": "code_challenge_method",
+									"value": "S256"
+								}
 							]
 						}
 					},
