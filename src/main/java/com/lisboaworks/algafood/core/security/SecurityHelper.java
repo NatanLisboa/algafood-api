@@ -36,7 +36,7 @@ public class SecurityHelper {
     public Long getUserId() {
         Jwt jwt = (Jwt) this.getAuthentication().getPrincipal();
 
-        return jwt.getClaim("user_id");
+        return Long.parseLong(jwt.getClaim("user_id"));
     }
 
     public boolean manageRestaurant(Long restaurantId) {
