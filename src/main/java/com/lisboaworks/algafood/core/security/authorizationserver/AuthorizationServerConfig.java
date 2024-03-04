@@ -25,6 +25,7 @@ import org.springframework.security.oauth2.core.OAuth2TokenFormat;
 import org.springframework.security.oauth2.server.authorization.JdbcOAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
+import org.springframework.security.oauth2.server.authorization.client.JdbcRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.ClientSettings;
@@ -59,7 +60,8 @@ public class AuthorizationServerConfig {
     }
 
     @Bean
-    public RegisteredClientRepository registeredClientRepository(PasswordEncoder passwordEncoder) {
+    public RegisteredClientRepository registeredClientRepository(PasswordEncoder passwordEncoder,
+                                                                 JdbcOperations jdbcOperations) {
 
         RegisteredClient algafoodBackend = RegisteredClient
                 .withId("1")
@@ -114,7 +116,13 @@ public class AuthorizationServerConfig {
                         .build())
                 .build();
 
-        return new InMemoryRegisteredClientRepository(Arrays.asList(algafoodBackend, algafoodWeb, foodAnalytics));
+        JdbcRegisteredClientRepository repository = new JdbcRegisteredClientRepository(jdbcOperations);
+
+        repository.save(algafoodBackend);
+        repository.save(algafoodWeb);
+        repository.save(foodAnalytics);
+
+        return repository;
     }
 
     @Bean
