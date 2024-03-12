@@ -20,7 +20,6 @@ public class AuthorizedClientsController {
         List<RegisteredClient> clients = oAuth2AuthorizationQueryService.listClientsWithConsent(principal.getName());
         model.addAttribute("clients", clients);
         return "pages/authorized-clients";
-
     }
 
 }
