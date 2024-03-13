@@ -2,8 +2,11 @@ package com.lisboaworks.algafood.core.security.authorizationserver;
 
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.security.oauth2.server.authorization.JdbcOAuth2AuthorizationService;
+import org.springframework.security.oauth2.server.authorization.OAuth2Authorization;
 import org.springframework.security.oauth2.server.authorization.client.JdbcRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 
 import java.util.List;
 
@@ -13,17 +16,30 @@ public class JdbcOAuth2AuthorizationQueryService implements OAuth2AuthorizationQ
             "inner join oauth2_registered_client rc on rc.id = c.registered_client_id " +
             "where c.principal_name = ?";
 
+    private final String LIST_AUTHORIZATIONS_FROM_CLIENT_QUERY = "select a.* from oauth2_authorization a " +
+            "inner join oauth2_registered_client c on c.id = a.registered_client_id " +
+            "where a.principal_name = ? " +
+            "and a.registered_client_id = ?";
+
     private final JdbcOperations jdbcOperations;
     private final RowMapper<RegisteredClient> registeredClientRowMapper;
+    private final RowMapper<OAuth2Authorization> oAuth2AuthorizationRowMapper;
 
-    public JdbcOAuth2AuthorizationQueryService(JdbcOperations jdbcOperations) {
+    public JdbcOAuth2AuthorizationQueryService(JdbcOperations jdbcOperations,
+                                               RegisteredClientRepository registeredClientRepository) {
         this.jdbcOperations = jdbcOperations;
         this.registeredClientRowMapper = new JdbcRegisteredClientRepository.RegisteredClientRowMapper();
+        this.oAuth2AuthorizationRowMapper = new JdbcOAuth2AuthorizationService.OAuth2AuthorizationRowMapper(registeredClientRepository);
     }
 
     @Override
     public List<RegisteredClient> listClientsWithConsent(String principalName) {
         return this.jdbcOperations.query(LIST_AUTHORIZED_CLIENTS, registeredClientRowMapper, principalName);
+    }
+
+    @Override
+    public List<OAuth2Authorization> listAuthorizationsFromClient(String principalName, String clientId) {
+        return this.jdbcOperations.query(LIST_AUTHORIZATIONS_FROM_CLIENT_QUERY, oAuth2AuthorizationRowMapper, principalName, clientId);
     }
 
 }
