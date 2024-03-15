@@ -4,7 +4,7 @@ import com.lisboaworks.algafood.domain.filter.OrderFilter;
 import com.lisboaworks.algafood.domain.model.Order;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,11 +21,11 @@ public class OrderSpecs {
             List<Predicate> predicates = new ArrayList<>();
 
             if (Objects.nonNull(filter.getCustomerId())) {
-                predicates.add(builder.equal(root.get("customer"), filter.getCustomerId()));
+                predicates.add(builder.equal(root.get("customer").get("id"), filter.getCustomerId()));
             }
 
             if (Objects.nonNull(filter.getRestaurantId())) {
-                predicates.add(builder.equal(root.get("restaurant"), filter.getRestaurantId()));
+                predicates.add(builder.equal(root.get("restaurant").get("id"), filter.getRestaurantId()));
             }
 
             if (Objects.nonNull(filter.getStartCreationDatetime())) {

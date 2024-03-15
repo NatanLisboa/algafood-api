@@ -7,9 +7,9 @@ import com.lisboaworks.algafood.domain.model.statistics.DailySale;
 import com.lisboaworks.algafood.domain.service.SaleQueryService;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.criteria.*;
 import java.util.*;
 
 @Repository
@@ -45,7 +45,7 @@ public class SaleQueryServiceImpl implements SaleQueryService {
 
         predicates.add(root.get("status").in(ordersStatusesToBeReturned));
         if (Objects.nonNull(filter.getRestaurantId())) {
-            Predicate restaurantIdPredicate = builder.equal(root.get("restaurant"), filter.getRestaurantId());
+            Predicate restaurantIdPredicate = builder.equal(root.get("restaurant").get("id"), filter.getRestaurantId());
             predicates.add(restaurantIdPredicate);
         }
         if (Objects.nonNull(filter.getStartCreationDatetime())) {
