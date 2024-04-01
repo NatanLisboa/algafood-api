@@ -36,12 +36,13 @@ public class SecurityHelper {
     public Long getUserId() {
         Jwt jwt = (Jwt) this.getAuthentication().getPrincipal();
 
-        String userId = jwt.getClaim("user_id");
-        if (Objects.nonNull(userId)) {
-            return Long.parseLong(userId);
+        Object userId = jwt.getClaim("user_id");
+
+        if (Objects.isNull(userId)) {
+            return null;
         }
 
-        return null;
+        return Long.valueOf(userId.toString());
     }
 
     public boolean manageRestaurant(Long restaurantId) {

@@ -16,11 +16,11 @@ services:
     image: algafood-api
     command: ["/wait-for-it.sh", "algafood-mysql:3306", "-t", "30", "--", "java", "-jar", "algafood-api.jar"]
     environment:
-      - ENVIRONMENT_URL=http://localhost:80
+      #- ENVIRONMENT_URL=http://algafood-api:8080
       - DB_HOST=algafood-mysql
-      - SPRING_SESSION_STORE_TYPE=redis
-      - SPRING_REDIS_HOST=algafood-redis
-      - SPRING_PROFILES_ACTIVE=development
+      #- SPRING_SESSION_STORE_TYPE=redis
+      #- SPRING_REDIS_HOST=algafood-redis
+      - SPRING_PROFILES_ACTIVE=development-docker
       - OAUTH2_CLIENT_ID=$OAUTH2_CLIENT_ID
       - OAUTH2_CLIENT_SECRET=$OAUTH2_CLIENT_SECRET
     networks:
@@ -28,10 +28,10 @@ services:
     depends_on:
       - algafood-mysql
 
-  algafood-redis:
-    image: redis:7.2.3-alpine
-    networks:
-      - algafood-network
+  #algafood-redis:
+  #  image: redis:7.2.3-alpine
+  #  networks:
+  #    - algafood-network
 
   algafood-proxy:
     build: ./nginx
