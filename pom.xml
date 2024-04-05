@@ -21,7 +21,7 @@
         <github-ziplet.version>2.4.1</github-ziplet.version>
         <logback-ext-loggly.version>0.1.5</logback-ext-loggly.version>
         <dockerfile-maven-version>1.4.13</dockerfile-maven-version>
-        <springdoc.version>2.4.0</springdoc.version>
+        <springdoc.version>2.5.0</springdoc.version>
         <springauthserver.version>1.2.2</springauthserver.version>
     </properties>
     <dependencies>
