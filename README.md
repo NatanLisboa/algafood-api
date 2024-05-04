@@ -13,8 +13,13 @@ or
 
 - Docker
 
-### 1. Clone the project in your local environment
-With an open terminal, in the folder where you want to place the project, type the command below to clone the project to your local environment:
+### 1. Fork the project to your remote repository
+In the project's root directory on github, select the fork option found in the top right corner of the screen to copy the project to your remote repository
+
+![GitHub fork button](https://docs.github.com/assets/cb-40742/mw-1440/images/help/repository/fork-button.webp)
+
+### 2. Clone the project in your local environment
+With an open terminal, in the folder where you want to place the project, type the command below to clone the project to your local environment
 ```
-git clone https://github.com/NatanLisboa/algafood-api.git
+git clone https://github.com/<your username>/algafood-api.git
 ```
