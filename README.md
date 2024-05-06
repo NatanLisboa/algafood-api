@@ -7,8 +7,8 @@ Food delivery API made in Java (JDK 17) with Spring (using Spring Boot 3.2.3)
 ### Prerequisites
 - Java (JDK 17)
 - Git
-- MySQL 8.0.35
-- IDE from your choice
+- MySQL 8.0.35 (with an open connection on port 3306) 
+- IDE from your choice (IntelliJ is recommended)
 
 or 
 
