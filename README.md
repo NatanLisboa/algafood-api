@@ -19,6 +19,8 @@ In the project's root directory on github, select the fork option found in the t
 
 ![GitHub fork button](https://docs.github.com/assets/cb-40742/mw-1440/images/help/repository/fork-button.webp)
 
+This project does not accept new pull requests. The fork must be done just for personal use.
+
 ### 2. Clone the project in your local environment
 With an open terminal, in the folder where you want to place the project, type the command below to clone the project to your local environment
 ```
