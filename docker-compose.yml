@@ -18,6 +18,8 @@ services:
     environment:
       #- ENVIRONMENT_URL=http://algafood-api:8080
       - DB_HOST=algafood-mysql
+      - SPRING_DATASOURCE_USERNAME=$SPRING_DATASOURCE_USERNAME
+      - SPRING_DATASOURCE_PASSWORD=$SPRING_DATASOURCE_PASSWORD
       - SPRING_SESSION_STORE_TYPE=redis
       - SPRING_DATA_REDIS_HOST=algafood-redis
       - SPRING_PROFILES_ACTIVE=development-docker
