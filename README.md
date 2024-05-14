@@ -3,13 +3,13 @@
 Food delivery API made in Java (JDK 17) with Spring (using Spring Boot 3.2.3)
 
 ## Prerequisites
-- Java (JDK 17)
-- Git
-- MySQL 8.0.35 (with an open connection on port 3306)
+- [Java (JDK 17)](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+- [Git](https://git-scm.com/downloads)
+- [MySQL 8.0.35 or higher (with an open connection on port 3306)](https://dev.mysql.com/downloads/windows/installer/)
 
 or 
 
-- Docker
+- [Docker](https://www.docker.com/)
 
 ## Build and run the project
 ### 1. Fork the project to your remote repository
@@ -60,15 +60,42 @@ In the project root directory, run the following command:
 docker compose up
 ```
 
-After this, the project will start on the port ```80```
+The project will start on the port ```80```
 
 ## Calling the project endpoints
 With the project started, you can access the local url ```http://localhost:8080/swagger-ui/index.html``` (or ```http://localhost:80/swagger-ui/index.html``` in case of Docker) in order to see the endpoints documentation and also test them.
 
 To complete the authorization process and login in the application, follow the steps below:
 
-1. After accessing the documentation endpoint above, click in the "Authorize" button
+### 1. After accessing the documentation endpoint above, click in the "Authorize" button
 ![Authorize button](https://i.stack.imgur.com/ULVnQ.png)
+
+### 2. Mark the checkboxes and fill the "client_id" and "client_secret" fields with _algafood-web_ and _web123_, respectively:
+![OAuth2 Credentials screen](https://snipboard.io/M1gJcp.jpg)
+
+### 3. Fill the "Username" and "Password" fields with _joao.man@algafood.com_ and _123_, respectively
+![OAuth2 user login credentials screen](https://snipboard.io/JOkgai.jpg) 
+
+### 4. Click the button "Close" to close the OAuth2 authorization success screen 
+![OAuth2 authorization success screen](https://snipboard.io/B5P0Sg.jpg)
+
+Now you will be able to test the application endpoints
+
+You can also test the endpoints with the Postman collection available in the project root (see the important notes)
+
+## Production environment
+If you want to implement the project in production environment, you will need an AWS Account to use the following services:
+- **Amazon ECS with Fargate:** To deploy the application container in the cloud environment
+- **Amazon ECR:** To store the application Docker image
+- **Amazon RDS**: To create the MySQL production instance
+- **Amazon S3**: To store the saved product photos
+
+In addition, it's recommended to use **AWS Parameter Store** to keep the environment variables values in a cleaner and safer way.
+
+To generate the image to deploy in Amazon ECR, run the following command in the project root directory:
+```
+./mvnw clean package -Pdocker
+```
 
 ## Important notes
 ### Test SMTP e-mail sending in dev environment
@@ -83,7 +110,7 @@ To complete the authorization process and login in the application, follow the s
 9. Issue an order with a customer with a valid email
 10. Confirm and deliver or cancel the order issued
 
-Then, verify if the transitional e-mails was sent to the customer e-mail inbox.
+Then, verify if the transitional e-mails were sent to the customer e-mail inbox.
 
 ## License
 
@@ -91,3 +118,8 @@ MIT
 
 ## Reference links
 - [Create SendGrid API keys](https://docs.sendgrid.com/api-reference/api-keys/create-api-keys)
+- [Install MySQL on Mac](https://dev.mysql.com/doc/mysql-installation-excerpt/8.3/en/macos-installation-pkg.html)
+- [Install MySQL on Linux](https://dev.mysql.com/doc/refman/8.0/en/linux-installation.html)
+- [Install Docker Desktop on Windows](https://docs.docker.com/desktop/install/windows-install/)
+- [Install Docker Desktop on Mac](https://docs.docker.com/desktop/install/mac-install/)
+- [Install Docker Desktop on Linux](https://docs.docker.com/desktop/install/linux-install/) 
