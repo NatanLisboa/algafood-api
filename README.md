@@ -68,18 +68,21 @@ With the project started, you can access the local url ```http://localhost:8080/
 To complete the authorization process and login in the application, follow the steps below:
 
 ### 1. After accessing the documentation endpoint above, click in the "Authorize" button
+
 ![Authorize button](https://i.stack.imgur.com/ULVnQ.png)
 
-### 2. Mark the checkboxes and fill the "client_id" and "client_secret" fields with _algafood-web_ and _web123_, respectively:
+### 2. Mark the checkboxes and fill the "client_id" and "client_secret" fields with _algafood-web_ and _web123_, respectively
+
 ![OAuth2 Credentials screen](https://snipboard.io/M1gJcp.jpg)
 
 ### 3. Fill the "Username" and "Password" fields with _joao.man@algafood.com_ and _123_, respectively
+
 ![OAuth2 user login credentials screen](https://snipboard.io/JOkgai.jpg) 
 
-### 4. Click the button "Close" to close the OAuth2 authorization success screen 
-![OAuth2 authorization success screen](https://snipboard.io/B5P0Sg.jpg)
 
-Now you will be able to test the application endpoints
+### 4. Click the button "Close" to close the OAuth2 authorization success screen 
+
+![OAuth2 authorization success screen](https://snipboard.io/B5P0Sg.jpg)
 
 You can also test the endpoints with the Postman collection available in the project root (see the important notes)
 
@@ -112,6 +115,40 @@ To generate the image to deploy in Amazon ECR, run the following command in the 
 
 Then, verify if the transitional e-mails were sent to the customer e-mail inbox.
 
+### Test API endpoints in Postman
+**Before start:** Be sure if your application is up on ```localhost:8080``` and the environment variables ```environmentUrl``` and ```redirectUri``` are both configured with the value ```127.0.0.1:8080``` on Postman (see the reference links to find out how do complete this step). 
+
+
+**1. In Postman inicial page, import the API collection located in project root by clicking on "Import" button, then dragging the collection file into the Import field**
+
+![Postman Import collection button](https://snipboard.io/mwaneT.jpg)
+![Postman Import drag n drop](https://snipboard.io/PjAo2y.jpg)
+
+
+**2. Select "OAuth2 Request Authorization Code" request into "OAuth2" folder, then copy the request URL and paste it in your browser, replacing {{environmentUrl}} and {{redirectUri}} by your localhost URL**
+
+![Postman OAuth2 Get Authorization Code Request](https://snipboard.io/CFD3Zx.jpg)
+![OAuth2 Authentication URL in browser](https://snipboard.io/twaAzR.jpg)
+
+
+**3. Fill the "Username" and "Password" login fields with _joao.man@algafood.com_ and _123_, respectively**
+
+![OAuth2 Login Credentials Page](https://snipboard.io/s5I6lS.jpg)
+
+
+**4. After OAuth2 login, copy the code generated in the URL**
+
+![OAuth2 Authorization Code in URL](https://snipboard.io/sRX4Je.jpg)
+
+
+**5. Going back to Postman, select "Authorization Code - Request Token" request inside "OAuth2" folder, then paste the copied code into "code" body request variable and click "Send" button**
+
+![OAuth2 Generate access token](https://snipboard.io/7kgPe6.jpg)
+
+
+After following these steps, the authorization code for an admin user will be generated and you will be able to test the application endpoints on Postman.
+
+
 ## License
 
 MIT
@@ -122,4 +159,5 @@ MIT
 - [Install MySQL on Linux](https://dev.mysql.com/doc/refman/8.0/en/linux-installation.html)
 - [Install Docker Desktop on Windows](https://docs.docker.com/desktop/install/windows-install/)
 - [Install Docker Desktop on Mac](https://docs.docker.com/desktop/install/mac-install/)
-- [Install Docker Desktop on Linux](https://docs.docker.com/desktop/install/linux-install/) 
+- [Install Docker Desktop on Linux](https://docs.docker.com/desktop/install/linux-install/)
+- [Configure and edit environment variables on Postman](https://learning.postman.com/docs/sending-requests/variables/environment-variables/)
