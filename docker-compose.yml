@@ -14,9 +14,7 @@ services:
 
   algafood-api:
     image: algafood-api
-    #command: ["/wait-for-it.sh", "algafood-mysql:3306", "-t", "30", "--", "java", "-jar", "algafood-api.jar"]
     environment:
-      #- ENVIRONMENT_URL=http://algafood-api:8080
       - DB_HOST=algafood-mysql
       - SPRING_DATASOURCE_USERNAME=$SPRING_DATASOURCE_USERNAME
       - SPRING_DATASOURCE_PASSWORD=$SPRING_DATASOURCE_PASSWORD
@@ -31,13 +29,6 @@ services:
       - algafood-mysql
     deploy:
       replicas: 2
-
-  algafood-redis:
-    image: redis:7.2.3-alpine
-    ports:
-      - "6379:6379"
-    networks:
-      - algafood-network
 
   algafood-proxy:
     build: ./nginx
