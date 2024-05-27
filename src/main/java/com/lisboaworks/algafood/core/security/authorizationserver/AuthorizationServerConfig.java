@@ -52,7 +52,8 @@ public class AuthorizationServerConfig extends SecurityConfigurerAdapter<Default
         RequestMatcher endpointsMatcher = authorizationServerConfigurer.getEndpointsMatcher();
 
         http.securityMatcher(endpointsMatcher)
-                .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
+                .authorizeHttpRequests(authorize -> authorize.requestMatchers("/v1").permitAll()
+                        .anyRequest().authenticated())
                 .csrf(csrf -> csrf.ignoringRequestMatchers(new RequestMatcher[]{endpointsMatcher}))
                 .formLogin(Customizer.withDefaults())
                 .exceptionHandling(exceptions -> exceptions
