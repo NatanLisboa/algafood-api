@@ -63,7 +63,7 @@ docker compose up
 The project will start on the port ```80```
 
 ## Calling the project endpoints
-With the project started, you can access the local url ```http://localhost:8080/swagger-ui/index.html``` (or ```http://localhost:80/swagger-ui/index.html``` in case of Docker) in order to see the endpoints documentation and also test them.
+With the project started, you can access the local url ```http://127.0.0.1:8080/swagger-ui/index.html``` (or ```http://127.0.0.1:80/swagger-ui/index.html``` in case of Docker) in order to see the endpoints documentation and also test them.
 
 To complete the authorization process and login in the application, follow the steps below:
 
@@ -116,7 +116,7 @@ To generate the image to deploy in Amazon ECR, run the following command in the 
 Then, verify if the transitional e-mails were sent to the customer e-mail inbox.
 
 ### Test API endpoints in Postman
-**Before start:** Be sure if your application is up on ```localhost:8080``` and the environment variables ```environmentUrl``` and ```redirectUri``` are both configured with the value ```127.0.0.1:8080``` on Postman (see the reference links to find out how to complete this step). 
+**Before start:** Be sure if your application is up on ```127.0.0.1:8080``` and the environment variables ```environmentUrl``` and ```redirectUri``` are both configured with the value ```127.0.0.1:8080``` on Postman (see the reference links to find out how to complete this step). 
 
 
 **1. In Postman inicial page, import the API collection located in project root by clicking on "Import" button, then dragging the collection file into the Import field**
